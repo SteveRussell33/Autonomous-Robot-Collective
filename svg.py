@@ -6,6 +6,7 @@ import subprocess
 files = [
     'FM',
     'FOLD',
+    'GAIN',
     'hswitch-0',
     'hswitch-1',
     'knob18',
