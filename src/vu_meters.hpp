@@ -2,9 +2,10 @@
 
 #include <cmath>
 
-// Adapted from github.com/MarcBoule/MindMeldModular/src/comp/VuMeters.hpp
+// Adapted from github.com/MarcBoule/MindMeldModular/src/comp/VuMeters.hpp.
 // GPL3 licensed: github.com/MarcBoule/MindMeldModular/LICENSE.md
-struct Track {
+
+struct RmsPeak {
 
     static constexpr float lambda = 30.f; // Inverse time constant in 1/seconds
 
