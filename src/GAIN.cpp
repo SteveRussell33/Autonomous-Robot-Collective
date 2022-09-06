@@ -1,9 +1,12 @@
 #include "plugin.hpp"
+#include "track.hpp"
 #include "widgets.hpp"
 
 #define GAIN_DEBUG
 
 struct GAIN : Module {
+
+    Track track;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -18,13 +21,15 @@ struct GAIN : Module {
     };
 
     enum InputId {
-        kInput,
+        kLeftInput,
+        kRightInput,
 
         kInputsLen
     };
 
     enum OutputId {
-        kOutput,
+        kLeftOutput,
+        kRightOutput,
 
 #ifdef GAIN_DEBUG
         kDebug1,
@@ -38,11 +43,14 @@ struct GAIN : Module {
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        configInput(kInput, "Audio");
+        configInput(kLeftInput, "Left");
+        configInput(kRightInput, "Right");
 
-        configOutput(kOutput, "Audio");
+        configOutput(kLeftOutput, "Left");
+        configOutput(kRightOutput, "Right");
 
-        configBypass(kInput, kOutput);
+        // TODO
+        // configBypass(kLeftInput, kLeftOutput);
 
 #ifdef GAIN_DEBUG
         configOutput(kDebug1, "Debug 1");
@@ -53,6 +61,24 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
+
+        float left = inputs[kLeftInput].getVoltage();
+        float right = inputs[kRightInput].getVoltage();
+
+        track.process(left, right, args.sampleTime);
+
+#ifdef GAIN_DEBUG
+        outputs[kDebug1].setVoltage(track.leftRms);
+        outputs[kDebug2].setVoltage(track.leftPeak);
+        outputs[kDebug3].setVoltage(track.rightRms);
+        outputs[kDebug4].setVoltage(track.rightPeak);
+#endif
+
+        outputs[kLeftOutput].setVoltage(left);
+        outputs[kRightOutput].setVoltage(right);
+
+        outputs[kLeftOutput].setChannels(1);
+        outputs[kRightOutput].setChannels(1);
     }
 };
 
@@ -75,8 +101,10 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<MPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 248), module, GAIN::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 306), module, GAIN::kOutput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 248), module, GAIN::kLeftInput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 276), module, GAIN::kRightInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 306), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, GAIN::kRightOutput));
     }
 };
 
