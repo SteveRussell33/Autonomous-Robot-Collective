@@ -12,11 +12,11 @@
    width="45"
    height="380"
    viewBox="0 0 45 380"
-   id="svg112"
+   id="svg105"
    sodipodi:docname="SAT.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
-     id="metadata116">
+     id="metadata109">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -37,7 +37,7 @@
      inkscape:pageshadow="2"
      inkscape:window-width="689"
      inkscape:window-height="480"
-     id="namedview114"
+     id="namedview107"
      showgrid="false"
      inkscape:zoom="2.1763158"
      inkscape:cx="22.5"
@@ -45,7 +45,7 @@
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg112" />
+     inkscape:current-layer="svg105" />
   <style
      id="style2">
     text.title {
@@ -92,7 +92,7 @@
   </style>
   <!-- ======== defs ======== -->
   <defs
-     id="defs60">
+     id="defs53">
     <linearGradient
        id="smallKnobMediumGradient">
       <stop
@@ -194,38 +194,21 @@
       </g>
     </symbol>
     <symbol
-       id="knob50">
-      <g
-         transform="translate(25 25)"
-         id="g51">
-        <circle
-           r="24.5"
-           fill="url('#bigKnobDarkGradient')"
-           transform="rotate(90)"
-           id="circle47" />
-        <circle
-           r="22.5"
-           fill="url('#bigKnobMediumGradient')"
-           transform="rotate(90)"
-           id="circle49" />
-      </g>
-    </symbol>
-    <symbol
        id="port">
       <g
          transform="translate(12 12)"
-         id="g54" />
+         id="g47" />
     </symbol>
     <symbol
        id="hswitch14">
       <g
          transform="translate(12 7)"
-         id="g57" />
+         id="g50" />
     </symbol>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#bigKnobDarkGradient"
-       id="linearGradient153"
+       id="linearGradient146"
        x1="-15.5"
        y1="-15.5"
        x2="15.5"
@@ -234,7 +217,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#bigKnobMediumGradient"
-       id="linearGradient155"
+       id="linearGradient148"
        x1="-13.5"
        y1="-13.5"
        x2="13.5"
@@ -243,7 +226,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#smallKnobMediumGradient"
-       id="linearGradient167"
+       id="linearGradient160"
        x1="-8"
        y1="-8"
        x2="8"
@@ -252,7 +235,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#smallKnobDarkGradient"
-       id="linearGradient169"
+       id="linearGradient162"
        x1="-7"
        y1="-7"
        x2="7"
@@ -261,200 +244,200 @@
   </defs>
   <!-- ======== id ======== -->
   <path
-     id="rect62"
+     id="rect55"
      style="fill:#e0e0e0"
      d="M 0,0 H 45 V 380 H 0 Z"
      class="background" />
   <g
      aria-label="SAT"
-     id="text64"
+     id="text57"
      style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="title">
     <path
        d="M 10.96875,27.234375 9.8359375,28.53125 q 1.8203125,1.5625 4.3515625,1.5625 3.914062,-0.04687 4,-3.3125 0,-1.210938 -0.757813,-2.125 Q 16.664062,23.726562 15.0625,23.507812 14.25,23.40625 13.78125,23.328125 12.9375,23.171875 12.554688,22.765625 12.171875,22.367187 12.171875,21.875 q 0.01563,-0.820313 0.570313,-1.234375 0.53125,-0.398438 1.328125,-0.398438 1.539062,0.03125 2.820312,0.875 v 0 l 0.960937,-1.421875 Q 16.28125,18.5625 14.15625,18.515625 12.390625,18.53125 11.429688,19.4375 10.4375,20.351562 10.4375,21.84375 q 0,1.242187 0.789063,2.109375 0.765625,0.84375 2.234375,1.085937 0.820312,0.117188 1.507812,0.210938 1.5,0.257812 1.484375,1.53125 -0.03125,1.554687 -2.25,1.585937 -1.875,-0.01563 -3.234375,-1.132812 z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path192" />
+       id="path185" />
     <path
        d="m 22.03125,25.921875 1.648437,-4.976563 h 0.03125 l 1.648438,4.976563 z M 26.734375,30 h 1.820312 L 24.414062,18.609375 H 22.96875 L 18.828125,30 h 1.828125 l 0.875,-2.546875 h 4.320312 z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path194" />
+       id="path187" />
     <path
        d="m 30.507812,30 h 1.734375 v -9.851563 h 3.117188 v -1.539062 h -7.96875 v 1.539062 h 3.117187 z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path196" />
+       id="path189" />
   </g>
   <g
      aria-label="RM"
-     id="text66"
+     id="text59"
      style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="logo">
     <path
        d="m 15.826823,353.79036 h 2.252604 q 0.690104,0 1.054688,0.29297 0.462239,0.33203 0.47526,1.07422 0,0.61849 -0.397135,1.04167 -0.403646,0.45573 -1.210938,0.46875 H 15.826823 Z M 14.388021,362 h 1.438802 v -4.05599 h 1.835938 L 19.622396,362 h 1.712239 l -2.20052,-4.21224 q 1.809895,-0.69661 1.835937,-2.63021 -0.03906,-1.3151 -0.94401,-2.02474 -0.748698,-0.625 -1.933594,-0.625 h -3.704427 z"
        style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path187" />
+       id="path180" />
     <path
        d="m 22.513021,362 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 362 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
        style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path189" />
+       id="path182" />
   </g>
   <!-- ======== knobs and switches ======== -->
   <path
-     id="polyline68"
+     id="polyline61"
      transform="translate(22.5,78)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 42"
      class="connect" />
   <g
      aria-label="DRIVE"
-     id="text72"
+     id="text65"
      style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="big-label">
     <path
        d="m 10.195313,56 h 2.416992 q 0.800781,0 1.352539,-0.351563 0.55664,-0.327148 0.86914,-0.830078 0.117188,-0.190429 0.200196,-0.366211 0.07813,-0.180664 0.117187,-0.410156 0.08301,-0.454101 0.08301,-1.601562 0,-1.079102 -0.05371,-1.518555 -0.06836,-0.439453 -0.327148,-0.839844 -0.722657,-1.191406 -2.167969,-1.201172 h -2.490234 z m 1.079101,-6.098633 h 1.289063 q 0.820312,-0.01953 1.269531,0.600586 0.219726,0.249024 0.27832,0.649414 0.04394,0.400391 0.04394,1.328125 0,0.952149 -0.04394,1.298828 -0.04883,0.351563 -0.229492,0.581055 -0.410156,0.620117 -1.318359,0.620117 h -1.289063 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path176" />
+       id="path169" />
     <path
        d="m 17.583008,49.842773 h 1.689453 q 0.517578,0 0.791016,0.219727 0.346679,0.249023 0.356445,0.805664 0,0.463867 -0.297852,0.78125 -0.302734,0.341797 -0.908203,0.351563 H 17.583008 Z M 16.503906,56 h 1.079102 v -3.041992 h 1.376953 L 20.429687,56 h 1.28418 l -1.65039,-3.15918 q 1.357421,-0.522461 1.376953,-1.972656 -0.0293,-0.986328 -0.708008,-1.518555 -0.561524,-0.46875 -1.450195,-0.46875 h -2.778321 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path178" />
+       id="path171" />
     <path
        d="m 22.597656,56 h 1.079102 v -7.119141 h -1.079102 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path180" />
+       id="path173" />
     <path
        d="m 26.782227,56 h 0.839843 l 2.353516,-7.119141 h -1.142578 l -1.621094,5.419922 h -0.01953 l -1.616211,-5.419922 h -1.142578 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path182" />
+       id="path175" />
     <path
        d="m 30.742187,56 h 4.545899 v -1.020508 h -3.466797 v -2.089844 h 2.958984 v -0.957031 h -2.958984 v -2.03125 h 3.466797 v -1.020508 h -4.545899 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path184" />
+       id="path177" />
   </g>
   <g
-     id="use74"
+     id="use67"
      transform="translate(6.5,62)">
     <g
        transform="translate(16,16)"
-       id="g149">
+       id="g142">
       <path
-         id="circle145"
-         style="fill:url(#linearGradient153)"
+         id="circle138"
+         style="fill:url(#linearGradient146)"
          transform="rotate(90)"
          d="M 15.5,0 A 15.5,15.5 0 0 1 0,15.5 15.5,15.5 0 0 1 -15.5,0 15.5,15.5 0 0 1 0,-15.5 15.5,15.5 0 0 1 15.5,0 Z" />
       <path
-         id="circle147"
-         style="fill:url(#linearGradient155)"
+         id="circle140"
+         style="fill:url(#linearGradient148)"
          transform="rotate(90)"
          d="M 13.5,0 A 13.5,13.5 0 0 1 0,13.5 13.5,13.5 0 0 1 -13.5,0 13.5,13.5 0 0 1 0,-13.5 13.5,13.5 0 0 1 13.5,0 Z" />
     </g>
   </g>
   <!-- ======== row 1 ======== -->
   <path
-     id="polyline78"
+     id="polyline71"
      transform="translate(22.5,120)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 42"
      class="connect" />
   <g
      transform="translate(22.5,135)"
-     id="g86">
+     id="g79">
     <path
-       id="polyline80"
+       id="polyline73"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="m -7,0 h 4"
        class="icon" />
     <path
-       id="polyline82"
+       id="polyline75"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 7,0 H 3"
        class="icon" />
     <path
-       id="polyline84"
+       id="polyline77"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 5,-2 V 2"
        class="icon" />
   </g>
   <g
-     id="use90"
+     id="use83"
      transform="translate(13.5,111)">
     <g
        transform="translate(9,9)"
-       id="g163">
+       id="g156">
       <path
-         id="circle157"
+         id="circle150"
          style="fill:none;stroke:#222222"
          d="M 8.5,0 A 8.5,8.5 0 0 1 0,8.5 8.5,8.5 0 0 1 -8.5,0 8.5,8.5 0 0 1 0,-8.5 8.5,8.5 0 0 1 8.5,0 Z" />
       <path
-         id="circle159"
-         style="fill:url(#linearGradient167)"
+         id="circle152"
+         style="fill:url(#linearGradient160)"
          transform="rotate(90)"
          d="M 8,0 A 8,8 0 0 1 0,8 8,8 0 0 1 -8,0 8,8 0 0 1 0,-8 8,8 0 0 1 8,0 Z" />
       <path
-         id="circle161"
-         style="fill:url(#linearGradient169)"
+         id="circle154"
+         style="fill:url(#linearGradient162)"
          transform="rotate(90)"
          d="M 7,0 A 7,7 0 0 1 0,7 7,7 0 0 1 -7,0 7,7 0 0 1 0,-7 7,7 0 0 1 7,0 Z" />
     </g>
   </g>
   <!-- ======== row 2 ======== -->
   <g
-     id="use94"
+     id="use87"
      transform="translate(10.5,150)">
     <g
        transform="translate(12,12)"
-       id="g133" />
+       id="g126" />
   </g>
   <!-- ======== row 3 ======== -->
   <g
-     id="use98"
+     id="use91"
      transform="translate(10.5,266)">
     <g
        transform="translate(12,12)"
-       id="g137" />
+       id="g130" />
   </g>
   <g
      aria-label="IN"
-     id="text100"
+     id="text93"
      style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="label">
     <path
        d="m 19.335937,300 h 0.863282 v -5.69531 h -0.863282 z"
        style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path208" />
+       id="path201" />
     <path
        d="m 21.398437,300 h 0.863282 v -4.04688 h 0.01563 L 24.851562,300 h 0.816407 v -5.69531 h -0.863282 v 4.04687 h -0.01563 l -2.578125,-4.04687 h -0.8125 z"
        style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path210" />
+       id="path203" />
   </g>
   <!-- ======== row 4 ======== -->
   <path
-     id="rect104"
+     id="rect97"
      style="fill:#bbbbbb"
      d="m 9.5,304 h 26 c 1.662,0 3,1.338 3,3 v 36 c 0,1.662 -1.338,3 -3,3 h -26 c -1.662,0 -3,-1.338 -3,-3 v -36 c 0,-1.662 1.338,-3 3,-3 z"
      class="output" />
   <g
-     id="use106"
+     id="use99"
      transform="translate(10.5,308)">
     <g
        transform="translate(12,12)"
-       id="g141" />
+       id="g134" />
   </g>
   <g
      aria-label="OUT"
-     id="text108"
+     id="text101"
      style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="label">
     <path
        d="m 15.945313,339.15234 q 0,0.97657 0.05859,1.32032 0.03125,0.18359 0.07813,0.30468 0.05078,0.11719 0.113281,0.2461 0.207032,0.39453 0.664063,0.69531 0.449219,0.3125 1.121094,0.32812 0.679687,-0.0156 1.132812,-0.32812 0.449219,-0.30078 0.648438,-0.69531 0.144531,-0.20703 0.199218,-0.55078 0.05078,-0.34375 0.05078,-1.32032 0,-0.99218 -0.05078,-1.32812 -0.05469,-0.33594 -0.199218,-0.54297 -0.199219,-0.39453 -0.648438,-0.70313 -0.453125,-0.3125 -1.132812,-0.32031 -0.671875,0.008 -1.121094,0.32031 -0.457031,0.3086 -0.664063,0.70313 -0.128906,0.20703 -0.191406,0.54297 -0.05859,0.33594 -0.05859,1.32812 z m 0.867187,0 q 0,-0.83984 0.0625,-1.14453 0.05469,-0.28906 0.222656,-0.47265 0.136719,-0.17579 0.359375,-0.29297 0.21875,-0.11328 0.523438,-0.1211 0.308593,0.008 0.535156,0.1211 0.214844,0.11718 0.34375,0.29297 0.167969,0.18359 0.230469,0.47265 0.05859,0.30469 0.05859,1.14453 0,0.83985 -0.05859,1.13672 -0.0625,0.29688 -0.230469,0.48047 -0.128906,0.17578 -0.34375,0.28516 -0.226563,0.1289 -0.535156,0.1289 -0.304688,0 -0.523438,-0.1289 -0.222656,-0.10938 -0.359375,-0.28516 -0.167969,-0.18359 -0.222656,-0.48047 -0.0625,-0.29687 -0.0625,-1.13672 z"
        style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path200" />
+       id="path193" />
     <path
        d="m 20.910156,340.07031 q 0.0078,0.89844 0.59375,1.42578 0.574219,0.54297 1.429688,0.55078 0.871093,-0.008 1.441406,-0.55078 0.566406,-0.52734 0.582031,-1.42578 v -3.76562 H 24.09375 v 3.67187 q -0.0078,0.58203 -0.328125,0.88672 -0.328125,0.32031 -0.832031,0.32031 -0.503907,0 -0.824219,-0.32031 -0.328125,-0.30469 -0.335938,-0.88672 v -3.67187 h -0.863281 z"
        style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path202" />
+       id="path195" />
     <path
        d="m 27.027344,342 h 0.867187 v -4.92578 h 1.558594 v -0.76953 H 25.46875 v 0.76953 h 1.558594 z"
        style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path204" />
+       id="path197" />
   </g>
 </svg>

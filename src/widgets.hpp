@@ -34,13 +34,6 @@ struct MKnob40 : MKnob {
     }
 };
 
-struct MKnob50 : MKnob {
-    MKnob50() : MKnob("res/knob50.svg", 50) {
-        shadow->blurRadius = 2.7;
-        shadow->box.pos = Vec(0.0, 4.0);
-    }
-};
-
 struct MPort : SvgPort {
     MPort() {
         setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/port.svg")));

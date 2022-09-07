@@ -10,9 +10,10 @@ files = [
     'hswitch-0',
     'hswitch-1',
     'knob18',
+    'knob24',
     'knob32',
     'knob40',
-    'knob50',
+    'MIX2',
     'port',
     'SAT'
 ]

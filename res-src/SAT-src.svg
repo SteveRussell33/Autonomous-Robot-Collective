@@ -97,13 +97,6 @@
       </g>
     </symbol>
 
-    <symbol id="knob50" >
-      <g transform="translate(25 25)">
-        <circle r="24.5" fill="url('#bigKnobDarkGradient')" transform="rotate(90)"/>
-        <circle r="22.5" fill="url('#bigKnobMediumGradient')" transform="rotate(90)"/>
-      </g>
-    </symbol>
-
     <symbol id="port" >
       <g transform="translate(12 12)">
         <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>

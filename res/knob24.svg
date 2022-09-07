@@ -8,14 +8,14 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="50"
-   height="50"
-   viewBox="0 0 50 50"
-   id="svg10"
-   sodipodi:docname="knob50.svg"
+   width="24"
+   height="24"
+   viewBox="0 0 24 24"
+   id="svg6"
+   sodipodi:docname="knob24.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
-     id="metadata16">
+     id="metadata12">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,7 +26,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs14" />
+     id="defs10" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -38,26 +38,18 @@
      inkscape:pageshadow="2"
      inkscape:window-width="689"
      inkscape:window-height="480"
-     id="namedview12"
+     id="namedview8"
      showgrid="false"
-     inkscape:zoom="16.54"
-     inkscape:cx="25"
-     inkscape:cy="25"
+     inkscape:zoom="34.458333"
+     inkscape:cx="12"
+     inkscape:cy="12"
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg10" />
+     inkscape:current-layer="svg6" />
   <path
-     id="circle2"
-     style="fill:#222222"
-     d="M 45.5,25 A 20.5,20.5 0 0 1 25,45.5 20.5,20.5 0 0 1 4.5,25 20.5,20.5 0 0 1 25,4.5 20.5,20.5 0 0 1 45.5,25 Z" />
-  <path
-     id="circle4"
-     style="fill:#f0f0f0"
-     d="M 44.5,25 A 19.5,19.5 0 0 1 25,44.5 19.5,19.5 0 0 1 5.5,25 19.5,19.5 0 0 1 25,5.5 19.5,19.5 0 0 1 44.5,25 Z" />
-  <path
-     id="polyline6"
-     transform="translate(25,25)"
-     style="fill:none;stroke:#343434;stroke-width:2.5;stroke-linecap:round"
-     d="M 0,-19.5 V -2" />
+     id="polyline2"
+     transform="translate(12,12)"
+     style="fill:none;stroke:#f0f0f0;stroke-width:2.2;stroke-linecap:round"
+     d="m 0,-10 v 7.5" />
 </svg>
