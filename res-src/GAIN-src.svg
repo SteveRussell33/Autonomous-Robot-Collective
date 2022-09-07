@@ -63,12 +63,7 @@
       </g>
     </symbol>
 
-    <symbol id="fader" >
-        <polyline points="0,0 0,144" stroke-width="1" class="blueprint"/>
-        <polyline points="8,0 8,144" stroke-width="1" class="blueprint"/>
-        <polyline points="0,0 8,0" stroke-width="1" class="blueprint"/>
-        <polyline points="0,144 8,144" stroke-width="1" class="blueprint"/>
-
+    <symbol id="track" >
         <g transform="translate(9 0)">
           <polyline points="6,0 6,144" stroke-width="2" class="blueprint"/>
           <path d="M 0 10 12,10 12,30 0,30 Z" stroke-width="2" class="blueprint"/>
@@ -84,8 +79,9 @@
   <text class="logo" x="50%" y="362" text-anchor="middle">RM</text>
 
   <g transform="translate(22.5 40)">
-    <use xlink:href="#fader" transform="translate(-9 0)"/>
-    <g transform="translate(0 1)">
+    <use xlink:href="#track" transform="translate(-9 0)"/>
+    <rect x="-10" y="-1" width="10" height="146" fill="#343434"/>
+    <g transform="translate(0 0)">
       <text x="-17"   y= "2.5"  class="label">6</text> <polyline points="-12   0 -9   0" class="connect"/>
       <text x="-17"   y="17.5"  class="label">3</text> <polyline points="-12  15 -9  15" class="connect"/>
       <text x="-17"   y="32.5"  class="label">0</text> <polyline points="-12  30 -9  30" class="connect"/>

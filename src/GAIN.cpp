@@ -103,7 +103,7 @@ struct GAINWidget : ModuleWidget {
         addInput(createInputCentered<MPort>(Vec(22.5, 279), module, GAIN::kInput));
         addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, GAIN::kOutput));
 
-        Meter *meter = createWidget<Meter>(Vec(22.5-9, 40));
+        VuMeter *meter = createWidget<VuMeter>(Vec(22.5-9, 40));
         //meter->setLevels(leftLevels, rightLevels);
         addChild(meter);
     }
