@@ -71,11 +71,6 @@ struct GAIN : Module {
 
         vuLevels.process(in, in, args.sampleTime);
 
-#ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(vuLevels.rms);
-        outputs[kDebug2].setVoltage(vuLevels.peak);
-#endif
-
         outputs[kOutput].setVoltage(in);
     }
 };
@@ -86,7 +81,7 @@ struct GAIN : Module {
 
 struct VUMeter : OpaqueWidget {
 
-    const NVGcolor red = nvgRGB(0x36, 0x29, 0x34);
+    const NVGcolor red = nvgRGB(0xE6, 0x29, 0x34);
     const NVGcolor orange = nvgRGB(0xFF, 0x87, 0x24);
     const NVGcolor yellow = nvgRGB(0xFF, 0xCA, 0x33);
     const NVGcolor yg = nvgRGB(0xC9, 0xCE, 0x3A);
@@ -106,20 +101,20 @@ struct VUMeter : OpaqueWidget {
             rightRms = module->vuLevels.rightRms;
         }
 
-        drawRms(args, 0, leftRms);
-        drawRms(args, 5, rightRms);
+        drawLevel(args, 0, leftRms);
+        drawLevel(args, 5, rightRms);
     }
 
-    void drawRms(const DrawArgs& args, float x, float rms) {
+    void drawLevel(const DrawArgs& args, float x, float level) {
 
-        float db = clamp(ampToDb(rms / 10.0f), -120.0f, 6.0f);
+        float db = clamp(ampToDb(level / 10.0f), -120.0f, 6.0f);
         if (db < -119.0f) {
             return;
         }
 
-        drawSegment(args, x, db, 0.0f,    6.0f, 30,  0, red);
-        drawSegment(args, x, db, -3.0f,   0.0f, 45, 30, orange);
-        drawSegment(args, x, db, -6.0f,  -3.0f, 60, 45, yellow);
+        drawSegment(args, x, db, 0.0f, 6.0f, 30, 0, red);
+        drawSegment(args, x, db, -3.0f, 0.0f, 45, 30, orange);
+        drawSegment(args, x, db, -6.0f, -3.0f, 60, 45, yellow);
         drawSegment(args, x, db, -12.0f, -6.0f, 81, 60, yg);
         drawSegment(args, x, db, -24.f, -12.0f, 102, 81, green);
         drawSegment(args, x, db, -48.f, -24.0f, 123, 102, green);
