@@ -55,48 +55,6 @@
 
   <defs>
 
-    <linearGradient id="smallKnobMediumGradient">
-      <stop offset="5%"  stop-color="#888" />
-      <stop offset="95%" stop-color="#333" />
-    </linearGradient>
-
-    <linearGradient id="smallKnobDarkGradient">
-      <stop offset="5%"  stop-color="#444" />
-      <stop offset="95%" stop-color="#222" />
-    </linearGradient>
-
-    <linearGradient id="bigKnobDarkGradient">
-      <stop offset="5%"  stop-color="#5c5c5c" />
-      <stop offset="95%" stop-color="#282828" />
-    </linearGradient>
-
-    <linearGradient id="bigKnobMediumGradient">
-      <stop offset="5%"  stop-color="#888" />
-      <stop offset="95%" stop-color="#333" />
-    </linearGradient>
-
-    <symbol id="knob18" >
-      <g transform="translate(9 9)">
-        <circle r="8.5" stroke="#222" fill="none"/>
-        <circle r="8" fill="url('#smallKnobMediumGradient')" transform="rotate(90)"/>
-        <circle r="7" fill="url('#smallKnobDarkGradient')" transform="rotate(90)"/>
-      </g>
-    </symbol>
-
-    <symbol id="knob32" >
-      <g transform="translate(16 16)">
-        <circle r="15.5" fill="url('#bigKnobDarkGradient')" transform="rotate(90)"/>
-        <circle r="13.5" fill="url('#bigKnobMediumGradient')" transform="rotate(90)"/>
-      </g>
-    </symbol>
-
-    <symbol id="knob40" >
-      <g transform="translate(20 20)">
-        <circle r="19.5" fill="url('#bigKnobDarkGradient')" transform="rotate(90)"/>
-        <circle r="17.5" fill="url('#bigKnobMediumGradient')" transform="rotate(90)"/>
-      </g>
-    </symbol>
-
     <symbol id="port" >
       <g transform="translate(12 12)">
         <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
@@ -105,38 +63,57 @@
       </g>
     </symbol>
 
-    <symbol id="hswitch14" >
-      <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
-      <g transform="translate(12 7)">
-        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
-        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
-      </g>
+    <symbol id="fader" >
+        <polyline points="0,0 0,144" stroke-width="1" class="blueprint"/>
+        <polyline points="8,0 8,144" stroke-width="1" class="blueprint"/>
+        <polyline points="0,0 8,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,144 8,144" stroke-width="1" class="blueprint"/>
+
+        <g transform="translate(9 0)">
+          <polyline points="6,0 6,144" stroke-width="2" class="blueprint"/>
+          <path d="M 0 10 12,10 12,30 0,30 Z" stroke-width="2" class="blueprint"/>
+        </g>
     </symbol>
+
   </defs>
 
-  <!-- ======== id ======== -->  
+  <!-- ======== body ======== -->  
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">GAIN</text>
   <text class="logo" x="50%" y="362" text-anchor="middle">RM</text>
 
-  <g transform="translate(22.5 248)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="-18" y="2" class="label" text-anchor="middle">L</text>
-  </g>
-  <g transform="translate(22.5 276)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="-18" y="2" class="label" text-anchor="middle">R</text>
+  <g transform="translate(22.5 40)">
+    <use xlink:href="#fader" transform="translate(-9 0)"/>
+    <text x="-17"   y= "2.5"  class="label">6</text> <polyline points="-12   0 -9   0" class="connect"/>
+    <text x="-17"   y="17.5"  class="label">3</text> <polyline points="-12  15 -9  15" class="connect"/>
+    <text x="-17"   y="32.5"  class="label">0</text> <polyline points="-12  30 -9  30" class="connect"/>
+    <text x="-17"   y="47.5"  class="label">3</text> <polyline points="-12  45 -9  45" class="connect"/>
+    <text x="-17"   y="62.5"  class="label">6</text> <polyline points="-12  60 -9  60" class="connect"/>
+    <text x="-20.5" y="83.5"  class="label">12</text><polyline points="-12  81 -9  81" class="connect"/>
+    <text x="-20.5" y="104.5" class="label">24</text><polyline points="-12 102 -9 102" class="connect"/>
+    <text x="-20.5" y="125.5" class="label">48</text><polyline points="-12 123 -9 123" class="connect"/>
   </g>
 
-  <g transform="translate(22.5 306)">
-    <rect x="-15" y="-15" width="30" height="58" rx="3" class="output"/>
+  <g transform="translate(22.5 201)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="-18" y="2" class="label" text-anchor="middle">L</text>
+    <text x="0" y="22" class="label" text-anchor="middle">MUTE</text>
   </g>
-  <g transform="translate(22.5 334)">
+
+  <g transform="translate(22.5 240)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="-18" y="2" class="label" text-anchor="middle">R</text>
+    <text x="0" y="22" class="label" text-anchor="middle">VOL</text>
+  </g>
+
+  <g transform="translate(22.5 279)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+    <text x="0" y="22" class="label" text-anchor="middle">IN</text>
+  </g>
+
+  <g transform="translate(22.5 320)">
+    <rect x="-16" y="-16" width="32" height="42" rx="3" class="output"/>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+    <text x="0" y="22" class="label" text-anchor="middle">OUT</text>
   </g>
 
 </svg>
