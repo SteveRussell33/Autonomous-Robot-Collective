@@ -72,6 +72,8 @@ struct GAIN : Module {
 #ifdef GAIN_DEBUG
         outputs[kDebug1].setVoltage(leftMeter.rms);
         outputs[kDebug2].setVoltage(leftMeter.peak);
+        //outputs[kDebug3].setVoltage(ampToDb(leftMeter.rms)/100.0f);
+        //outputs[kDebug4].setVoltage(ampToDb(leftMeter.peak)/100.0f);
         outputs[kDebug3].setVoltage(rightMeter.rms);
         outputs[kDebug4].setVoltage(rightMeter.peak);
 #endif
