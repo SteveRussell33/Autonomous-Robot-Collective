@@ -2,12 +2,11 @@
 #include "plugin.hpp"
 #include "widgets.hpp"
 
-#define GAIN_DEBUG
+// define GAIN_DEBUG
 
 struct GAIN : Module {
 
-    Meter leftMeter;
-    Meter rightMeter;
+    Meter meter;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -22,15 +21,14 @@ struct GAIN : Module {
     };
 
     enum InputId {
-        kLeftInput,
-        kRightInput,
+        kVolInput,
+        kInput,
 
         kInputsLen
     };
 
     enum OutputId {
-        kLeftOutput,
-        kRightOutput,
+        kOutput,
 
 #ifdef GAIN_DEBUG
         kDebug1,
@@ -44,14 +42,12 @@ struct GAIN : Module {
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        configInput(kLeftInput, "Left");
-        configInput(kRightInput, "Right");
+        configInput(kVolInput, "Vol");
+        configInput(kInput, "Audio");
 
-        configOutput(kLeftOutput, "Left");
-        configOutput(kRightOutput, "Right");
+        configOutput(kOutput, "Audio");
 
-        // TODO
-        // configBypass(kLeftInput, kLeftOutput);
+        configBypass(kInput, kOutput);
 
 #ifdef GAIN_DEBUG
         configOutput(kDebug1, "Debug 1");
@@ -63,26 +59,16 @@ struct GAIN : Module {
 
     void process(const ProcessArgs& args) override {
 
-        float left = inputs[kLeftInput].getVoltage();
-        float right = inputs[kRightInput].getVoltage();
+        float in = inputs[kInput].getVoltage();
 
-        leftMeter.process(left, args.sampleTime);
-        rightMeter.process(right, args.sampleTime);
+        meter.process(in, args.sampleTime);
 
 #ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(leftMeter.rms);
-        outputs[kDebug2].setVoltage(leftMeter.peak);
-        //outputs[kDebug3].setVoltage(ampToDb(leftMeter.rms)/100.0f);
-        //outputs[kDebug4].setVoltage(ampToDb(leftMeter.peak)/100.0f);
-        outputs[kDebug3].setVoltage(rightMeter.rms);
-        outputs[kDebug4].setVoltage(rightMeter.peak);
+        outputs[kDebug1].setVoltage(meter.rms);
+        outputs[kDebug2].setVoltage(meter.peak);
 #endif
 
-        outputs[kLeftOutput].setVoltage(left);
-        outputs[kRightOutput].setVoltage(right);
-
-        outputs[kLeftOutput].setChannels(1);
-        outputs[kRightOutput].setChannels(1);
+        outputs[kOutput].setVoltage(in);
     }
 };
 
@@ -105,10 +91,9 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<MPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 248), module, GAIN::kLeftInput));
-        addInput(createInputCentered<MPort>(Vec(22.5, 276), module, GAIN::kRightInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 306), module, GAIN::kLeftOutput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, GAIN::kRightOutput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 240), module, GAIN::kVolInput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 279), module, GAIN::kInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, GAIN::kOutput));
     }
 };
 
