@@ -23,54 +23,63 @@ inline float fastTanh(const float x) {
 }
 
 //--------------------------------------------------------------
-// Pitch
+// Conversion
 //--------------------------------------------------------------
 
-const float kC4 = 261.626;
-
-// The following two functions are from github.com/bogaudio/BogaudioModules/src/dsp/pitch.hpp
+// The conversion code is from github.com/bogaudio/BogaudioModules/src/dsp/
 // License is GPL3.
+
+const float kC4 = 261.626;
 
 inline float freqToPitch(float freq) { return log2f(freq / kC4); }
 
 inline float pitchToFreq(float pitch) { return powf(2.0, pitch) * kC4; }
 
-//--------------------------------------------------------------
-// Metering
-//--------------------------------------------------------------
-
-// The following two functions are from github.com/bogaudio/BogaudioModules/src/dsp/signal.hpp
-// License is GPL3.
-
-inline float dbToAmp(float db) {
-	return powf(10.0f, db * 0.05f);
-}
+inline float dbToAmp(float db) { return powf(10.0f, db * 0.05f); }
 
 inline float ampToDb(float amplitude) {
-	if (amplitude < 0.000001f) {
-		return -120.0f;
-	}
-	return 20.0f * log10f(amplitude);
+    if (amplitude < 0.000001f) {
+        return -120.0f;
+    }
+    return 20.0f * log10f(amplitude);
 }
 
-// This class is adapted from /Rack-SDK/include/dsp/vumeter.hpp.
+//--------------------------------------------------------------
+// VU
+//--------------------------------------------------------------
+
+// This class is adapted from /Rack-SDK/leftclude/dsp/vumeter.hpp.
 // License is GPL3.
-struct Levels {
+struct VULevels {
 
-    static constexpr float lambda = 30.f; // Inverse time constant in 1/seconds
+    // TODO have a look at this for more sophistacted approach, e.g. circular buffer for RMS
+    // https://www.kvraudio.com/forum/viewtopic.php?t=460756
 
-    float rms = 0.0f;
-    float peak = 0.0f;
+    static constexpr float lambda = 30.f; // Inverse time constant left 1/seconds
 
-    void process(float in, float deltaTime) {
+    float leftRms = 0.0f;
+    float leftPeak = 0.0f;
+    float rightRms = 0.0f;
+    float rightPeak = 0.0f;
 
-        rms += (in*in - rms) * lambda * deltaTime;
+    void process(float left, float right, float deltaTime) {
 
-        float absv = std::fabs(in);
-        if (absv >= peak) {
-            peak = absv;
+        leftRms += (left * left - leftRms) * lambda * deltaTime;
+
+        rightRms += (right * right - rightRms) * lambda * deltaTime;
+
+        float leftAbs = std::fabs(left);
+        if (leftAbs >= leftPeak) {
+            leftPeak = leftAbs;
         } else {
-            peak += (absv - peak) * lambda * deltaTime;
+            leftPeak += (leftAbs - leftPeak) * lambda * deltaTime;
+        }
+
+        float rightAbs = std::fabs(right);
+        if (rightAbs >= rightPeak) {
+            rightPeak = rightAbs;
+        } else {
+            rightPeak += (rightAbs - rightPeak) * lambda * deltaTime;
         }
     }
 };

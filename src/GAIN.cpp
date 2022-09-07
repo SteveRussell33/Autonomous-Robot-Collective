@@ -1,16 +1,17 @@
 #include "dsp.hpp"
 #include "plugin.hpp"
 #include "widgets.hpp"
-#include "vu.hpp"
+// include "vu.hpp"
 
 // define GAIN_DEBUG
 
+//--------------------------------------------------------------
+// GAIN
+//--------------------------------------------------------------
+
 struct GAIN : Module {
 
-    // GAIN is mono, but its easier to pretend that its stereo 
-    // and has no right input connected.
-    Levels leftLevels;
-    Levels rightLevels;
+    VULevels vuLevels;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -62,23 +63,99 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
+        if (!outputs[kOutput].isConnected()) {
+            return;
+        }
 
         float in = inputs[kInput].getVoltage();
 
-        // GAIN is mono, but its easier to pretend that its stereo 
-        // and has no right input connected.
-        leftLevels.process(in, args.sampleTime);
-        rightLevels.rms = leftLevels.rms;
-        rightLevels.peak = leftLevels.peak;
+        vuLevels.process(in, in, args.sampleTime);
 
 #ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(leftLevels.rms);
-        outputs[kDebug2].setVoltage(leftLevels.peak);
+        outputs[kDebug1].setVoltage(vuLevels.rms);
+        outputs[kDebug2].setVoltage(vuLevels.peak);
 #endif
 
         outputs[kOutput].setVoltage(in);
     }
 };
+
+//--------------------------------------------------------------
+// VUMeter
+//--------------------------------------------------------------
+
+struct VUMeter : OpaqueWidget {
+
+    const NVGcolor red = nvgRGB(0x36, 0x29, 0x34);
+    const NVGcolor orange = nvgRGB(0xFF, 0x87, 0x24);
+    const NVGcolor yellow = nvgRGB(0xFF, 0xCA, 0x33);
+    const NVGcolor yg = nvgRGB(0xC9, 0xCE, 0x3A);
+    const NVGcolor green = nvgRGB(0x3E, 0xD5, 0x64);
+
+    // TODO make a base class that we can get VULevels from
+    GAIN* module;
+
+    VUMeter(GAIN* module_) : module(module_) {}
+
+    void draw(const DrawArgs& args) override {
+
+        float leftRms = 0.0;
+        float rightRms = 0.0;
+        if (module) {
+            leftRms = module->vuLevels.leftRms;
+            rightRms = module->vuLevels.rightRms;
+        }
+
+        drawRms(args, 0, leftRms);
+        drawRms(args, 5, rightRms);
+    }
+
+    void drawRms(const DrawArgs& args, float x, float rms) {
+
+        float db = clamp(ampToDb(rms / 10.0f), -120.0f, 6.0f);
+        if (db < -119.0f) {
+            return;
+        }
+
+        drawSegment(args, x, db, 0.0f,    6.0f, 30,  0, red);
+        drawSegment(args, x, db, -3.0f,   0.0f, 45, 30, orange);
+        drawSegment(args, x, db, -6.0f,  -3.0f, 60, 45, yellow);
+        drawSegment(args, x, db, -12.0f, -6.0f, 81, 60, yg);
+        drawSegment(args, x, db, -24.f, -12.0f, 102, 81, green);
+        drawSegment(args, x, db, -48.f, -24.0f, 123, 102, green);
+        drawSegment(args, x, db, -120.f, -48.0f, 144, 123, green);
+    }
+
+    void drawSegment(
+        const DrawArgs& args,
+        float x,
+        float db,
+        float lowDb,
+        float highDb,
+        float bottom,
+        float top,
+        NVGcolor color) {
+
+        if (db < lowDb) {
+            return;
+        }
+
+        float y = (db > highDb) ? top : rescale(db, lowDb, highDb, bottom, top);
+        float height = bottom - y;
+        drawRect(args, x, y, 3, height, color);
+    }
+
+    void drawRect(const DrawArgs& args, float x, float y, float w, float h, NVGcolor color) {
+        nvgBeginPath(args.vg);
+        nvgRect(args.vg, x, y, w, h);
+        nvgFillColor(args.vg, color);
+        nvgFill(args.vg);
+    }
+};
+
+//--------------------------------------------------------------
+// GAINWidget
+//--------------------------------------------------------------
 
 struct GAINWidget : ModuleWidget {
     GAINWidget(GAIN* module) {
@@ -103,8 +180,9 @@ struct GAINWidget : ModuleWidget {
         addInput(createInputCentered<MPort>(Vec(22.5, 279), module, GAIN::kInput));
         addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, GAIN::kOutput));
 
-        VuMeter *meter = createWidget<VuMeter>(Vec(22.5-9, 40));
-        //meter->setLevels(leftLevels, rightLevels);
+        VUMeter* meter = new VUMeter(module);
+        meter->box.pos = Vec(22.5 - 9, 40);
+        meter->box.size = Vec(9, 144);
         addChild(meter);
     }
 };
