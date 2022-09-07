@@ -84,7 +84,6 @@ struct VUMeter : OpaqueWidget {
     const NVGcolor red = nvgRGB(0xE6, 0x29, 0x34);
     const NVGcolor orange = nvgRGB(0xFF, 0x87, 0x24);
     const NVGcolor yellow = nvgRGB(0xFF, 0xCA, 0x33);
-    const NVGcolor yg = nvgRGB(0xC9, 0xCE, 0x3A);
     const NVGcolor green = nvgRGB(0x3E, 0xD5, 0x64);
 
     // TODO make a base class that we can get VULevels from
@@ -108,17 +107,21 @@ struct VUMeter : OpaqueWidget {
     void drawLevel(const DrawArgs& args, float x, float level) {
 
         float db = clamp(ampToDb(level / 10.0f), -120.0f, 6.0f);
-        if (db < -119.0f) {
+        if (db < -72.0f) {
             return;
         }
 
-        drawSegment(args, x, db, 0.0f, 6.0f, 30, 0, red);
-        drawSegment(args, x, db, -3.0f, 0.0f, 45, 30, orange);
-        drawSegment(args, x, db, -6.0f, -3.0f, 60, 45, yellow);
-        drawSegment(args, x, db, -12.0f, -6.0f, 81, 60, yg);
-        drawSegment(args, x, db, -24.f, -12.0f, 102, 81, green);
-        drawSegment(args, x, db, -48.f, -24.0f, 123, 102, green);
-        drawSegment(args, x, db, -120.f, -48.0f, 144, 123, green);
+        NVGpaint orangeYellow = nvgLinearGradient(args.vg, 0, 30, 0, 45, orange, yellow);
+        NVGpaint yellowGreen = nvgLinearGradient(args.vg, 0, 60, 0, 81, yellow, green);
+
+        drawSegment(args, x, db, 3.0f, 6.0f, 30, 0, red, NVGpaint{}, true);
+        drawSegment(args, x, db, 0.0f, 3.0f, 30, 15, orange, NVGpaint{}, true);
+        drawSegment(args, x, db, -3.0f, 0.0f, 45, 30, NVGcolor{}, orangeYellow, false);
+        drawSegment(args, x, db, -6.0f, -3.0f, 60, 45, yellow, NVGpaint{}, true);
+        drawSegment(args, x, db, -12.0f, -6.0f, 81, 60, NVGcolor{}, yellowGreen, false);
+        drawSegment(args, x, db, -24.f, -12.0f, 102, 81, green, NVGpaint{}, true);
+        drawSegment(args, x, db, -48.f, -24.0f, 123, 102, green, NVGpaint{}, true);
+        drawSegment(args, x, db, -72.f, -48.0f, 144, 123, green, NVGpaint{}, true);
     }
 
     void drawSegment(
@@ -129,7 +132,9 @@ struct VUMeter : OpaqueWidget {
         float highDb,
         float bottom,
         float top,
-        NVGcolor color) {
+        NVGcolor color,
+        NVGpaint gradient,
+        bool isColor) {
 
         if (db < lowDb) {
             return;
@@ -137,13 +142,26 @@ struct VUMeter : OpaqueWidget {
 
         float y = (db > highDb) ? top : rescale(db, lowDb, highDb, bottom, top);
         float height = bottom - y;
-        drawRect(args, x, y, 3, height, color);
+        drawRect(args, x, y, 3, height, color, gradient, isColor);
     }
 
-    void drawRect(const DrawArgs& args, float x, float y, float w, float h, NVGcolor color) {
+    void drawRect(
+        const DrawArgs& args,
+        float x,
+        float y,
+        float w,
+        float h,
+        NVGcolor color,
+        NVGpaint gradient,
+        bool isColor) {
+
         nvgBeginPath(args.vg);
         nvgRect(args.vg, x, y, w, h);
-        nvgFillColor(args.vg, color);
+        if (isColor) {
+            nvgFillColor(args.vg, color);
+        } else {
+            nvgFillPaint(args.vg, gradient);
+        }
         nvgFill(args.vg);
     }
 };
