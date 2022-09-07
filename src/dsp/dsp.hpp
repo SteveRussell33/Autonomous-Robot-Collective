@@ -33,3 +33,29 @@ const float kC4 = 261.626;
 inline float freqToPitch(float freq) { return log2f(freq / kC4); }
 
 inline float pitchToFreq(float pitch) { return powf(2.0, pitch) * kC4; }
+
+//--------------------------------------------------------------
+// Metering
+//--------------------------------------------------------------
+
+// This class is adapted from /Rack-SDK/include/dsp/vumeter.hpp.
+// License is GPL3.
+struct Meter {
+
+    static constexpr float lambda = 30.f; // Inverse time constant in 1/seconds
+
+    float rms = 0.0f;
+    float peak = 0.0f;
+
+    void process(float in, float deltaTime) {
+
+        rms += (in*in - rms) * lambda * deltaTime;
+
+        float absv = std::fabs(in);
+        if (absv >= peak) {
+            peak = absv;
+        } else {
+            peak += (absv - peak) * lambda * deltaTime;
+        }
+    }
+};
