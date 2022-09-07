@@ -1,12 +1,13 @@
+#include "meters.hpp"
 #include "plugin.hpp"
-#include "vu_meters.hpp"
 #include "widgets.hpp"
 
 #define GAIN_DEBUG
 
 struct GAIN : Module {
 
-    RmsPeak rmsPeak;
+    Meter leftMeter;
+    Meter rightMeter;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -65,13 +66,14 @@ struct GAIN : Module {
         float left = inputs[kLeftInput].getVoltage();
         float right = inputs[kRightInput].getVoltage();
 
-        rmsPeak.process(left, right, args.sampleTime);
+        leftMeter.process(left, args.sampleTime);
+        rightMeter.process(right, args.sampleTime);
 
 #ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(rmsPeak.leftRms);
-        outputs[kDebug2].setVoltage(rmsPeak.leftPeak);
-        outputs[kDebug3].setVoltage(rmsPeak.rightRms);
-        outputs[kDebug4].setVoltage(rmsPeak.rightPeak);
+        outputs[kDebug1].setVoltage(leftMeter.rms);
+        outputs[kDebug2].setVoltage(leftMeter.peak);
+        outputs[kDebug3].setVoltage(rightMeter.rms);
+        outputs[kDebug4].setVoltage(rightMeter.peak);
 #endif
 
         outputs[kLeftOutput].setVoltage(left);
