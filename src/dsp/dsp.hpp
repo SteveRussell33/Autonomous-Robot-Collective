@@ -55,7 +55,7 @@ inline float ampToDb(float amplitude) {
 
 // This class is adapted from /Rack-SDK/include/dsp/vumeter.hpp.
 // License is GPL3.
-struct Meter {
+struct Levels {
 
     static constexpr float lambda = 30.f; // Inverse time constant in 1/seconds
 

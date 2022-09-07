@@ -85,14 +85,16 @@
 
   <g transform="translate(22.5 40)">
     <use xlink:href="#fader" transform="translate(-9 0)"/>
-    <text x="-17"   y= "2.5"  class="label">6</text> <polyline points="-12   0 -9   0" class="connect"/>
-    <text x="-17"   y="17.5"  class="label">3</text> <polyline points="-12  15 -9  15" class="connect"/>
-    <text x="-17"   y="32.5"  class="label">0</text> <polyline points="-12  30 -9  30" class="connect"/>
-    <text x="-17"   y="47.5"  class="label">3</text> <polyline points="-12  45 -9  45" class="connect"/>
-    <text x="-17"   y="62.5"  class="label">6</text> <polyline points="-12  60 -9  60" class="connect"/>
-    <text x="-20.5" y="83.5"  class="label">12</text><polyline points="-12  81 -9  81" class="connect"/>
-    <text x="-20.5" y="104.5" class="label">24</text><polyline points="-12 102 -9 102" class="connect"/>
-    <text x="-20.5" y="125.5" class="label">48</text><polyline points="-12 123 -9 123" class="connect"/>
+    <g transform="translate(0 1)">
+      <text x="-17"   y= "2.5"  class="label">6</text> <polyline points="-12   0 -9   0" class="connect"/>
+      <text x="-17"   y="17.5"  class="label">3</text> <polyline points="-12  15 -9  15" class="connect"/>
+      <text x="-17"   y="32.5"  class="label">0</text> <polyline points="-12  30 -9  30" class="connect"/>
+      <text x="-17"   y="47.5"  class="label">3</text> <polyline points="-12  45 -9  45" class="connect"/>
+      <text x="-17"   y="62.5"  class="label">6</text> <polyline points="-12  60 -9  60" class="connect"/>
+      <text x="-20.5" y="83.5"  class="label">12</text><polyline points="-12  81 -9  81" class="connect"/>
+      <text x="-20.5" y="104.5" class="label">24</text><polyline points="-12 102 -9 102" class="connect"/>
+      <text x="-20.5" y="125.5" class="label">48</text><polyline points="-12 123 -9 123" class="connect"/>
+    </g>
   </g>
 
   <g transform="translate(22.5 201)">

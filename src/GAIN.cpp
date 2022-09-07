@@ -1,12 +1,16 @@
 #include "dsp.hpp"
 #include "plugin.hpp"
 #include "widgets.hpp"
+#include "vu.hpp"
 
 // define GAIN_DEBUG
 
 struct GAIN : Module {
 
-    Meter meter;
+    // GAIN is mono, but its easier to pretend that its stereo 
+    // and has no right input connected.
+    Levels leftLevels;
+    Levels rightLevels;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -61,11 +65,15 @@ struct GAIN : Module {
 
         float in = inputs[kInput].getVoltage();
 
-        meter.process(in, args.sampleTime);
+        // GAIN is mono, but its easier to pretend that its stereo 
+        // and has no right input connected.
+        leftLevels.process(in, args.sampleTime);
+        rightLevels.rms = leftLevels.rms;
+        rightLevels.peak = leftLevels.peak;
 
 #ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(meter.rms);
-        outputs[kDebug2].setVoltage(meter.peak);
+        outputs[kDebug1].setVoltage(leftLevels.rms);
+        outputs[kDebug2].setVoltage(leftLevels.peak);
 #endif
 
         outputs[kOutput].setVoltage(in);
@@ -94,6 +102,10 @@ struct GAINWidget : ModuleWidget {
         addInput(createInputCentered<MPort>(Vec(22.5, 240), module, GAIN::kVolInput));
         addInput(createInputCentered<MPort>(Vec(22.5, 279), module, GAIN::kInput));
         addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, GAIN::kOutput));
+
+        Meter *meter = createWidget<Meter>(Vec(22.5-9, 40));
+        //meter->setLevels(leftLevels, rightLevels);
+        addChild(meter);
     }
 };
 
