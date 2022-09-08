@@ -119,10 +119,12 @@ struct FMWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/FM.svg")));
 
-        addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
+        //addChild(createWidget<ScrewSilver>(Vec(15, 0)));
+        //addChild(createWidget<ScrewSilver>(Vec(15, 365)));
+        //addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
+        //addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
+        addChild(createWidget<ScrewSilver>(Vec(0, 0)));
+        addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
         // knobs and switches
         addParam(createParamCentered<MKnob40>(Vec(37.5, 82), module, FM::kRatioParam));
@@ -134,12 +136,12 @@ struct FMWidget : ModuleWidget {
         addParam(createParamCentered<MKnob18>(Vec(55.5, 236), module, FM::kOffsetCvAmountParam));
 
         // row 2
-        addInput(createInputCentered<MPort>(Vec(19.5, 278), module, FM::kRatioCvInput));
-        addInput(createInputCentered<MPort>(Vec(55.5, 278), module, FM::kOffsetCvInput));
+        addInput(createInputCentered<MPort>(Vec(19.5, 292), module, FM::kRatioCvInput));
+        addInput(createInputCentered<MPort>(Vec(55.5, 292), module, FM::kOffsetCvInput));
 
         // row 3
-        addInput(createInputCentered<MPort>(Vec(19.5, 320), module, FM::kCarrierPitchInput));
-        addOutput(createOutputCentered<MPort>(Vec(55.5, 320), module, FM::kModulatorPitchOutput));
+        addInput(createInputCentered<MPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
+        addOutput(createOutputCentered<MPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
 
 #ifdef FM_DEBUG
         addOutput(createOutputCentered<MPort>(Vec(12, 12), module, FM::kDebug1));

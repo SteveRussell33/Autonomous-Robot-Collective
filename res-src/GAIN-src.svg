@@ -86,17 +86,11 @@
           <polyline points="-7.5 144 8 144" class="connect"/>
 
           <rect x="-5" y="-1" width="10" height="146" rx="2" fill="#121212"/>
-
         </g>
     </symbol>
 
     <symbol id="fader" >
         <g transform="translate(6 8)">
-
-          <!--rect x="-6" y="0" width="12" height="152" rx="2" class="blueprint"/-->
-
-          <!--polyline points="0,4 0,148" stroke-width="1" class="blueprint"/-->
-
           <polyline points="0,0 0,144" stroke-width="1" class="blueprint"/>
 
           <rect x="-6" y="-8" width="12" height="16" stroke-width="2" class="blueprint"/>
@@ -115,7 +109,7 @@
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">GAIN</text>
-  <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
+  <text class="logo" x="48%" y="376" text-anchor="middle">RM</text>
 
   <!-- ======== track ======== -->  
 

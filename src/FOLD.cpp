@@ -140,8 +140,8 @@ struct FOLDWidget : ModuleWidget {
         addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, FOLD::kTimbreCvAmountParam));
         addInput(createInputCentered<MPort>(Vec(22.5, 162), module, FOLD::kTimbreCvInput));
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 278), module, FOLD::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, FOLD::kOutput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 292), module, FOLD::kInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, FOLD::kOutput));
     }
 };
 

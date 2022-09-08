@@ -112,7 +112,7 @@
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">FM</text>
-  <text class="logo" x="50%" y="362" text-anchor="middle">RM</text>
+  <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
   <!-- ======== knobs and switches ======== -->  
 
@@ -164,25 +164,25 @@
 
   <!-- ======== row 2 ======== -->  
 
-  <g transform="translate(19.5 278)">
+  <g transform="translate(19.5 292)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
     <text x="0" y="22" class="label" text-anchor="middle">RAT</text>
   </g>
 
-  <g transform="translate(55.5 278)">
+  <g transform="translate(55.5 292)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
     <text x="0" y="22" class="label" text-anchor="middle">OFS</text>
   </g>
 
   <!-- ======== row 3 ======== -->  
 
-  <g transform="translate(19.5 320)">
+  <g transform="translate(19.5 334)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
     <text x="0" y="22" class="label" text-anchor="middle">CAR</text>
   </g>
 
-  <g transform="translate(55.5 320)">
-    <rect x="-16" y="-16" width="32" height="42" rx="3" class="output"/>
+  <g transform="translate(55.5 334)">
+    <rect x="-15" y="-16" width="30" height="42" rx="3" class="output"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
     <text x="0" y="22" class="label" text-anchor="middle">MOD</text>
   </g>

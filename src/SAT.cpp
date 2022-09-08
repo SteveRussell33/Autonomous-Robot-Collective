@@ -121,8 +121,8 @@ struct SATWidget : ModuleWidget {
         addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, SAT::kDriveCvAmountParam));
         addInput(createInputCentered<MPort>(Vec(22.5, 162), module, SAT::kDriveCvInput));
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 278), module, SAT::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, SAT::kOutput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 292), module, SAT::kInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, SAT::kOutput));
     }
 };
 
