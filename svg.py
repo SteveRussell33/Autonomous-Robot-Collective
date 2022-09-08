@@ -14,7 +14,7 @@ files = [
     'knob18',
     'knob32',
     'knob40',
-    'MIX2',
+    'MIX-2',
     'port',
     'SAT',
     'toggle-0',

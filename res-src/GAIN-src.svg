@@ -137,7 +137,7 @@
 
   <g transform="translate(37.5 254)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="0" y="22" class="label" text-anchor="middle">LVL</text>
+    <text x="0" y="22" class="label" text-anchor="middle">LEVEL</text>
   </g>
 
   <!-- ======== inputs ======== -->  
