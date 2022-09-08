@@ -49,3 +49,14 @@ struct MHSwitch : SvgSwitch {
         addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/hswitch-1.svg")));
     }
 };
+
+struct MFader : SvgSlider {
+	MFader() {
+		setBackgroundSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-bg.svg")));
+		setHandleSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-handle.svg")));
+        setHandlePos(
+            Vec(0, 130), // nudge to keep it from disappearing
+            //Vec(0, 144-0.1), // nudge to keep it from disappearing
+            Vec(0, 0));
+	}
+};

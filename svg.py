@@ -4,6 +4,8 @@ import os
 import subprocess
 
 files = [
+    'fader-bg',
+    'fader-handle',
     'FM',
     'FOLD',
     'GAIN',

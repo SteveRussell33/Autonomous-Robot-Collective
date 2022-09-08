@@ -21,6 +21,7 @@ struct GAIN : Module {
 #endif
 
     enum ParamId {
+        kFader,
 
         kParamsLen
     };
@@ -46,6 +47,8 @@ struct GAIN : Module {
 
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
+
+        configParam(kFader, 0.0f, 1.0f, 0.0f, "Fader");
 
         configInput(kVolInput, "Vol");
         configInput(kInput, "Audio");
@@ -94,18 +97,22 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<MPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
+        // track
+
         VUMeter* meter = new VUMeter();
         if (module) {
             meter->vuLevels = &(module->vuLevels);
         }
-        meter->box.pos = Vec(30, 40);
+        meter->box.pos = Vec(22, 40);
         meter->box.size = Vec(9, 144);
         addChild(meter);
 
-        addInput(createInputCentered<MPort>(Vec(30, 201), module, GAIN::kVolInput)); // temporary
-        //addInput(createInputCentered<MPort>(Vec(30, 240), module, GAIN::kVolInput));
-        addInput(createInputCentered<MPort>(Vec(30, 279), module, GAIN::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(30, 320), module, GAIN::kOutput));
+        addParam(createParam<MFader>(Vec(22+5, 40), module, GAIN::kFader));
+
+        // ins and outs
+        addInput(createInputCentered<MPort>(Vec(22.5, 240), module, GAIN::kVolInput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 279), module, GAIN::kInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, GAIN::kOutput));
     }
 };
 

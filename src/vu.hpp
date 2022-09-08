@@ -59,6 +59,7 @@ struct VUMeter : OpaqueWidget {
 
     const int levelWidth = 3;
 
+    // Set in the constructor of the parent ModuleWidget 
     VULevels* vuLevels = NULL;
 
     void draw(const DrawArgs& args) override {
@@ -80,10 +81,11 @@ struct VUMeter : OpaqueWidget {
             return;
         }
 
-        NVGpaint redOrange = nvgLinearGradient(args.vg, 0, 0, 0, 30, red, orange);
+        NVGpaint redOrange = nvgLinearGradient(args.vg, 0, 15, 0, 30, red, orange);
         NVGpaint yellowGreen = nvgLinearGradient(args.vg, 0, 45, 0, 60, yellow, green);
 
-        drawSegment(args, x, db, 0.0f, 6.0f, 30, 0, NVGcolor{}, redOrange, false);
+        drawSegment(args, x, db, 3.0f, 6.0f, 15, 0, red, NVGpaint{}, true);
+        drawSegment(args, x, db, 0.0f, 3.0f, 30, 15, NVGcolor{}, redOrange, false);
         drawSegment(args, x, db, -3.0f, 0.0f, 45, 30, yellow, NVGpaint{}, true);
         drawSegment(args, x, db, -6.0f, -3.0f, 60, 45, NVGcolor{}, yellowGreen, false);
         drawSegment(args, x, db, -12.0f, -6.0f, 81, 60, green, NVGpaint{}, true);
