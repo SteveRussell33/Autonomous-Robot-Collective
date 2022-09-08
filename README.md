@@ -1,2 +1,3 @@
-# zaphod
-zaphod is a suite of VCV Rack modules
+# Red Mercury
+
+Red Mercury is a suite of VCV Rack modules
