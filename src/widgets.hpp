@@ -55,8 +55,8 @@ struct MFader : SvgSlider {
 		setBackgroundSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-bg.svg")));
 		setHandleSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-handle.svg")));
         setHandlePos(
-            Vec(0, 145-0.1), // nudge to keep it from disappearing
-            Vec(0, 1));
+            Vec(0, 144-0.1), // nudge to keep it from disappearing
+            Vec(0, 0));
         box.size = Vec(12, 160);
 	}
 };
