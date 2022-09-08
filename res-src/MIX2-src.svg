@@ -65,11 +65,19 @@
       <stop offset="95%" stop-color="#222" />
     </linearGradient>
 
-    <symbol id="knob24" >
-      <g transform="translate(12 12)">
-        <circle r="11.5" stroke="#222" fill="none"/>
-        <circle r="11" fill="url('#smallKnobMediumGradient')" transform="rotate(90)"/>
-        <circle r="10" fill="url('#smallKnobDarkGradient')" transform="rotate(90)"/>
+    <symbol id="knob18" >
+      <g transform="translate(9 9)">
+        <circle r="8.5" stroke="#222" fill="none"/>
+        <circle r="8" fill="url('#smallKnobMediumGradient')" transform="rotate(90)"/>
+        <circle r="7" fill="url('#smallKnobDarkGradient')" transform="rotate(90)"/>
+      </g>
+    </symbol>
+
+    <symbol id="toggleButton" >
+      <g transform="translate(9 9)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="8.5" stroke-width="2" class="blueprint"/>
       </g>
     </symbol>
 
@@ -103,7 +111,7 @@
           <polyline points="-7.5 123 8 123" class="connect"/>
           <polyline points="-7.5 144 8 144" class="connect"/>
 
-          <rect x="-5" y="-1" width="10" height="146" rx="2" fill="#121212"/>
+          <rect x="-5" y="0" width="10" height="144" fill="#121212"/>
         </g>
     </symbol>
 
@@ -130,10 +138,10 @@
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
   <!-- labels -->  
-  <g transform="translate(8 198)">
+  <g transform="translate(8 204)">
     <text x="0" y="2.5" class="label" text-anchor="middle">M</text>
   </g>
-  <g transform="translate(8 228)">
+  <g transform="translate(8 230)">
     <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
   </g>
   <g transform="translate(8 258)">
@@ -151,18 +159,22 @@
 
   <!-- ch1 -->  
 
-  <g transform="translate(28 29)">
+  <g transform="translate(24 29)">
+    <text x="0" y="0" class="label" text-anchor="middle">CH 1</text>
+  </g>
+
+  <g transform="translate(24 37)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
     <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(28 198)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  <g transform="translate(28 204)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(28 228)">
-    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+  <g transform="translate(28 230)">
+    <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
   <g transform="translate(28 258)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
@@ -179,18 +191,22 @@
 
   <!-- ch2 -->  
 
-  <g transform="translate(70 29)">
+  <g transform="translate(66 29)">
+    <text x="0" y="0" class="label" text-anchor="middle">CH 2</text>
+  </g>
+
+  <g transform="translate(66 37)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
     <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(70 198)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  <g transform="translate(70 204)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(70 228)">
-    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+  <g transform="translate(70 230)">
+    <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
   <g transform="translate(70 258)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
@@ -207,22 +223,22 @@
 
   <!-- mix -->  
 
-  <!--g transform="translate(112 26)">
-    <text x="0" y="0" class="label" text-anchor="middle">MX</text>
-  </g-->
+  <g transform="translate(108 29)">
+    <text x="0" y="0" class="label" text-anchor="middle">MIX</text>
+  </g>
 
-  <g transform="translate(112 29)">
+  <g transform="translate(108 37)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
     <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(112 198)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  <g transform="translate(112 204)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
   <!--g transform="translate(112 228)">
-    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <use xlink:href="#knob18" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(112 258)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
