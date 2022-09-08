@@ -3,10 +3,6 @@
 #include <cmath>
 #include <math.h>
 
-//--------------------------------------------------------------
-// Math
-//--------------------------------------------------------------
-
 const float kTwoPi = 2.0f * M_PI;
 
 // A fast approximation for tanh().
@@ -22,24 +18,3 @@ inline float fastTanh(const float x) {
     return (z / (0.795956503022967 + fabs(z)));
 }
 
-//--------------------------------------------------------------
-// Conversion
-//--------------------------------------------------------------
-
-// The conversion code is from github.com/bogaudio/BogaudioModules/src/dsp/
-// License is GPL3.
-
-const float kC4 = 261.626;
-
-inline float freqToPitch(float freq) { return log2f(freq / kC4); }
-
-inline float pitchToFreq(float pitch) { return powf(2.0, pitch) * kC4; }
-
-inline float dbToAmp(float db) { return powf(10.0f, db * 0.05f); }
-
-inline float ampToDb(float amplitude) {
-    if (amplitude < 0.000001f) {
-        return -120.0f;
-    }
-    return 20.0f * log10f(amplitude);
-}

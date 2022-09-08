@@ -2,9 +2,10 @@
 
 #include "rack.hpp"
 
-#include "dsp.hpp"
+#include "bogaudio/dsp/signal.hpp"
 
 using namespace rack;
+using namespace bogaudio;
 
 //--------------------------------------------------------------
 // VuLevels
@@ -76,7 +77,7 @@ struct VUMeter : OpaqueWidget {
 
     void drawLevel(const DrawArgs& args, float x, float level) {
 
-        float db = clamp(ampToDb(level / 10.0f), -120.0f, 6.0f);
+        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level / 10.0f), -120.0f, 6.0f);
         if (db < -71.0f) {
             return;
         }
