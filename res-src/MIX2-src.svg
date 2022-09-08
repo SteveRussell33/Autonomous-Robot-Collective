@@ -2,9 +2,9 @@
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="120"
+  width="135"
   height="380"
-  viewBox="0 0 120 380"
+  viewBox="0 0 135 380"
 >
 
   <style>
@@ -179,58 +179,62 @@
 
   <!-- ch2 -->  
 
-  <g transform="translate(64 29)">
+  <g transform="translate(70 29)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
     <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(64 198)">
+  <g transform="translate(70 198)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(64 228)">
+  <g transform="translate(70 228)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(64 258)">
+  <g transform="translate(70 258)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(64 288)">
+  <g transform="translate(70 288)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(64 318)">
+  <g transform="translate(70 318)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(64 348)">
+  <g transform="translate(70 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- mix -->  
 
-  <g transform="translate(100 29)">
+  <!--g transform="translate(112 26)">
+    <text x="0" y="0" class="label" text-anchor="middle">MX</text>
+  </g-->
+
+  <g transform="translate(112 29)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
     <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(100 198)">
+  <g transform="translate(112 198)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <!--g transform="translate(100 228)">
+  <!--g transform="translate(112 228)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(100 258)">
+  <g transform="translate(112 258)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g-->
-  <g transform="translate(100 288)">
+  <g transform="translate(112 288)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(100 318)">
+  <g transform="translate(112 318)">
     <rect x="-15" y="-15" width="30" height="60" rx="3" class="output"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(100 348)">
+  <g transform="translate(112 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 </svg>
