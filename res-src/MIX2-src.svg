@@ -148,7 +148,7 @@
     <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
   </g>
   <g transform="translate(8 288)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
+    <text x="0" y="2.5" class="label" text-anchor="middle">LVL</text>
   </g>
   <g transform="translate(8 318)">
     <text x="0" y="2.5" class="label" text-anchor="middle">L</text>

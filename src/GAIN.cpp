@@ -28,14 +28,16 @@ struct GAIN : Module {
     };
 
     enum InputId {
-        kVolInput,
-        kInput,
+        kLevelInput,
+        kLeftInput,
+        kRightInput,
 
         kInputsLen
     };
 
     enum OutputId {
-        kOutput,
+        kLeftOutput,
+        kRightOutput,
 
 #ifdef GAIN_DEBUG
         kDebug1,
@@ -52,12 +54,15 @@ struct GAIN : Module {
         configParam(kFader, 0.0f, 1.0f, 0.0f, "Fader");
 		configParam(kMute, 0.0f, 1.0f, 0.0f, "Mute");
 
-        configInput(kVolInput, "Vol");
-        configInput(kInput, "Audio");
+        configInput(kLevelInput, "Level");
+        configInput(kLeftInput, "Left");
+        configInput(kRightInput, "Right");
 
-        configOutput(kOutput, "Audio");
+        configOutput(kLeftOutput, "Left");
+        configOutput(kRightOutput, "Right");
 
-        configBypass(kInput, kOutput);
+        // I guess there is no bypass?
+        //configBypass(kLeftInput, kLeftOutput);
 
 #ifdef GAIN_DEBUG
         configOutput(kDebug1, "Debug 1");
@@ -68,15 +73,23 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
-        if (!outputs[kOutput].isConnected()) {
-            return;
+
+        float left = inputs[kLeftInput].getVoltage();
+
+        float right = left;
+        if (inputs[kRightInput].isConnected()) {
+            right = inputs[kRightInput].getVoltage();
         }
 
-        float in = inputs[kInput].getVoltage();
+        vuLevels.process(left, right, args.sampleTime);
 
-        vuLevels.process(in, in, args.sampleTime);
+        if (outputs[kLeftOutput].isConnected()) {
+            outputs[kLeftOutput].setVoltage(left);
+        }
 
-        outputs[kOutput].setVoltage(in);
+        if (outputs[kRightOutput].isConnected()) {
+            outputs[kRightOutput].setVoltage(right);
+        }
     }
 };
 
@@ -100,22 +113,30 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         // track
-        addParam(createParam<MFader>(Vec(18+6, 46-10), module, GAIN::kFader));
+        const int faderXofs = 6;
+        const int faderYofs = -10;
+        const int meterH = 9;
+        const int meterW = 144;
+
+        addParam(createParam<MFader>(Vec(33+faderXofs, 46+faderYofs), module, GAIN::kFader));
 
         VUMeter* meter = new VUMeter();
         if (module) {
             meter->vuLevels = &(module->vuLevels);
         }
-        meter->box.pos = Vec(18, 46);
-        meter->box.size = Vec(9, 144);
+        meter->box.pos = Vec(33, 46);
+        meter->box.size = Vec(meterH, meterW);
         addChild(meter);
 
-        addParam(createParamCentered<MToggleButton>(Vec(22.5, 217), module, GAIN::kMute));
+        // mute and level
+        addParam(createParamCentered<MToggleButton>(Vec(37.5, 217), module, GAIN::kMute));
+        addInput(createInputCentered<MPort>(Vec(37.5, 254), module, GAIN::kLevelInput));
 
         // ins and outs
-        addInput(createInputCentered<MPort>(Vec(22.5, 254), module, GAIN::kVolInput));
-        addInput(createInputCentered<MPort>(Vec(22.5, 293), module, GAIN::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, GAIN::kOutput));
+        addInput(createInputCentered<MPort>(Vec(19.5, 292), module, GAIN::kLeftInput));
+        addInput(createInputCentered<MPort>(Vec(55.5, 292), module, GAIN::kRightInput));
+        addOutput(createOutputCentered<MPort>(Vec(19.5, 334), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<MPort>(Vec(55.5, 334), module, GAIN::kRightOutput));
     }
 };
 

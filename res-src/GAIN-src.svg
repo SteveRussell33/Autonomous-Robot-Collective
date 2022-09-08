@@ -2,9 +2,9 @@
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="45"
+  width="75"
   height="380"
-  viewBox="0 0 45 380"
+  viewBox="0 0 75 380"
 >
 
   <style>
@@ -121,7 +121,7 @@
 
   <!-- ======== track ======== -->  
 
-  <g transform="translate(18 46)">
+  <g transform="translate(33 46)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
     <g transform="translate(12 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
@@ -130,25 +130,39 @@
 
   <!-- ======== params and ports ======== -->  
 
-  <g transform="translate(22.5 217)">
+  <g transform="translate(37.5 217)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     <text x="0" y="19" class="label" text-anchor="middle">MUTE</text>
   </g>
 
-  <g transform="translate(22.5 254)">
+  <g transform="translate(37.5 254)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="0" y="22" class="label" text-anchor="middle">VOL</text>
+    <text x="0" y="22" class="label" text-anchor="middle">LVL</text>
   </g>
 
-  <g transform="translate(22.5 293)">
+  <!-- ======== inputs ======== -->  
+
+  <g transform="translate(19.5 292)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="0" y="22" class="label" text-anchor="middle">IN</text>
+    <text x="0" y="22" class="label" text-anchor="middle">L</text>
   </g>
 
-  <g transform="translate(22.5 334)">
-    <rect x="-16" y="-16" width="32" height="42" rx="3" class="output"/>
+  <g transform="translate(55.5 292)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="0" y="22" class="label" text-anchor="middle">OUT</text>
+    <text x="0" y="22" class="label" text-anchor="middle">R</text>
+  </g>
+
+  <!-- ======== outputs ======== -->  
+
+  <g transform="translate(19.5 334)">
+    <rect x="-15" y="-16" width="66" height="42" rx="3" class="output"/>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+    <text x="0" y="22" class="label" text-anchor="middle">L</text>
+  </g>
+
+  <g transform="translate(55.5 334)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+    <text x="0" y="22" class="label" text-anchor="middle">R</text>
   </g>
 
 </svg>
