@@ -63,6 +63,14 @@
       </g>
     </symbol>
 
+    <symbol id="toggleButton" >
+      <g transform="translate(9 9)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="8.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
     <symbol id="meter" >
         <g transform="translate(20 5)">
 
@@ -122,9 +130,9 @@
 
   <!-- ======== params and ports ======== -->  
 
-  <g transform="translate(22.5 215)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <text x="0" y="22" class="label" text-anchor="middle">MUTE</text>
+  <g transform="translate(22.5 217)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
+    <text x="0" y="19" class="label" text-anchor="middle">MUTE</text>
   </g>
 
   <g transform="translate(22.5 254)">

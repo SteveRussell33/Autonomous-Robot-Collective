@@ -17,7 +17,9 @@ files = [
     'knob40',
     'MIX2',
     'port',
-    'SAT'
+    'SAT',
+    'toggle-0',
+    'toggle-1'
 ]
 
 for f in files:

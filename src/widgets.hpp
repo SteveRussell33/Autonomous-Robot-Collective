@@ -60,3 +60,13 @@ struct MFader : SvgSlider {
         box.size = Vec(12, 160);
 	}
 };
+
+struct MToggleButton : SvgSwitch {
+    MToggleButton() {
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-0.svg")));
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-1.svg")));
+        box.size = Vec(18,18);
+        shadow->blurRadius = 1.0;
+        shadow->box.pos = Vec(0.0, 1.5);
+    }
+};

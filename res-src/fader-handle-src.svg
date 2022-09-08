@@ -7,7 +7,7 @@
   viewBox="0 0 12 20"
 >
 
-  <rect x="0" y="0" rx="2" width="12" height="20" stroke-width="1" stroke="#343434" fill="#e0e0e0"/>
+  <rect x="0" y="0.5" rx="2" width="12" height="19" stroke-width="1" stroke="#343434" fill="#e0e0e0"/>
   <polyline points="0 10 12 10" stroke-width="1" stroke="#343434"/>
 
 </svg>

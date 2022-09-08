@@ -22,6 +22,7 @@ struct GAIN : Module {
 
     enum ParamId {
         kFader,
+		kMute,
 
         kParamsLen
     };
@@ -49,6 +50,7 @@ struct GAIN : Module {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         configParam(kFader, 0.0f, 1.0f, 0.0f, "Fader");
+		configParam(kMute, 0.0f, 1.0f, 0.0f, "Mute");
 
         configInput(kVolInput, "Vol");
         configInput(kInput, "Audio");
@@ -107,6 +109,8 @@ struct GAINWidget : ModuleWidget {
         meter->box.pos = Vec(18, 46);
         meter->box.size = Vec(9, 144);
         addChild(meter);
+
+        addParam(createParamCentered<MToggleButton>(Vec(22.5, 217), module, GAIN::kMute));
 
         // ins and outs
         addInput(createInputCentered<MPort>(Vec(22.5, 254), module, GAIN::kVolInput));
