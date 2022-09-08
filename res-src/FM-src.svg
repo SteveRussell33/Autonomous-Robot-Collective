@@ -105,9 +105,10 @@
         <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
       </g>
     </symbol>
+
   </defs>
 
-  <!-- ======== id ======== -->  
+  <!-- ======== header/footer ======== -->  
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">FM</text>

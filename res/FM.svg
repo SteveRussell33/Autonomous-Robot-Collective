@@ -261,7 +261,7 @@
        y2="-7"
        gradientUnits="userSpaceOnUse" />
   </defs>
-  <!-- ======== id ======== -->
+  <!-- ======== header/footer ======== -->
   <path
      id="rect48"
      style="fill:#e0e0e0"

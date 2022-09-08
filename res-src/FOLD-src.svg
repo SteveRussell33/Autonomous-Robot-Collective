@@ -90,13 +90,6 @@
       </g>
     </symbol>
 
-    <symbol id="knob40" >
-      <g transform="translate(20 20)">
-        <circle r="19.5" fill="url('#bigKnobDarkGradient')" transform="rotate(90)"/>
-        <circle r="17.5" fill="url('#bigKnobMediumGradient')" transform="rotate(90)"/>
-      </g>
-    </symbol>
-
     <symbol id="port" >
       <g transform="translate(12 12)">
         <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
@@ -105,22 +98,15 @@
       </g>
     </symbol>
 
-    <symbol id="hswitch14" >
-      <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
-      <g transform="translate(12 7)">
-        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
-        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
-      </g>
-    </symbol>
   </defs>
 
-  <!-- ======== id ======== -->  
+  <!-- ======== header/footer ======== -->  
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">FOLD</text>
   <text class="logo" x="50%" y="362" text-anchor="middle">RM</text>
 
-  <!-- ======== knobs and switches ======== -->  
+  <!-- ======== params ======== -->  
 
   <g transform="translate(22.5 78)">
       <polyline points="0 0 0 42" class="connect"/>
@@ -130,7 +116,7 @@
     <use xlink:href="#knob32" transform="translate(-16 -16)"/>
   </g>
 
-  <!-- ======== row 1 ======== -->  
+  <!-- ======== params ======== -->  
 
   <g transform="translate(22.5 120)">
       <polyline points="0 0 0 42" class="connect"/>
@@ -144,21 +130,16 @@
       <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
 
-  <!-- ======== row 2 ======== -->  
-
   <g transform="translate(22.5 162)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
-    <!--text x="0" y="22" class="label" text-anchor="middle">DRV</text-->
   </g>
 
-  <!-- ======== row 3 ======== -->  
+  <!-- ======== ports ======== -->  
 
   <g transform="translate(22.5 278)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
     <text x="0" y="22" class="label" text-anchor="middle">IN</text>
   </g>
-
-  <!-- ======== row 4 ======== -->  
 
   <g transform="translate(22.5 320)">
     <rect x="-16" y="-16" width="32" height="42" rx="3" class="output"/>

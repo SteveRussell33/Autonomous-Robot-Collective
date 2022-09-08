@@ -126,10 +126,6 @@ struct FOLDWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/FOLD.svg")));
 
-        // addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
@@ -141,9 +137,9 @@ struct FOLDWidget : ModuleWidget {
 #endif
 
         addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, FOLD::kTimbreParam));
-
         addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, FOLD::kTimbreCvAmountParam));
         addInput(createInputCentered<MPort>(Vec(22.5, 162), module, FOLD::kTimbreCvInput));
+
         addInput(createInputCentered<MPort>(Vec(22.5, 278), module, FOLD::kInput));
         addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, FOLD::kOutput));
     }

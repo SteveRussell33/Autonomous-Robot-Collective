@@ -84,10 +84,6 @@ struct GAINWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/GAIN.svg")));
 
-        // addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 

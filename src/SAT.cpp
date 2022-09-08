@@ -114,17 +114,13 @@ struct SATWidget : ModuleWidget {
         addOutput(createOutputCentered<MPort>(Vec(12, 84), module, SAT::kDebug4));
 #endif
 
-        // addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
         addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, SAT::kDriveParam));
-
         addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, SAT::kDriveCvAmountParam));
         addInput(createInputCentered<MPort>(Vec(22.5, 162), module, SAT::kDriveCvInput));
+
         addInput(createInputCentered<MPort>(Vec(22.5, 278), module, SAT::kInput));
         addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, SAT::kOutput));
     }
