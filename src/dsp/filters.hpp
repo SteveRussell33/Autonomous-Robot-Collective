@@ -1,6 +1,7 @@
 #pragma once
 
-#include "Biquad.h"
+#include "earlevel/Biquad.h"
+
 #include "dsp.hpp"
 
 struct TwelvePoleLpf {
@@ -10,9 +11,9 @@ struct TwelvePoleLpf {
 
     void setCutoff(float cutoff, float sampleRate) {
 
-        float Fc = cutoff / sampleRate;
+        double Fc = cutoff / sampleRate;
 
-        float q[kFilters] = {0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
+        double q[kFilters] = {0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
 
         for (int i = 0; i < kFilters; i++) {
             filter[i].setBiquad(bq_type_lowpass, Fc, q[i], 0);
