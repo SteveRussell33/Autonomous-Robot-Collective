@@ -57,6 +57,8 @@ struct VUMeter : OpaqueWidget {
     const NVGcolor yellow = nvgRGB(0xFF, 0xCA, 0x33);
     const NVGcolor green = nvgRGB(0x3E, 0xD5, 0x64);
 
+    const int levelWidth = 3;
+
     VULevels* vuLevels = NULL;
 
     void draw(const DrawArgs& args) override {
@@ -67,8 +69,8 @@ struct VUMeter : OpaqueWidget {
         float leftRms = vuLevels->leftRms;
         float rightRms = vuLevels->rightRms;
 
-        drawLevel(args, 0, leftRms);
-        drawLevel(args, 5, rightRms);
+        drawLevel(args, -4, leftRms);
+        drawLevel(args, 1, rightRms);
     }
 
     void drawLevel(const DrawArgs& args, float x, float level) {
@@ -108,7 +110,7 @@ struct VUMeter : OpaqueWidget {
 
         float y = (db > highDb) ? top : rescale(db, lowDb, highDb, bottom, top);
         float height = bottom - y;
-        drawRect(args, x, y, 3, height, color, gradient, isColor);
+        drawRect(args, x, y, levelWidth, height, color, gradient, isColor);
     }
 
     void drawRect(
