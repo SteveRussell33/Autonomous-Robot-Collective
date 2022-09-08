@@ -61,12 +61,8 @@ struct SAT : Module {
         oversample.sampleRateChange(e.sampleRate);
     }
 
-    inline float overdrive(float in, float drive) {
-
-        // We need to use two stages to get enough overdrive.
-        float s1 = in * (1 - drive) + fastTanh(in * M_PI) * drive;
-        float s2 = s1 * (1 - drive) + fastTanh(s1 * M_PI) * drive;
-        return s2;
+    inline float saturate(float in, float drive) {
+        return in * (1 - drive) + fastTanh(in * M_PI) * drive;
     }
 
     float oversampleDrive(float in, float drive) {
@@ -75,7 +71,7 @@ struct SAT : Module {
         oversample.upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = overdrive(buffer[i], drive);
+            buffer[i] = saturate(buffer[i], drive);
         }
 
         return oversample.downsample(buffer);
