@@ -85,7 +85,7 @@
           <polyline points="-7.5 123 8 123" class="connect"/>
           <polyline points="-7.5 144 8 144" class="connect"/>
 
-          <rect x="-5" y="-1" width="10" height="146" rx="2" fill="#121212"/>
+          <rect x="-5" y="0" width="10" height="144" fill="#121212"/>
         </g>
     </symbol>
 
@@ -113,9 +113,9 @@
 
   <!-- ======== track ======== -->  
 
-  <g transform="translate(22 46)">
+  <g transform="translate(18 46)">
     <use xlink:href="#meter" transform="translate(-20 -5)"/>
-    <g transform="translate(11 0)">
+    <g transform="translate(12 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>

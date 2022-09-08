@@ -98,13 +98,13 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         // track
-        addParam(createParam<MFader>(Vec(22+5, 46-8), module, GAIN::kFader));
+        addParam(createParam<MFader>(Vec(18+6, 46-10), module, GAIN::kFader));
 
         VUMeter* meter = new VUMeter();
         if (module) {
             meter->vuLevels = &(module->vuLevels);
         }
-        meter->box.pos = Vec(22, 46);
+        meter->box.pos = Vec(18, 46);
         meter->box.size = Vec(9, 144);
         addChild(meter);
 

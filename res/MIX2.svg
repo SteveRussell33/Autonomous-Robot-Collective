@@ -9,9 +9,9 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   width="120"
+   width="135"
    height="380"
-   viewBox="0 0 120 380"
+   viewBox="0 0 135 380"
    id="svg192"
    sodipodi:docname="MIX2.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
@@ -40,7 +40,7 @@
      id="namedview194"
      showgrid="false"
      inkscape:zoom="2.1763158"
-     inkscape:cx="60"
+     inkscape:cx="67.5"
      inkscape:cy="190"
      inkscape:window-x="0"
      inkscape:window-y="25"
@@ -285,7 +285,7 @@
   <path
      id="rect72"
      style="fill:#e0e0e0"
-     d="M 0,0 H 120 V 380 H 0 Z"
+     d="M 0,0 H 135 V 380 H 0 Z"
      class="background" />
   <g
      aria-label="MIX2"
@@ -293,19 +293,19 @@
      style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="title">
     <path
-       d="m 44.9375,16 h 1.726562 V 8.8984375 h 0.03125 l 2.382813,5.4687505 h 1.4375 L 52.898437,8.8984375 H 52.9375 V 16 h 1.726562 V 4.609375 H 53.03125 l -3.203125,7.421875 v 0 L 46.5625,4.609375 h -1.625 z"
+       d="m 52.4375,16 h 1.726562 V 8.8984375 h 0.03125 l 2.382813,5.4687505 h 1.4375 L 60.398437,8.8984375 H 60.4375 V 16 h 1.726562 V 4.609375 H 60.53125 l -3.203125,7.421875 v 0 L 54.0625,4.609375 h -1.625 z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path479" />
     <path
-       d="m 57.0625,16 h 1.726562 V 4.609375 H 57.0625 Z"
+       d="m 64.5625,16 h 1.726562 V 4.609375 H 64.5625 Z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path481" />
     <path
-       d="M 64.273437,11.757813 66.765625,16 H 68.71875 L 65.234375,10.164063 68.492187,4.609375 H 66.546875 L 64.273437,8.5625 v 0 L 62,4.609375 H 60.046875 L 63.3125,10.164063 59.828125,16 h 1.945312 l 2.5,-4.242187 z"
+       d="M 71.773437,11.757813 74.265625,16 H 76.21875 L 72.734375,10.164063 75.992187,4.609375 H 74.046875 L 71.773437,8.5625 v 0 L 69.5,4.609375 H 67.546875 L 70.8125,10.164063 67.328125,16 h 1.945312 l 2.5,-4.242187 z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path483" />
     <path
-       d="m 69.09375,16 h 6.492187 v -1.632812 h -4.351562 l 3.664062,-4.5937505 q 0.6875,-0.875 0.6875,-2 Q 75.570312,6.3671875 74.640625,5.453125 73.726562,4.53125 72.257812,4.515625 70.945312,4.53125 70.046875,5.4375 69.15625,6.3671875 69.09375,7.7890625 h 1.625 q 0.08594,-0.78125 0.546875,-1.2109375 0.445312,-0.4296875 1.117187,-0.4296875 0.757813,0.015625 1.171875,0.4921875 0.398438,0.4765625 0.398438,1.1171875 0,0.2421875 -0.0625,0.515625 -0.09375,0.2890625 -0.351563,0.625 L 69.09375,14.460938 Z"
+       d="m 76.59375,16 h 6.492187 v -1.632812 h -4.351562 l 3.664062,-4.5937505 q 0.6875,-0.875 0.6875,-2 Q 83.070312,6.3671875 82.140625,5.453125 81.226562,4.53125 79.757812,4.515625 78.445312,4.53125 77.546875,5.4375 76.65625,6.3671875 76.59375,7.7890625 h 1.625 q 0.08594,-0.78125 0.546875,-1.2109375 0.445312,-0.4296875 1.117187,-0.4296875 0.757813,0.015625 1.171875,0.4921875 0.398438,0.4765625 0.398438,1.1171875 0,0.2421875 -0.0625,0.515625 -0.09375,0.2890625 -0.351563,0.625 L 76.59375,14.460938 Z"
        style="font-size:16px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path485" />
   </g>
@@ -315,11 +315,11 @@
      style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="logo">
     <path
-       d="m 53.326823,367.79036 h 2.252604 q 0.690104,0 1.054688,0.29297 0.462239,0.33203 0.47526,1.07422 0,0.61849 -0.397135,1.04167 -0.403646,0.45573 -1.210938,0.46875 H 53.326823 Z M 51.888021,376 h 1.438802 v -4.05599 h 1.835938 L 57.122396,376 h 1.712239 l -2.20052,-4.21224 q 1.809895,-0.69661 1.835937,-2.63021 -0.03906,-1.3151 -0.94401,-2.02474 -0.748698,-0.625 -1.933594,-0.625 h -3.704427 z"
+       d="m 60.826823,367.79036 h 2.252604 q 0.690104,0 1.054688,0.29297 0.462239,0.33203 0.47526,1.07422 0,0.61849 -0.397135,1.04167 -0.403646,0.45573 -1.210938,0.46875 H 60.826823 Z M 59.388021,376 h 1.438802 v -4.05599 h 1.835938 L 64.622396,376 h 1.712239 l -2.20052,-4.21224 q 1.809895,-0.69661 1.835937,-2.63021 -0.03906,-1.3151 -0.94401,-2.02474 -0.748698,-0.625 -1.933594,-0.625 h -3.704427 z"
        style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path474" />
     <path
-       d="m 60.013021,376 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 376 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
+       d="m 67.513021,376 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 376 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
        style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path476" />
   </g>
@@ -609,7 +609,7 @@
   <!-- ch2 -->
   <g
      id="use134"
-     transform="translate(44,24)">
+     transform="translate(50,24)">
     <g
        transform="translate(20,5)"
        id="g306">
@@ -757,7 +757,7 @@
     </g>
   </g>
   <g
-     transform="translate(75,29)"
+     transform="translate(81,29)"
      id="g138">
     <g
        id="use136"
@@ -773,14 +773,14 @@
   </g>
   <g
      id="use142"
-     transform="translate(52,186)">
+     transform="translate(58,186)">
     <g
        transform="translate(12,12)"
        id="g388" />
   </g>
   <g
      id="use146"
-     transform="translate(52,216)">
+     transform="translate(58,216)">
     <g
        transform="translate(12,12)"
        id="g398">
@@ -802,36 +802,39 @@
   </g>
   <g
      id="use150"
-     transform="translate(52,246)">
+     transform="translate(58,246)">
     <g
        transform="translate(12,12)"
        id="g406" />
   </g>
   <g
      id="use154"
-     transform="translate(52,276)">
+     transform="translate(58,276)">
     <g
        transform="translate(12,12)"
        id="g410" />
   </g>
   <g
      id="use158"
-     transform="translate(52,306)">
+     transform="translate(58,306)">
     <g
        transform="translate(12,12)"
        id="g414" />
   </g>
   <g
      id="use162"
-     transform="translate(52,336)">
+     transform="translate(58,336)">
     <g
        transform="translate(12,12)"
        id="g418" />
   </g>
   <!-- mix -->
+  <!--g transform="translate(112 26)">
+    <text x="0" y="0" class="label" text-anchor="middle">MX</text>
+  </g-->
   <g
      id="use166"
-     transform="translate(80,24)">
+     transform="translate(92,24)">
     <g
        transform="translate(20,5)"
        id="g346">
@@ -979,7 +982,7 @@
     </g>
   </g>
   <g
-     transform="translate(111,29)"
+     transform="translate(123,29)"
      id="g170">
     <g
        id="use168"
@@ -995,20 +998,20 @@
   </g>
   <g
      id="use174"
-     transform="translate(88,186)">
+     transform="translate(100,186)">
     <g
        transform="translate(12,12)"
        id="g422" />
   </g>
-  <!--g transform="translate(100 228)">
+  <!--g transform="translate(112 228)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(100 258)">
+  <g transform="translate(112 258)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g-->
   <g
      id="use178"
-     transform="translate(88,276)">
+     transform="translate(100,276)">
     <g
        transform="translate(12,12)"
        id="g350" />
@@ -1016,18 +1019,18 @@
   <path
      id="rect182"
      style="fill:#bbbbbb"
-     d="m 88,303 h 24 c 1.662,0 3,1.338 3,3 v 54 c 0,1.662 -1.338,3 -3,3 H 88 c -1.662,0 -3,-1.338 -3,-3 v -54 c 0,-1.662 1.338,-3 3,-3 z"
+     d="m 100,303 h 24 c 1.662,0 3,1.338 3,3 v 54 c 0,1.662 -1.338,3 -3,3 h -24 c -1.662,0 -3,-1.338 -3,-3 v -54 c 0,-1.662 1.338,-3 3,-3 z"
      class="output" />
   <g
      id="use184"
-     transform="translate(88,306)">
+     transform="translate(100,306)">
     <g
        transform="translate(12,12)"
        id="g426" />
   </g>
   <g
      id="use188"
-     transform="translate(88,336)">
+     transform="translate(100,336)">
     <g
        transform="translate(12,12)"
        id="g430" />

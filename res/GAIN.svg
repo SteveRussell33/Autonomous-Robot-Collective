@@ -181,10 +181,9 @@
            id="polyline39" />
         <rect
            x="-5"
-           y="-1"
+           y="0"
            width="10"
-           height="146"
-           rx="2"
+           height="144"
            fill="#121212"
            id="rect41" />
       </g>
@@ -245,7 +244,7 @@
   <!-- ======== track ======== -->
   <g
      id="use59"
-     transform="translate(2,41)">
+     transform="translate(-2,41)">
     <g
        transform="translate(20,5)"
        id="g147">
@@ -389,11 +388,11 @@
       <path
          id="rect145"
          style="fill:#121212"
-         d="m -3,-1 h 6 c 1.108,0 2,0.892 2,2 v 142 c 0,1.108 -0.892,2 -2,2 h -6 c -1.108,0 -2,-0.892 -2,-2 V 1 c 0,-1.108 0.892,-2 2,-2 z" />
+         d="M -5,0 H 5 V 144 H -5 Z" />
     </g>
   </g>
   <g
-     transform="translate(33,46)"
+     transform="translate(30,46)"
      id="g63">
     <g
        id="use61"
