@@ -98,21 +98,20 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         // track
+        addParam(createParam<MFader>(Vec(22+5, 46-8), module, GAIN::kFader));
 
         VUMeter* meter = new VUMeter();
         if (module) {
             meter->vuLevels = &(module->vuLevels);
         }
-        meter->box.pos = Vec(22, 40);
+        meter->box.pos = Vec(22, 46);
         meter->box.size = Vec(9, 144);
         addChild(meter);
 
-        addParam(createParam<MFader>(Vec(22+5, 40), module, GAIN::kFader));
-
         // ins and outs
-        addInput(createInputCentered<MPort>(Vec(22.5, 240), module, GAIN::kVolInput));
-        addInput(createInputCentered<MPort>(Vec(22.5, 279), module, GAIN::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 320), module, GAIN::kOutput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 254), module, GAIN::kVolInput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 293), module, GAIN::kInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, GAIN::kOutput));
     }
 };
 

@@ -3,11 +3,11 @@
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
   width="12"
-  height="144"
-  viewBox="0 0 12 144"
+  height="160"
+  viewBox="0 0 12 160"
 >
-  <rect x="0" y="0" width="12" height="144" stroke-width="1" stroke="none" fill="pink"/>
+  <!--rect x="0" y="0" width="12" height="160" stroke-width="1" stroke="none" fill="pink"/-->
 
-  <rect x="5" y="0" width="2" height="144" stroke-width="1" stroke="none" fill="#121212"/>
+  <rect x="5" y="8" width="2" height="144" stroke-width="1" stroke="none" fill="#121212"/>
 
 </svg>
