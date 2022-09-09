@@ -63,7 +63,8 @@ struct DRV : Module {
     }
 
     inline float saturate(float in, float drive) {
-        return in * (1 - drive) + fastTanh(in * M_PI) * drive;
+        float out = in * (1 - drive) + fastTanh(in * M_PI) * drive;
+        return out * (1 - drive) + fastTanh(out * M_PI) * drive;
     }
 
     float oversampleDrive(float in, float drive) {
