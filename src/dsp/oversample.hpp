@@ -1,8 +1,34 @@
 #pragma once
 
-#include "filters.hpp"
+#include "earlevel/Biquad.h"
 
 const int kMaxOversample = 16;
+
+struct TwelvePoleLpf {
+
+    static const int kFilters = 6;
+    Biquad filter[kFilters];
+
+    void setCutoff(float cutoff, float sampleRate) {
+
+        double Fc = cutoff / sampleRate;
+
+        // https://www.earlevel.com/main/2016/09/29/cascading-filters/
+        double q[kFilters] = {0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
+
+        for (int i = 0; i < kFilters; i++) {
+            filter[i].setBiquad(bq_type_lowpass, Fc, q[i], 0);
+        }
+    }
+
+    float process(float in) {
+        float out = in;
+        for (int i = 0; i < kFilters; i++) {
+            out = filter[i].process(out);
+        }
+        return out;
+    }
+};
 
 struct Oversample {
 

@@ -1,3 +1,5 @@
+#include "pub/pub.hpp"
+
 #include "oversample.hpp"
 #include "plugin.hpp"
 #include "widgets.hpp"
@@ -67,26 +69,13 @@ struct FOLD : Module {
         oversample.sampleRateChange(e.sampleRate);
     }
 
-    // This folding algorithm is derived from a permissively licensed
-    // Max/MSP patch created by Randy Jones of Madrona Labs.
-    inline float fold(float in, float timbre) {
-
-        float ampOffset = timbre * 2.0f + 0.1f;
-        float phaseOffset = timbre + 0.25f;
-
-        float amp = in * ampOffset;
-
-        // TODO should we use a fast approximation for cosf()?
-        return std::cosf(kTwoPi * (amp + phaseOffset));
-    }
-
     float oversampleFold(float in, float timbre) {
 
         float buffer[kMaxOversample] = {};
         oversample.upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = fold(buffer[i], timbre);
+            buffer[i] = wavefold(buffer[i], timbre);
         }
 
         return oversample.downsample(buffer);
