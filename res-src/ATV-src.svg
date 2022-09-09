@@ -1,0 +1,148 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="30"
+  height="380"
+  viewBox="0 0 30 380"
+>
+
+  <style>
+    text.title {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 12pt;
+    }
+    text.logo {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 10pt;
+    }
+    text.big-label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 7.5pt;
+    }
+    text.label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+    .background {
+      fill: #e0e0e0;
+    }
+    .output {
+      fill: #bbbbbb;
+    }
+    polyline.icon {
+      stroke: #343434;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    polyline.connect {
+      stroke: #343434;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    .blueprint {
+      stroke: #08f;
+      fill: none;
+    }
+  </style>
+
+  <!-- ======== defs ======== -->  
+
+  <defs>
+
+    <linearGradient id="smallKnobMediumGradient">
+      <stop offset="5%"  stop-color="#888" />
+      <stop offset="95%" stop-color="#333" />
+    </linearGradient>
+
+    <linearGradient id="smallKnobDarkGradient">
+      <stop offset="5%"  stop-color="#444" />
+      <stop offset="95%" stop-color="#222" />
+    </linearGradient>
+
+    <symbol id="knob18" >
+      <g transform="translate(9 9)">
+        <circle r="8.5" stroke="#222" fill="none"/>
+        <circle r="8" fill="url('#smallKnobMediumGradient')" transform="rotate(90)"/>
+        <circle r="7" fill="url('#smallKnobDarkGradient')" transform="rotate(90)"/>
+      </g>
+    </symbol>
+
+    <symbol id="port" >
+      <g transform="translate(12 12)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+  </defs>
+
+  <!-- ======== header/footer ======== -->  
+
+  <rect class="background" width="100%" height="100%"/>
+  <text class="title" x="50%" y="30"  text-anchor="middle">ATV</text>
+  <text class="logo" x="10" y="376" text-anchor="middle">RM</text>
+
+  <!-- ======== A ======== -->  
+
+  <g transform="translate(15 158)">
+    <rect x="-13" y="-14" width="26" height="28" rx="3" class="output"/>
+  </g>
+
+  <g transform="translate(15 74)">
+      <polyline points="0 0 0 84" class="connect"/>
+  </g>
+
+  <g transform="translate(15 74)">
+    <text x="0" y="-18" class="big-label" text-anchor="middle">A</text>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+  <g transform="translate(15 116)">
+      <use xlink:href="#knob18" transform="translate(-9 -9)"/>
+      <g transform="translate(0 15)">
+        <polyline points="-7 0 -3 0" class="icon"/>
+        <polyline points="7 0 3 0" class="icon"/>
+        <polyline points="5 -2 5 2" class="icon"/>
+    </g>
+  </g>
+
+  <g transform="translate(15 158)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+  <!-- ======== B ======== -->  
+
+  <g transform="translate(15 314)">
+    <rect x="-13" y="-14" width="26" height="28" rx="3" class="output"/>
+  </g>
+
+  <g transform="translate(15 230)">
+      <polyline points="0 0 0 84" class="connect"/>
+  </g>
+
+  <g transform="translate(15 230)">
+    <text x="0" y="-18" class="big-label" text-anchor="middle">B</text>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+  <g transform="translate(15 272)">
+      <use xlink:href="#knob18" transform="translate(-9 -9)"/>
+      <g transform="translate(0 15)">
+        <polyline points="-7 0 -3 0" class="icon"/>
+        <polyline points="7 0 3 0" class="icon"/>
+        <polyline points="5 -2 5 2" class="icon"/>
+    </g>
+  </g>
+
+  <g transform="translate(15 314)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+</svg>

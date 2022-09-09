@@ -4,6 +4,7 @@ import os
 import subprocess
 
 files = [
+    'ATV',
     'DRV',
     'fader-bg',
     'fader-handle',
