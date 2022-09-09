@@ -108,10 +108,10 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         // track
-        const int faderXofs = 6;
-        const int faderYofs = -10;
-        const int meterH = 9;
-        const int meterW = 144;
+        const float faderXofs = 8;
+        const float faderYofs = -9.5;
+        const float meterH = 9;
+        const float meterW = 144;
 
         addParam(createParam<MFader>(Vec(20 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
 
