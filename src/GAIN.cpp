@@ -1,6 +1,6 @@
 #include "plugin.hpp"
-#include "widgets.hpp"
 #include "vu.hpp"
+#include "widgets.hpp"
 
 // define GAIN_DEBUG
 
@@ -21,7 +21,7 @@ struct GAIN : Module {
 
     enum ParamId {
         kFader,
-		kMute,
+        kMute,
 
         kParamsLen
     };
@@ -51,7 +51,7 @@ struct GAIN : Module {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         configParam(kFader, 0.0f, 1.0f, 0.0f, "Fader");
-		configParam(kMute, 0.0f, 1.0f, 0.0f, "Mute");
+        configParam(kMute, 0.0f, 1.0f, 0.0f, "Mute");
 
         configInput(kLevelInput, "Level");
         configInput(kLeftInput, "Left");
@@ -61,7 +61,7 @@ struct GAIN : Module {
         configOutput(kRightOutput, "Right");
 
         // I guess there is no bypass?
-        //configBypass(kLeftInput, kLeftOutput);
+        // configBypass(kLeftInput, kLeftOutput);
 
 #ifdef GAIN_DEBUG
         configOutput(kDebug1, "Debug 1");
@@ -117,7 +117,7 @@ struct GAINWidget : ModuleWidget {
         const int meterH = 9;
         const int meterW = 144;
 
-        addParam(createParam<MFader>(Vec(33+faderXofs, 46+faderYofs), module, GAIN::kFader));
+        addParam(createParam<MFader>(Vec(33 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
 
         VUMeter* meter = new VUMeter();
         if (module) {

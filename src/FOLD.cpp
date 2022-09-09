@@ -68,7 +68,7 @@ struct FOLD : Module {
         oversample.sampleRateChange(e.sampleRate);
     }
 
-    // This wavefolding algorithm is derived from a Max/MSP patch that was 
+    // This wavefolding algorithm is derived from a Max/MSP patch that was
     // created by Randy Jones of Madrona Labs.
     inline float wavefold(float in, float timbre) {
 

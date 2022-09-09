@@ -60,7 +60,7 @@ struct VUMeter : OpaqueWidget {
 
     const int levelWidth = 3;
 
-    // Set in the constructor of the parent ModuleWidget 
+    // Set in the constructor of the parent ModuleWidget
     VULevels* vuLevels = NULL;
 
     void draw(const DrawArgs& args) override {
@@ -136,4 +136,3 @@ struct VUMeter : OpaqueWidget {
         nvgFill(args.vg);
     }
 };
-

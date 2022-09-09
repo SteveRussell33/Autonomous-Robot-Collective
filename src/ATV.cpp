@@ -60,8 +60,7 @@ struct ATV : Module {
 #endif
     }
 
-    void process(const ProcessArgs& args) override {
-    }
+    void process(const ProcessArgs& args) override {}
 };
 
 struct ATVWidget : ModuleWidget {
