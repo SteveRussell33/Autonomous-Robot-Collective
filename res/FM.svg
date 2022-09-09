@@ -416,12 +416,12 @@
   <!-- ======== row 1 ======== -->
   <path
      id="polyline78"
-     transform="translate(19.5,236)"
+     transform="translate(19.5,250)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 42"
      class="connect" />
   <g
-     transform="translate(19.5,251)"
+     transform="translate(19.5,265)"
      id="g86">
     <path
        id="polyline80"
@@ -441,7 +441,7 @@
   </g>
   <g
      id="use90"
-     transform="translate(10.5,227)">
+     transform="translate(10.5,241)">
     <g
        transform="translate(9,9)"
        id="g214">
@@ -463,12 +463,12 @@
   </g>
   <path
      id="polyline94"
-     transform="translate(55.5,236)"
+     transform="translate(55.5,250)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 42"
      class="connect" />
   <g
-     transform="translate(55.5,251)"
+     transform="translate(55.5,265)"
      id="g102">
     <path
        id="polyline96"
@@ -488,7 +488,7 @@
   </g>
   <g
      id="use106"
-     transform="translate(46.5,227)">
+     transform="translate(46.5,241)">
     <g
        transform="translate(9,9)"
        id="g228">

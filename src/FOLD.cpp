@@ -120,18 +120,18 @@ struct FOLDWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 #ifdef FOLD_DEBUG
-        addOutput(createOutputCentered<MPort>(Vec(12, 12), module, FOLD::kDebug1));
-        addOutput(createOutputCentered<MPort>(Vec(12, 36), module, FOLD::kDebug2));
-        addOutput(createOutputCentered<MPort>(Vec(12, 60), module, FOLD::kDebug3));
-        addOutput(createOutputCentered<MPort>(Vec(12, 84), module, FOLD::kDebug4));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FOLD::kDebug1));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, FOLD::kDebug2));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, FOLD::kDebug3));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, FOLD::kDebug4));
 #endif
 
         addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, FOLD::kTimbreParam));
         addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, FOLD::kTimbreCvAmountParam));
-        addInput(createInputCentered<MPort>(Vec(22.5, 162), module, FOLD::kTimbreCvInput));
+        addInput(createInputCentered<PJ301MPort>(Vec(22.5, 162), module, FOLD::kTimbreCvInput));
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 292), module, FOLD::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, FOLD::kOutput));
+        addInput(createInputCentered<PJ301MPort>(Vec(22.5, 292), module, FOLD::kInput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(22.5, 334), module, FOLD::kOutput));
     }
 };
 

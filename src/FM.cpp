@@ -133,22 +133,22 @@ struct FMWidget : ModuleWidget {
         addParam(createParamCentered<MKnob40>(Vec(37.5, 180), module, FM::kOffsetParam));
 
         // row 1
-        addParam(createParamCentered<MKnob18>(Vec(19.5, 236), module, FM::kRatioCvAmountParam));
-        addParam(createParamCentered<MKnob18>(Vec(55.5, 236), module, FM::kOffsetCvAmountParam));
+        addParam(createParamCentered<MKnob18>(Vec(19.5, 250), module, FM::kRatioCvAmountParam));
+        addParam(createParamCentered<MKnob18>(Vec(55.5, 250), module, FM::kOffsetCvAmountParam));
 
         // row 2
-        addInput(createInputCentered<MPort>(Vec(19.5, 292), module, FM::kRatioCvInput));
-        addInput(createInputCentered<MPort>(Vec(55.5, 292), module, FM::kOffsetCvInput));
+        addInput(createInputCentered<PJ301MPort>(Vec(19.5, 292), module, FM::kRatioCvInput));
+        addInput(createInputCentered<PJ301MPort>(Vec(55.5, 292), module, FM::kOffsetCvInput));
 
         // row 3
-        addInput(createInputCentered<MPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
-        addOutput(createOutputCentered<MPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
+        addInput(createInputCentered<PJ301MPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
 
 #ifdef FM_DEBUG
-        addOutput(createOutputCentered<MPort>(Vec(12, 12), module, FM::kDebug1));
-        addOutput(createOutputCentered<MPort>(Vec(12, 36), module, FM::kDebug2));
-        addOutput(createOutputCentered<MPort>(Vec(12, 60), module, FM::kDebug3));
-        addOutput(createOutputCentered<MPort>(Vec(12, 84), module, FM::kDebug4));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FM::kDebug1));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, FM::kDebug2));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, FM::kDebug3));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, FM::kDebug4));
 #endif
     }
 };

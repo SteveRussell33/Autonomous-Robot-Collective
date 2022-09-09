@@ -110,10 +110,10 @@ struct DRVWidget : ModuleWidget {
         setPanel(createPanel(asset::plugin(pluginInstance, "res/DRV.svg")));
 
 #ifdef DRV_DEBUG
-        addOutput(createOutputCentered<MPort>(Vec(12, 12), module, DRV::kDebug1));
-        addOutput(createOutputCentered<MPort>(Vec(12, 36), module, DRV::kDebug2));
-        addOutput(createOutputCentered<MPort>(Vec(12, 60), module, DRV::kDebug3));
-        addOutput(createOutputCentered<MPort>(Vec(12, 84), module, DRV::kDebug4));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, DRV::kDebug1));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, DRV::kDebug2));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, DRV::kDebug3));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, DRV::kDebug4));
 #endif
 
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
@@ -121,10 +121,10 @@ struct DRVWidget : ModuleWidget {
 
         addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, DRV::kDriveParam));
         addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, DRV::kDriveCvAmountParam));
-        addInput(createInputCentered<MPort>(Vec(22.5, 162), module, DRV::kDriveCvInput));
+        addInput(createInputCentered<PJ301MPort>(Vec(22.5, 162), module, DRV::kDriveCvInput));
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 292), module, DRV::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, DRV::kOutput));
+        addInput(createInputCentered<PJ301MPort>(Vec(22.5, 292), module, DRV::kInput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(22.5, 334), module, DRV::kOutput));
     }
 };
 

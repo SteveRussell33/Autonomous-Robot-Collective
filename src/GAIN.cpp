@@ -105,10 +105,10 @@ struct GAINWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 #ifdef GAIN_DEBUG
-        addOutput(createOutputCentered<MPort>(Vec(12, 12), module, GAIN::kDebug1));
-        addOutput(createOutputCentered<MPort>(Vec(12, 36), module, GAIN::kDebug2));
-        addOutput(createOutputCentered<MPort>(Vec(12, 60), module, GAIN::kDebug3));
-        addOutput(createOutputCentered<MPort>(Vec(12, 84), module, GAIN::kDebug4));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, GAIN::kDebug1));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, GAIN::kDebug2));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, GAIN::kDebug3));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
         // track
@@ -129,13 +129,13 @@ struct GAINWidget : ModuleWidget {
 
         // mute and level
         addParam(createParamCentered<MToggleButton>(Vec(37.5, 217), module, GAIN::kMute));
-        addInput(createInputCentered<MPort>(Vec(37.5, 254), module, GAIN::kLevelInput));
+        addInput(createInputCentered<PJ301MPort>(Vec(37.5, 254), module, GAIN::kLevelInput));
 
         // ins and outs
-        addInput(createInputCentered<MPort>(Vec(19.5, 292), module, GAIN::kLeftInput));
-        addInput(createInputCentered<MPort>(Vec(55.5, 292), module, GAIN::kRightInput));
-        addOutput(createOutputCentered<MPort>(Vec(19.5, 334), module, GAIN::kLeftOutput));
-        addOutput(createOutputCentered<MPort>(Vec(55.5, 334), module, GAIN::kRightOutput));
+        addInput(createInputCentered<PJ301MPort>(Vec(19.5, 292), module, GAIN::kLeftInput));
+        addInput(createInputCentered<PJ301MPort>(Vec(55.5, 292), module, GAIN::kRightInput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(19.5, 334), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(55.5, 334), module, GAIN::kRightOutput));
     }
 };
 
