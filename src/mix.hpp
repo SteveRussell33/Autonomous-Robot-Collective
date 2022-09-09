@@ -111,8 +111,6 @@ struct VUMeter : OpaqueWidget {
 
     const int levelWidth = 3;
 
-    // This is set in the constructor of the parent ModuleWidget.
-    // It could still be NULL though.
     StereoTrack* track = NULL;
 
     void draw(const DrawArgs& args) override {

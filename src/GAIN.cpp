@@ -72,21 +72,15 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
-
-        // TODO: polyphonic, sum voltages
+        if (!inputs[kInput].isConnected()) {
+            return;
+        }
 
         float in = inputs[kInput].getVoltage();
 
         // This is a mono module, but its easier to do everything in stereo.
         track.left.process(in);
         track.right.process(in);
-
-#ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(track.left.peak);
-        outputs[kDebug2].setVoltage(track.left.rms);
-        outputs[kDebug1].setVoltage(track.right.peak);
-        outputs[kDebug2].setVoltage(track.right.rms);
-#endif
 
         if (outputs[kOutput].isConnected()) {
             outputs[kOutput].setVoltage(in);
