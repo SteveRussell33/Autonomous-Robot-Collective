@@ -72,6 +72,11 @@ struct GAIN : Module {
 
         trackLevels.process(in, in, args.sampleTime);
 
+#ifdef GAIN_DEBUG
+    outputs[kDebug1].setVoltage(trackLevels.leftPeak);
+    outputs[kDebug2].setVoltage(trackLevels.leftRms);
+#endif
+
         if (outputs[kOutput].isConnected()) {
             outputs[kOutput].setVoltage(in);
         }
