@@ -1,4 +1,4 @@
-#include "pub/pub.hpp"
+#include "pub/pub.h"
 
 #include "oversample.hpp"
 #include "plugin.hpp"
