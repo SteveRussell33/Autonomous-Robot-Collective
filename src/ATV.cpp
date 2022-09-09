@@ -60,7 +60,28 @@ struct ATV : Module {
 #endif
     }
 
-    void process(const ProcessArgs& args) override {}
+    void applyCV(int inputID, int cvParamID, int outputID) {
+
+        if (!outputs[outputID].isConnected()) {
+            return;
+        }
+
+        float cvAmount = params[cvParamID].getValue();
+
+        int channels = std::max(inputs[inputID].getChannels(), 1);
+        for (int ch = 0; ch < channels; ch++) {
+
+            float in = inputs[inputID].getPolyVoltage(ch);
+            outputs[outputID].setVoltage(in * cvAmount, ch);
+        }
+
+        outputs[outputID].setChannels(channels);
+    }
+
+    void process(const ProcessArgs& args) override {
+        applyCV(kInputA, kCvParamA, kOutputA);
+        applyCV(kInputB, kCvParamB, kOutputB);
+    }
 };
 
 struct ATVWidget : ModuleWidget {
