@@ -1,5 +1,5 @@
-#include "plugin.hpp"
 #include "mix.hpp"
+#include "plugin.hpp"
 #include "widgets.hpp"
 
 // define GAIN_DEBUG
@@ -82,10 +82,10 @@ struct GAIN : Module {
         track.right.process(in);
 
 #ifdef GAIN_DEBUG
-    outputs[kDebug1].setVoltage(track.left.peak);
-    outputs[kDebug2].setVoltage(track.left.rms);
-    outputs[kDebug1].setVoltage(track.right.peak);
-    outputs[kDebug2].setVoltage(track.right.rms);
+        outputs[kDebug1].setVoltage(track.left.peak);
+        outputs[kDebug2].setVoltage(track.left.rms);
+        outputs[kDebug1].setVoltage(track.right.peak);
+        outputs[kDebug2].setVoltage(track.right.rms);
 #endif
 
         if (outputs[kOutput].isConnected()) {
