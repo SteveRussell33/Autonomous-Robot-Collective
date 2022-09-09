@@ -3,34 +3,47 @@
 #include "rack.hpp"
 
 #include "bogaudio/dsp/signal.hpp"
+#include "bogaudio/dsp/filters/utility.hpp"
 
 using namespace rack;
 
 //--------------------------------------------------------------
-// Track
+// MonoTrack
 //--------------------------------------------------------------
 
+// This class is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
 struct MonoTrack {
 
 private:
 
+	bogaudio::dsp::RootMeanSquare rms;
+
     bogaudio::dsp::RunningAverage peakAvg;
 	bogaudio::dsp::SlewLimiter peakSlew;
-	float peakFalling = 0.0f;
+	bool peakFalling = false;
 
 public:
-    float peakLevel = 0.0f;
+
     float rmsLevel = 0.0f;
+    float peakLevel = 0.0f;
 
     void sampleRateChange(float sampleRate) {
+
+        rms.setSampleRate(sampleRate);
+		rms.setSensitivity(1.0f);
+
         peakAvg.setSampleRate(sampleRate);
 		peakAvg.setSensitivity(0.025f);
         peakSlew.setParams(sampleRate, 750.0f, 1.0f);
     }
 
-	void process(float in) {
+	void process(float sample) {
 
-        float peak = peakAvg.next(fabsf(in)) / 5.0f;
+        // RMS
+        rmsLevel = rms.next(sample) / 5.0f;
+
+        // Peak
+        float peak = peakAvg.next(fabsf(sample)) / 5.0f;
 
         if (peak < peakLevel) {
             if (!peakFalling) {
@@ -45,6 +58,10 @@ public:
         peakLevel = peak;
 	}
 };
+
+//--------------------------------------------------------------
+// StereoTrack
+//--------------------------------------------------------------
 
 struct StereoTrack {
     MonoTrack left;
@@ -70,10 +87,10 @@ struct VUColors {
 struct VUMeter : OpaqueWidget {
 
     VUColors peakColors = {
-        nvgRGBA(0xE6, 0x29, 0x34, 0xA0),
-        nvgRGBA(0xFF, 0x87, 0x24, 0xA0),
-        nvgRGBA(0xFF, 0xCA, 0x33, 0xA0),
-        nvgRGBA(0x3E, 0xD5, 0x64, 0xA0)};
+        nvgRGBA(0xE6, 0x29, 0x34, 0xA8),
+        nvgRGBA(0xFF, 0x87, 0x24, 0xA8),
+        nvgRGBA(0xFF, 0xCA, 0x33, 0xA8),
+        nvgRGBA(0x3E, 0xD5, 0x64, 0xA8)};
 
     VUColors rmsColors = {
         nvgRGB(0xE6, 0x29, 0x34),
@@ -92,14 +109,11 @@ struct VUMeter : OpaqueWidget {
             return;
         }
 
-        drawLevel(args, -4, track->left.peakLevel, rmsColors);
-        drawLevel(args, 1, track->right.peakLevel, rmsColors);
+        drawLevel(args, -4, track->left.peakLevel, peakColors);
+        drawLevel(args, 1, track->right.peakLevel, peakColors);
 
-        //drawLevel(args, -4, track->left.peak, peakColors);
-        //drawLevel(args, 1, track->right.peak, peakColors);
-
-        //drawLevel(args, -4, track->left.rms, rmsColors);
-        //drawLevel(args, 1, track->right.rms, rmsColors);
+        drawLevel(args, -4, track->left.rmsLevel, rmsColors);
+        drawLevel(args, 1, track->right.rmsLevel, rmsColors);
     }
 
     void drawLevel(const DrawArgs& args, float x, float level, VUColors col) {
