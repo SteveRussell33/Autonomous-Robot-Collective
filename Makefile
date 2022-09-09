@@ -7,4 +7,5 @@ DISTRIBUTABLES += $(wildcard LICENSE*) res
 RACK_DIR ?= ../..
 include $(RACK_DIR)/plugin.mk
 
+# NOTE: -Ilib/bogaudio/dsp is there for BogAudio to compile successfully
 CXXFLAGS += -Isrc -Isrc/dsp -Ilib -Ilib/bogaudio/dsp

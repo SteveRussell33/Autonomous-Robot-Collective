@@ -67,6 +67,10 @@ struct GAIN : Module {
 #endif
     }
 
+    void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        track.sampleRateChange(e.sampleRate);
+    }
+
     void process(const ProcessArgs& args) override {
 
         // TODO: polyphonic, sum voltages
@@ -74,8 +78,8 @@ struct GAIN : Module {
         float in = inputs[kInput].getVoltage();
 
         // This is a mono module, but its easier to do everything in stereo.
-        track.left.process(args.sampleTime, in);
-        track.right.process(args.sampleTime, in);
+        track.left.process(in);
+        track.right.process(in);
 
 #ifdef GAIN_DEBUG
     outputs[kDebug1].setVoltage(track.left.peak);

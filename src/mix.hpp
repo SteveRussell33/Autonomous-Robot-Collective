@@ -10,37 +10,50 @@ using namespace rack;
 // Track
 //--------------------------------------------------------------
 
-// This class is adapted from /Rack-SDK/include/dsp/vumeter.hpp.
-// License is GPL3.
 struct MonoTrack {
 
 private:
 
-	/** Inverse time constant in 1/seconds */
-	const float lambda = 30.f;
+    bogaudio::dsp::RunningAverage peakAvg;
+	bogaudio::dsp::SlewLimiter peakSlew;
+	float peakFalling = 0.0f;
 
 public:
-    float rms = 0.0f;
-    float peak = 0.0f;
+    float peakLevel = 0.0f;
+    float rmsLevel = 0.0f;
 
-	void process(float deltaTime, float value) {
+    void sampleRateChange(float sampleRate) {
+        peakAvg.setSampleRate(sampleRate);
+		peakAvg.setSensitivity(0.025f);
+        peakSlew.setParams(sampleRate, 750.0f, 1.0f);
+    }
 
-		rms += (value*value - rms) * lambda * deltaTime;
+	void process(float in) {
 
-        // peak
-        float absv = std::fabs(value);
-        if (absv >= peak) {
-            peak = absv;
+        float peak = peakAvg.next(fabsf(in)) / 5.0f;
+
+        if (peak < peakLevel) {
+            if (!peakFalling) {
+                peakFalling = true;
+                peakSlew._last = peakLevel;
+            }
+            peak = peakSlew.next(peak);
         }
         else {
-            peak += (absv - peak) * lambda * deltaTime;
+            peakFalling = false;
         }
+        peakLevel = peak;
 	}
 };
 
 struct StereoTrack {
     MonoTrack left;
     MonoTrack right;
+
+    void sampleRateChange(float sampleRate) {
+        left.sampleRateChange(sampleRate);
+        right.sampleRateChange(sampleRate);
+    }
 };
 
 //--------------------------------------------------------------
@@ -70,7 +83,8 @@ struct VUMeter : OpaqueWidget {
 
     const int levelWidth = 3;
 
-    // This is in the constructor of the parent ModuleWidget.
+    // This is set in the constructor of the parent ModuleWidget.
+    // It could still be NULL though.
     StereoTrack* track = NULL;
 
     void draw(const DrawArgs& args) override {
@@ -78,16 +92,19 @@ struct VUMeter : OpaqueWidget {
             return;
         }
 
+        drawLevel(args, -4, track->left.peakLevel, rmsColors);
+        drawLevel(args, 1, track->right.peakLevel, rmsColors);
+
         //drawLevel(args, -4, track->left.peak, peakColors);
         //drawLevel(args, 1, track->right.peak, peakColors);
 
-        drawLevel(args, -4, track->left.rms, rmsColors);
-        drawLevel(args, 1, track->right.rms, rmsColors);
+        //drawLevel(args, -4, track->left.rms, rmsColors);
+        //drawLevel(args, 1, track->right.rms, rmsColors);
     }
 
     void drawLevel(const DrawArgs& args, float x, float level, VUColors col) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level / 10.0f), -120.0f, 6.0f);
+        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level), -120.0f, 6.0f);
         if (db < -71.0f) {
             return;
         }
