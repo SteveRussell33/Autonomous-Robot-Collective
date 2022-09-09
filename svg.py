@@ -4,6 +4,7 @@ import os
 import subprocess
 
 files = [
+    'DRV',
     'fader-bg',
     'fader-handle',
     'FM',
@@ -16,7 +17,6 @@ files = [
     'knob40',
     'MIX-2',
     'port',
-    'SAT',
     'toggle-0',
     'toggle-1'
 ]

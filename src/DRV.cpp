@@ -4,9 +4,9 @@
 #include "plugin.hpp"
 #include "widgets.hpp"
 
-// define SAT_DEBUG
+// define DRV_DEBUG
 
-struct SAT : Module {
+struct DRV : Module {
 
     const int kOversampleFactor = 4;
     Oversample oversample{kOversampleFactor};
@@ -28,7 +28,7 @@ struct SAT : Module {
     enum OutputId {
         kOutput,
 
-#ifdef SAT_DEBUG
+#ifdef DRV_DEBUG
         kDebug1,
         kDebug2,
         kDebug3,
@@ -37,7 +37,7 @@ struct SAT : Module {
         kOutputsLen
     };
 
-    SAT() {
+    DRV() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         configParam(kDriveParam, 0.0f, 10.0f, 0.0f, "Drive");
@@ -50,7 +50,7 @@ struct SAT : Module {
 
         configBypass(kInput, kOutput);
 
-#ifdef SAT_DEBUG
+#ifdef DRV_DEBUG
         configOutput(kDebug1, "Debug 1");
         configOutput(kDebug2, "Debug 2");
         configOutput(kDebug3, "Debug 3");
@@ -104,28 +104,28 @@ struct SAT : Module {
     }
 };
 
-struct SATWidget : ModuleWidget {
-    SATWidget(SAT* module) {
+struct DRVWidget : ModuleWidget {
+    DRVWidget(DRV* module) {
         setModule(module);
-        setPanel(createPanel(asset::plugin(pluginInstance, "res/SAT.svg")));
+        setPanel(createPanel(asset::plugin(pluginInstance, "res/DRV.svg")));
 
-#ifdef SAT_DEBUG
-        addOutput(createOutputCentered<MPort>(Vec(12, 12), module, SAT::kDebug1));
-        addOutput(createOutputCentered<MPort>(Vec(12, 36), module, SAT::kDebug2));
-        addOutput(createOutputCentered<MPort>(Vec(12, 60), module, SAT::kDebug3));
-        addOutput(createOutputCentered<MPort>(Vec(12, 84), module, SAT::kDebug4));
+#ifdef DRV_DEBUG
+        addOutput(createOutputCentered<MPort>(Vec(12, 12), module, DRV::kDebug1));
+        addOutput(createOutputCentered<MPort>(Vec(12, 36), module, DRV::kDebug2));
+        addOutput(createOutputCentered<MPort>(Vec(12, 60), module, DRV::kDebug3));
+        addOutput(createOutputCentered<MPort>(Vec(12, 84), module, DRV::kDebug4));
 #endif
 
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
-        addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, SAT::kDriveParam));
-        addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, SAT::kDriveCvAmountParam));
-        addInput(createInputCentered<MPort>(Vec(22.5, 162), module, SAT::kDriveCvInput));
+        addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, DRV::kDriveParam));
+        addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, DRV::kDriveCvAmountParam));
+        addInput(createInputCentered<MPort>(Vec(22.5, 162), module, DRV::kDriveCvInput));
 
-        addInput(createInputCentered<MPort>(Vec(22.5, 292), module, SAT::kInput));
-        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, SAT::kOutput));
+        addInput(createInputCentered<MPort>(Vec(22.5, 292), module, DRV::kInput));
+        addOutput(createOutputCentered<MPort>(Vec(22.5, 334), module, DRV::kOutput));
     }
 };
 
-Model* modelSAT = createModel<SAT, SATWidget>("SAT");
+Model* modelDRV = createModel<DRV, DRVWidget>("DRV");
