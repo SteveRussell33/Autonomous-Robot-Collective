@@ -5,54 +5,49 @@
 #include "bogaudio/dsp/signal.hpp"
 
 using namespace rack;
-using namespace bogaudio;
 
 //--------------------------------------------------------------
-// TrackLevels
+// Track
 //--------------------------------------------------------------
 
 // This class is adapted from /Rack-SDK/include/dsp/vumeter.hpp.
 // License is GPL3.
-struct TrackLevels {
+struct MonoTrack {
 
-    // TODO have a look at this for more sophistacted approach, e.g. circular buffer for RMS
-    // https://www.kvraudio.com/forum/viewtopic.php?t=460756
+private:
 
-    static constexpr float lambda = 30.f; // Inverse time constant left 1/seconds
+	/** Inverse time constant in 1/seconds */
+	const float lambda = 30.f;
 
-    float leftRms = 0.0f;
-    float leftPeak = 0.0f;
+public:
+    float rms = 0.0f;
+    float peak = 0.0f;
 
-    float rightRms = 0.0f;
-    float rightPeak = 0.0f;
+	void process(float deltaTime, float value) {
 
-    void process(float left, float right, float deltaTime) {
+		rms += (value*value - rms) * lambda * deltaTime;
 
-        leftRms += (left * left - leftRms) * lambda * deltaTime;
-
-        rightRms += (right * right - rightRms) * lambda * deltaTime;
-
-        float leftAbs = std::fabs(left);
-        if (leftAbs >= leftPeak) {
-            leftPeak = leftAbs;
-        } else {
-            leftPeak += (leftAbs - leftPeak) * lambda * deltaTime;
+        // peak
+        float absv = std::fabs(value);
+        if (absv >= peak) {
+            peak = absv;
         }
-
-        float rightAbs = std::fabs(right);
-        if (rightAbs >= rightPeak) {
-            rightPeak = rightAbs;
-        } else {
-            rightPeak += (rightAbs - rightPeak) * lambda * deltaTime;
+        else {
+            peak += (absv - peak) * lambda * deltaTime;
         }
-    }
+	}
+};
+
+struct StereoTrack {
+    MonoTrack left;
+    MonoTrack right;
 };
 
 //--------------------------------------------------------------
 // VUMeter
 //--------------------------------------------------------------
 
-struct Colors {
+struct VUColors {
     NVGcolor red;
     NVGcolor orange;
     NVGcolor yellow;
@@ -61,13 +56,13 @@ struct Colors {
 
 struct VUMeter : OpaqueWidget {
 
-    Colors peakColors = {
+    VUColors peakColors = {
         nvgRGBA(0xE6, 0x29, 0x34, 0xA0),
         nvgRGBA(0xFF, 0x87, 0x24, 0xA0),
         nvgRGBA(0xFF, 0xCA, 0x33, 0xA0),
         nvgRGBA(0x3E, 0xD5, 0x64, 0xA0)};
 
-    Colors rmsColors = {
+    VUColors rmsColors = {
         nvgRGB(0xE6, 0x29, 0x34),
         nvgRGB(0xFF, 0x87, 0x24),
         nvgRGB(0xFF, 0xCA, 0x33),
@@ -75,22 +70,22 @@ struct VUMeter : OpaqueWidget {
 
     const int levelWidth = 3;
 
-    // Set in the constructor of the parent ModuleWidget
-    TrackLevels* trackLevels = NULL;
+    // This is in the constructor of the parent ModuleWidget.
+    StereoTrack* track = NULL;
 
     void draw(const DrawArgs& args) override {
-        if (!trackLevels) {
+        if (!track) {
             return;
         }
 
-        drawLevel(args, -4, trackLevels->leftPeak, peakColors);
-        drawLevel(args, 1, trackLevels->rightPeak, peakColors);
+        //drawLevel(args, -4, track->left.peak, peakColors);
+        //drawLevel(args, 1, track->right.peak, peakColors);
 
-        drawLevel(args, -4, trackLevels->leftRms, rmsColors);
-        drawLevel(args, 1, trackLevels->rightRms, rmsColors);
+        drawLevel(args, -4, track->left.rms, rmsColors);
+        drawLevel(args, 1, track->right.rms, rmsColors);
     }
 
-    void drawLevel(const DrawArgs& args, float x, float level, Colors col) {
+    void drawLevel(const DrawArgs& args, float x, float level, VUColors col) {
 
         float db = clamp(bogaudio::dsp::amplitudeToDecibels(level / 10.0f), -120.0f, 6.0f);
         if (db < -71.0f) {

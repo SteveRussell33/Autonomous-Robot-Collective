@@ -10,7 +10,8 @@
 
 struct GAIN : Module {
 
-    TrackLevels trackLevels;
+    // This is a mono module, but its easier to do everything in stereo.
+    StereoTrack track;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -68,13 +69,19 @@ struct GAIN : Module {
 
     void process(const ProcessArgs& args) override {
 
+        // TODO: polyphonic, sum voltages
+
         float in = inputs[kInput].getVoltage();
 
-        trackLevels.process(in, in, args.sampleTime);
+        // This is a mono module, but its easier to do everything in stereo.
+        track.left.process(args.sampleTime, in);
+        track.right.process(args.sampleTime, in);
 
 #ifdef GAIN_DEBUG
-    outputs[kDebug1].setVoltage(trackLevels.leftPeak);
-    outputs[kDebug2].setVoltage(trackLevels.leftRms);
+    outputs[kDebug1].setVoltage(track.left.peak);
+    outputs[kDebug2].setVoltage(track.left.rms);
+    outputs[kDebug1].setVoltage(track.right.peak);
+    outputs[kDebug2].setVoltage(track.right.rms);
 #endif
 
         if (outputs[kOutput].isConnected()) {
@@ -112,7 +119,7 @@ struct GAINWidget : ModuleWidget {
 
         VUMeter* meter = new VUMeter();
         if (module) {
-            meter->trackLevels = &(module->trackLevels);
+            meter->track = &(module->track);
         }
         meter->box.pos = Vec(20, 46);
         meter->box.size = Vec(meterH, meterW);
