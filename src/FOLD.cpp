@@ -109,7 +109,7 @@ struct FOLD : Module {
 
             float inTimbreCv = inputs[kTimbreCvInput].getPolyVoltage(ch);
             float timbre = pTimbre + inTimbreCv * pTimbreCvAmount;
-            timbre = clamp(timbre, 0.0, 10.0);
+            //timbre = clamp(timbre, 0.0, 10.0);
 
             // Turn the timbre down a good bit so its less aggressive
             timbre = timbre * 0.5f;

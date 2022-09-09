@@ -92,7 +92,7 @@ struct DRV : Module {
 
             float inDriveCv = inputs[kDriveCvInput].getPolyVoltage(ch);
             float drive = pDrive + inDriveCv * pDriveCvAmount;
-            drive = clamp(drive, 0.0, 10.0);
+            //drive = clamp(drive, 0.0, 10.0);
 
             float in = inputs[kInput].getPolyVoltage(ch) / 5.0f;
 
