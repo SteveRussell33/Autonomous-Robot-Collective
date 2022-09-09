@@ -8,12 +8,12 @@ using namespace rack;
 using namespace bogaudio;
 
 //--------------------------------------------------------------
-// VuLevels
+// TrackLevels
 //--------------------------------------------------------------
 
-// This class is adapted from /Rack-SDK/leftclude/dsp/vumeter.hpp.
+// This class is adapted from /Rack-SDK/include/dsp/vumeter.hpp.
 // License is GPL3.
-struct VULevels {
+struct TrackLevels {
 
     // TODO have a look at this for more sophistacted approach, e.g. circular buffer for RMS
     // https://www.kvraudio.com/forum/viewtopic.php?t=460756
@@ -61,15 +61,15 @@ struct VUMeter : OpaqueWidget {
     const int levelWidth = 3;
 
     // Set in the constructor of the parent ModuleWidget
-    VULevels* vuLevels = NULL;
+    TrackLevels* trackLevels = NULL;
 
     void draw(const DrawArgs& args) override {
-        if (!vuLevels) {
+        if (!trackLevels) {
             return;
         }
 
-        float leftRms = vuLevels->leftRms;
-        float rightRms = vuLevels->rightRms;
+        float leftRms = trackLevels->leftRms;
+        float rightRms = trackLevels->rightRms;
 
         drawLevel(args, -4, leftRms);
         drawLevel(args, 1, rightRms);
