@@ -128,13 +128,13 @@ struct FMWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
         // knobs and switches
-        addParam(createParamCentered<MKnob40>(Vec(37.5, 82), module, FM::kRatioParam));
-        addParam(createParamCentered<MHSwitch>(Vec(37.5, 118), module, FM::kRatioQuantParam));
-        addParam(createParamCentered<MKnob40>(Vec(37.5, 180), module, FM::kOffsetParam));
+        addParam(createParamCentered<RmKnob40>(Vec(37.5, 82), module, FM::kRatioParam));
+        addParam(createParamCentered<RmHSwitch>(Vec(37.5, 118), module, FM::kRatioQuantParam));
+        addParam(createParamCentered<RmKnob40>(Vec(37.5, 180), module, FM::kOffsetParam));
 
         // row 1
-        addParam(createParamCentered<MKnob18>(Vec(19.5, 250), module, FM::kRatioCvAmountParam));
-        addParam(createParamCentered<MKnob18>(Vec(55.5, 250), module, FM::kOffsetCvAmountParam));
+        addParam(createParamCentered<RmKnob18>(Vec(19.5, 250), module, FM::kRatioCvAmountParam));
+        addParam(createParamCentered<RmKnob18>(Vec(55.5, 250), module, FM::kOffsetCvAmountParam));
 
         // row 2
         addInput(createInputCentered<PJ301MPort>(Vec(19.5, 292), module, FM::kRatioCvInput));

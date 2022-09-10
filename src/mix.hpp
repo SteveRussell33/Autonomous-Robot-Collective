@@ -18,7 +18,7 @@ struct MonoTrack {
 
     bogaudio::dsp::RootMeanSquare calcRms;
 
-    bogaudio::dsp::RunningAverage peakAvg;
+    bogaudio::dsp::RunningAverage calcPeak;
     bogaudio::dsp::SlewLimiter peakSlew;
     bool peakFalling = false;
 
@@ -35,8 +35,8 @@ struct MonoTrack {
         calcRms.setSampleRate(sampleRate);
         calcRms.setSensitivity(1.0f);
 
-        peakAvg.setSampleRate(sampleRate);
-        peakAvg.setSensitivity(0.025f);
+        calcPeak.setSampleRate(sampleRate);
+        calcPeak.setSensitivity(0.025f);
         peakSlew.setParams(sampleRate, 750.0f, 1.0f);
 
         maxPeakTimer.setParams(sampleRate, 1.0f);
@@ -48,7 +48,7 @@ struct MonoTrack {
         rms = calcRms.next(sample) / 5.0f;
 
         // Peak
-        float pa = peakAvg.next(fabsf(sample)) / 5.0f;
+        float pa = calcPeak.next(fabsf(sample)) / 5.0f;
 
         if (pa < peak) {
             if (!peakFalling) {
@@ -194,13 +194,13 @@ struct VUMeter : OpaqueWidget {
             col = colors.green;
         } else if (db < -3.0f) {
             y = rescale(db, -6.0f, -3.0f, 60, 45);
-            col = nvgLerpRGBA(colors.green, colors.yellow, dist(db, -6.0f, -3.0f));
+            col = nvgLerpRGBA(colors.green, colors.yellow, linearDistance(db, -6.0f, -3.0f));
         } else if (db < 0.0f) {
             y = rescale(db, -3.0f, 0.0f, 45, 30);
             col = colors.yellow;
         } else if (db < 3.0f) {
             y = rescale(db, 0.0f, 3.0f, 30, 15);
-            col = nvgLerpRGBA(colors.yellow, colors.red, dist(db, 0.0f, 3.0f));
+            col = nvgLerpRGBA(colors.yellow, colors.red, linearDistance(db, 0.0f, 3.0f));
         } else {
             y = rescale(db, 3.0f, 6.0f, 15, 0);
             col = colors.red;
@@ -209,7 +209,7 @@ struct VUMeter : OpaqueWidget {
         drawRect(args, x, y, levelWidth, 1, col, NVGpaint{}, true);
     }
 
-    float dist(float x, float low, float high) { return (x - low) / (high - low); }
+    inline float linearDistance(float x, float low, float high) { return (x - low) / (high - low); }
 
     void drawRect(
         const DrawArgs& args,
@@ -236,8 +236,8 @@ struct VUMeter : OpaqueWidget {
 // Fader
 //--------------------------------------------------------------
 
-// These were all empiricially determined by moving the fader handle
-// around so it lined up with the various tick marks.
+// These values were all empiricially determined by moving the fader handle
+// around so that it lined up with the various tick marks.
 const float kFaderDbPlus6 = 1.0f;
 const float kFaderDbPlus3 = 0.896f;
 const float kFaderDbZero = 0.79f;
@@ -248,6 +248,20 @@ const float kFaderDbMinus24 = 0.286f;
 const float kFaderDbMinus48 = 0.136f;
 const float kFaderDbMinus72 = 0.0f;
 
+float faderToDb(float v) {
+    if (v >= kFaderDbMinus6) {
+        return rescale(v, kFaderDbMinus6, kFaderDbPlus6, -6.0f, 6.0f);
+    } else if (v >= kFaderDbMinus12) {
+        return rescale(v, kFaderDbMinus12, kFaderDbMinus6, -12.0f, -6.0f);
+    } else if (v >= kFaderDbMinus24) {
+        return rescale(v, kFaderDbMinus24, kFaderDbMinus12, -24.0f, -12.0f);
+    } else if (v >= kFaderDbMinus48) {
+        return rescale(v, kFaderDbMinus48, kFaderDbMinus24, -48.0f, -24.0f);
+    } else {
+        return rescale(v, kFaderDbMinus72, kFaderDbMinus48, -72.0f, -48.0f);
+    }
+}
+
 struct FaderParamQuantity : ParamQuantity {
 
     float getDisplayValue() override {
@@ -255,18 +269,7 @@ struct FaderParamQuantity : ParamQuantity {
         if (!module) {
             return v;
         }
-
-        if (v >= kFaderDbMinus6) {
-            return rescale(v, kFaderDbMinus6, kFaderDbPlus6, -6.0f, 6.0f);
-        } else if (v >= kFaderDbMinus12) {
-            return rescale(v, kFaderDbMinus12, kFaderDbMinus6, -12.0f, -6.0f);
-        } else if (v >= kFaderDbMinus24) {
-            return rescale(v, kFaderDbMinus24, kFaderDbMinus12, -24.0f, -12.0f);
-        } else if (v >= kFaderDbMinus48) {
-            return rescale(v, kFaderDbMinus48, kFaderDbMinus24, -48.0f, -24.0f);
-        } else {
-            return rescale(v, kFaderDbMinus72, kFaderDbMinus48, -72.0f, -48.0f);
-        }
+        return faderToDb(v);
     }
 
     void setDisplayValue(float v) override {

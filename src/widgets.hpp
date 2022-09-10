@@ -6,43 +6,62 @@ using namespace rack;
 
 extern Plugin* pluginInstance;
 
-struct MKnob : RoundKnob {
-    MKnob(const char* svg, int dim) {
+struct RmKnob : RoundKnob {
+    RmKnob(const char* svg, int dim) {
         setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, svg)));
         box.size = Vec(dim, dim);
     }
 };
 
-struct MKnob18 : MKnob {
-    MKnob18() : MKnob("res/knob18.svg", 18) {
+struct RmKnob18 : RmKnob {
+    RmKnob18() : RmKnob("res/knob18.svg", 18) {
         shadow->blurRadius = 2.0;
         shadow->box.pos = Vec(0.0, 3.0);
     }
 };
 
-struct MKnob32 : MKnob {
-    MKnob32() : MKnob("res/knob32.svg", 32) {
+struct RmKnob32 : RmKnob {
+    RmKnob32() : RmKnob("res/knob32.svg", 32) {
         shadow->blurRadius = 2.0;
         shadow->box.pos = Vec(0.0, 3.0);
     }
 };
 
-struct MKnob40 : MKnob {
-    MKnob40() : MKnob("res/knob40.svg", 40) {
+struct RmKnob40 : RmKnob {
+    RmKnob40() : RmKnob("res/knob40.svg", 40) {
         shadow->blurRadius = 2.0;
         shadow->box.pos = Vec(0.0, 3.0);
     }
 };
 
-struct MHSwitch : SvgSwitch {
-    MHSwitch() {
+struct RmHSwitch : SvgSwitch {
+    RmHSwitch() {
         addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/hswitch-0.svg")));
         addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/hswitch-1.svg")));
     }
 };
 
-struct MFader : SvgSlider {
-    MFader() {
+struct RmToggleButton : SvgSwitch {
+    RmToggleButton() {
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-0.svg")));
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-1.svg")));
+        box.size = Vec(18, 18);
+        shadow->blurRadius = 1.0;
+        shadow->box.pos = Vec(0.0, 1.5);
+    }
+};
+
+struct FaderListener {
+    virtual void onFaderChange(int trackNum, float db) = 0;
+};
+
+struct RmFader : SvgSlider {
+
+    int trackNum;
+    FaderListener* listener;
+
+    RmFader(int trackNum_, FaderListener* listener_) : trackNum(trackNum_), listener(listener_) {
+
         setBackgroundSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-bg.svg")));
         setHandleSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-handle.svg")));
         setHandlePos(
@@ -50,14 +69,13 @@ struct MFader : SvgSlider {
             Vec(0, 0.5));
         box.size = Vec(12, 160);
     }
-};
 
-struct MToggleButton : SvgSwitch {
-    MToggleButton() {
-        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-0.svg")));
-        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-1.svg")));
-        box.size = Vec(18, 18);
-        shadow->blurRadius = 1.0;
-        shadow->box.pos = Vec(0.0, 1.5);
+    void onChange(const ChangeEvent& e) override {
+        SvgSlider::onChange(e);
+
+        auto pq = getParamQuantity();
+        if (listener && pq) {
+            listener->onFaderChange(trackNum, pq->getValue());
+        }
     }
 };

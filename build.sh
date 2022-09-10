@@ -1,2 +1,0 @@
-./svg.py
-make install

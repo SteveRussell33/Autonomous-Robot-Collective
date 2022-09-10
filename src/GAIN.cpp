@@ -2,13 +2,13 @@
 #include "plugin.hpp"
 #include "widgets.hpp"
 
-// define GAIN_DEBUG
+#define GAIN_DEBUG
 
 //--------------------------------------------------------------
 // GAIN
 //--------------------------------------------------------------
 
-struct GAIN : Module {
+struct GAIN : Module, FaderListener {
 
     // This is a mono module, but its easier to do everything in stereo.
     StereoTrack track;
@@ -86,6 +86,13 @@ struct GAIN : Module {
             outputs[kOutput].setVoltage(in);
         }
     }
+
+    // FaderListener
+    void onFaderChange(int trackNum, float value) override {
+#ifdef GAIN_DEBUG
+        outputs[kDebug1].setVoltage(faderToDb(value)/100.0f);
+#endif
+    }
 };
 
 //--------------------------------------------------------------
@@ -107,14 +114,25 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
+        ////////////////////////////////////////
         // track
+
         const float faderXofs = 8;
         const float faderYofs = -9.5;
         const float meterH = 9;
         const float meterW = 144;
 
-        addParam(createParam<MFader>(Vec(20 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
+        // fader
+        // addParam(createParam<RmFader>(Vec(20 + faderXofs, 46 + faderYofs), module,
+        // GAIN::kFader));
+        RmFader* fader = new RmFader(0, module);
+        fader->box.pos = Vec(20 + faderXofs, 46 + faderYofs);
+        fader->app::ParamWidget::module = module;
+        fader->app::ParamWidget::paramId = GAIN::kFader;
+        fader->initParamQuantity();
+        addParam(fader);
 
+        // meter
         VUMeter* meter = new VUMeter();
         if (module) {
             meter->track = &(module->track);
@@ -123,11 +141,15 @@ struct GAINWidget : ModuleWidget {
         meter->box.size = Vec(meterH, meterW);
         addChild(meter);
 
+        ////////////////////////////////////////
         // mute and level
-        addParam(createParamCentered<MToggleButton>(Vec(22.5, 217), module, GAIN::kMute));
+
+        addParam(createParamCentered<RmToggleButton>(Vec(22.5, 217), module, GAIN::kMute));
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 254), module, GAIN::kLevelInput));
 
+        ////////////////////////////////////////
         // ins and outs
+
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 292), module, GAIN::kInput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(22.5, 334), module, GAIN::kOutput));
     }

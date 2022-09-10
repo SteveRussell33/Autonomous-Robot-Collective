@@ -120,8 +120,8 @@ struct DRVWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
-        addParam(createParamCentered<MKnob32>(Vec(22.5, 78), module, DRV::kDriveParam));
-        addParam(createParamCentered<MKnob18>(Vec(22.5, 120), module, DRV::kDriveCvAmountParam));
+        addParam(createParamCentered<RmKnob32>(Vec(22.5, 78), module, DRV::kDriveParam));
+        addParam(createParamCentered<RmKnob18>(Vec(22.5, 120), module, DRV::kDriveCvAmountParam));
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 162), module, DRV::kDriveCvInput));
 
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 292), module, DRV::kInput));

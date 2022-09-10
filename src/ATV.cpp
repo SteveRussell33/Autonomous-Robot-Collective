@@ -100,11 +100,11 @@ struct ATVWidget : ModuleWidget {
 #endif
 
         addInput(createInputCentered<PJ301MPort>(Vec(15, 74), module, ATV::kInputA));
-        addParam(createParamCentered<MKnob18>(Vec(15, 116), module, ATV::kCvParamA));
+        addParam(createParamCentered<RmKnob18>(Vec(15, 116), module, ATV::kCvParamA));
         addOutput(createOutputCentered<PJ301MPort>(Vec(15, 158), module, ATV::kOutputA));
 
         addInput(createInputCentered<PJ301MPort>(Vec(15, 230), module, ATV::kInputB));
-        addParam(createParamCentered<MKnob18>(Vec(15, 272), module, ATV::kCvParamB));
+        addParam(createParamCentered<RmKnob18>(Vec(15, 272), module, ATV::kCvParamB));
         addOutput(createOutputCentered<PJ301MPort>(Vec(15, 314), module, ATV::kOutputB));
     }
 };

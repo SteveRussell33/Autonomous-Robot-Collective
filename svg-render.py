@@ -3,6 +3,9 @@
 import os
 import subprocess
 
+# The concept of having a `res-src` directory, and using Inkscape via the
+# command line to render to the `res` directory, comes from the BogAudio project.
+
 files = [
     'ATV',
     'DRV',
@@ -41,7 +44,8 @@ for f in files:
         # write output
         open(fout, 'w').writelines(lout)
 
-        # run it through inkscape
+        # Run it through inkscape
+        # Adapted from github.com/bogaudio/BogaudioModules/scripts/svg_render.rb
         subprocess.run([
             '/Applications/Inkscape.app/Contents/MacOS/inkscape', 
             '--batch-process', 
@@ -49,4 +53,4 @@ for f in files:
             fout],
             check=True)
 
-print('Done.')
+print('SVG rendering is done.')
