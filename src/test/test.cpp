@@ -4,25 +4,33 @@
 #include <sstream>
 #include <vector>
 
+#include "../../lib/bogaudio/dsp/signal.hpp"
+
 float dist(float x, float low, float high) {
     return (x - low) / (high - low);
 }
 
+void dumpFloat(float v) {
+    std::cout << std::fixed;
+    std::cout << std::setprecision(2);
+    std::cout << v << std::endl;
+}
+
 int main() {
+
+    const float sampleRate = 48000.0f;
+    const float kMinDb = -72.0f;
+    const float kMaxDb = 6.0f;
+
+	bogaudio::dsp::SlewLimiter dbSlew;
+    dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
 
     std::cout << "-----------------------------------" << std::endl;
 
-    //for (float amp = 0.0; amp < 1.3f; amp += 0.02) {
-    //    float db = ampToDb(amp);
-    //    std::cout << std::fixed;
-    //    std::cout << std::setprecision(2);
-    //    std::cout << amp << ": " << db << std::endl;
-    //}
-
-    std::cout << std::fixed;
-    std::cout << std::setprecision(2);
-    std::cout << dist(-5, -6, -3) << std::endl;
-    std::cout << dist(2, 0, 4) << std::endl;
+    for (int i = 0; i < 100; i++) {
+        //dumpFloat(dbSlew.next(kMinDb));
+        dumpFloat(dbSlew.next(6.0f));
+    }
     
     std::cout << "-----------------------------------" << std::endl;
 }

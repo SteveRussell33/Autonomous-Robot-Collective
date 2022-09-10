@@ -2,7 +2,7 @@
 #include "plugin.hpp"
 #include "widgets.hpp"
 
-#define GAIN_DEBUG
+// define GAIN_DEBUG
 
 //--------------------------------------------------------------
 // GAIN
@@ -10,10 +10,10 @@
 
 struct GAIN : Module {
 
+    MonoTrack track;
+
     // This is a mono module, but VUMeter monitors the levels in stereo.
     StereoLevels levels;
-
-    Amp amp;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -70,6 +70,7 @@ struct GAIN : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        track.sampleRateChange(e.sampleRate);
         levels.sampleRateChange(e.sampleRate);
     }
 
@@ -80,13 +81,14 @@ struct GAIN : Module {
 
         float in = inputs[kInput].getVoltage();
         float db = faderToDb(params[kFader].getValue());
+        bool muted = params[kMute].getValue() > 0.5f;
 
-#ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(params[kFader].getValue());
-        outputs[kDebug2].setVoltage(db / 100.0f);
-#endif
+        // ifdef GAIN_DEBUG
+        //        outputs[kDebug1].setVoltage(params[kFader].getValue());
+        //        outputs[kDebug2].setVoltage(db / 100.0f);
+        // endif
 
-        float out = amp.next(in, db);
+        float out = track.next(in, db, muted);
 
         if (outputs[kOutput].isConnected()) {
             outputs[kOutput].setVoltage(out);

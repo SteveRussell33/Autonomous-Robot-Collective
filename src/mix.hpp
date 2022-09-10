@@ -7,30 +7,62 @@
 
 using namespace rack;
 
+const float kMinDb = -72.0f;
+const float kMaxDb = 6.0f;
+
 //--------------------------------------------------------------
-// Amp
+// MonoTrack
 //--------------------------------------------------------------
 
-struct Amp {
+// MonoTrack is adapted from github.com/bogaudio/BogaudioModules/src/mixer.cpp
+struct MonoTrack {
 
   private:
 
     float curDb;
     float curLevel;
 
-  public:
+    bogaudio::dsp::SlewLimiter dbSlew;
 
-    Amp() : curDb(0.0f), curLevel(bogaudio::dsp::decibelsToAmplitude(0.0f)) {}
-
-    float next(float in, float db) {
-
+    void setDb(float db) {
         if (curDb != db) {
             curDb = db;
-            // TODO use a lookup table
-            curLevel = (curDb < -71.0f) ? 0.0f : bogaudio::dsp::decibelsToAmplitude(curDb);
+
+            // TODO we could use a lookup table here maybe
+            curLevel = bogaudio::dsp::decibelsToAmplitude(curDb);
+        }
+    }
+
+  public:
+
+    MonoTrack() : curDb(0.0f), curLevel(bogaudio::dsp::decibelsToAmplitude(0.0f)) {}
+
+    void sampleRateChange(float sampleRate) { dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb); }
+
+    float next(float in, float db, bool muted) {
+
+        if (muted) {
+            setDb(dbSlew.next(kMinDb));
+        } else {
+            setDb(dbSlew.next(db));
         }
 
         return in * curLevel;
+    }
+};
+
+//--------------------------------------------------------------
+// StereoTrack
+//--------------------------------------------------------------
+
+struct StereoTrack {
+
+    MonoTrack left;
+    MonoTrack right;
+
+    void sampleRateChange(float sampleRate) {
+        left.sampleRateChange(sampleRate);
+        right.sampleRateChange(sampleRate);
     }
 };
 
@@ -124,6 +156,10 @@ struct VUColors {
 
 struct VUMeter : OpaqueWidget {
 
+  private:
+
+    static const int kLevelWidth = 3;
+
     VUColors fadedColors = {
         nvgRGBA(0xE6, 0x29, 0x34, 0xA0),
         nvgRGBA(0xFF, 0x87, 0x24, 0xA0),
@@ -136,29 +172,10 @@ struct VUMeter : OpaqueWidget {
         nvgRGB(0xFF, 0xCA, 0x33),
         nvgRGB(0x3E, 0xD5, 0x64)};
 
-    const int levelWidth = 3;
-
-    StereoLevels* levels = NULL;
-
-    void draw(const DrawArgs& args) override {
-        if (!levels) {
-            return;
-        }
-
-        drawLevel(args, -4, levels->left.peak, fadedColors);
-        drawLevel(args, 1, levels->right.peak, fadedColors);
-
-        drawMaxPeak(args, -4, levels->left.maxPeak, boldColors);
-        drawMaxPeak(args, 1, levels->right.maxPeak, boldColors);
-
-        drawLevel(args, -4, levels->left.rms, boldColors);
-        drawLevel(args, 1, levels->right.rms, boldColors);
-    }
-
     void drawLevel(const DrawArgs& args, float x, float level, VUColors colors) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level), -120.0f, 6.0f);
-        if (db < -71.0f) {
+        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level), kMinDb, 6.0f);
+        if (db < kMinDb + 1.0f) {
             return;
         }
 
@@ -194,13 +211,13 @@ struct VUMeter : OpaqueWidget {
 
         float y = (db > highDb) ? top : rescale(db, lowDb, highDb, bottom, top);
         float height = bottom - y;
-        drawRect(args, x, y, levelWidth, height, color, gradient, isColor);
+        drawRect(args, x, y, kLevelWidth, height, color, gradient, isColor);
     }
 
     void drawMaxPeak(const DrawArgs& args, float x, float maxPeak, VUColors colors) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(maxPeak), -120.0f, 6.0f);
-        if (db < -71.0f) {
+        float db = clamp(bogaudio::dsp::amplitudeToDecibels(maxPeak), kMinDb, 6.0f);
+        if (db < kMinDb + 1.0f) {
             return;
         }
 
@@ -233,7 +250,7 @@ struct VUMeter : OpaqueWidget {
             col = colors.red;
         }
 
-        drawRect(args, x, y, levelWidth, 1, col, NVGpaint{}, true);
+        drawRect(args, x, y, kLevelWidth, 1, col, NVGpaint{}, true);
     }
 
     inline float linearDistance(float x, float low, float high) { return (x - low) / (high - low); }
@@ -256,6 +273,25 @@ struct VUMeter : OpaqueWidget {
             nvgFillPaint(args.vg, gradient);
         }
         nvgFill(args.vg);
+    }
+
+  public:
+
+    StereoLevels* levels = NULL;
+
+    void draw(const DrawArgs& args) override {
+        if (!levels) {
+            return;
+        }
+
+        drawLevel(args, -4, levels->left.peak, fadedColors);
+        drawLevel(args, 1, levels->right.peak, fadedColors);
+
+        drawMaxPeak(args, -4, levels->left.maxPeak, boldColors);
+        drawMaxPeak(args, 1, levels->right.maxPeak, boldColors);
+
+        drawLevel(args, -4, levels->left.rms, boldColors);
+        drawLevel(args, 1, levels->right.rms, boldColors);
     }
 };
 
