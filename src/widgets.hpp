@@ -51,17 +51,17 @@ struct RmToggleButton : SvgSwitch {
     }
 };
 
-struct FaderListener {
-    virtual void onFaderChange(int trackNum, float db) = 0;
-};
+//struct FaderListener {
+//    virtual void onFaderChange(int trackNum, float db) = 0;
+//};
 
 struct RmFader : SvgSlider {
 
-    int trackNum;
-    FaderListener* listener;
+    //int trackNum;
+    //FaderListener* listener;
+    //RmFader(int trackNum_, FaderListener* listener_) : trackNum(trackNum_), listener(listener_) {
 
-    RmFader(int trackNum_, FaderListener* listener_) : trackNum(trackNum_), listener(listener_) {
-
+    RmFader() {
         setBackgroundSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-bg.svg")));
         setHandleSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/fader-handle.svg")));
         setHandlePos(
@@ -70,12 +70,11 @@ struct RmFader : SvgSlider {
         box.size = Vec(12, 160);
     }
 
-    void onChange(const ChangeEvent& e) override {
-        SvgSlider::onChange(e);
-
-        auto pq = getParamQuantity();
-        if (listener && pq) {
-            listener->onFaderChange(trackNum, pq->getValue());
-        }
-    }
+    //void onChange(const ChangeEvent& e) override {
+    //    SvgSlider::onChange(e);
+    //    auto pq = getParamQuantity();
+    //    if (listener && pq) {
+    //        listener->onFaderChange(trackNum, pq->getValue());
+    //    }
+    //}
 };

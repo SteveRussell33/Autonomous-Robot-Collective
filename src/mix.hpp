@@ -8,11 +8,22 @@
 using namespace rack;
 
 //--------------------------------------------------------------
-// MonoTrack
+// Amp
 //--------------------------------------------------------------
 
-// MonoTrack is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
-struct MonoTrack {
+struct Amp {
+    float next(float in, float db) {
+        float level = bogaudio::dsp::decibelsToAmplitude(db);
+        return in * level;
+    }
+};
+
+//--------------------------------------------------------------
+// MonoLevels
+//--------------------------------------------------------------
+
+// MonoLevels is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
+struct MonoLevels {
 
   private:
 
@@ -70,13 +81,13 @@ struct MonoTrack {
 };
 
 //--------------------------------------------------------------
-// StereoTrack
+// StereoLevels
 //--------------------------------------------------------------
 
-struct StereoTrack {
+struct StereoLevels {
 
-    MonoTrack left;
-    MonoTrack right;
+    MonoLevels left;
+    MonoLevels right;
 
     void sampleRateChange(float sampleRate) {
         left.sampleRateChange(sampleRate);
@@ -111,21 +122,21 @@ struct VUMeter : OpaqueWidget {
 
     const int levelWidth = 3;
 
-    StereoTrack* track = NULL;
+    StereoLevels* levels = NULL;
 
     void draw(const DrawArgs& args) override {
-        if (!track) {
+        if (!levels) {
             return;
         }
 
-        drawLevel(args, -4, track->left.peak, fadedColors);
-        drawLevel(args, 1, track->right.peak, fadedColors);
+        drawLevel(args, -4, levels->left.peak, fadedColors);
+        drawLevel(args, 1, levels->right.peak, fadedColors);
 
-        drawMaxPeak(args, -4, track->left.maxPeak, boldColors);
-        drawMaxPeak(args, 1, track->right.maxPeak, boldColors);
+        drawMaxPeak(args, -4, levels->left.maxPeak, boldColors);
+        drawMaxPeak(args, 1, levels->right.maxPeak, boldColors);
 
-        drawLevel(args, -4, track->left.rms, boldColors);
-        drawLevel(args, 1, track->right.rms, boldColors);
+        drawLevel(args, -4, levels->left.rms, boldColors);
+        drawLevel(args, 1, levels->right.rms, boldColors);
     }
 
     void drawLevel(const DrawArgs& args, float x, float level, VUColors colors) {

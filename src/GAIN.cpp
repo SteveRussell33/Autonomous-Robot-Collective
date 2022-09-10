@@ -2,16 +2,18 @@
 #include "plugin.hpp"
 #include "widgets.hpp"
 
-#define GAIN_DEBUG
+// define GAIN_DEBUG
 
 //--------------------------------------------------------------
 // GAIN
 //--------------------------------------------------------------
 
-struct GAIN : Module, FaderListener {
+struct GAIN : Module {
 
-    // This is a mono module, but its easier to do everything in stereo.
-    StereoTrack track;
+    // This is a mono module, but VUMeter monitors the levels in stereo.
+    StereoLevels levels;
+
+    Amp amp;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -68,7 +70,7 @@ struct GAIN : Module, FaderListener {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        track.sampleRateChange(e.sampleRate);
+        levels.sampleRateChange(e.sampleRate);
     }
 
     void process(const ProcessArgs& args) override {
@@ -77,22 +79,28 @@ struct GAIN : Module, FaderListener {
         }
 
         float in = inputs[kInput].getVoltage();
+        float db = faderToDb(params[kFader].getValue());
+        float out = amp.next(in, db);
 
-        // This is a mono module, but its easier to do everything in stereo.
-        track.left.process(in);
-        track.right.process(in);
+//        float out = in;
+//#ifdef GAIN_DEBUG
+//        outputs[kDebug1].setVoltage(amp.next(in, faderToDb(params[kFader].getValue())));
+//#endif
 
         if (outputs[kOutput].isConnected()) {
-            outputs[kOutput].setVoltage(in);
+            outputs[kOutput].setVoltage(out);
         }
+
+        levels.left.process(out);
+        levels.right.process(out);
     }
 
-    // FaderListener
-    void onFaderChange(int trackNum, float value) override {
-#ifdef GAIN_DEBUG
-        outputs[kDebug1].setVoltage(faderToDb(value)/100.0f);
-#endif
-    }
+//    // FaderListener
+//    void onFaderChange(int trackNum, float value) override {
+//#ifdef GAIN_DEBUG
+//        outputs[kDebug1].setVoltage(faderToDb(value)/100.0f);
+//#endif
+//    }
 };
 
 //--------------------------------------------------------------
@@ -115,7 +123,7 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         ////////////////////////////////////////
-        // track
+        // levels
 
         const float faderXofs = 8;
         const float faderYofs = -9.5;
@@ -123,19 +131,18 @@ struct GAINWidget : ModuleWidget {
         const float meterW = 144;
 
         // fader
-        // addParam(createParam<RmFader>(Vec(20 + faderXofs, 46 + faderYofs), module,
-        // GAIN::kFader));
-        RmFader* fader = new RmFader(0, module);
-        fader->box.pos = Vec(20 + faderXofs, 46 + faderYofs);
-        fader->app::ParamWidget::module = module;
-        fader->app::ParamWidget::paramId = GAIN::kFader;
-        fader->initParamQuantity();
-        addParam(fader);
+        addParam(createParam<RmFader>(Vec(20 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
+        //RmFader* fader = new RmFader(0, module);
+        //fader->box.pos = Vec(20 + faderXofs, 46 + faderYofs);
+        //fader->app::ParamWidget::module = module;
+        //fader->app::ParamWidget::paramId = GAIN::kFader;
+        //fader->initParamQuantity();
+        //addParam(fader);
 
         // meter
         VUMeter* meter = new VUMeter();
         if (module) {
-            meter->track = &(module->track);
+            meter->levels = &(module->levels);
         }
         meter->box.pos = Vec(20, 46);
         meter->box.size = Vec(meterH, meterW);
