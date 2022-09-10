@@ -14,24 +14,13 @@ const float kMaxDb = 6.0f;
 // MonoTrack
 //--------------------------------------------------------------
 
-// MonoTrack is adapted from github.com/bogaudio/BogaudioModules/src/mixer.cpp
 struct MonoTrack {
 
   private:
 
     float curDb;
     float curLevel;
-
-    bogaudio::dsp::SlewLimiter dbSlew;
-
-    void setDb(float db) {
-        if (curDb != db) {
-            curDb = db;
-
-            // TODO we could use a lookup table here maybe
-            curLevel = bogaudio::dsp::decibelsToAmplitude(curDb);
-        }
-    }
+    bogaudio::dsp::SlewLimiter slew;
 
   public:
 
@@ -39,15 +28,19 @@ struct MonoTrack {
     }
 
     void sampleRateChange(float sampleRate) {
-        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+        slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
     }
 
-    float next(float in, float db, bool muted) {
+    float next(float in, float db) {
 
-        if (muted) {
-            setDb(dbSlew.next(kMinDb));
-        } else {
-            setDb(dbSlew.next(db));
+        float s = slew.next(db);
+
+        if (curDb != s) {
+            curDb = s;
+            // TODO we could use a lookup table here maybe.  That would
+            // be more efficient in cases where the db level is constantly 
+            // fluctuating.
+            curLevel = bogaudio::dsp::decibelsToAmplitude(curDb);
         }
 
         return in * curLevel;

@@ -80,15 +80,10 @@ struct GAIN : Module {
         }
 
         float in = inputs[kInput].getVoltage();
-        float db = faderToDb(params[kFader].getValue());
+        float faderDb = faderToDb(params[kFader].getValue());
         bool muted = params[kMute].getValue() > 0.5f;
 
-        // ifdef GAIN_DEBUG
-        //        outputs[kDebug1].setVoltage(params[kFader].getValue());
-        //        outputs[kDebug2].setVoltage(db / 100.0f);
-        // endif
-
-        float out = track.next(in, db, muted);
+        float out = track.next(in, muted ? kMinDb : faderDb);
 
         if (outputs[kOutput].isConnected()) {
             outputs[kOutput].setVoltage(out);
