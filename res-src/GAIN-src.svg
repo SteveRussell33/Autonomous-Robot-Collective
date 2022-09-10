@@ -103,7 +103,7 @@
           <polyline points="6 123   9 123" class="connect"/>
           <polyline points="6 142.5 9 142.5" class="connect"/>
 
-          <rect x="-5" y="-2" width="10" height="146" rx="1" fill="#121212"/>
+          <rect x="-5" y="-2" width="10" height="146" rx="2" fill="#121212"/>
         </g>
     </symbol>
 

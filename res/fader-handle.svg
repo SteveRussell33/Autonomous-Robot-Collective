@@ -11,11 +11,11 @@
    width="12"
    height="20"
    viewBox="0 0 12 20"
-   id="svg6"
+   id="svg24"
    sodipodi:docname="fader-handle.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
-     id="metadata12">
+     id="metadata30">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -26,7 +26,7 @@
     </rdf:RDF>
   </metadata>
   <defs
-     id="defs10" />
+     id="defs28" />
   <sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
@@ -38,7 +38,7 @@
      inkscape:pageshadow="2"
      inkscape:window-width="689"
      inkscape:window-height="480"
-     id="namedview8"
+     id="namedview26"
      showgrid="false"
      inkscape:zoom="41.35"
      inkscape:cx="6"
@@ -46,13 +46,72 @@
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg6" />
+     inkscape:current-layer="svg24" />
+  <!--defs>
+
+    <linearGradient id="topGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#9e9e9e" />
+      <stop offset="100%" stop-color="#c8c8c8" />
+    </linearGradient>
+
+    <linearGradient id="middleGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#707070" />
+      <stop offset="100%" stop-color="#c8c8c8" />
+    </linearGradient>
+
+    <linearGradient id="bottomGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#838383" />
+      <stop offset="100%" stop-color="#757575" />
+    </linearGradient>
+
+  </defs>
+
+  <rect x="0.5" y="1.0" width="11" height="5.14" stroke="none" fill="url('#topGradient')"/>
+  <rect x="0.5" y="5.42" width="11" height="8.71" stroke="none" fill="url('#middleGradient')"/>
+  <rect x="0.5" y="13.86" width="11" height="5.14" stroke="none" fill="url('#bottomGradient')"/-->
+  <!--rect x="0.5" y="0.5" width="11" height="19" stroke-width="0.5" stroke="#343434" fill="none"/-->
   <path
      id="rect2"
-     style="fill:#e0e0e0;stroke:#343434;stroke-width:1"
-     d="m 2.5,0.5 h 7 c 1.108,0 2,0.892 2,2 v 15 c 0,1.108 -0.892,2 -2,2 h -7 c -1.108,0 -2,-0.892 -2,-2 v -15 c 0,-1.108 0.892,-2 2,-2 z" />
+     style="fill:#777777"
+     d="m 1.5,0.5 h 9 c 0.554,0 1,0.446 1,1 v 17 c 0,0.554 -0.446,1 -1,1 h -9 c -0.554,0 -1,-0.446 -1,-1 v -17 c 0,-0.554 0.446,-1 1,-1 z" />
   <path
      id="polyline4"
-     style="stroke:#343434;stroke-width:1"
-     d="M 0,10 H 12" />
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,2 h 11" />
+  <path
+     id="polyline6"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,4 h 11" />
+  <path
+     id="polyline8"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,6 h 11" />
+  <path
+     id="polyline10"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,8 h 11" />
+  <path
+     id="polyline12"
+     style="stroke:#f0f0f0;stroke-width:1"
+     d="m 0.5,10 h 11" />
+  <path
+     id="polyline14"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,12 h 11" />
+  <path
+     id="polyline16"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,14 h 11" />
+  <path
+     id="polyline18"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,16 h 11" />
+  <path
+     id="polyline20"
+     style="stroke:#333333;stroke-width:1"
+     d="m 0.5,18 h 11" />
+  <path
+     id="rect22"
+     style="fill:none;stroke:#333333;stroke-width:1"
+     d="m 1.5,0.5 h 9 c 0.554,0 1,0.446 1,1 v 17 c 0,0.554 -0.446,1 -1,1 h -9 c -0.554,0 -1,-0.446 -1,-1 v -17 c 0,-0.554 0.446,-1 1,-1 z" />
 </svg>
