@@ -40,7 +40,8 @@ struct Oversample {
     TwelvePoleLpf upLpf;
     TwelvePoleLpf downLpf;
 
-    Oversample(int oversample_) : oversample(oversample_) {}
+    Oversample(int oversample_) : oversample(oversample_) {
+    }
 
     void sampleRateChange(float sampleRate) {
 

@@ -35,9 +35,12 @@ struct MonoTrack {
 
   public:
 
-    MonoTrack() : curDb(0.0f), curLevel(bogaudio::dsp::decibelsToAmplitude(0.0f)) {}
+    MonoTrack() : curDb(0.0f), curLevel(bogaudio::dsp::decibelsToAmplitude(0.0f)) {
+    }
 
-    void sampleRateChange(float sampleRate) { dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb); }
+    void sampleRateChange(float sampleRate) {
+        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+    }
 
     float next(float in, float db, bool muted) {
 
@@ -253,7 +256,9 @@ struct VUMeter : OpaqueWidget {
         drawRect(args, x, y, kLevelWidth, 1, col, NVGpaint{}, true);
     }
 
-    inline float linearDistance(float x, float low, float high) { return (x - low) / (high - low); }
+    inline float linearDistance(float x, float low, float high) {
+        return (x - low) / (high - low);
+    }
 
     void drawRect(
         const DrawArgs& args,

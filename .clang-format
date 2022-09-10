@@ -1,6 +1,7 @@
 BasedOnStyle: LLVM
 
 AlignAfterOpenBracket: AlwaysBreak
+AllowShortFunctionsOnASingleLine: false
 BinPackArguments: false
 BinPackParameters: false
 ColumnLimit: 100
