@@ -11,7 +11,7 @@ using namespace rack;
 // MonoTrack
 //--------------------------------------------------------------
 
-// This class is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
+// MonoTrack is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
 struct MonoTrack {
 
   private:
