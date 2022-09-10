@@ -2,7 +2,7 @@
 #include "plugin.hpp"
 #include "widgets.hpp"
 
-// define GAIN_DEBUG
+#define GAIN_DEBUG
 
 //--------------------------------------------------------------
 // GAIN
@@ -80,12 +80,13 @@ struct GAIN : Module {
 
         float in = inputs[kInput].getVoltage();
         float db = faderToDb(params[kFader].getValue());
-        float out = amp.next(in, db);
 
-//        float out = in;
-//#ifdef GAIN_DEBUG
-//        outputs[kDebug1].setVoltage(amp.next(in, faderToDb(params[kFader].getValue())));
-//#endif
+#ifdef GAIN_DEBUG
+        outputs[kDebug1].setVoltage(params[kFader].getValue());
+        outputs[kDebug2].setVoltage(db / 100.0f);
+#endif
+
+        float out = amp.next(in, db);
 
         if (outputs[kOutput].isConnected()) {
             outputs[kOutput].setVoltage(out);
@@ -94,13 +95,6 @@ struct GAIN : Module {
         levels.left.process(out);
         levels.right.process(out);
     }
-
-//    // FaderListener
-//    void onFaderChange(int trackNum, float value) override {
-//#ifdef GAIN_DEBUG
-//        outputs[kDebug1].setVoltage(faderToDb(value)/100.0f);
-//#endif
-//    }
 };
 
 //--------------------------------------------------------------
@@ -131,20 +125,14 @@ struct GAINWidget : ModuleWidget {
         const float meterW = 144;
 
         // fader
-        addParam(createParam<RmFader>(Vec(20 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
-        //RmFader* fader = new RmFader(0, module);
-        //fader->box.pos = Vec(20 + faderXofs, 46 + faderYofs);
-        //fader->app::ParamWidget::module = module;
-        //fader->app::ParamWidget::paramId = GAIN::kFader;
-        //fader->initParamQuantity();
-        //addParam(fader);
+        addParam(createParam<RmFader>(Vec(21 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
 
         // meter
         VUMeter* meter = new VUMeter();
         if (module) {
             meter->levels = &(module->levels);
         }
-        meter->box.pos = Vec(20, 46);
+        meter->box.pos = Vec(21, 46);
         meter->box.size = Vec(meterH, meterW);
         addChild(meter);
 

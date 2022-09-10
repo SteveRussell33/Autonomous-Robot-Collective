@@ -12,9 +12,25 @@ using namespace rack;
 //--------------------------------------------------------------
 
 struct Amp {
+
+  private:
+
+    float curDb;
+    float curLevel;
+
+  public:
+
+    Amp() : curDb(0.0f), curLevel(bogaudio::dsp::decibelsToAmplitude(0.0f)) {}
+
     float next(float in, float db) {
-        float level = bogaudio::dsp::decibelsToAmplitude(db);
-        return in * level;
+
+        if (curDb != db) {
+            curDb = db;
+            // TODO use a lookup table
+            curLevel = (curDb < -71.0f) ? 0.0f : bogaudio::dsp::decibelsToAmplitude(curDb);
+        }
+
+        return in * curLevel;
     }
 };
 
