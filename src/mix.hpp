@@ -231,3 +231,63 @@ struct VUMeter : OpaqueWidget {
         nvgFill(args.vg);
     }
 };
+
+//--------------------------------------------------------------
+// Fader
+//--------------------------------------------------------------
+
+// These were all empiricially determined by moving the fader handle
+// around so it lined up with the various tick marks.
+const float kFaderDbPlus6 = 1.0f;
+const float kFaderDbPlus3 = 0.896f;
+const float kFaderDbZero = 0.79f;
+const float kFaderDbMinus3 = 0.686f;
+const float kFaderDbMinus6 = 0.58f;
+const float kFaderDbMinus12 = 0.432f;
+const float kFaderDbMinus24 = 0.286f;
+const float kFaderDbMinus48 = 0.136f;
+const float kFaderDbMinus72 = 0.0f;
+
+struct FaderParamQuantity : ParamQuantity {
+
+    float getDisplayValue() override {
+        float v = getValue();
+        if (!module) {
+            return v;
+        }
+
+        if (v >= kFaderDbMinus6) {
+            return rescale(v, kFaderDbMinus6, kFaderDbPlus6, -6.0f, 6.0f);
+        } else if (v >= kFaderDbMinus12) {
+            return rescale(v, kFaderDbMinus12, kFaderDbMinus6, -12.0f, -6.0f);
+        } else if (v >= kFaderDbMinus24) {
+            return rescale(v, kFaderDbMinus24, kFaderDbMinus12, -24.0f, -12.0f);
+        } else if (v >= kFaderDbMinus48) {
+            return rescale(v, kFaderDbMinus48, kFaderDbMinus24, -48.0f, -24.0f);
+        } else {
+            return rescale(v, kFaderDbMinus72, kFaderDbMinus48, -72.0f, -48.0f);
+        }
+    }
+
+    void setDisplayValue(float v) override {
+        if (!module) {
+            return;
+        }
+
+        v = clamp(v, -72.0f, 6.0f);
+
+        if (v >= -6.0f) {
+            v = rescale(v, -6.0f, 6.0f, kFaderDbMinus6, kFaderDbPlus6);
+        } else if (v >= -12.0f) {
+            v = rescale(v, -12.0f, -6.0f, kFaderDbMinus12, kFaderDbMinus6);
+        } else if (v >= -24.0f) {
+            v = rescale(v, -24.0f, -12.0f, kFaderDbMinus24, kFaderDbMinus12);
+        } else if (v >= -48.0f) {
+            v = rescale(v, -48.0f, -24.0f, kFaderDbMinus48, kFaderDbMinus24);
+        } else {
+            v = rescale(v, -72.0f, -48.0f, kFaderDbMinus72, kFaderDbMinus48);
+        }
+
+        setValue(v);
+    }
+};

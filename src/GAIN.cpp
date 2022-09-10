@@ -49,8 +49,8 @@ struct GAIN : Module {
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        configParam(kFader, 0.0f, 1.0f, 0.0f, "Fader");
-        configParam(kMute, 0.0f, 1.0f, 0.0f, "Mute");
+        configParam<FaderParamQuantity>(kFader, 0.0f, 1.0f, kFaderDbZero, "Fader", " dB");
+        configSwitch(kMute, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
 
         configInput(kLevelInput, "Level");
         configInput(kInput, "Signal");
