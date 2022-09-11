@@ -11,54 +11,123 @@ const float kMinDb = -72.0f;
 const float kMaxDb = 6.0f;
 
 //--------------------------------------------------------------
-// MonoTrack
+// Fader
 //--------------------------------------------------------------
 
-struct MonoTrack {
+// These values were all empiricially determined by moving the fader handle
+// around so that it lined up with the various tick marks.
+const float kFaderDbPlus6 = 1.0f;
+const float kFaderDbPlus3 = 0.896f;
+const float kFaderDbZero = 0.79f;
+const float kFaderDbMinus3 = 0.686f;
+const float kFaderDbMinus6 = 0.58f;
+const float kFaderDbMinus12 = 0.432f;
+const float kFaderDbMinus24 = 0.286f;
+const float kFaderDbMinus48 = 0.136f;
+const float kFaderDbMinus72 = 0.0f;
 
-  private:
+float faderToDb(float v) {
+    if (v >= kFaderDbMinus6) {
+        return rescale(v, kFaderDbMinus6, kFaderDbPlus6, -6.0f, 6.0f);
+    } else if (v >= kFaderDbMinus12) {
+        return rescale(v, kFaderDbMinus12, kFaderDbMinus6, -12.0f, -6.0f);
+    } else if (v >= kFaderDbMinus24) {
+        return rescale(v, kFaderDbMinus24, kFaderDbMinus12, -24.0f, -12.0f);
+    } else if (v >= kFaderDbMinus48) {
+        return rescale(v, kFaderDbMinus48, kFaderDbMinus24, -48.0f, -24.0f);
+    } else {
+        return rescale(v, kFaderDbMinus72, kFaderDbMinus48, -72.0f, -48.0f);
+    }
+}
 
-    float curDb;
-    float curLevel;
-    bogaudio::dsp::SlewLimiter slew;
+struct FaderParamQuantity : ParamQuantity {
 
-  public:
-
-    MonoTrack() : curDb(0.0f), curLevel(bogaudio::dsp::decibelsToAmplitude(0.0f)) {
+    float getDisplayValue() override {
+        float v = getValue();
+        if (!module) {
+            return v;
+        }
+        return faderToDb(v);
     }
 
-    void sampleRateChange(float sampleRate) {
-        slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
-    }
-
-    float next(float in, float db) {
-
-        float s = slew.next(db);
-
-        if (curDb != s) {
-            curDb = s;
-            // TODO we could use a lookup table here maybe.  That would
-            // be more efficient in cases where the db level is constantly 
-            // fluctuating.
-            curLevel = bogaudio::dsp::decibelsToAmplitude(curDb);
+    void setDisplayValue(float v) override {
+        if (!module) {
+            return;
         }
 
-        return in * curLevel;
+        v = clamp(v, -72.0f, 6.0f);
+
+        if (v >= -6.0f) {
+            v = rescale(v, -6.0f, 6.0f, kFaderDbMinus6, kFaderDbPlus6);
+        } else if (v >= -12.0f) {
+            v = rescale(v, -12.0f, -6.0f, kFaderDbMinus12, kFaderDbMinus6);
+        } else if (v >= -24.0f) {
+            v = rescale(v, -24.0f, -12.0f, kFaderDbMinus24, kFaderDbMinus12);
+        } else if (v >= -48.0f) {
+            v = rescale(v, -48.0f, -24.0f, kFaderDbMinus48, kFaderDbMinus24);
+        } else {
+            v = rescale(v, -72.0f, -48.0f, kFaderDbMinus72, kFaderDbMinus48);
+        }
+
+        setValue(v);
     }
 };
 
 //--------------------------------------------------------------
-// StereoTrack
+// Track
 //--------------------------------------------------------------
 
-struct StereoTrack {
+struct Track {
 
-    MonoTrack left;
-    MonoTrack right;
+  private:
+
+    Param* fader;
+    Param* mute;
+    Input* level;
+
+    float curDb;
+    float curAmp;
+    bogaudio::dsp::SlewLimiter dbSlew;
+
+    float dbToAmp(float targetDb) {
+
+        float dbs = dbSlew.next(targetDb);
+        if (curDb != dbs) {
+            curDb = dbs;
+
+            // TODO perhaps we should use a lookup table here.
+            curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        }
+        return curAmp;
+    }
+
+  public:
+
+    Track() {
+        curDb = kMinDb;
+        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        dbSlew.setLast(curDb);
+    }
+
+    void init(Param* fader_, Param* mute_, Input* level_) {
+        fader = fader_;
+        mute = mute_;
+        level = level_;
+    }
 
     void sampleRateChange(float sampleRate) {
-        left.sampleRateChange(sampleRate);
-        right.sampleRateChange(sampleRate);
+        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+    }
+
+    float nextAmplitude() {
+
+        bool muted = mute->getValue() > 0.5f;
+        if (muted) {
+            return dbToAmp(kMinDb);
+        }
+
+        float faderDb = faderToDb(fader->getValue());
+        return dbToAmp(faderDb);
     }
 };
 
@@ -170,8 +239,8 @@ struct VUMeter : OpaqueWidget {
 
     void drawLevel(const DrawArgs& args, float x, float level, VUColors colors) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level), kMinDb, 6.0f);
-        if (db < kMinDb + 1.0f) {
+        float dB = clamp(bogaudio::dsp::amplitudeToDecibels(level), kMinDb, 6.0f);
+        if (dB < kMinDb + 1.0f) {
             return;
         }
 
@@ -179,20 +248,20 @@ struct VUMeter : OpaqueWidget {
         NVGpaint yellowGreen =
             nvgLinearGradient(args.vg, 0, 45, 0, 60, colors.yellow, colors.green);
 
-        drawSegment(args, x, db, 3.0f, 6.0f, 15, 0, colors.red, NVGpaint{}, true);
-        drawSegment(args, x, db, 0.0f, 3.0f, 30, 15, NVGcolor{}, redOrange, false);
-        drawSegment(args, x, db, -3.0f, 0.0f, 45, 30, colors.yellow, NVGpaint{}, true);
-        drawSegment(args, x, db, -6.0f, -3.0f, 60, 45, NVGcolor{}, yellowGreen, false);
-        drawSegment(args, x, db, -12.0f, -6.0f, 81, 60, colors.green, NVGpaint{}, true);
-        drawSegment(args, x, db, -24.f, -12.0f, 102, 81, colors.green, NVGpaint{}, true);
-        drawSegment(args, x, db, -48.f, -24.0f, 123, 102, colors.green, NVGpaint{}, true);
-        drawSegment(args, x, db, -72.f, -48.0f, 144, 123, colors.green, NVGpaint{}, true);
+        drawSegment(args, x, dB, 3.0f, 6.0f, 15, 0, colors.red, NVGpaint{}, true);
+        drawSegment(args, x, dB, 0.0f, 3.0f, 30, 15, NVGcolor{}, redOrange, false);
+        drawSegment(args, x, dB, -3.0f, 0.0f, 45, 30, colors.yellow, NVGpaint{}, true);
+        drawSegment(args, x, dB, -6.0f, -3.0f, 60, 45, NVGcolor{}, yellowGreen, false);
+        drawSegment(args, x, dB, -12.0f, -6.0f, 81, 60, colors.green, NVGpaint{}, true);
+        drawSegment(args, x, dB, -24.f, -12.0f, 102, 81, colors.green, NVGpaint{}, true);
+        drawSegment(args, x, dB, -48.f, -24.0f, 123, 102, colors.green, NVGpaint{}, true);
+        drawSegment(args, x, dB, -72.f, -48.0f, 144, 123, colors.green, NVGpaint{}, true);
     }
 
     void drawSegment(
         const DrawArgs& args,
         float x,
-        float db,
+        float dB,
         float lowDb,
         float highDb,
         float bottom,
@@ -201,48 +270,48 @@ struct VUMeter : OpaqueWidget {
         NVGpaint gradient,
         bool isColor) {
 
-        if (db < lowDb) {
+        if (dB < lowDb) {
             return;
         }
 
-        float y = (db > highDb) ? top : rescale(db, lowDb, highDb, bottom, top);
+        float y = (dB > highDb) ? top : rescale(dB, lowDb, highDb, bottom, top);
         float height = bottom - y;
         drawRect(args, x, y, kLevelWidth, height, color, gradient, isColor);
     }
 
     void drawMaxPeak(const DrawArgs& args, float x, float maxPeak, VUColors colors) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(maxPeak), kMinDb, 6.0f);
-        if (db < kMinDb + 1.0f) {
+        float dB = clamp(bogaudio::dsp::amplitudeToDecibels(maxPeak), kMinDb, 6.0f);
+        if (dB < kMinDb + 1.0f) {
             return;
         }
 
         float y = 0.0f;
         NVGcolor col;
 
-        if (db < -48.0f) {
-            y = rescale(db, -72.f, -48.0f, 144, 123);
+        if (dB < -48.0f) {
+            y = rescale(dB, -72.f, -48.0f, 144, 123);
             col = colors.green;
-        } else if (db < -24.0f) {
-            y = rescale(db, -48.f, -24.0f, 123, 102);
+        } else if (dB < -24.0f) {
+            y = rescale(dB, -48.f, -24.0f, 123, 102);
             col = colors.green;
-        } else if (db < -12.0f) {
-            y = rescale(db, -24.f, -12.0f, 102, 81);
+        } else if (dB < -12.0f) {
+            y = rescale(dB, -24.f, -12.0f, 102, 81);
             col = colors.green;
-        } else if (db < -6.0f) {
-            y = rescale(db, -12.0f, -6.0f, 81, 60);
+        } else if (dB < -6.0f) {
+            y = rescale(dB, -12.0f, -6.0f, 81, 60);
             col = colors.green;
-        } else if (db < -3.0f) {
-            y = rescale(db, -6.0f, -3.0f, 60, 45);
-            col = nvgLerpRGBA(colors.green, colors.yellow, linearDistance(db, -6.0f, -3.0f));
-        } else if (db < 0.0f) {
-            y = rescale(db, -3.0f, 0.0f, 45, 30);
+        } else if (dB < -3.0f) {
+            y = rescale(dB, -6.0f, -3.0f, 60, 45);
+            col = nvgLerpRGBA(colors.green, colors.yellow, linearDistance(dB, -6.0f, -3.0f));
+        } else if (dB < 0.0f) {
+            y = rescale(dB, -3.0f, 0.0f, 45, 30);
             col = colors.yellow;
-        } else if (db < 3.0f) {
-            y = rescale(db, 0.0f, 3.0f, 30, 15);
-            col = nvgLerpRGBA(colors.yellow, colors.red, linearDistance(db, 0.0f, 3.0f));
+        } else if (dB < 3.0f) {
+            y = rescale(dB, 0.0f, 3.0f, 30, 15);
+            col = nvgLerpRGBA(colors.yellow, colors.red, linearDistance(dB, 0.0f, 3.0f));
         } else {
-            y = rescale(db, 3.0f, 6.0f, 15, 0);
+            y = rescale(dB, 3.0f, 6.0f, 15, 0);
             col = colors.red;
         }
 
@@ -290,68 +359,5 @@ struct VUMeter : OpaqueWidget {
 
         drawLevel(args, -4, levels->left.rms, boldColors);
         drawLevel(args, 1, levels->right.rms, boldColors);
-    }
-};
-
-//--------------------------------------------------------------
-// Fader
-//--------------------------------------------------------------
-
-// These values were all empiricially determined by moving the fader handle
-// around so that it lined up with the various tick marks.
-const float kFaderDbPlus6 = 1.0f;
-const float kFaderDbPlus3 = 0.896f;
-const float kFaderDbZero = 0.79f;
-const float kFaderDbMinus3 = 0.686f;
-const float kFaderDbMinus6 = 0.58f;
-const float kFaderDbMinus12 = 0.432f;
-const float kFaderDbMinus24 = 0.286f;
-const float kFaderDbMinus48 = 0.136f;
-const float kFaderDbMinus72 = 0.0f;
-
-float faderToDb(float v) {
-    if (v >= kFaderDbMinus6) {
-        return rescale(v, kFaderDbMinus6, kFaderDbPlus6, -6.0f, 6.0f);
-    } else if (v >= kFaderDbMinus12) {
-        return rescale(v, kFaderDbMinus12, kFaderDbMinus6, -12.0f, -6.0f);
-    } else if (v >= kFaderDbMinus24) {
-        return rescale(v, kFaderDbMinus24, kFaderDbMinus12, -24.0f, -12.0f);
-    } else if (v >= kFaderDbMinus48) {
-        return rescale(v, kFaderDbMinus48, kFaderDbMinus24, -48.0f, -24.0f);
-    } else {
-        return rescale(v, kFaderDbMinus72, kFaderDbMinus48, -72.0f, -48.0f);
-    }
-}
-
-struct FaderParamQuantity : ParamQuantity {
-
-    float getDisplayValue() override {
-        float v = getValue();
-        if (!module) {
-            return v;
-        }
-        return faderToDb(v);
-    }
-
-    void setDisplayValue(float v) override {
-        if (!module) {
-            return;
-        }
-
-        v = clamp(v, -72.0f, 6.0f);
-
-        if (v >= -6.0f) {
-            v = rescale(v, -6.0f, 6.0f, kFaderDbMinus6, kFaderDbPlus6);
-        } else if (v >= -12.0f) {
-            v = rescale(v, -12.0f, -6.0f, kFaderDbMinus12, kFaderDbMinus6);
-        } else if (v >= -24.0f) {
-            v = rescale(v, -24.0f, -12.0f, kFaderDbMinus24, kFaderDbMinus12);
-        } else if (v >= -48.0f) {
-            v = rescale(v, -48.0f, -24.0f, kFaderDbMinus48, kFaderDbMinus24);
-        } else {
-            v = rescale(v, -72.0f, -48.0f, kFaderDbMinus72, kFaderDbMinus48);
-        }
-
-        setValue(v);
     }
 };

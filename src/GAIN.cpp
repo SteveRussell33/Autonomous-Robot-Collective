@@ -10,9 +10,10 @@
 
 struct GAIN : Module {
 
-    MonoTrack track;
+    Track track;
 
-    // This is a mono module, but VUMeter monitors the levels in stereo.
+    // VUMeter monitors the levels in stereo, so will use StereoLevels 
+    // even though GAIN is a mono Module.
     StereoLevels levels;
 
 #ifdef GAIN_DEBUG
@@ -67,6 +68,8 @@ struct GAIN : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
+
+        track.init(&(params[kFader]), &(params[kMute]), &(inputs[kLevelInput]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
@@ -80,10 +83,7 @@ struct GAIN : Module {
         }
 
         float in = inputs[kInput].getVoltage();
-        float faderDb = faderToDb(params[kFader].getValue());
-        bool muted = params[kMute].getValue() > 0.5f;
-
-        float out = track.next(in, muted ? kMinDb : faderDb);
+        float out = in * track.nextAmplitude();
 
         if (outputs[kOutput].isConnected()) {
             outputs[kOutput].setVoltage(out);

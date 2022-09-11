@@ -4,7 +4,8 @@ import os
 import subprocess
 
 # The concept of having a `res-src` directory, and using Inkscape via the
-# command line to render to the `res` directory, comes from the BogAudio project.
+# command line to render to the `res` directory, comes from 
+# the github.com/bogaudio/BogaudioModules project.
 
 files = [
     'ATV',
