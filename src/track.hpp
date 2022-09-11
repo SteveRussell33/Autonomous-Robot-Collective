@@ -74,24 +74,33 @@ struct FaderParamQuantity : ParamQuantity {
 };
 
 //--------------------------------------------------------------
-// Track
+// Amplitude
 //--------------------------------------------------------------
 
-struct Track {
+struct Amplitude {
 
-  private:
-
-    Param* fader;
-    Param* mute;
-    Input* level;
+private:
 
     float curDb;
     float curAmp;
     bogaudio::dsp::SlewLimiter dbSlew;
 
-    float dbToAmp(float targetDb) {
+public:
 
-        float dbs = dbSlew.next(targetDb);
+    Amplitude() {
+        curDb = kMinDb;
+        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        dbSlew.setLast(curDb);
+    }
+
+    void sampleRateChange(float sampleRate) {
+        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+    }
+
+    // Convert db to amplitude
+    float next(float db) {
+
+        float dbs = dbSlew.next(db);
         if (curDb != dbs) {
             curDb = dbs;
 
@@ -100,34 +109,60 @@ struct Track {
         }
         return curAmp;
     }
+};
+
+//--------------------------------------------------------------
+// Track
+//--------------------------------------------------------------
+
+struct Track {
+
+  private:
+
+    Param* faderParam;
+    Param* muteParam;
+    Input* levelInput;
+
+    Amplitude faderAmplitude;
+    Amplitude levelAmplitude;
 
   public:
 
-    Track() {
-        curDb = kMinDb;
-        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
-        dbSlew.setLast(curDb);
-    }
-
-    void init(Param* fader_, Param* mute_, Input* level_) {
-        fader = fader_;
-        mute = mute_;
-        level = level_;
+    void init(Param* faderParam_, Param* muteParam_, Input* levelParam_) {
+        faderParam = faderParam_;
+        muteParam = muteParam_;
+        levelInput = levelParam_;
     }
 
     void sampleRateChange(float sampleRate) {
-        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+        faderAmplitude.sampleRateChange(sampleRate);
+        levelAmplitude.sampleRateChange(sampleRate);
     }
 
     float nextAmplitude() {
 
-        bool muted = mute->getValue() > 0.5f;
+        bool muted = muteParam->getValue() > 0.5f;
         if (muted) {
-            return dbToAmp(kMinDb);
+            return faderAmplitude.next(kMinDb);
         }
 
-        float faderDb = faderToDb(fader->getValue());
-        return dbToAmp(faderDb);
+        float faderDb = faderToDb(faderParam->getValue());
+        float faderAmp = faderAmplitude.next(faderDb);
+
+        if (levelInput->isConnected()) {
+
+            // Scale the level input voltage exponentially from [0V, 10V] to [-72dB, +6dB].  
+            // Note that levelInput is monophonic.
+            float levelDb = rescale(levelInput->getVoltage(), 0.0f, 10.0f, kMinDb, kMaxDb);
+            float levelAmp = levelAmplitude.next(levelDb);
+
+            // Use the fader amplitude as an exponential CV control 
+            // on the level amplitude.
+            return levelAmp * faderAmp;
+        }
+        else {
+            return faderAmp;
+        }
     }
 };
 

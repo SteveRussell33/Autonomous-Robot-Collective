@@ -1,4 +1,4 @@
-#include "mix.hpp"
+#include "track.hpp"
 #include "plugin.hpp"
 #include "widgets.hpp"
 
@@ -12,7 +12,7 @@ struct GAIN : Module {
 
     Track track;
 
-    // VUMeter monitors the levels in stereo, so will use StereoLevels 
+    // VUMeter monitors the levels in stereo, so will use StereoLevels
     // even though GAIN is a mono Module.
     StereoLevels levels;
 
