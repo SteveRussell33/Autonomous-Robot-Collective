@@ -4,3 +4,10 @@
 /plugin.dylib
 /plugin.dll
 .DS_Store
+
+/src/test/*.o
+/src/test/run-test
+
+/src/test/*.txt
+/src/test/*.csv
+/src/test/*.png

@@ -68,19 +68,20 @@ struct FOLD : Module {
         oversample.sampleRateChange(e.sampleRate);
     }
 
+    static constexpr float kTwoPi = 2.0f * M_PI;
+
     // This wavefolding algorithm is derived from a Max/MSP patch that was
     // created by Randy Jones of Madrona Labs.
-    inline float wavefold(float in, float timbre) {
-
-        const float kTwoPi = 2.0f * M_PI;
+    inline float wavefold(float x, float timbre) {
 
         float ampOffset = timbre * 2.0f + 0.1f;
         float phaseOffset = timbre + 0.25f;
 
-        float amp = in * ampOffset;
+        float phase = x * ampOffset;
+        phase = phase + phaseOffset;
 
         // TODO should we use a fast approximation for cosf()?
-        return std::cosf(kTwoPi * (amp + phaseOffset));
+        return std::cosf(kTwoPi * phase);
     }
 
     float oversampleFold(float in, float timbre) {
