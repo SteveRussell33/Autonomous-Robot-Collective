@@ -17,3 +17,8 @@
 compile:
 	clang++ -Wall -std=c++17 -c test.cpp
 	clang++ -Wall -std=c++17 *.o -o run-test
+
+clean:
+	rm -f *.o
+	rm -f run-test
+	rm -f out.*-test
