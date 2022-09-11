@@ -1,5 +1,5 @@
-#include "track.hpp"
 #include "plugin.hpp"
+#include "track.hpp"
 #include "widgets.hpp"
 
 // define GAIN_DEBUG
@@ -114,7 +114,7 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         ////////////////////////////////////////
-        // levels
+        // fader and meter
 
         const float faderXofs = 8;
         const float faderYofs = -9.5;
