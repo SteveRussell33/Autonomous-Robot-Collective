@@ -1,12 +1,33 @@
 #pragma once
 
+#include <cmath>
+
 #include "earlevel/Biquad.h"
 
-const int kMaxOversample = 16;
+namespace rm {
+namespace dsp {
+
+//--------------------------------------------------------------
+// misc
+//--------------------------------------------------------------
+
+// https://www.kvraudio.com/forum/viewtopic.php?p=2779936&sid=e1e44d1b6ec3fd37f76e4a8ca1ed422a#p2779936
+static inline float softClip(float x) {
+
+    // Hard Clip: clamp(x, -1, 1)
+    x = 0.5f * (std::fabs(x + 1.0f) - std::fabs(x - 1.0f));
+
+    // Soft Clip: Simple f(x) = 1.5x - 0.5x^3 waveshaper
+    return 1.5f * x - 0.5f * x * x * x;
+}
+
+//--------------------------------------------------------------
+// TwelvePoleLpf
+//--------------------------------------------------------------
 
 struct TwelvePoleLpf {
 
-private:
+  private:
 
     static const int kFilters = 6;
 
@@ -16,7 +37,7 @@ private:
 
     Biquad filter[kFilters];
 
-public:
+  public:
 
     void setCutoff(float cutoff, float sampleRate) {
 
@@ -36,9 +57,15 @@ public:
     }
 };
 
+//--------------------------------------------------------------
+// Oversample
+//--------------------------------------------------------------
+
+const int kMaxOversample = 16;
+
 struct Oversample {
 
-private:
+  private:
 
     int oversample;
 
@@ -46,7 +73,7 @@ private:
     TwelvePoleLpf upLpf;
     TwelvePoleLpf downLpf;
 
-public:
+  public:
 
     Oversample(int oversample_) : oversample(oversample_) {
     }
@@ -77,3 +104,6 @@ public:
         return buffer[0];
     }
 };
+
+} // namespace dsp
+} // namespace rm

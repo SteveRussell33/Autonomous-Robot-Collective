@@ -1,9 +1,9 @@
 #include "plugin.hpp"
-#include "oversample.hpp"
+#include "rm_dsp.hpp"
 #include "track.hpp"
 #include "widgets.hpp"
 
-#define CLIP_DEBUG
+//define CLIP_DEBUG
 
 //--------------------------------------------------------------
 // CLIP
@@ -12,7 +12,7 @@
 struct CLIP : Module {
 
     const int kOversampleFactor = 4;
-    Oversample oversample{kOversampleFactor};
+    rm::dsp::Oversample oversample{kOversampleFactor};
 
     Amplitude faderAmp;
     Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
@@ -81,23 +81,13 @@ struct CLIP : Module {
         levels.sampleRateChange(e.sampleRate);
     }
 
-    // https://www.kvraudio.com/forum/viewtopic.php?p=2779936&sid=e1e44d1b6ec3fd37f76e4a8ca1ed422a#p2779936
-    inline float clip(float x) {
+    float oversampleSoftClip(float in) {
 
-        // Hard Clip: equivalent to clamp(x, -1, 1)
-        x = 0.5f * (std::fabs(x + 1.0f) - std::fabs(x - 1.0f));
-
-        // Soft Clip: Simple f(x) = 1.5x - 0.5x^3 waveshaper
-        return 1.5f * x - 0.5f * x * x * x;
-    }
-
-    float oversampleClip(float in) {
-
-        float buffer[kMaxOversample] = {};
+        float buffer[rm::dsp::kMaxOversample] = {};
         oversample.upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = clip(buffer[i]);
+            buffer[i] = rm::dsp::softClip(buffer[i]);
         }
 
         return oversample.downsample(buffer);
@@ -117,30 +107,25 @@ struct CLIP : Module {
             return;
         }
 
-        //// fader amplitude
-        //float db = faderToDb(params[kFader].getValue());
-        //float ampF = faderAmp.next(db);
-
-#ifdef CLIP_DEBUG
-        outputs[kDebug1].setVoltage(params[kFader].getValue());
-#endif
+        // fader amplitude
+        float db = faderToDb(params[kFader].getValue());
+        float ampF = faderAmp.next(db);
 
         // process each channel
         float sum = 0;
         int channels = std::max(inputs[kInput].getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
-            //// channel amplitude
-            //float ampCh = ampF;
-            //if (inputs[kLevelInput].isConnected()) {
-            //    ampCh = ampCh * nextLevelAmplitude(ch);
-            //}
+            // channel amplitude
+            float ampCh = ampF;
+            if (inputs[kLevelInput].isConnected()) {
+                ampCh = ampCh * nextLevelAmplitude(ch);
+            }
 
             // process sample
             float in = inputs[kInput].getPolyVoltage(ch);
-            float out = oversampleClip(in / 5.0f) * 5.0f;
-            //float out = oversampleClip(in / 5.0f * ampCh);
-            //out = out * 5.0f / ampCh;
+            float out = in / (5.0f * ampCh);
+            out = oversampleSoftClip(out) * 5.0f;
 
             sum += out;
             outputs[kOutput].setVoltage(out, ch);

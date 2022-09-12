@@ -1,6 +1,6 @@
 
-#include "oversample.hpp"
 #include "plugin.hpp"
+#include "rm_dsp.hpp"
 #include "widgets.hpp"
 
 // define FOLD_DEBUG
@@ -8,7 +8,7 @@
 struct FOLD : Module {
 
     const int kOversampleFactor = 4;
-    Oversample oversample{kOversampleFactor};
+    rm::dsp::Oversample oversample{kOversampleFactor};
 
 #ifdef FOLD_DEBUG
     float debug1;
@@ -86,7 +86,7 @@ struct FOLD : Module {
 
     float oversampleFold(float in, float timbre) {
 
-        float buffer[kMaxOversample] = {};
+        float buffer[rm::dsp::kMaxOversample] = {};
         oversample.upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {

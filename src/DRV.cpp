@@ -1,7 +1,7 @@
 #include "pub/pub.h"
 
-#include "oversample.hpp"
 #include "plugin.hpp"
+#include "rm_dsp.hpp"
 #include "widgets.hpp"
 
 // define DRV_DEBUG
@@ -9,7 +9,7 @@
 struct DRV : Module {
 
     const int kOversampleFactor = 4;
-    Oversample oversample{kOversampleFactor};
+    rm::dsp::Oversample oversample{kOversampleFactor};
 
     enum ParamId {
         kDriveParam,
@@ -69,7 +69,7 @@ struct DRV : Module {
 
     float oversampleDrive(float in, float drive) {
 
-        float buffer[kMaxOversample] = {};
+        float buffer[rm::dsp::kMaxOversample] = {};
         oversample.upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {
