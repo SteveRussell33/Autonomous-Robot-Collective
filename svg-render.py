@@ -10,9 +10,7 @@ import subprocess
 files = [
     'ATV',
     'CLIP',
-    'DRV',
     'FM',
-    'FOLD',
     'GAIN',
     'MIX-2',
     'fader-bg',

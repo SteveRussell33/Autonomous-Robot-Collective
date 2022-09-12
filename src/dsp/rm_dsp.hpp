@@ -8,7 +8,7 @@ namespace rm {
 namespace dsp {
 
 //--------------------------------------------------------------
-// misc
+// signal
 //--------------------------------------------------------------
 
 // https://www.kvraudio.com/forum/viewtopic.php?p=2779936&sid=e1e44d1b6ec3fd37f76e4a8ca1ed422a#p2779936

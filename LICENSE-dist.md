@@ -9,5 +9,3 @@ The `lib/earlevel` directory uses Nigel Redmon's [Biquad C++ source code](https:
     for your own purposes, free or commercial.
 
 The `lib/ffft` directory uses [FFTReal](https://github.com/cyrilcode/fft-real) under terms of the "Do What The F*ck You Want To Public License": ([https://github.com/cyrilcode/fft-real/blob/master/license.txt](https://github.com/cyrilcode/fft-real/blob/master/license.txt)).
-
-The `lib/pub` directory contains code in the public domain. 
