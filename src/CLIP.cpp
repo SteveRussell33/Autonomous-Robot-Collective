@@ -121,11 +121,16 @@ struct CLIP : Module {
             if (inputs[kLevelInput].isConnected()) {
                 ampCh = ampCh * nextLevelAmplitude(ch);
             }
+            float limit = 5.0f * ampCh;
 
             // process sample
             float in = inputs[kInput].getPolyVoltage(ch);
-            float out = in / (5.0f * ampCh);
-            out = oversampleSoftClip(out) * 5.0f;
+            float out = in / limit;
+            out = oversampleSoftClip(out) * limit;
+
+            // Apply the magic empirically observed ratio that 
+            // causes the incoming and outgoing amplitudes to match up.
+            out = out * 0.67f; 
 
             sum += out;
             outputs[kOutput].setVoltage(out, ch);
