@@ -140,7 +140,7 @@ const float kFaderDbMinus24 = 0.286f;
 const float kFaderDbMinus48 = 0.136f;
 const float kFaderDbMinus72 = 0.0f;
 
-float faderToDb(float v) {
+static float faderToDb(float v) {
     if (v >= kFaderDbMinus6) {
         return rescale(v, kFaderDbMinus6, kFaderDbPlus6, -6.0f, 6.0f);
     } else if (v >= kFaderDbMinus12) {

@@ -20,6 +20,18 @@
       "tags": []
     },
     {
+      "slug": "CLIP",
+      "name": "CLIP",
+      "description": "CLIP",
+      "tags": []
+    },
+    {
+      "slug": "DRV",
+      "name": "DRV",
+      "description": "DRV",
+      "tags": []
+    },
+    {
       "slug": "FM",
       "name": "FM",
       "description": "FM",
@@ -35,12 +47,6 @@
       "slug": "GAIN",
       "name": "GAIN",
       "description": "GAIN",
-      "tags": []
-    },
-    {
-      "slug": "DRV",
-      "name": "DRV",
-      "description": "DRV",
       "tags": []
     }
   ]

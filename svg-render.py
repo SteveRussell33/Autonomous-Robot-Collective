@@ -9,18 +9,19 @@ import subprocess
 
 files = [
     'ATV',
+    'CLIP',
     'DRV',
-    'fader-bg',
-    'fader-handle',
     'FM',
     'FOLD',
     'GAIN',
+    'MIX-2',
+    'fader-bg',
+    'fader-handle',
     'hswitch-0',
     'hswitch-1',
     'knob18',
     'knob32',
     'knob40',
-    'MIX-2',
     'toggle-0',
     'toggle-1'
 ]
