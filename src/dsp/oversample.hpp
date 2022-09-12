@@ -6,6 +6,8 @@ const int kMaxOversample = 16;
 
 struct TwelvePoleLpf {
 
+private:
+
     static const int kFilters = 6;
 
     // https://www.earlevel.com/main/2016/09/29/cascading-filters/
@@ -13,6 +15,8 @@ struct TwelvePoleLpf {
         0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
 
     Biquad filter[kFilters];
+
+public:
 
     void setCutoff(float cutoff, float sampleRate) {
 
@@ -34,11 +38,15 @@ struct TwelvePoleLpf {
 
 struct Oversample {
 
+private:
+
     int oversample;
 
     // Nuke everything above the Nyquist frequency.
     TwelvePoleLpf upLpf;
     TwelvePoleLpf downLpf;
+
+public:
 
     Oversample(int oversample_) : oversample(oversample_) {
     }
@@ -54,8 +62,7 @@ struct Oversample {
 
     void upsample(float in, float* buffer) {
 
-        // Apply gain to compensate for zero-interpolation
-        buffer[0] = upLpf.process(in * oversample);
+        buffer[0] = upLpf.process(in);
 
         // Interpolate with zeros
         for (int i = 1; i < oversample; ++i) {

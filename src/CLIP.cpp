@@ -1,14 +1,18 @@
 #include "plugin.hpp"
+#include "oversample.hpp"
 #include "track.hpp"
 #include "widgets.hpp"
 
-// define CLIP_DEBUG
+#define CLIP_DEBUG
 
 //--------------------------------------------------------------
 // CLIP
 //--------------------------------------------------------------
 
 struct CLIP : Module {
+
+    const int kOversampleFactor = 4;
+    Oversample oversample{kOversampleFactor};
 
     Amplitude faderAmp;
     Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
@@ -77,9 +81,31 @@ struct CLIP : Module {
         levels.sampleRateChange(e.sampleRate);
     }
 
+    // https://www.kvraudio.com/forum/viewtopic.php?p=2779936&sid=e1e44d1b6ec3fd37f76e4a8ca1ed422a#p2779936
+    inline float clip(float x) {
+
+        // Hard Clip: equivalent to clamp(x, -1, 1)
+        x = 0.5f * (std::fabs(x + 1.0f) - std::fabs(x - 1.0f));
+
+        // Soft Clip: Simple f(x) = 1.5x - 0.5x^3 waveshaper
+        return 1.5f * x - 0.5f * x * x * x;
+    }
+
+    float oversampleClip(float in) {
+
+        float buffer[kMaxOversample] = {};
+        oversample.upsample(in, buffer);
+
+        for (int i = 0; i < kOversampleFactor; i++) {
+            buffer[i] = clip(buffer[i]);
+        }
+
+        return oversample.downsample(buffer);
+    }
+
+    // Scale the level input voltage exponentially from [0V, 10V] to [-72dB, +6dB].
     float nextLevelAmplitude(int ch) {
         float lv = inputs[kLevelInput].getPolyVoltage(ch);
-        // Scale the level input voltage exponentially from [0V, 10V] to [-72dB, +6dB].
         float db = rescale(lv, 0.0f, 10.0f, kMinDb, kMaxDb);
         return levelAmps[ch].next(db);
     }
@@ -91,24 +117,30 @@ struct CLIP : Module {
             return;
         }
 
-        // fader amplitude
-        float db = faderToDb(params[kFader].getValue());
-        float ampF = faderAmp.next(db);
+        //// fader amplitude
+        //float db = faderToDb(params[kFader].getValue());
+        //float ampF = faderAmp.next(db);
+
+#ifdef CLIP_DEBUG
+        outputs[kDebug1].setVoltage(params[kFader].getValue());
+#endif
 
         // process each channel
         float sum = 0;
         int channels = std::max(inputs[kInput].getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
-            float in = inputs[kInput].getPolyVoltage(ch);
 
-            // channel amplitude
-            float ampCh = ampF;
-            if (inputs[kLevelInput].isConnected()) {
-                ampCh = ampCh * nextLevelAmplitude(ch);
-            }
+            //// channel amplitude
+            //float ampCh = ampF;
+            //if (inputs[kLevelInput].isConnected()) {
+            //    ampCh = ampCh * nextLevelAmplitude(ch);
+            //}
 
             // process sample
-            float out = in * ampCh;
+            float in = inputs[kInput].getPolyVoltage(ch);
+            float out = oversampleClip(in / 5.0f) * 5.0f;
+            //float out = oversampleClip(in / 5.0f * ampCh);
+            //out = out * 5.0f / ampCh;
 
             sum += out;
             outputs[kOutput].setVoltage(out, ch);
