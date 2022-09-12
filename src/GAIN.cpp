@@ -87,9 +87,16 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
+
+        // if the output isn't connected, just show the VU metering
         if (!outputs[kOutput].isConnected()) {
-            levels.left.process(0.0f);
-            levels.right.process(0.0f);
+            float sum = 0;
+            int channels = std::max(inputs[kInput].getChannels(), 1);
+            for (int ch = 0; ch < channels; ch++) {
+                sum += inputs[kInput].getPolyVoltage(ch);
+            }
+            levels.left.process(sum);
+            levels.right.process(sum);
             return;
         }
 
