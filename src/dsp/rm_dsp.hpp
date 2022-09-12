@@ -18,7 +18,10 @@ static inline float softClip(float x) {
     x = 0.5f * (std::fabs(x + 1.0f) - std::fabs(x - 1.0f));
 
     // Soft Clip: Simple f(x) = 1.5x - 0.5x^3 waveshaper
-    return 1.5f * x - 0.5f * x * x * x;
+    x =  1.5f * x - 0.5f * x * x * x;
+
+    // Remove the introduced gain
+    return x * 0.6666667;
 }
 
 //--------------------------------------------------------------
