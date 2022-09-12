@@ -10,9 +10,10 @@
 
 struct GAIN : Module {
 
-    Track track;
+    Amplitude faderAmp;
+    Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
 
-    // VUMeter monitors the levels in stereo, so will use StereoLevels
+    // Since VUMeter monitors the levels in stereo, we will use StereoLevels,
     // even though GAIN is a mono Module.
     StereoLevels levels;
 
@@ -68,29 +69,63 @@ struct GAIN : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
-
-        track.init(&(params[kFader]), &(params[kMute]), &(inputs[kLevelInput]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        track.sampleRateChange(e.sampleRate);
+        faderAmp.sampleRateChange(e.sampleRate);
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelAmps[ch].sampleRateChange(e.sampleRate);
+        }
         levels.sampleRateChange(e.sampleRate);
     }
 
+    float nextLevelAmplitude(int ch) {
+        float lv = inputs[kLevelInput].getPolyVoltage(ch);
+        // Scale the level input voltage exponentially from [0V, 10V] to [-72dB, +6dB].
+        float db = rescale(lv, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return levelAmps[ch].next(db);
+    }
+
     void process(const ProcessArgs& args) override {
-        if (!inputs[kInput].isConnected()) {
+        if (!outputs[kOutput].isConnected()) {
+            levels.left.process(0.0f);
+            levels.right.process(0.0f);
             return;
         }
 
-        float in = inputs[kInput].getVoltage();
-        float out = in * track.nextAmplitude();
+        bool muted = params[kMute].getValue() > 0.5f;
 
-        if (outputs[kOutput].isConnected()) {
-            outputs[kOutput].setVoltage(out);
+        // fader amplitude
+        float ampF = 0.0f;
+        if (muted) {
+            ampF = faderAmp.next(kMinDb);
+        } else {
+            float db = faderToDb(params[kFader].getValue());
+            ampF = faderAmp.next(db);
         }
 
-        levels.left.process(out);
-        levels.right.process(out);
+        // process each channel
+        float sum = 0;
+        int channels = std::max(inputs[kInput].getChannels(), 1);
+        for (int ch = 0; ch < channels; ch++) {
+            float in = inputs[kInput].getPolyVoltage(ch);
+
+            // channel amplitude
+            float ampCh = ampF;
+            if (!muted && inputs[kLevelInput].isConnected()) {
+                ampCh = ampCh * nextLevelAmplitude(ch);
+            }
+
+            // process sample
+            float out = in * ampCh;
+
+            sum += out;
+            outputs[kOutput].setVoltage(out, ch);
+        }
+        outputs[kOutput].setChannels(channels);
+
+        levels.left.process(sum);
+        levels.right.process(sum);
     }
 };
 
