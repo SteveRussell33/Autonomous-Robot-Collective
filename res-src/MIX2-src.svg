@@ -90,28 +90,39 @@
     </symbol>
 
     <symbol id="meter" >
-        <g transform="translate(20 5)">
+        <g transform="translate(20 6)">
 
-          <text x="-12.5" y= "2.5"  class="label">6</text> 
-          <text x="-12.5" y="17.5"  class="label">3</text> 
-          <text x="-12.5" y="32.5"  class="label">0</text> 
-          <text x="-12.5" y="47.5"  class="label">3</text> 
-          <text x="-12.5" y="62.5"  class="label">6</text> 
-          <text x="-16"   y="83.5"  class="label">12</text>
-          <text x="-16"   y="104.5" class="label">24</text>
-          <text x="-16"   y="125.5" class="label">48</text>
+          <text x="-14.5" y= "3"  class="label">6</text> 
+          <text x="-14.5" y="18"  class="label">3</text> 
+          <text x="-14.5" y="33"  class="label">0</text> 
+          <text x="-14.5" y="48"  class="label">3</text> 
+          <text x="-14.5" y="63"  class="label">6</text> 
+          <text x="-18"   y="84"  class="label">12</text>
+          <text x="-18"   y="105" class="label">24</text>
+          <text x="-18"   y="126" class="label">48</text>
+          <text x="-18"   y="145" class="label">72</text> 
 
-          <polyline points="-7.5   0 8   0" class="connect"/>
-          <polyline points="-7.5  15 8  15" class="connect"/>
-          <polyline points="-7.5  30 8  30" class="connect"/>
-          <polyline points="-7.5  45 8  45" class="connect"/>
-          <polyline points="-7.5  60 8  60" class="connect"/>
-          <polyline points="-7.5  81 8  81" class="connect"/>
-          <polyline points="-7.5 102 8 102" class="connect"/>
-          <polyline points="-7.5 123 8 123" class="connect"/>
-          <polyline points="-7.5 144 8 144" class="connect"/>
+          <polyline points="-9   0   -6   0" class="connect"/>
+          <polyline points="-9  15   -6  15" class="connect"/>
+          <polyline points="-9  30   -6  30" class="connect"/>
+          <polyline points="-9  45   -6  45" class="connect"/>
+          <polyline points="-9  60   -6  60" class="connect"/>
+          <polyline points="-9  81   -6  81" class="connect"/>
+          <polyline points="-9 102   -6 102" class="connect"/>
+          <polyline points="-9 123   -6 123" class="connect"/>
+          <polyline points="-9 142.5 -6 142.5" class="connect"/>
 
-          <rect x="-5" y="0" width="10" height="144" fill="#121212"/>
+          <polyline points="6   0   9   0" class="connect"/>
+          <polyline points="6  15   9  15" class="connect"/>
+          <polyline points="6  30   9  30" class="connect"/>
+          <polyline points="6  45   9  45" class="connect"/>
+          <polyline points="6  60   9  60" class="connect"/>
+          <polyline points="6  81   9  81" class="connect"/>
+          <polyline points="6 102   9 102" class="connect"/>
+          <polyline points="6 123   9 123" class="connect"/>
+          <polyline points="6 142.5 9 142.5" class="connect"/>
+
+          <rect x="-5" y="-2" width="10" height="146" rx="2" fill="#121212"/>
         </g>
     </symbol>
 
@@ -159,13 +170,14 @@
 
   <!-- ch1 -->  
 
-  <g transform="translate(24 29)">
-    <text x="0" y="0" class="label" text-anchor="middle">1</text>
-  </g>
-
-  <g transform="translate(24 37)">
-    <use xlink:href="#meter" transform="translate(-20 -5)"/>
-    <g transform="translate(11 0)">
+  <g transform="translate(28 37)">
+    <g transform="translate(-1.5 -8)">
+      <text x="0" y="0" class="label" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(-1.5 0)">
+      <use xlink:href="#meter" transform="translate(-20 -5)"/>
+    </g>
+    <g transform="translate(13 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
@@ -191,13 +203,14 @@
 
   <!-- ch2 -->  
 
-  <g transform="translate(66 29)">
-    <text x="0" y="0" class="label" text-anchor="middle">2</text>
-  </g>
-
-  <g transform="translate(66 37)">
-    <use xlink:href="#meter" transform="translate(-20 -5)"/>
-    <g transform="translate(11 0)">
+  <g transform="translate(70 37)">
+    <g transform="translate(-1.5 -8)">
+      <text x="0" y="0" class="label" text-anchor="middle">2</text>
+    </g>
+    <g transform="translate(-1.5 0)">
+      <use xlink:href="#meter" transform="translate(-20 -5)"/>
+    </g>
+    <g transform="translate(13 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
@@ -223,24 +236,24 @@
 
   <!-- mix -->  
 
-  <g transform="translate(108 29)">
-    <text x="0" y="0" class="label" text-anchor="middle">MIX</text>
-  </g>
-
-  <g transform="translate(108 37)">
-    <use xlink:href="#meter" transform="translate(-20 -5)"/>
-    <g transform="translate(11 0)">
+  <g transform="translate(112 37)">
+    <g transform="translate(-1.5 -8)">
+      <text x="0" y="0" class="label" text-anchor="middle">MIX</text>
+    </g>
+    <g transform="translate(-1.5 0)">
+      <use xlink:href="#meter" transform="translate(-20 -5)"/>
+    </g>
+    <g transform="translate(13 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
+
   <g transform="translate(112 203)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
   <g transform="translate(112 232)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-
-
 
   <g transform="translate(112 319)">
     <rect x="-15" y="-15" width="30" height="60" rx="3" class="output"/>

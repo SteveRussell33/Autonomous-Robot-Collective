@@ -15,9 +15,7 @@ struct MIX2 : Module {
     // Amplitude faderAmp;
     // Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
 
-    //// Since VUMeter monitors the levels in stereo, we will use StereoLevels,
-    //// even though MIX2 is a mono Module.
-    // StereoLevels levels;
+    StereoLevels levels[kNumTracks+1];
 
 #ifdef MIX2_DEBUG
     float debug1;
@@ -28,9 +26,9 @@ struct MIX2 : Module {
 
     enum ParamId {
 
-        // kFader1,
-        // kFader2,
-        // kFaderMix,
+        kFader1,
+        kFader2,
+        kFaderMix,
 
         kMute1,
         kMute2,
@@ -77,10 +75,9 @@ struct MIX2 : Module {
     MIX2() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        // configParam<FaderParamQuantity>(kFader1, 0.0f, 1.0f, kFaderDbZero, "Track 1 Fader", "
-        // dB"); configParam<FaderParamQuantity>(kFader2, 0.0f, 1.0f, kFaderDbZero, "Track 2 Fader",
-        // " dB"); configParam<FaderParamQuantity>(kFaderMix, 0.0f, 1.0f, kFaderDbZero, "Mix Fader",
-        // " dB");
+        configParam<FaderParamQuantity>(kFader1, 0.0f, 1.0f, kFaderDbZero, "Fader", " dB");
+        configParam<FaderParamQuantity>(kFader2, 0.0f, 1.0f, kFaderDbZero, "Fader", " dB");
+        configParam<FaderParamQuantity>(kFaderMix, 0.0f, 1.0f, kFaderDbZero, "Fader", " dB");
 
         configSwitch(kMute1, 0.f, 1.f, 0.f, "Track 1 Mute", {"Off", "On"});
         configSwitch(kMute2, 0.f, 1.f, 0.f, "Track 2 Mute", {"Off", "On"});
@@ -137,6 +134,7 @@ struct MIX2 : Module {
 //--------------------------------------------------------------
 
 struct MIX2Widget : ModuleWidget {
+
     MIX2Widget(MIX2* module) {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/MIX2.svg")));
@@ -151,46 +149,18 @@ struct MIX2Widget : ModuleWidget {
         addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, MIX2::kDebug4));
 #endif
 
-        //////////////////////////////////////////
-        //// fader and meter
-
-        // const float faderXofs = 8;
-        // const float faderYofs = -9.5;
-        // const float meterH = 9;
-        // const float meterW = 144;
-
-        //// fader
-        // addParam(createParam<RmFader>(Vec(21 + faderXofs, 46 + faderYofs), module,
-        // MIX2::kFader));
-
-        //// meter
-        // VUMeter* meter = new VUMeter();
-        // if (module) {
-        //     meter->levels = &(module->levels);
-        // }
-        // meter->box.pos = Vec(21, 46);
-        // meter->box.size = Vec(meterH, meterW);
-        // addChild(meter);
-
-        //////////////////////////////////////////
-        //// mute and level
-
-        // addParam(createParamCentered<RmToggleButton>(Vec(22.5, 217), module, MIX2::kMute));
-        // addInput(createInputCentered<PJ301MPort>(Vec(22.5, 254), module, MIX2::kLevelInput));
-
-        //////////////////////////////////////////
-        //// ins and outs
-
-        // addInput(createInputCentered<PJ301MPort>(Vec(22.5, 292), module, MIX2::kInput));
-        // addOutput(createOutputCentered<PJ301MPort>(Vec(22.5, 334), module, MIX2::kOutput));
+        //////////////////////////////////////////////////////////////
 
         // Columns: [28, 70, 112]
         // Rows: [203, 232, 261, 290, 319, 348]
 
+        static const int faderY = 37;
         static const int cols[] = {28, 70};
         static const int mixCol = 112;
 
         for (int t = 0; t < MIX2::kNumTracks; t++) {
+            addFader(cols[t], faderY, MIX2::kFader1 + t);
+            addMeter(cols[t], faderY, module ?  &(module->levels[t]) : NULL);
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 203), module, MIX2::kMute1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 232), module, MIX2::kLevelInput1 + t));
             addParam(createParamCentered<RmKnob18>(Vec(cols[t], 261), module, MIX2::kPan1 + t));
@@ -199,23 +169,32 @@ struct MIX2Widget : ModuleWidget {
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, MIX2::kRightInput1 + t));
         }
 
+        addFader(mixCol, faderY, MIX2::kFaderMix);
+        addMeter(mixCol, faderY, module ?  &(module->levels[MIX2::kNumTracks]) : NULL);
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 203), module, MIX2::kMuteMix));
         addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 232), module, MIX2::kLevelInputMix));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, MIX2::kLeftOutput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, MIX2::kRightOutput));
-
-        // configSwitch(kMute1, 0.f, 1.f, 0.f, "Track 1 Mute", {"Off", "On"});
-        // configInput(kLevelInput1, "Track 1 Level CV");
-        // configParam(kPan1, -1.0f, 1.0f, 0.0f, "Track 1 Pan");
-        // configInput(kPanInput1, "Track 1 Pan CV");
-        // configInput(kLeftInput1, "Track 1 Left");
-        // configInput(kRightInput1, "Track 1 Right");
-
-        // configSwitch(kMuteMix, 0.f, 1.f, 0.f, "Mix Mute", {"Off", "On"});
-        // configInput(kLevelInputMix, "Mix Level CV");
-        // configOutput(kLeftOutput, "Mix Left");
-        // configOutput(kRightOutput, "Mix Right");
     }
+
+    void addFader(float x, float y, int faderID) {
+        static const float faderXofs = 5.5;
+        static const float faderYofs = -9.5;
+
+        addParam(createParam<RmFader>(Vec(x + faderXofs, y + faderYofs), module, faderID));
+    }
+
+    void addMeter(float x, float y, StereoLevels* levels) {
+        static const float meterXofs = -1.5;
+        static const float meterH = 9;
+        static const float meterW = 144;
+
+        VUMeter* meter = new VUMeter(levels);
+        meter->box.pos = Vec(x + meterXofs, y);
+        meter->box.size = Vec(meterH, meterW);
+        addChild(meter);
+    }
+
 };
 
 Model* modelMIX2 = createModel<MIX2, MIX2Widget>("MIX2");

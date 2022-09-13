@@ -163,37 +163,32 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        ////////////////////////////////////////
-        // fader and meter
-
-        const float faderXofs = 8;
-        const float faderYofs = -9.5;
-        const float meterH = 9;
-        const float meterW = 144;
-
-        // fader
-        addParam(createParam<RmFader>(Vec(21 + faderXofs, 46 + faderYofs), module, GAIN::kFader));
-
-        // meter
-        VUMeter* meter = new VUMeter();
-        if (module) {
-            meter->levels = &(module->levels);
-        }
-        meter->box.pos = Vec(21, 46);
-        meter->box.size = Vec(meterH, meterW);
-        addChild(meter);
-
-        ////////////////////////////////////////
-        // mute and level
+        addFader(22.5, 46, GAIN::kFader);
+        addMeter(22.5, 46, module ?  &(module->levels) : NULL);
 
         addParam(createParamCentered<RmToggleButton>(Vec(22.5, 217), module, GAIN::kMute));
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 254), module, GAIN::kLevelInput));
 
-        ////////////////////////////////////////
-        // ins and outs
-
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 292), module, GAIN::kInput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(22.5, 334), module, GAIN::kOutput));
+    }
+
+    void addFader(float x, float y, int faderID) {
+        static const float faderXofs = 5.5;
+        static const float faderYofs = -9.5;
+
+        addParam(createParam<RmFader>(Vec(x + faderXofs, y + faderYofs), module, faderID));
+    }
+
+    void addMeter(float x, float y, StereoLevels* levels) {
+        static const float meterXofs = -1.5;
+        static const float meterH = 9;
+        static const float meterW = 144;
+
+        VUMeter* meter = new VUMeter(levels);
+        meter->box.pos = Vec(x + meterXofs, y);
+        meter->box.size = Vec(meterH, meterW);
+        addChild(meter);
     }
 };
 

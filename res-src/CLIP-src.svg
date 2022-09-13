@@ -132,9 +132,11 @@
 
   <!-- ======== track ======== -->  
 
-  <g transform="translate(21 46)">
-    <use xlink:href="#meter" transform="translate(-20 -5)"/>
-    <g transform="translate(12 0)">
+  <g transform="translate(22.5 46)">
+    <g transform="translate(-1.5 0)">
+      <use xlink:href="#meter" transform="translate(-20 -5)"/>
+    </g>
+    <g transform="translate(13 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>

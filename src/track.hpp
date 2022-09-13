@@ -204,6 +204,8 @@ struct VUMeter : OpaqueWidget {
 
     static const int kLevelWidth = 3;
 
+    StereoLevels* levels = NULL;
+
     VUColors fadedColors = {
         nvgRGBA(0xE6, 0x29, 0x34, 0xA0),
         nvgRGBA(0xFF, 0x87, 0x24, 0xA0),
@@ -312,7 +314,7 @@ struct VUMeter : OpaqueWidget {
 
   public:
 
-    StereoLevels* levels = NULL;
+    VUMeter(StereoLevels* levels_) : levels(levels_) {}
 
     void draw(const DrawArgs& args) override {
         if (!levels) {
