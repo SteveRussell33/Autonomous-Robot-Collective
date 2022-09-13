@@ -9,5 +9,6 @@ void init(Plugin* p) {
     p->addModel(modelCLIP);
     p->addModel(modelFM);
     p->addModel(modelGAIN);
+    p->addModel(modelMIX1);
     p->addModel(modelMIX2);
 }

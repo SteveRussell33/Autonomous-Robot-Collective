@@ -12,7 +12,6 @@ files = [
     'CLIP',
     'FM',
     'GAIN',
-    'MIX2',
     'fader-bg',
     'fader-handle',
     'hswitch-0',
@@ -20,6 +19,8 @@ files = [
     'knob18',
     'knob32',
     'knob40',
+    'MIX1',
+    'MIX2',
     'toggle-0',
     'toggle-1'
 ]

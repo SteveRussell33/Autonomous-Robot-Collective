@@ -172,7 +172,7 @@
 
   <!-- ch1 -->  
 
-  <g transform="translate(29 38)">
+  <g transform="translate(29 39)">
     <g transform="translate(-2.5 -8)">
       <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
     </g>
@@ -205,7 +205,7 @@
 
   <!-- ch2 -->  
 
-  <g transform="translate(71 38)">
+  <g transform="translate(71 39)">
     <g transform="translate(-2.5 -8)">
       <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
     </g>
@@ -238,7 +238,7 @@
 
   <!-- mix -->  
 
-  <g transform="translate(113 38)">
+  <g transform="translate(113 39)">
     <g transform="translate(-2.5 -8)">
       <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
     </g>

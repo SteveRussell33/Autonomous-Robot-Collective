@@ -151,7 +151,7 @@ struct MIX2Widget : ModuleWidget {
 
         //////////////////////////////////////////////////////////////
 
-        static const int faderY = 38;
+        static const int faderY = 39;
         static const int cols[] = {29, 71};
         static const int mixCol = 113;
 

@@ -175,7 +175,7 @@
 
   <!-- ch1 -->  
 
-  <g transform="translate(30 38)">
+  <g transform="translate(30 39)">
     <g transform="translate(-2.5 0)">
       <use xlink:href="#meter" transform="translate(-20 -5)"/>
     </g>
