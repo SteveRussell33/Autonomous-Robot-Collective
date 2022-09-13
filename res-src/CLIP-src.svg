@@ -132,7 +132,7 @@
 
   <!-- ======== track ======== -->  
 
-  <g transform="translate(22.5 46)">
+  <g transform="translate(22.5 48)">
     <g transform="translate(-1.5 0)">
       <use xlink:href="#meter" transform="translate(-20 -5)"/>
     </g>
