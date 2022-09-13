@@ -151,12 +151,9 @@ struct MIX2Widget : ModuleWidget {
 
         //////////////////////////////////////////////////////////////
 
-        // Columns: [28, 70, 112]
-        // Rows: [203, 232, 261, 290, 319, 348]
-
-        static const int faderY = 37;
-        static const int cols[] = {28, 70};
-        static const int mixCol = 112;
+        static const int faderY = 38;
+        static const int cols[] = {29, 71};
+        static const int mixCol = 113;
 
         for (int t = 0; t < MIX2::kNumTracks; t++) {
             addFader(cols[t], faderY, MIX2::kFader1 + t);
@@ -178,14 +175,14 @@ struct MIX2Widget : ModuleWidget {
     }
 
     void addFader(float x, float y, int faderID) {
-        static const float faderXofs = 5.5;
+        static const float faderXofs = 4.5;
         static const float faderYofs = -9.5;
 
         addParam(createParam<RmFader>(Vec(x + faderXofs, y + faderYofs), module, faderID));
     }
 
     void addMeter(float x, float y, StereoLevels* levels) {
-        static const float meterXofs = -1.5;
+        static const float meterXofs = -2.5;
         static const float meterH = 9;
         static const float meterW = 144;
 

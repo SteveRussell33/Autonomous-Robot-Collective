@@ -149,117 +149,119 @@
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
   <!-- labels -->  
-  <g transform="translate(8 203)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">M/S</text>
-  </g>
-  <g transform="translate(8 232)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">LVL</text>
-  </g>
-  <g transform="translate(8 261)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
-  </g>
-  <g transform="translate(8 290)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
-  </g>
-  <g transform="translate(8 319)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">L</text>
-  </g>
-  <g transform="translate(8 348)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">R</text>
+  <g transform="translate(29 0)">
+    <g transform="translate(-20 203)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">M/S</text>
+    </g>
+    <g transform="translate(-20 232)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">LV</text>
+    </g>
+    <g transform="translate(-20 261)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
+    </g>
+    <g transform="translate(-20 290)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
+    </g>
+    <g transform="translate(-20 319)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">L</text>
+    </g>
+    <g transform="translate(-20 348)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">R</text>
+    </g>
   </g>
 
   <!-- ch1 -->  
 
-  <g transform="translate(28 37)">
-    <g transform="translate(-1.5 -8)">
-      <text x="0" y="0" class="label" text-anchor="middle">1</text>
+  <g transform="translate(29 38)">
+    <g transform="translate(-2.5 -8)">
+      <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
     </g>
-    <g transform="translate(-1.5 0)">
+    <g transform="translate(-2.5 0)">
       <use xlink:href="#meter" transform="translate(-20 -5)"/>
     </g>
-    <g transform="translate(13 0)">
+    <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(28 203)">
+  <g transform="translate(29 203)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(28 232)">
+  <g transform="translate(29 232)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(28 261)">
+  <g transform="translate(29 261)">
     <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(28 290)">
+  <g transform="translate(29 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(28 319)">
+  <g transform="translate(29 319)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(28 348)">
+  <g transform="translate(29 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- ch2 -->  
 
-  <g transform="translate(70 37)">
-    <g transform="translate(-1.5 -8)">
-      <text x="0" y="0" class="label" text-anchor="middle">2</text>
+  <g transform="translate(71 38)">
+    <g transform="translate(-2.5 -8)">
+      <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
     </g>
-    <g transform="translate(-1.5 0)">
+    <g transform="translate(-2.5 0)">
       <use xlink:href="#meter" transform="translate(-20 -5)"/>
     </g>
-    <g transform="translate(13 0)">
+    <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(70 203)">
+  <g transform="translate(71 203)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(70 232)">
+  <g transform="translate(71 232)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(70 261)">
+  <g transform="translate(71 261)">
     <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(70 290)">
+  <g transform="translate(71 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(70 319)">
+  <g transform="translate(71 319)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(70 348)">
+  <g transform="translate(71 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- mix -->  
 
-  <g transform="translate(112 37)">
-    <g transform="translate(-1.5 -8)">
-      <text x="0" y="0" class="label" text-anchor="middle">MIX</text>
+  <g transform="translate(113 38)">
+    <g transform="translate(-2.5 -8)">
+      <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
     </g>
-    <g transform="translate(-1.5 0)">
+    <g transform="translate(-2.5 0)">
       <use xlink:href="#meter" transform="translate(-20 -5)"/>
     </g>
-    <g transform="translate(13 0)">
+    <g transform="translate(11 0)">
       <use xlink:href="#fader" transform="translate(-6 -8)"/>
     </g>
   </g>
 
-  <g transform="translate(112 203)">
+  <g transform="translate(113 203)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(112 232)">
+  <g transform="translate(113 232)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
-  <g transform="translate(112 319)">
+  <g transform="translate(113 319)">
     <rect x="-15" y="-15" width="30" height="60" rx="3" class="output"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(112 348)">
+  <g transform="translate(113 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
