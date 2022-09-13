@@ -88,6 +88,14 @@ struct GAIN : Module {
 
     void process(const ProcessArgs& args) override {
 
+        // if the input isn't connected, there is nothing to do
+        if (!inputs[kInput].isConnected()) {
+            outputs[kOutput].setChannels(0);
+            levels.left.process(0.0f);
+            levels.right.process(0.0f);
+            return;
+        }
+
         // if the output isn't connected, just show the VU metering
         if (!outputs[kOutput].isConnected()) {
             float sum = 0;
