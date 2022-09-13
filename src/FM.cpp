@@ -142,8 +142,7 @@ struct FMWidget : ModuleWidget {
 
         // row 3
         addInput(createInputCentered<PJ301MPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
-        addOutput(
-            createOutputCentered<PJ301MPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
 
 #ifdef FM_DEBUG
         addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FM::kDebug1));

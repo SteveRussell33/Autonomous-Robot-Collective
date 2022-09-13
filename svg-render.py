@@ -12,7 +12,7 @@ files = [
     'CLIP',
     'FM',
     'GAIN',
-    'MIX-2',
+    'MIX2',
     'fader-bg',
     'fader-handle',
     'hswitch-0',

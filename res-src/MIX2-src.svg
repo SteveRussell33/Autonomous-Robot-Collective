@@ -139,7 +139,7 @@
 
   <!-- labels -->  
   <g transform="translate(8 203)">
-    <text x="0" y="2.5" class="label" text-anchor="middle">M</text>
+    <text x="0" y="2.5" class="label" text-anchor="middle">M/S</text>
   </g>
   <g transform="translate(8 232)">
     <text x="0" y="2.5" class="label" text-anchor="middle">LVL</text>
@@ -160,7 +160,7 @@
   <!-- ch1 -->  
 
   <g transform="translate(24 29)">
-    <text x="0" y="0" class="label" text-anchor="middle">CH 1</text>
+    <text x="0" y="0" class="label" text-anchor="middle">1</text>
   </g>
 
   <g transform="translate(24 37)">
@@ -192,7 +192,7 @@
   <!-- ch2 -->  
 
   <g transform="translate(66 29)">
-    <text x="0" y="0" class="label" text-anchor="middle">CH 2</text>
+    <text x="0" y="0" class="label" text-anchor="middle">2</text>
   </g>
 
   <g transform="translate(66 37)">

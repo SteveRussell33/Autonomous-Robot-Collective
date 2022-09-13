@@ -3,7 +3,7 @@
 #include "track.hpp"
 #include "widgets.hpp"
 
-//define CLIP_DEBUG
+// define CLIP_DEBUG
 
 //--------------------------------------------------------------
 // CLIP

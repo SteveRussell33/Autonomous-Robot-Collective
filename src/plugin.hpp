@@ -9,3 +9,4 @@ extern Model* modelATV;
 extern Model* modelCLIP;
 extern Model* modelFM;
 extern Model* modelGAIN;
+extern Model* modelMIX2;
