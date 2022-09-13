@@ -201,8 +201,8 @@ struct MIX2Widget : ModuleWidget {
 
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 203), module, MIX2::kMuteMix));
         addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 232), module, MIX2::kLevelInputMix));
-        // addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 319), module, MIX2::kLeftOutput));
-        // addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 348), module, MIX2::kRightOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, MIX2::kLeftOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, MIX2::kRightOutput));
 
         // configSwitch(kMute1, 0.f, 1.f, 0.f, "Track 1 Mute", {"Off", "On"});
         // configInput(kLevelInput1, "Track 1 Level CV");
