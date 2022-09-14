@@ -125,20 +125,6 @@
       </g>
     </symbol>
 
-    <symbol id="led-strip-labels">
-      <g transform="translate(8 2.5)">
-         <text x="0" y= "0" class="label" text-anchor="right">0</text>
-         <text x="0" y="12" class="label" text-anchor="right">3</text>
-         <text x="0" y="24" class="label" text-anchor="right">6</text>
-         <text x="0" y="36" class="label" text-anchor="right">9</text>
-         <text x="0" y="48" class="label" text-anchor="right">12</text>
-         <text x="0" y="60" class="label" text-anchor="right">18</text>
-         <text x="0" y="72" class="label" text-anchor="right">24</text>
-         <text x="0" y="84" class="label" text-anchor="right">36</text>
-         <text x="0" y="96" class="label" text-anchor="right">48</text>
-      </g>
-    </symbol>
-
   </defs>
 
   <!-- ======== body ======== -->  
@@ -194,11 +180,11 @@
     <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
   </g>
 
-  <g transform="translate(31 36)">
-    <g transform="translate(-6 6)">
+  <g transform="translate(31 42)">
+    <g transform="translate(-6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
-    <g transform="translate(6 6)">
+    <g transform="translate(6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
   </g>
@@ -231,11 +217,11 @@
     <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
   </g>
 
-  <g transform="translate(72 36)">
-    <g transform="translate(-6 6)">
+  <g transform="translate(72 42)">
+    <g transform="translate(-6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
-    <g transform="translate(6 6)">
+    <g transform="translate(6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
   </g>
@@ -268,11 +254,11 @@
     <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
   </g>
 
-  <g transform="translate(113 36)">
-    <g transform="translate(-6 6)">
+  <g transform="translate(113 42)">
+    <g transform="translate(-6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
-    <g transform="translate(6 6)">
+    <g transform="translate(6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
   </g>

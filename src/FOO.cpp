@@ -71,8 +71,14 @@ struct FOO : Module {
         kOutputsLen
     };
 
+	enum LightIds {
+		ENUMS(kLeftLights1, 9),
+		ENUMS(kRightLights1, 9),
+		kLightsLen
+	};
+
     FOO() {
-        config(kParamsLen, kInputsLen, kOutputsLen, 0);
+        config(kParamsLen, kInputsLen, kOutputsLen, kLightsLen);
 
         // configParam<FaderParamQuantity>(kLevelParam1, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
         // configParam<FaderParamQuantity>(kLevelParam2, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
@@ -157,6 +163,9 @@ struct FOOWidget : ModuleWidget {
 
         // [168, 198, 228, 258, 288, 318, 348]
 
+        addLights(module, FOO::kLeftLights1, cols[0] - 6, 44); 
+        addLights(module, FOO::kRightLights1, cols[1] - 6, 44); 
+
         for (int t = 0; t < FOO::kNumTracks; t++) {
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kLevelParam1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 198), module, FOO::kLevelInput1 + t));
@@ -172,6 +181,18 @@ struct FOOWidget : ModuleWidget {
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 228), module, FOO::kMuteParamMix));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 318), module, FOO::kLeftOutput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, FOO::kRightOutput));
+    }
+
+    void addLights(FOO* module, int lightID, int x, int y) {
+		addChild(createLightCentered<SmallSimpleLight<RedLight>>   (Vec(x, y), module, lightID));
+		addChild(createLightCentered<SmallSimpleLight<YellowLight>>(Vec(x, y + 12), module, lightID+ 1));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 24), module, lightID+ 2));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 36), module, lightID+ 3));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 48), module, lightID+ 4));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 60), module, lightID+ 5));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 72), module, lightID+ 6));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 84), module, lightID+ 7));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 96), module, lightID+ 8));
     }
 };
 
