@@ -11,6 +11,7 @@ files = [
     'ATV',
     'CLIP',
     'FM',
+    'FOO',
     'GAIN',
     'fader-bg',
     'fader-handle',

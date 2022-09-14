@@ -8,6 +8,7 @@ extern Plugin* pluginInstance;
 extern Model* modelATV;
 extern Model* modelCLIP;
 extern Model* modelFM;
+extern Model* modelFOO;
 extern Model* modelGAIN;
 extern Model* modelMIX1;
 extern Model* modelMIX2;
