@@ -32,10 +32,9 @@ struct Peak {
 
 	float getBrightness(float dbMin, float dbMax) {
 
-        float amplitude = value/5.0f;
+        float amp = value/5.0f;
 
-        // TODO: lookup table?
-		float db = dsp::amplitudeToDb(amplitude);
+		float db = dsp::amplitudeToDb(amp);
 
 		if (db >= dbMax)
 			return 1.f;
@@ -105,10 +104,10 @@ struct StereoTrack {
             left.disconnect(deltaTime);
         }
 
-        //if (rightInput.isConnected()) {
-        //    right.process(deltaTime, rightInput);
-        //} else {
-        //    right.disconnect(deltaTime);
-        //}
+        if (rightInput.isConnected()) {
+            right.process(deltaTime, rightInput);
+        } else {
+            right.disconnect(deltaTime);
+        }
     }
 };

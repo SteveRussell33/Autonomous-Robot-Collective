@@ -62,12 +62,12 @@
 
     <linearGradient id="smallKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%"   stop-color="#7c6f64" />
-      <stop offset="100%" stop-color="#282828" />
+      <stop offset="100%" stop-color="#3c3836" />
     </linearGradient>
 
     <linearGradient id="smallKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%"   stop-color="#504945" />
-      <stop offset="100%" stop-color="#1d2021" />
+      <stop offset="100%" stop-color="#282828" />
     </linearGradient>
 
     <symbol id="knob18" >

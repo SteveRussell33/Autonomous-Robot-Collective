@@ -138,7 +138,7 @@ struct FOO : Module {
         if (ledDivider.process()) {
             for (int t = 0; t < kNumTracks; t++) {
                 tracks[t].left.updateLeds(lights, kLeftLights1 + t * 8);
-                //tracks[t].right.updateLeds(lights, kRightLights1 + t * 8);
+                tracks[t].right.updateLeds(lights, kRightLights1 + t * 8);
             }
         }
     }
