@@ -20,6 +20,13 @@ struct RmKnob18 : RmKnob {
     }
 };
 
+struct RmKnob24 : RmKnob {
+    RmKnob24() : RmKnob("res/knob24.svg", 24) {
+        shadow->blurRadius = 2.0;
+        shadow->box.pos = Vec(0.0, 3.0);
+    }
+};
+
 struct RmKnob32 : RmKnob {
     RmKnob32() : RmKnob("res/knob32.svg", 32) {
         shadow->blurRadius = 2.0;

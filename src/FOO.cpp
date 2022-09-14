@@ -25,9 +25,9 @@ struct FOO : Module {
 
     enum ParamId {
 
-        //kLevelParam1,
-        //kLevelParam2,
-        //kLevelParamMix,
+        kLevelParam1,
+        kLevelParam2,
+        kLevelParamMix,
 
         kMuteParam1,
         kMuteParam2,
@@ -138,8 +138,10 @@ struct FOOWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/FOO.svg")));
 
-        addChild(createWidget<ScrewSilver>(Vec(0, 0)));
-        addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
+        addChild(createWidget<ScrewSilver>(Vec(15, 0)));
+        addChild(createWidget<ScrewSilver>(Vec(15, 365)));
+        addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
+        addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
 #ifdef FOO_DEBUG
         addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FOO::kDebug1));
@@ -156,8 +158,7 @@ struct FOOWidget : ModuleWidget {
         // [168, 198, 228, 258, 288, 318, 348]
 
         for (int t = 0; t < FOO::kNumTracks; t++) {
-            //addFader(cols[t], faderY, FOO::kLevelParam1 + t);
-            //addMeter(cols[t], faderY, module ?  &(module->levels[t]) : NULL);
+            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kLevelParam1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 198), module, FOO::kLevelInput1 + t));
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 228), module, FOO::kMuteParam1 + t));
             addParam(createParamCentered<RmKnob18>(Vec(cols[t], 258), module, FOO::kPanParam1 + t));
@@ -166,8 +167,7 @@ struct FOOWidget : ModuleWidget {
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
         }
 
-        //addFader(mixCol, faderY, FOO::kLevelParamMix);
-        //addMeter(mixCol, faderY, module ?  &(module->levels[FOO::kNumTracks]) : NULL);
+        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 168), module, FOO::kLevelParamMix));
         addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 198), module, FOO::kLevelInputMix));
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 228), module, FOO::kMuteParamMix));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 318), module, FOO::kLeftOutput));
