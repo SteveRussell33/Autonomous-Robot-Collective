@@ -1,0 +1,297 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="135"
+  height="380"
+  viewBox="0 0 135 380"
+>
+
+  <style>
+    text.title {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 12pt;
+    }
+    text.logo {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 10pt;
+    }
+    text.big-label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 7.5pt;
+    }
+    text.label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+    text.led-label {
+      fill: #888;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+    .background {
+      fill: #e0e0e0;
+    }
+    .output {
+      fill: #bbbbbb;
+    }
+    polyline.icon {
+      stroke: #343434;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    polyline.connect {
+      stroke: #343434;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    .blueprint {
+      stroke: #08f;
+      fill: none;
+    }
+  </style>
+
+  <!-- ======== defs ======== -->  
+
+  <defs>
+
+    <linearGradient id="smallKnobMediumGradient">
+      <stop offset="5%"  stop-color="#888" />
+      <stop offset="95%" stop-color="#333" />
+    </linearGradient>
+
+    <linearGradient id="smallKnobDarkGradient">
+      <stop offset="5%"  stop-color="#444" />
+      <stop offset="95%" stop-color="#222" />
+    </linearGradient>
+
+    <linearGradient id="bigKnobDarkGradient">
+      <stop offset="5%"  stop-color="#5c5c5c" />
+      <stop offset="95%" stop-color="#282828" />
+    </linearGradient>
+
+    <linearGradient id="bigKnobMediumGradient">
+      <stop offset="5%"  stop-color="#888" />
+      <stop offset="95%" stop-color="#333" />
+    </linearGradient>
+
+    <symbol id="knob18" >
+      <g transform="translate(9 9)">
+        <circle r="8.5" stroke="#222" fill="none"/>
+        <circle r="8" fill="url('#smallKnobMediumGradient')" transform="rotate(90)"/>
+        <circle r="7" fill="url('#smallKnobDarkGradient')" transform="rotate(90)"/>
+      </g>
+    </symbol>
+
+    <symbol id="knob24" >
+      <g transform="translate(12 12)">
+        <circle r="11.5" fill="url('#bigKnobDarkGradient')" transform="rotate(90)"/>
+        <circle r="9.5" fill="url('#bigKnobMediumGradient')" transform="rotate(90)"/>
+      </g>
+    </symbol>
+
+    <symbol id="toggleButton" >
+      <g transform="translate(9 9)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="8.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="port" >
+      <g transform="translate(12 12)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="led-strip">
+      <g transform="translate(5 2.5)">
+         <circle cx="0" cy= "0" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="12" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="24" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="36" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="48" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="60" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="72" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="84" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="96" r="2" stroke-width="1" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="led-strip-labels">
+      <g transform="translate(8 2.5)">
+         <text x="0" y= "0" class="label" text-anchor="right">0</text>
+         <text x="0" y="12" class="label" text-anchor="right">3</text>
+         <text x="0" y="24" class="label" text-anchor="right">6</text>
+         <text x="0" y="36" class="label" text-anchor="right">9</text>
+         <text x="0" y="48" class="label" text-anchor="right">12</text>
+         <text x="0" y="60" class="label" text-anchor="right">18</text>
+         <text x="0" y="72" class="label" text-anchor="right">24</text>
+         <text x="0" y="84" class="label" text-anchor="right">36</text>
+         <text x="0" y="96" class="label" text-anchor="right">48</text>
+      </g>
+    </symbol>
+
+  </defs>
+
+  <!-- ======== body ======== -->  
+
+  <rect class="background" width="100%" height="100%"/>
+  <text class="title" x="50%" y="16"  text-anchor="middle">FOO</text>
+  <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
+
+  <rect x="0" y="40" width="135" height="114" fill="#121212"/>
+  <g transform="translate(29 40)">
+    <g transform="translate(-15 11)">
+      <text x="0" y= "0" class="led-label" text-anchor="end">0</text>
+      <text x="0" y="12" class="led-label" text-anchor="end">-3</text>
+      <text x="0" y="24" class="led-label" text-anchor="end">-6</text>
+      <text x="0" y="36" class="led-label" text-anchor="end">-9</text>
+      <text x="0" y="48" class="led-label" text-anchor="end">-12</text>
+      <text x="0" y="60" class="led-label" text-anchor="end">-18</text>
+      <text x="0" y="72" class="led-label" text-anchor="end">-24</text>
+      <text x="0" y="84" class="led-label" text-anchor="end">-36</text>
+      <text x="0" y="96" class="led-label" text-anchor="end">-48</text>
+    </g>
+  </g>
+
+  <!-- labels -->  
+  <g transform="translate(29 0)">
+    <g transform="translate(-20 174)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
+    </g>
+    <g transform="translate(-20 203)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
+    </g>
+    <g transform="translate(-20 232)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">M</text>
+    </g>
+    <g transform="translate(-20 261)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
+    </g>
+    <g transform="translate(-20 290)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
+    </g>
+    <g transform="translate(-20 319)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">L</text>
+    </g>
+    <g transform="translate(-20 348)">
+      <text x="0" y="2.5" class="label" text-anchor="middle">R</text>
+    </g>
+  </g>
+
+  <!-- ch1 -->  
+
+  <g transform="translate(29 34)">
+    <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
+  </g>
+
+  <g transform="translate(29 40)">
+    <g transform="translate(-6 6)">
+      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
+    </g>
+    <g transform="translate(6 6)">
+      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
+    </g>
+  </g>
+
+  <g transform="translate(29 174)">
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(29 203)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(29 232)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
+  </g>
+  <g transform="translate(29 261)">
+    <use xlink:href="#knob18" transform="translate(-9 -9)"/>
+  </g>
+  <g transform="translate(29 290)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(29 319)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(29 348)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+  <!-- ch2 -->  
+
+  <g transform="translate(71 34)">
+    <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
+  </g>
+
+  <g transform="translate(71 40)">
+    <g transform="translate(-6 6)">
+      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
+    </g>
+    <g transform="translate(6 6)">
+      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
+    </g>
+  </g>
+
+  <g transform="translate(71 174)">
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(71 203)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(71 232)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
+  </g>
+  <g transform="translate(71 261)">
+    <use xlink:href="#knob18" transform="translate(-9 -9)"/>
+  </g>
+  <g transform="translate(71 290)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(71 319)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(71 348)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+  <!-- mix -->  
+
+  <g transform="translate(113 34)">
+    <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
+  </g>
+
+  <g transform="translate(113 40)">
+    <g transform="translate(-6 6)">
+      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
+    </g>
+    <g transform="translate(6 6)">
+      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
+    </g>
+  </g>
+
+  <g transform="translate(113 174)">
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(113 203)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(113 232)">
+    <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
+  </g>
+
+  <g transform="translate(113 319)">
+    <rect x="-15" y="-15" width="30" height="60" rx="3" class="output"/>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(113 348)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+</svg>

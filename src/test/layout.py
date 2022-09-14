@@ -1,4 +1,4 @@
 #!/usr/bin/env python3
 
-columns = [0, 1, 2, 3, 4, 5]
-print([x * 29 + 203 for x in columns])
+columns = [6, 5, 4, 3, 2, 1, 0]
+print([348 - x * 29 for x in columns])
