@@ -1,5 +1,7 @@
 #pragma once
 
+#include <vector>
+
 #include "rack.hpp"
 
 using namespace rack;
@@ -10,23 +12,37 @@ using namespace rack;
 
 struct Peak {
 
-private:
+  private:
 
     /** Inverse time constant in 1/seconds */
     static constexpr float lambda = 30.f;
 
-public:
+  public:
 
-	float value = 0.0f;
+    float value = 0.0f;
 
-	void process(float deltaTime, float sample) {
+    void process(float deltaTime, float sample) {
         sample = std::fabs(sample);
         if (sample >= value) {
             value = sample;
-        }
-        else {
+        } else {
             value += (sample - value) * lambda * deltaTime;
         }
+    }
+
+	float getBrightness(float dbMin, float dbMax) {
+
+        float amplitude = value/5.0f;
+
+        // TODO: lookup table?
+		float db = dsp::amplitudeToDb(amplitude);
+
+		if (db >= dbMax)
+			return 1.f;
+		else if (db <= dbMin)
+			return 0.f;
+		else
+			return math::rescale(db, dbMin, dbMax, 0.f, 1.f);
 	}
 };
 
@@ -36,44 +52,43 @@ public:
 
 struct MonoTrack {
 
-private:
-    int channels = 0;
-    float voltages[engine::PORT_MAX_CHANNELS] = {};
+  public:
 
-	void sumVoltages() {
-		sum = 0.f;
-		for (int ch = 0; ch < channels; ch++) {
-			sum += voltages[ch];
-		}
-	}
-
-public:
-
-    Peak peak;
     float sum = 0.0f;
+    Peak peak;
 
     void process(float deltaTime, Input& input) {
 
         // process each channel
-        channels = std::max(input.getChannels(), 1);
+        sum = 0.0f;
+        int channels = std::max(input.getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
             float in = input.getPolyVoltage(ch);
 
             // TODO levels, mute, pan
-            float out = in; 
+            float out = in;
 
-            voltages[ch] = out;
+            sum += out;
         }
 
         // done
-        sumVoltages();
         peak.process(deltaTime, sum);
     }
 
     void disconnect(float deltaTime) {
-        channels = 0;
         sum = 0.0f;
         peak.process(deltaTime, 0.0f);
+    }
+
+    void updateLeds(std::vector<Light>& leds, int ledID) {
+        leds[ledID + 0].setBrightness(peak.getBrightness(  0,   3));
+        leds[ledID + 1].setBrightness(peak.getBrightness( -3,   0));
+        leds[ledID + 2].setBrightness(peak.getBrightness( -6,  -3));
+        leds[ledID + 3].setBrightness(peak.getBrightness(-12,  -6));
+        leds[ledID + 4].setBrightness(peak.getBrightness(-24, -12));
+        leds[ledID + 5].setBrightness(peak.getBrightness(-36, -24));
+        leds[ledID + 6].setBrightness(peak.getBrightness(-36, -36));
+        leds[ledID + 7].setBrightness(peak.getBrightness(-48, -36));
     }
 };
 
@@ -88,12 +103,12 @@ struct StereoTrack {
             left.process(deltaTime, leftInput);
         } else {
             left.disconnect(deltaTime);
-        } 
+        }
 
         //if (rightInput.isConnected()) {
         //    right.process(deltaTime, rightInput);
         //} else {
         //    right.disconnect(deltaTime);
-        //} 
+        //}
     }
 };

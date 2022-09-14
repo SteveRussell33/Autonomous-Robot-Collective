@@ -1,8 +1,8 @@
-#include "plugin.hpp"
 #include "foo.hpp"
+#include "plugin.hpp"
 #include "widgets.hpp"
 
-#define FOO_DEBUG
+// define FOO_DEBUG
 
 //--------------------------------------------------------------
 // FOO
@@ -13,6 +13,8 @@ struct FOO : Module {
     static const int kNumTracks = 2;
 
     StereoTrack tracks[kNumTracks];
+
+    dsp::ClockDivider ledDivider;
 
 #ifdef FOO_DEBUG
     float debug1;
@@ -73,10 +75,11 @@ struct FOO : Module {
 
     enum LightIds {
         ENUMS(kLeftLights1, 8),
-        ENUMS(kRightLights1, 8),
         ENUMS(kLeftLights2, 8),
-        ENUMS(kRightLights2, 8),
         ENUMS(kLeftLightsMix, 8),
+
+        ENUMS(kRightLights1, 8),
+        ENUMS(kRightLights2, 8),
         ENUMS(kRightLightsMix, 8),
         kLightsLen
     };
@@ -120,30 +123,24 @@ struct FOO : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
+
+        ledDivider.setDivision(512);
     }
-
-    // void onSampleRateChange(const SampleRateChangeEvent& e) override {
-    //     faderAmp.sampleRateChange(e.sampleRate);
-    //     for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-    //         levelAmps[ch].sampleRateChange(e.sampleRate);
-    //     }
-    //     levels.sampleRateChange(e.sampleRate);
-    // }
-
-    // float nextLevelAmplitude(int ch) {
-    //     float lv = inputs[kLevelInput].getPolyVoltage(ch);
-    //     // Scale the level input voltage exponentially from [0V, 10V] to [-72dB, +6dB].
-    //     float db = rescale(lv, 0.0f, 10.0f, kMinDb, kMaxDb);
-    //     return levelAmps[ch].next(db);
-    // }
 
     void process(const ProcessArgs& args) override {
 
+        // Process each track
         for (int t = 0; t < kNumTracks; t++) {
             tracks[t].process(args.sampleTime, inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
         }
 
-        outputs[kDebug1].setVoltage(tracks[0].left.peak.value);
+        // Update leds
+        if (ledDivider.process()) {
+            for (int t = 0; t < kNumTracks; t++) {
+                tracks[t].left.updateLeds(lights, kLeftLights1 + t * 8);
+                //tracks[t].right.updateLeds(lights, kRightLights1 + t * 8);
+            }
+        }
     }
 };
 
