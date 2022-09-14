@@ -6,6 +6,15 @@ using namespace rack;
 
 extern Plugin* pluginInstance;
 
+struct RmPort24 : SvgPort {
+    RmPort24() {
+        setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/port24.svg")));
+        box.size = Vec(24, 24);
+        shadow->blurRadius = 1.0;
+        shadow->box.pos = Vec(0.0, 1.5);
+    }
+};
+
 struct RmKnob : RoundKnob {
     RmKnob(const char* svg, int dim) {
         setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, svg)));

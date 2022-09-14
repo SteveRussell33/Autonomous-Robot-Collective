@@ -9,49 +9,49 @@
 
   <style>
     text.title {
-      fill: #a91913;
+      fill: #ebdbb2;
       font-family: 'DIN Alternate';
       font-size: 12pt;
     }
     text.logo {
-      fill: #a91913;
+      fill: #ebdbb2;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
     text.big-label {
-      fill: #343434;
+      fill: #ebdbb2;
       font-family: 'DIN Alternate';
       font-size: 7.5pt;
     }
     text.label {
-      fill: #343434;
+      fill: #ebdbb2;
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
     text.led-label {
-      fill: #686868;
+      fill: #87796c;
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
     .background {
-      fill: #e0e0e0;
+      fill: #3c3836;
     }
     .output {
-      fill: #bbbbbb;
+      fill: #665c54;
     }
     polyline.icon {
-      stroke: #343434;
+      stroke: #ebdbb2;
       stroke-width: 1.2;
       fill: none;
     }
     polyline.connect {
-      stroke: #343434;
+      stroke: #ebdbb2;
       stroke-width: 1;
       fill: none;
     }
 
     .blueprint {
-      stroke: #08f;
+      stroke: #838598;
       fill: none;
     }
   </style>
@@ -61,23 +61,13 @@
   <defs>
 
     <linearGradient id="smallKnobMediumGradient">
-      <stop offset="5%"  stop-color="#888" />
-      <stop offset="95%" stop-color="#333" />
-    </linearGradient>
-
-    <linearGradient id="smallKnobDarkGradient">
-      <stop offset="5%"  stop-color="#444" />
-      <stop offset="95%" stop-color="#222" />
-    </linearGradient>
-
-    <linearGradient id="bigKnobDarkGradient">
-      <stop offset="5%"  stop-color="#5c5c5c" />
+      <stop offset="5%"  stop-color="#665c54" />
       <stop offset="95%" stop-color="#282828" />
     </linearGradient>
 
-    <linearGradient id="bigKnobMediumGradient">
-      <stop offset="5%"  stop-color="#888" />
-      <stop offset="95%" stop-color="#333" />
+    <linearGradient id="smallKnobDarkGradient">
+      <stop offset="5%"  stop-color="#504945" />
+      <stop offset="95%" stop-color="#1d2021" />
     </linearGradient>
 
     <symbol id="knob18" >
@@ -90,8 +80,9 @@
 
     <symbol id="knob24" >
       <g transform="translate(12 12)">
-        <circle r="11.5" fill="url('#bigKnobDarkGradient')" transform="rotate(90)"/>
-        <circle r="9.5" fill="url('#bigKnobMediumGradient')" transform="rotate(90)"/>
+        <circle r="11.5" stroke="#121212" fill="none"/>
+        <circle r="11" fill="url('#smallKnobMediumGradient')" transform="rotate(90)"/>
+        <circle r="10" fill="url('#smallKnobDarkGradient')" transform="rotate(90)"/>
       </g>
     </symbol>
 
@@ -131,7 +122,7 @@
   <text class="title" x="50%" y="16"  text-anchor="middle">FOO</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
-  <rect x="0" y="34" width="135" height="118" fill="#121212"/>
+  <rect x="0" y="35" width="135" height="116" fill="#121212"/>
 
   <g transform="translate(31 46.5)">
     <g transform="translate(-17 0)">
@@ -147,27 +138,27 @@
   </g>
 
   <!-- labels -->  
-  <g transform="translate(12 0)">
+  <g transform="translate(10 0)">
     <g transform="translate(0 168)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
+      <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
     <g transform="translate(0 198)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
+      <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
     <g transform="translate(0 228)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">M</text>
+      <text x="0" y="3" class="label" text-anchor="middle">M</text>
     </g>
     <g transform="translate(0 258)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
+      <text x="0" y="3" class="label" text-anchor="middle">P</text>
     </g>
     <g transform="translate(0 288)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
+      <text x="0" y="3" class="label" text-anchor="middle">P</text>
     </g>
     <g transform="translate(0 318)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">L</text>
+      <text x="0" y="3" class="label" text-anchor="middle">L</text>
     </g>
     <g transform="translate(0 348)">
-      <text x="0" y="2.5" class="label" text-anchor="middle">R</text>
+      <text x="0" y="3" class="label" text-anchor="middle">R</text>
     </g>
   </g>
 
@@ -196,7 +187,7 @@
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
   <g transform="translate(31 258)">
-    <use xlink:href="#knob18" transform="translate(-9 -9)"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(31 288)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
@@ -233,7 +224,7 @@
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
   <g transform="translate(72 258)">
-    <use xlink:href="#knob18" transform="translate(-9 -9)"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(72 288)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>

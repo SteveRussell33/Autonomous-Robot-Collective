@@ -23,6 +23,7 @@ files = [
     'knob40',
     'MIX1',
     'MIX2',
+    'port24',
     'toggle-0',
     'toggle-1'
 ]
