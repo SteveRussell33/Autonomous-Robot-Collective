@@ -99,14 +99,14 @@
   <defs
      id="defs41">
     <linearGradient
-       id="smallKnobMediumGradient"
+       id="smallKnobLight"
        x1="0%"
        y1="0%"
        x2="0%"
        y2="100%">
       <stop
          offset="0%"
-         stop-color="#665c54"
+         stop-color="#7c6f64"
          id="stop4" />
       <stop
          offset="100%"
@@ -114,7 +114,7 @@
          id="stop6" />
     </linearGradient>
     <linearGradient
-       id="smallKnobDarkGradient"
+       id="smallKnobDark"
        x1="0%"
        y1="0%"
        x2="0%"
@@ -140,11 +140,11 @@
            id="circle14" />
         <circle
            r="8"
-           fill="url('#smallKnobMediumGradient')"
+           fill="url('#smallKnobLight')"
            id="circle16" />
         <circle
            r="7"
-           fill="url('#smallKnobDarkGradient')"
+           fill="url('#smallKnobDark')"
            id="circle18" />
       </g>
     </symbol>
@@ -160,11 +160,11 @@
            id="circle23" />
         <circle
            r="11"
-           fill="url('#smallKnobMediumGradient')"
+           fill="url('#smallKnobLight')"
            id="circle25" />
         <circle
            r="10"
-           fill="url('#smallKnobDarkGradient')"
+           fill="url('#smallKnobDark')"
            id="circle27" />
       </g>
     </symbol>
@@ -188,7 +188,7 @@
     </symbol>
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobMediumGradient"
+       xlink:href="#smallKnobLight"
        id="linearGradient295"
        x1="-11"
        y1="-11"
@@ -197,7 +197,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobDarkGradient"
+       xlink:href="#smallKnobDark"
        id="linearGradient297"
        x1="-10"
        y1="-10"
@@ -206,7 +206,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobMediumGradient"
+       xlink:href="#smallKnobLight"
        id="linearGradient317"
        x1="-11"
        y1="-11"
@@ -215,7 +215,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobDarkGradient"
+       xlink:href="#smallKnobDark"
        id="linearGradient319"
        x1="-10"
        y1="-10"
@@ -224,7 +224,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobMediumGradient"
+       xlink:href="#smallKnobLight"
        id="linearGradient343"
        x1="-11"
        y1="-11"
@@ -233,7 +233,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobDarkGradient"
+       xlink:href="#smallKnobDark"
        id="linearGradient345"
        x1="-10"
        y1="-10"
@@ -242,7 +242,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobMediumGradient"
+       xlink:href="#smallKnobLight"
        id="linearGradient365"
        x1="-11"
        y1="-11"
@@ -251,7 +251,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobDarkGradient"
+       xlink:href="#smallKnobDark"
        id="linearGradient367"
        x1="-10"
        y1="-10"
@@ -260,7 +260,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobMediumGradient"
+       xlink:href="#smallKnobLight"
        id="linearGradient391"
        x1="-11"
        y1="-11"
@@ -269,7 +269,7 @@
        gradientUnits="userSpaceOnUse" />
     <linearGradient
        inkscape:collect="always"
-       xlink:href="#smallKnobDarkGradient"
+       xlink:href="#smallKnobDark"
        id="linearGradient393"
        x1="-10"
        y1="-10"
