@@ -72,8 +72,12 @@ struct FOO : Module {
     };
 
 	enum LightIds {
-		ENUMS(kLeftLights1, 9),
-		ENUMS(kRightLights1, 9),
+		ENUMS(kLeftLights1, 8),
+		ENUMS(kRightLights1, 8),
+		ENUMS(kLeftLights2, 8),
+		ENUMS(kRightLights2, 8),
+		ENUMS(kLeftLightsMix, 8),
+		ENUMS(kRightLightsMix, 8),
 		kLightsLen
 	};
 
@@ -164,7 +168,11 @@ struct FOOWidget : ModuleWidget {
         // [168, 198, 228, 258, 288, 318, 348]
 
         addLights(module, FOO::kLeftLights1, cols[0] - 6, 44); 
-        addLights(module, FOO::kRightLights1, cols[1] - 6, 44); 
+        addLights(module, FOO::kRightLights1, cols[0] + 6, 44); 
+        addLights(module, FOO::kLeftLights2, cols[1] - 6, 44); 
+        addLights(module, FOO::kRightLights2, cols[1] + 6, 44); 
+        addLights(module, FOO::kLeftLightsMix, mixCol - 6, 44); 
+        addLights(module, FOO::kRightLightsMix, mixCol + 6, 44); 
 
         for (int t = 0; t < FOO::kNumTracks; t++) {
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kLevelParam1 + t));
@@ -185,14 +193,13 @@ struct FOOWidget : ModuleWidget {
 
     void addLights(FOO* module, int lightID, int x, int y) {
 		addChild(createLightCentered<SmallSimpleLight<RedLight>>   (Vec(x, y), module, lightID));
-		addChild(createLightCentered<SmallSimpleLight<YellowLight>>(Vec(x, y + 12), module, lightID+ 1));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 24), module, lightID+ 2));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 36), module, lightID+ 3));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 48), module, lightID+ 4));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 60), module, lightID+ 5));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 72), module, lightID+ 6));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 84), module, lightID+ 7));
-		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 96), module, lightID+ 8));
+		addChild(createLightCentered<SmallSimpleLight<YellowLight>>(Vec(x, y + 14), module, lightID+ 1));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 28), module, lightID+ 2));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 42), module, lightID+ 3));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 56), module, lightID+ 4));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 70), module, lightID+ 5));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 84), module, lightID+ 6));
+		addChild(createLightCentered<SmallSimpleLight<GreenLight>> (Vec(x, y + 98), module, lightID+ 7));
     }
 };
 

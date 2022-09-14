@@ -29,7 +29,7 @@
       font-size: 6pt;
     }
     text.led-label {
-      fill: #888;
+      fill: #686868;
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
@@ -110,18 +110,16 @@
         <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
       </g>
     </symbol>
-
     <symbol id="led-strip">
       <g transform="translate(5 2.5)">
          <circle cx="0" cy= "0" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="12" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="24" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="36" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="48" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="60" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="72" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="14" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="28" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="42" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="56" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="70" r="2" stroke-width="1" class="blueprint"/>
          <circle cx="0" cy="84" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="96" r="2" stroke-width="1" class="blueprint"/>
+         <circle cx="0" cy="98" r="2" stroke-width="1" class="blueprint"/>
       </g>
     </symbol>
 
@@ -133,19 +131,18 @@
   <text class="title" x="50%" y="16"  text-anchor="middle">FOO</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
-  <rect x="0" y="36" width="135" height="114" fill="#121212"/>
+  <rect x="0" y="34" width="135" height="118" fill="#121212"/>
 
-  <g transform="translate(31 36)">
-    <g transform="translate(-18 11)">
+  <g transform="translate(31 46.5)">
+    <g transform="translate(-17 0)">
       <text x="0" y= "0" class="led-label" text-anchor="end">0</text>
-      <text x="0" y="12" class="led-label" text-anchor="end">-3</text>
-      <text x="0" y="24" class="led-label" text-anchor="end">-6</text>
-      <text x="0" y="36" class="led-label" text-anchor="end">-9</text>
-      <text x="0" y="48" class="led-label" text-anchor="end">-12</text>
-      <text x="0" y="60" class="led-label" text-anchor="end">-18</text>
-      <text x="0" y="72" class="led-label" text-anchor="end">-24</text>
-      <text x="0" y="84" class="led-label" text-anchor="end">-36</text>
-      <text x="0" y="96" class="led-label" text-anchor="end">-48</text>
+      <text x="0" y="14" class="led-label" text-anchor="end">-3</text>
+      <text x="0" y="28" class="led-label" text-anchor="end">-6</text>
+      <text x="0" y="42" class="led-label" text-anchor="end">-9</text>
+      <text x="0" y="56" class="led-label" text-anchor="end">-12</text>
+      <text x="0" y="70" class="led-label" text-anchor="end">-18</text>
+      <text x="0" y="84" class="led-label" text-anchor="end">-24</text>
+      <text x="0" y="98" class="led-label" text-anchor="end">-36</text>
     </g>
   </g>
 
@@ -176,11 +173,11 @@
 
   <!-- ch1 -->  
 
-  <g transform="translate(31 32)">
+  <g transform="translate(31 31)">
     <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
   </g>
 
-  <g transform="translate(31 42)">
+  <g transform="translate(31 41)">
     <g transform="translate(-6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
@@ -213,11 +210,11 @@
 
   <!-- ch2 -->  
 
-  <g transform="translate(72 32)">
+  <g transform="translate(72 31)">
     <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
   </g>
 
-  <g transform="translate(72 42)">
+  <g transform="translate(72 41)">
     <g transform="translate(-6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
@@ -250,11 +247,11 @@
 
   <!-- mix -->  
 
-  <g transform="translate(113 32)">
+  <g transform="translate(113 31)">
     <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
   </g>
 
-  <g transform="translate(113 42)">
+  <g transform="translate(113 41)">
     <g transform="translate(-6 0)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
