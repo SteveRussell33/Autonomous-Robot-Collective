@@ -148,8 +148,8 @@
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
   <rect x="0" y="40" width="135" height="114" fill="#121212"/>
-  <g transform="translate(29 40)">
-    <g transform="translate(-15 11)">
+  <g transform="translate(31 40)">
+    <g transform="translate(-18 11)">
       <text x="0" y= "0" class="led-label" text-anchor="end">0</text>
       <text x="0" y="12" class="led-label" text-anchor="end">-3</text>
       <text x="0" y="24" class="led-label" text-anchor="end">-6</text>
@@ -163,37 +163,37 @@
   </g>
 
   <!-- labels -->  
-  <g transform="translate(29 0)">
-    <g transform="translate(-20 174)">
+  <g transform="translate(12 0)">
+    <g transform="translate(0 174)">
       <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
     </g>
-    <g transform="translate(-20 203)">
+    <g transform="translate(0 203)">
       <text x="0" y="2.5" class="label" text-anchor="middle">V</text>
     </g>
-    <g transform="translate(-20 232)">
+    <g transform="translate(0 232)">
       <text x="0" y="2.5" class="label" text-anchor="middle">M</text>
     </g>
-    <g transform="translate(-20 261)">
+    <g transform="translate(0 261)">
       <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
     </g>
-    <g transform="translate(-20 290)">
+    <g transform="translate(0 290)">
       <text x="0" y="2.5" class="label" text-anchor="middle">P</text>
     </g>
-    <g transform="translate(-20 319)">
+    <g transform="translate(0 319)">
       <text x="0" y="2.5" class="label" text-anchor="middle">L</text>
     </g>
-    <g transform="translate(-20 348)">
+    <g transform="translate(0 348)">
       <text x="0" y="2.5" class="label" text-anchor="middle">R</text>
     </g>
   </g>
 
   <!-- ch1 -->  
 
-  <g transform="translate(29 34)">
+  <g transform="translate(31 34)">
     <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
   </g>
 
-  <g transform="translate(29 40)">
+  <g transform="translate(31 40)">
     <g transform="translate(-6 6)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
@@ -202,35 +202,35 @@
     </g>
   </g>
 
-  <g transform="translate(29 174)">
+  <g transform="translate(31 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(29 203)">
+  <g transform="translate(31 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(29 232)">
+  <g transform="translate(31 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(29 261)">
+  <g transform="translate(31 261)">
     <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(29 290)">
+  <g transform="translate(31 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(29 319)">
+  <g transform="translate(31 319)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(29 348)">
+  <g transform="translate(31 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- ch2 -->  
 
-  <g transform="translate(71 34)">
+  <g transform="translate(72 34)">
     <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
   </g>
 
-  <g transform="translate(71 40)">
+  <g transform="translate(72 40)">
     <g transform="translate(-6 6)">
       <use xlink:href="#led-strip" transform="translate(-5 0)"/>
     </g>
@@ -239,25 +239,25 @@
     </g>
   </g>
 
-  <g transform="translate(71 174)">
+  <g transform="translate(72 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(71 203)">
+  <g transform="translate(72 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(71 232)">
+  <g transform="translate(72 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(71 261)">
+  <g transform="translate(72 261)">
     <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(71 290)">
+  <g transform="translate(72 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(71 319)">
+  <g transform="translate(72 319)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(71 348)">
+  <g transform="translate(72 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
