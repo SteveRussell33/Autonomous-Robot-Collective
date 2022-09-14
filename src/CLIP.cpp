@@ -157,7 +157,7 @@ struct CLIPWidget : ModuleWidget {
 #endif
 
         addFader(22.5, 48, CLIP::kFader);
-        addMeter(22.5, 48, module ?  &(module->levels) : NULL);
+        addMeter(22.5, 48, module ? &(module->levels) : NULL);
 
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 254), module, CLIP::kLevelInput));
 

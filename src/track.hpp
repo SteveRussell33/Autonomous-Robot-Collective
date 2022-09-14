@@ -314,7 +314,8 @@ struct VUMeter : OpaqueWidget {
 
   public:
 
-    VUMeter(StereoLevels* levels_) : levels(levels_) {}
+    VUMeter(StereoLevels* levels_) : levels(levels_) {
+    }
 
     void draw(const DrawArgs& args) override {
         if (!levels) {

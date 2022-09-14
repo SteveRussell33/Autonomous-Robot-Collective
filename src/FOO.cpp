@@ -1,5 +1,5 @@
 #include "plugin.hpp"
-//include "track.hpp"
+// include "track.hpp"
 #include "widgets.hpp"
 
 // define FOO_DEBUG
@@ -74,9 +74,9 @@ struct FOO : Module {
     FOO() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        //configParam<FaderParamQuantity>(kLevelParam1, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
-        //configParam<FaderParamQuantity>(kLevelParam2, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
-        //configParam<FaderParamQuantity>(kLevelParamMix, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
+        // configParam<FaderParamQuantity>(kLevelParam1, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
+        // configParam<FaderParamQuantity>(kLevelParam2, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
+        // configParam<FaderParamQuantity>(kLevelParamMix, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
 
         configSwitch(kMuteParam1, 0.f, 1.f, 0.f, "Track 1 Mute", {"Off", "On"});
         configSwitch(kMuteParam2, 0.f, 1.f, 0.f, "Track 2 Mute", {"Off", "On"});
@@ -173,7 +173,6 @@ struct FOOWidget : ModuleWidget {
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 318), module, FOO::kLeftOutput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, FOO::kRightOutput));
     }
-
 };
 
 Model* modelFOO = createModel<FOO, FOOWidget>("FOO");

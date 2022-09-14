@@ -119,7 +119,7 @@ struct MIX1Widget : ModuleWidget {
         static const int faderY = 39;
 
         addFader(30, faderY, MIX1::kFader);
-        addMeter(30, faderY, module ?  &(module->levels) : NULL);
+        addMeter(30, faderY, module ? &(module->levels) : NULL);
         addParam(createParamCentered<RmToggleButton>(Vec(30, 203), module, MIX1::kMute));
         addInput(createInputCentered<PJ301MPort>(Vec(30, 232), module, MIX1::kLevelInput));
         addInput(createInputCentered<PJ301MPort>(Vec(30, 261), module, MIX1::kLeftInput));
@@ -146,7 +146,6 @@ struct MIX1Widget : ModuleWidget {
         meter->box.size = Vec(meterH, meterW);
         addChild(meter);
     }
-
 };
 
 Model* modelMIX1 = createModel<MIX1, MIX1Widget>("MIX1");

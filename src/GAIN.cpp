@@ -164,7 +164,7 @@ struct GAINWidget : ModuleWidget {
 #endif
 
         addFader(22.5, 46, GAIN::kFader);
-        addMeter(22.5, 46, module ?  &(module->levels) : NULL);
+        addMeter(22.5, 46, module ? &(module->levels) : NULL);
 
         addParam(createParamCentered<RmToggleButton>(Vec(22.5, 217), module, GAIN::kMute));
         addInput(createInputCentered<PJ301MPort>(Vec(22.5, 254), module, GAIN::kLevelInput));
