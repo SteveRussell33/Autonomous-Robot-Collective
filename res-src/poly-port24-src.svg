@@ -8,11 +8,9 @@
 >
   <g transform="translate(12 12)">
     <circle r="11.5" fill="#bababa"/>
-    <circle r="8.5"    fill="#222"/>
-    <circle r="7.5"    fill="#ebdbb2"/>
+    <circle r="8.5"  fill="#222"/>
+    <circle r="7.5"  fill="#ebdbb2"/>
     <circle r="5"    fill="#121212"/>
-    <!---circle r="11.5" stroke-width="1" stroke="#666" fill="none"/>
-    <circle r="6"    stroke-width="1" stroke="#777" fill="none"/-->
   </g>
 </svg>
 

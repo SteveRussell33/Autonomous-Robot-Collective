@@ -261,11 +261,25 @@
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
 
+  <g transform="translate(113 258)">
+    <rect x="-22" y="-14" width="37" height="58" rx="3" class="output"/>
+
+    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(113 288)">
+    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">R</text>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
   <g transform="translate(113 318)">
-    <rect x="-15" y="-15" width="30" height="60" rx="3" class="output"/>
+    <rect x="-22" y="-14" width="37" height="58" rx="3" class="output"/>
+
+    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(113 348)">
+    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">R</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 

@@ -1,8 +1,8 @@
 #include "plugin.hpp"
-// include "track.hpp"
+#include "foo.hpp"
 #include "widgets.hpp"
 
-// define FOO_DEBUG
+#define FOO_DEBUG
 
 //--------------------------------------------------------------
 // FOO
@@ -12,9 +12,7 @@ struct FOO : Module {
 
     static const int kNumTracks = 2;
 
-    // Amplitude faderAmp;
-    // Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
-    // StereoLevels levels[kNumTracks+1];
+    StereoTrack tracks[kNumTracks];
 
 #ifdef FOO_DEBUG
     float debug1;
@@ -59,8 +57,10 @@ struct FOO : Module {
 
     enum OutputId {
 
-        kLeftOutput,
-        kRightOutput,
+        kSendLeftOutput,
+        kSendRightOutput,
+        kMixLeftOutput,
+        kMixRightOutput,
 
 #ifdef FOO_DEBUG
         kDebug1,
@@ -108,8 +108,11 @@ struct FOO : Module {
         configInput(kRightInput1, "Track 1 Right");
         configInput(kRightInput2, "Track 2 Right");
 
-        configOutput(kLeftOutput, "Mix Left");
-        configOutput(kRightOutput, "Mix Right");
+        configOutput(kSendLeftOutput, "Send Left");
+        configOutput(kSendRightOutput, "Send Right");
+
+        configOutput(kMixLeftOutput, "Mix Left");
+        configOutput(kMixRightOutput, "Mix Right");
 
 #ifdef FOO_DEBUG
         configOutput(kDebug1, "Debug 1");
@@ -135,6 +138,12 @@ struct FOO : Module {
     // }
 
     void process(const ProcessArgs& args) override {
+
+        for (int t = 0; t < kNumTracks; t++) {
+            tracks[t].process(args.sampleTime, inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
+        }
+
+        outputs[kDebug1].setVoltage(tracks[0].left.peak.value);
     }
 };
 
@@ -154,10 +163,10 @@ struct FOOWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
 #ifdef FOO_DEBUG
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 12), module, FOO::kDebug1));
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 36), module, FOO::kDebug2));
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 60), module, FOO::kDebug3));
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 84), module, FOO::kDebug4));
+        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 12), module, FOO::kDebug1));
+        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 36), module, FOO::kDebug2));
+        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 60), module, FOO::kDebug3));
+        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 84), module, FOO::kDebug4));
 #endif
 
         //////////////////////////////////////////////////////////////
@@ -176,19 +185,21 @@ struct FOOWidget : ModuleWidget {
 
         for (int t = 0; t < FOO::kNumTracks; t++) {
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kLevelParam1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 198), module, FOO::kLevelInput1 + t));
+            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 198), module, FOO::kLevelInput1 + t));
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 228), module, FOO::kMuteParam1 + t));
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 258), module, FOO::kPanParam1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 288), module, FOO::kPanParamInput1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 318), module, FOO::kLeftInput1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
+            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 288), module, FOO::kPanParamInput1 + t));
+            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 318), module, FOO::kLeftInput1 + t));
+            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
         }
 
         addParam(createParamCentered<RmKnob24>(Vec(mixCol, 168), module, FOO::kLevelParamMix));
-        addInput(createInputCentered<RmPort24>(Vec(mixCol, 198), module, FOO::kLevelInputMix));
+        addInput(createInputCentered<RmPolyPort24>(Vec(mixCol, 198), module, FOO::kLevelInputMix));
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 228), module, FOO::kMuteParamMix));
-        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 318), module, FOO::kLeftOutput));
-        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 348), module, FOO::kRightOutput));
+        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 258), module, FOO::kSendLeftOutput));
+        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 288), module, FOO::kSendRightOutput));
+        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 318), module, FOO::kMixLeftOutput));
+        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
     }
 
     void addLights(FOO* module, int lightID, int x, int y) {
