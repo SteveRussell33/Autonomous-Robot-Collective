@@ -23,9 +23,9 @@ struct FOO : Module {
 
     enum ParamId {
 
-        kLevelParam1,
-        kLevelParam2,
-        kLevelParamMix,
+        kVolumeParam1,
+        kVolumeParam2,
+        kVolumeParamMix,
 
         kMuteParam1,
         kMuteParam2,
@@ -45,9 +45,9 @@ struct FOO : Module {
         kRightInput1,
         kRightInput2,
 
-        kLevelInput1,
-        kLevelInput2,
-        kLevelInputMix,
+        kVolumeInput1,
+        kVolumeInput2,
+        kVolumeInputMix,
 
         kPanParamInput1,
         kPanParamInput2,
@@ -74,17 +74,17 @@ struct FOO : Module {
     FOO() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        // configParam<FaderParamQuantity>(kLevelParam1, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
-        // configParam<FaderParamQuantity>(kLevelParam2, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
-        // configParam<FaderParamQuantity>(kLevelParamMix, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
+        // configParam<FaderParamQuantity>(kVolumeParam1, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
+        // configParam<FaderParamQuantity>(kVolumeParam2, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
+        // configParam<FaderParamQuantity>(kVolumeParamMix, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
 
         configSwitch(kMuteParam1, 0.f, 1.f, 0.f, "Track 1 Mute", {"Off", "On"});
         configSwitch(kMuteParam2, 0.f, 1.f, 0.f, "Track 2 Mute", {"Off", "On"});
         configSwitch(kMuteParamMix, 0.f, 1.f, 0.f, "Mix Mute", {"Off", "On"});
 
-        configInput(kLevelInput1, "Track 1 Level CV");
-        configInput(kLevelInput2, "Track 2 Level CV");
-        configInput(kLevelInputMix, "Mix Level CV");
+        configInput(kVolumeInput1, "Track 1 Volume CV");
+        configInput(kVolumeInput2, "Track 2 Volume CV");
+        configInput(kVolumeInputMix, "Mix Volume CV");
 
         configParam(kPanParam1, -1.0f, 1.0f, 0.0f, "Track 1 Pan");
         configParam(kPanParam2, -1.0f, 1.0f, 0.0f, "Track 2 Pan");
@@ -112,11 +112,17 @@ struct FOO : Module {
 #endif
     }
 
+    void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        for (int t = 0; t < kNumTracks; t++) {
+            tracks[t].onSampleRateChange(e.sampleRate);
+        }
+    }
+
     void process(const ProcessArgs& args) override {
 
         // Process each track
         for (int t = 0; t < kNumTracks; t++) {
-            tracks[t].process(args.sampleTime, inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
+            tracks[t].process(inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
         }
     }
 };
@@ -151,8 +157,8 @@ struct FOOWidget : ModuleWidget {
         // [168, 198, 228, 258, 288, 318, 348]
 
         for (int t = 0; t < FOO::kNumTracks; t++) {
-            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kLevelParam1 + t));
-            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 198), module, FOO::kLevelInput1 + t));
+            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kVolumeParam1 + t));
+            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 198), module, FOO::kVolumeInput1 + t));
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 228), module, FOO::kMuteParam1 + t));
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 258), module, FOO::kPanParam1 + t));
             addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 288), module, FOO::kPanParamInput1 + t));
@@ -160,8 +166,8 @@ struct FOOWidget : ModuleWidget {
             addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
         }
 
-        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 168), module, FOO::kLevelParamMix));
-        addInput(createInputCentered<RmPolyPort24>(Vec(mixCol, 198), module, FOO::kLevelInputMix));
+        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 168), module, FOO::kVolumeParamMix));
+        addInput(createInputCentered<RmPolyPort24>(Vec(mixCol, 198), module, FOO::kVolumeInputMix));
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 228), module, FOO::kMuteParamMix));
         addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 258), module, FOO::kSendLeftOutput));
         addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 288), module, FOO::kSendRightOutput));

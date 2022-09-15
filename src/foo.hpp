@@ -1,48 +1,72 @@
 #pragma once
 
-#include <vector>
-
 #include "rack.hpp"
+
+#include "bogaudio/dsp/filters/utility.hpp"
+#include "bogaudio/dsp/signal.hpp"
 
 using namespace rack;
 
 //--------------------------------------------------------------
-// Peak is adapted from /Rack-SDK/include/dsp/vumeter.hpp
+// VuLevel
 //--------------------------------------------------------------
 
-struct Peak {
+// VuLevel is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
+struct VuLevel {
 
   private:
 
-    /** Inverse time constant in 1/seconds */
-    static constexpr float lambda = 30.f;
+    bogaudio::dsp::RootMeanSquare calcRms;
+
+    bogaudio::dsp::RunningAverage calcPeak;
+    bogaudio::dsp::SlewLimiter peakSlew;
+    bool peakFalling = false;
+
+    bogaudio::dsp::Timer maxPeakTimer;
 
   public:
 
-    float value = 0.0f;
+    float rms = 0.0f;
+    float peak = 0.0f;
+    float maxPeak = 0.0f;
 
-    void process(float deltaTime, float sample) {
-        sample = std::fabs(sample);
-        if (sample >= value) {
-            value = sample;
-        } else {
-            value += (sample - value) * lambda * deltaTime;
-        }
+    void onSampleRateChange(float sampleRate) {
+
+        calcRms.setSampleRate(sampleRate);
+        calcRms.setSensitivity(1.0f);
+
+        calcPeak.setSampleRate(sampleRate);
+        calcPeak.setSensitivity(0.025f);
+        peakSlew.setParams(sampleRate, 750.0f, 1.0f);
+
+        maxPeakTimer.setParams(sampleRate, 1.0f);
     }
 
-	float getBrightness(float dbMin, float dbMax) {
+    void process(float sample) {
 
-        float amp = value/5.0f;
+        // RMS
+        rms = calcRms.next(sample) / 5.0f;
 
-		float db = dsp::amplitudeToDb(amp);
+        // Peak
+        float pa = calcPeak.next(fabsf(sample)) / 5.0f;
 
-		if (db >= dbMax)
-			return 1.f;
-		else if (db <= dbMin)
-			return 0.f;
-		else
-			return math::rescale(db, dbMin, dbMax, 0.f, 1.f);
-	}
+        if (pa < peak) {
+            if (!peakFalling) {
+                peakFalling = true;
+                peakSlew.setLast(peak);
+            }
+            pa = peakSlew.next(pa);
+        } else {
+            peakFalling = false;
+        }
+        peak = pa;
+
+        // Max Peak
+        if ((peak > maxPeak) || !maxPeakTimer.next()) {
+            maxPeak = peak;
+            maxPeakTimer.reset();
+        }
+    }
 };
 
 //--------------------------------------------------------------
@@ -51,15 +75,17 @@ struct Peak {
 
 struct MonoTrack {
 
-  public:
+    float voltageSum = 0.0f;
+    VuLevel vuLevel;
 
-    float sum = 0.0f;
-    Peak peak;
+    void onSampleRateChange(float sampleRate) {
+        vuLevel.onSampleRateChange(sampleRate);
+    }
 
-    void process(float deltaTime, Input& input) {
+    void process(Input& input) {
 
         // process each channel
-        sum = 0.0f;
+        voltageSum = 0.0f;
         int channels = std::max(input.getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
             float in = input.getPolyVoltage(ch);
@@ -67,47 +93,45 @@ struct MonoTrack {
             // TODO levels, mute, pan
             float out = in;
 
-            sum += out;
+            voltageSum += out;
         }
 
         // done
-        peak.process(deltaTime, sum);
+        vuLevel.process(voltageSum);
     }
 
-    void disconnect(float deltaTime) {
-        sum = 0.0f;
-        peak.process(deltaTime, 0.0f);
-    }
-
-    void updateLeds(std::vector<Light>& leds, int ledID) {
-        leds[ledID + 0].setBrightness(peak.getBrightness(  0,   3));
-        leds[ledID + 1].setBrightness(peak.getBrightness( -3,   0));
-        leds[ledID + 2].setBrightness(peak.getBrightness( -6,  -3));
-        leds[ledID + 3].setBrightness(peak.getBrightness(-12,  -6));
-        leds[ledID + 4].setBrightness(peak.getBrightness(-24, -12));
-        leds[ledID + 5].setBrightness(peak.getBrightness(-36, -24));
-        leds[ledID + 6].setBrightness(peak.getBrightness(-36, -36));
-        leds[ledID + 7].setBrightness(peak.getBrightness(-48, -36));
+    void disconnect() {
+        voltageSum = 0.0f;
+        vuLevel.process(0.0f);
     }
 };
+
+//--------------------------------------------------------------
+// MonoTrack
+//--------------------------------------------------------------
 
 struct StereoTrack {
 
     MonoTrack left;
     MonoTrack right;
 
-    void process(float deltaTime, Input& leftInput, Input& rightInput) {
+    void onSampleRateChange(float sampleRate) {
+        left.onSampleRateChange(sampleRate);
+        right.onSampleRateChange(sampleRate);
+    }
+
+    void process(Input& leftInput, Input& rightInput) {
 
         if (leftInput.isConnected()) {
-            left.process(deltaTime, leftInput);
+            left.process(leftInput);
         } else {
-            left.disconnect(deltaTime);
+            left.disconnect();
         }
 
         if (rightInput.isConnected()) {
-            right.process(deltaTime, rightInput);
+            right.process(rightInput);
         } else {
-            right.disconnect(deltaTime);
+            right.disconnect();
         }
     }
 };
