@@ -4,7 +4,7 @@ import os
 import subprocess
 
 files = [
-    'FOO',
+    'MIX2',
     'knob24',
     'toggle-0',
     'toggle-1'

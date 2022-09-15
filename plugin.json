@@ -14,9 +14,9 @@
   "changelogUrl": "",
   "modules": [
     {
-      "slug": "FOO",
-      "name": "FOO",
-      "description": "FOO",
+      "slug": "MIX2",
+      "name": "MIX-2",
+      "description": "MIX-2",
       "tags": []
     }
   ]

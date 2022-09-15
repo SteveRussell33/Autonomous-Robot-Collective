@@ -1,20 +1,20 @@
-#include "foo.hpp"
 #include "plugin.hpp"
+#include "track.hpp"
 #include "widgets.hpp"
 
-// define FOO_DEBUG
+// define MIX2_DEBUG
 
 //--------------------------------------------------------------
-// FOO
+// MIX2
 //--------------------------------------------------------------
 
-struct FOO : Module {
+struct MIX2 : Module {
 
     static const int kNumTracks = 2;
 
     StereoTrack tracks[kNumTracks];
 
-#ifdef FOO_DEBUG
+#ifdef MIX2_DEBUG
     float debug1;
     float debug2;
     float debug3;
@@ -62,7 +62,7 @@ struct FOO : Module {
         kMixLeftOutput,
         kMixRightOutput,
 
-#ifdef FOO_DEBUG
+#ifdef MIX2_DEBUG
         kDebug1,
         kDebug2,
         kDebug3,
@@ -71,7 +71,7 @@ struct FOO : Module {
         kOutputsLen
     };
 
-    FOO() {
+    MIX2() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         // configParam<FaderParamQuantity>(kVolumeParam1, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
@@ -104,7 +104,7 @@ struct FOO : Module {
         configOutput(kMixLeftOutput, "Mix Left");
         configOutput(kMixRightOutput, "Mix Right");
 
-#ifdef FOO_DEBUG
+#ifdef MIX2_DEBUG
         configOutput(kDebug1, "Debug 1");
         configOutput(kDebug2, "Debug 2");
         configOutput(kDebug3, "Debug 3");
@@ -128,25 +128,25 @@ struct FOO : Module {
 };
 
 //--------------------------------------------------------------
-// FOOWidget
+// MIX2Widget
 //--------------------------------------------------------------
 
-struct FOOWidget : ModuleWidget {
+struct MIX2Widget : ModuleWidget {
 
-    FOOWidget(FOO* module) {
+    MIX2Widget(MIX2* module) {
         setModule(module);
-        setPanel(createPanel(asset::plugin(pluginInstance, "res/FOO.svg")));
+        setPanel(createPanel(asset::plugin(pluginInstance, "res/MIX2.svg")));
 
         addChild(createWidget<ScrewSilver>(Vec(15, 0)));
         addChild(createWidget<ScrewSilver>(Vec(15, 365)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
-#ifdef FOO_DEBUG
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FOO::kDebug1));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, FOO::kDebug2));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, FOO::kDebug3));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, FOO::kDebug4));
+#ifdef MIX2_DEBUG
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, MIX2::kDebug1));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, MIX2::kDebug2));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, MIX2::kDebug3));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, MIX2::kDebug4));
 #endif
 
         //////////////////////////////////////////////////////////////
@@ -156,24 +156,24 @@ struct FOOWidget : ModuleWidget {
 
         // [174, 203, 232, 261, 290, 319, 348]
 
-        for (int t = 0; t < FOO::kNumTracks; t++) {
-            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, FOO::kVolumeParam1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, FOO::kVolumeInput1 + t));
-            addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 232), module, FOO::kMuteParam1 + t));
-            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 261), module, FOO::kPanParam1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 290), module, FOO::kPanParamInput1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 319), module, FOO::kLeftInput1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
+        for (int t = 0; t < MIX2::kNumTracks; t++) {
+            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, MIX2::kVolumeParam1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, MIX2::kVolumeInput1 + t));
+            addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 232), module, MIX2::kMuteParam1 + t));
+            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 261), module, MIX2::kPanParam1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 290), module, MIX2::kPanParamInput1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 319), module, MIX2::kLeftInput1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, MIX2::kRightInput1 + t));
         }
 
-        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, FOO::kVolumeParamMix));
-        addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 203), module, FOO::kVolumeInputMix));
-        addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 232), module, FOO::kMuteParamMix));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 261), module, FOO::kSendLeftOutput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 290), module, FOO::kSendRightOutput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, FOO::kMixLeftOutput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
+        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, MIX2::kVolumeParamMix));
+        addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 203), module, MIX2::kVolumeInputMix));
+        addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 232), module, MIX2::kMuteParamMix));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 261), module, MIX2::kSendLeftOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 290), module, MIX2::kSendRightOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, MIX2::kMixLeftOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, MIX2::kMixRightOutput));
     }
 };
 
-Model* modelFOO = createModel<FOO, FOOWidget>("FOO");
+Model* modelMIX2 = createModel<MIX2, MIX2Widget>("MIX2");
