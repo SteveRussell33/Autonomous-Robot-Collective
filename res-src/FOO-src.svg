@@ -9,34 +9,39 @@
 
   <style>
     text.title {
-      fill: #ebdbb2;
+      fill: #a91913;
       font-family: 'DIN Alternate';
-      font-size: 12pt;
+      font-size: 11pt;
     }
     text.logo {
-      fill: #ebdbb2;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
     text.big-label {
-      fill: #ebdbb2;
+      fill: #343434;
       font-family: 'DIN Alternate';
       font-size: 7.5pt;
     }
     text.label {
-      fill: #ebdbb2;
+      fill: #343434;
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
     .background {
-      fill: #3c3836;
+      fill: #dfdfdf;
     }
     .output {
-      fill: #665c54;
+      fill: #bbbbbb;
     }
     polyline.icon {
-      stroke: #ebdbb2;
+      stroke: #343434;
       stroke-width: 1.2;
+      fill: none;
+    }
+    polyline.connect {
+      stroke: #343434;
+      stroke-width: 1;
       fill: none;
     }
 
@@ -62,12 +67,12 @@
   <defs>
 
     <linearGradient id="smallKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#7c6f64" />
+      <stop offset="0%"   stop-color="#6f6f6f" />
       <stop offset="100%" stop-color="#3c3836" />
     </linearGradient>
 
     <linearGradient id="smallKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%"   stop-color="#504945" />
+      <stop offset="0%"   stop-color="#494949" />
       <stop offset="100%" stop-color="#282828" />
     </linearGradient>
 
@@ -136,29 +141,29 @@
   <!-- ======== body ======== -->  
 
   <rect class="background" width="100%" height="100%"/>
-  <text class="title" x="50%" y="16"  text-anchor="middle">FOO</text>
+  <text class="title" x="50%" y="16"  text-anchor="middle">MIX-2</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
-  <rect x="0" y="38" width="135" height="114" fill="#121212"/>
+  <rect x="0" y="36" width="135" height="120" fill="#121212"/>
 
   <!-- labels -->  
   <g transform="translate(10 0)">
-    <g transform="translate(0 168)">
+    <g transform="translate(0 174)">
       <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
-    <g transform="translate(0 198)">
+    <g transform="translate(0 203)">
       <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
-    <g transform="translate(0 228)">
+    <g transform="translate(0 232)">
       <text x="0" y="3" class="label" text-anchor="middle">M</text>
     </g>
-    <g transform="translate(0 258)">
+    <g transform="translate(0 261)">
       <text x="0" y="3" class="label" text-anchor="middle">P</text>
     </g>
-    <g transform="translate(0 288)">
+    <g transform="translate(0 290)">
       <text x="0" y="3" class="label" text-anchor="middle">P</text>
     </g>
-    <g transform="translate(0 318)">
+    <g transform="translate(0 319)">
       <text x="0" y="3" class="label" text-anchor="middle">L</text>
     </g>
     <g transform="translate(0 348)">
@@ -168,30 +173,30 @@
 
   <!-- 1 -->  
 
-  <g transform="translate(31 33)">
+  <g transform="translate(31 32)">
     <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
   </g>
 
-  <g transform="translate(31 43)">
+  <g transform="translate(31 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(31 168)">
+  <g transform="translate(31 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(31 198)">
+  <g transform="translate(31 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(31 228)">
+  <g transform="translate(31 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(31 258)">
+  <g transform="translate(31 261)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(31 288)">
+  <g transform="translate(31 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(31 318)">
+  <g transform="translate(31 319)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(31 348)">
@@ -200,30 +205,30 @@
 
   <!-- 2 -->  
 
-  <g transform="translate(72 33)">
+  <g transform="translate(72 32)">
     <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
   </g>
 
-  <g transform="translate(72 43)">
+  <g transform="translate(72 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(72 168)">
+  <g transform="translate(72 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(72 198)">
+  <g transform="translate(72 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(72 228)">
+  <g transform="translate(72 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(72 258)">
+  <g transform="translate(72 261)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(72 288)">
+  <g transform="translate(72 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(72 318)">
+  <g transform="translate(72 319)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(72 348)">
@@ -232,37 +237,37 @@
 
   <!-- mix -->  
 
-  <g transform="translate(113 33)">
+  <g transform="translate(113 32)">
     <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
   </g>
 
-  <g transform="translate(113 43)">
+  <g transform="translate(113 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(113 168)">
+  <g transform="translate(113 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(113 198)">
+  <g transform="translate(113 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(113 228)">
+  <g transform="translate(113 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
 
-  <g transform="translate(113 258)">
-    <rect x="-22" y="-14" width="37" height="58" rx="3" class="output"/>
+  <g transform="translate(113 261)">
+    <rect x="-22" y="-14" width="37" height="57" rx="3" class="output"/>
 
     <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(113 288)">
+  <g transform="translate(113 290)">
     <text x ="-16.5" y="2.5" class="label" text-anchor="middle">R</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
-  <g transform="translate(113 318)">
-    <rect x="-22" y="-14" width="37" height="58" rx="3" class="output"/>
+  <g transform="translate(113 319)">
+    <rect x="-22" y="-14" width="37" height="57" rx="3" class="output"/>
 
     <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>

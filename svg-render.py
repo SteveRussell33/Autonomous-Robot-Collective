@@ -19,8 +19,7 @@ files = [
     'knob40',
     'MIX1',
     'MIX2',
-    'mono-port24',
-    'poly-port24',
+    'port24',
     'toggle-0',
     'toggle-1'
 ]

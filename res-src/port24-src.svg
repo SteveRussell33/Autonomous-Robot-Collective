@@ -7,10 +7,10 @@
   viewBox="0 0 24 24"
 >
   <g transform="translate(12 12)">
-    <circle r="11.5" fill="#bababa"/>
-    <circle r="8.5"  fill="#222"/>
-    <circle r="7.5"  fill="#ebdbb2"/>
-    <circle r="5"    fill="#121212"/>
+    <circle r="11.5" fill="#666666"/>
+    <circle r="11"   fill="#eaeaea"/>
+    <circle r="6"    fill="#666666"/>
+    <circle r="5.5"  fill="#121212"/>
   </g>
 </svg>
 

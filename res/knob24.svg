@@ -50,6 +50,6 @@
   <path
      id="polyline2"
      transform="translate(12,12)"
-     style="fill:none;stroke:#ebdbb2;stroke-width:2.2;stroke-linecap:round"
-     d="m 0,-8.5 v 6" />
+     style="fill:none;stroke:#dbdbdb;stroke-width:2.2;stroke-linecap:round"
+     d="m 0,-9 v 6.5" />
 </svg>

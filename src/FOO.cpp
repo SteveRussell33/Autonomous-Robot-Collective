@@ -143,10 +143,10 @@ struct FOOWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
 #ifdef FOO_DEBUG
-        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 12), module, FOO::kDebug1));
-        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 36), module, FOO::kDebug2));
-        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 60), module, FOO::kDebug3));
-        addOutput(createOutputCentered<RmPolyPort24>(Vec(12, 84), module, FOO::kDebug4));
+        addOutput(createOutputCentered<RmPort24>(Vec(12, 12), module, FOO::kDebug1));
+        addOutput(createOutputCentered<RmPort24>(Vec(12, 36), module, FOO::kDebug2));
+        addOutput(createOutputCentered<RmPort24>(Vec(12, 60), module, FOO::kDebug3));
+        addOutput(createOutputCentered<RmPort24>(Vec(12, 84), module, FOO::kDebug4));
 #endif
 
         //////////////////////////////////////////////////////////////
@@ -154,25 +154,25 @@ struct FOOWidget : ModuleWidget {
         static const int cols[] = {31, 72};
         static const int mixCol = 113;
 
-        // [168, 198, 228, 258, 288, 318, 348]
+        // [174, 203, 232, 261, 290, 319, 348]
 
         for (int t = 0; t < FOO::kNumTracks; t++) {
-            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kVolumeParam1 + t));
-            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 198), module, FOO::kVolumeInput1 + t));
-            addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 228), module, FOO::kMuteParam1 + t));
-            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 258), module, FOO::kPanParam1 + t));
-            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 288), module, FOO::kPanParamInput1 + t));
-            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 318), module, FOO::kLeftInput1 + t));
-            addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
+            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, FOO::kVolumeParam1 + t));
+            addInput(createInputCentered<RmPort24>(Vec(cols[t], 203), module, FOO::kVolumeInput1 + t));
+            addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 232), module, FOO::kMuteParam1 + t));
+            addParam(createParamCentered<RmKnob24>(Vec(cols[t], 261), module, FOO::kPanParam1 + t));
+            addInput(createInputCentered<RmPort24>(Vec(cols[t], 290), module, FOO::kPanParamInput1 + t));
+            addInput(createInputCentered<RmPort24>(Vec(cols[t], 319), module, FOO::kLeftInput1 + t));
+            addInput(createInputCentered<RmPort24>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
         }
 
-        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 168), module, FOO::kVolumeParamMix));
-        addInput(createInputCentered<RmPolyPort24>(Vec(mixCol, 198), module, FOO::kVolumeInputMix));
-        addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 228), module, FOO::kMuteParamMix));
-        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 258), module, FOO::kSendLeftOutput));
-        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 288), module, FOO::kSendRightOutput));
-        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 318), module, FOO::kMixLeftOutput));
-        addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
+        addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, FOO::kVolumeParamMix));
+        addInput(createInputCentered<RmPort24>(Vec(mixCol, 203), module, FOO::kVolumeInputMix));
+        addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 232), module, FOO::kMuteParamMix));
+        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 261), module, FOO::kSendLeftOutput));
+        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 290), module, FOO::kSendRightOutput));
+        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 319), module, FOO::kMixLeftOutput));
+        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
     }
 };
 
