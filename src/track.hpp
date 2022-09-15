@@ -75,7 +75,7 @@ struct VuLevel {
 
 struct MonoTrack {
 
-    float voltageSum = 0.0f;
+    float sum = 0.0f;
     VuLevel vuLevel;
 
     void onSampleRateChange(float sampleRate) {
@@ -84,29 +84,28 @@ struct MonoTrack {
 
     void process(Input& input) {
 
-        // process each channel
-        voltageSum = 0.0f;
+        sum = 0.0f;
         int channels = std::max(input.getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
             float in = input.getPolyVoltage(ch);
 
+            // TODO
             float out = in;
 
-            voltageSum += out;
+            sum += out;
         }
 
-        // done
-        vuLevel.process(voltageSum);
+        vuLevel.process(sum);
     }
 
     void disconnect() {
-        voltageSum = 0.0f;
+        sum = 0.0f;
         vuLevel.process(0.0f);
     }
 };
 
 //--------------------------------------------------------------
-// MonoTrack
+// StereoTrack
 //--------------------------------------------------------------
 
 struct StereoTrack {
@@ -123,15 +122,71 @@ struct StereoTrack {
 
         if (leftInput.isConnected()) {
             left.process(leftInput);
+
+            if (rightInput.isConnected()) {
+                right.process(rightInput); // stereo
+            } else {
+                right.process(leftInput); // mono
+            }
         } else {
             left.disconnect();
+
+            if (rightInput.isConnected()) {
+                right.process(rightInput);
+            } else {
+                right.disconnect();
+            }
         }
 
-        if (rightInput.isConnected()) {
-            right.process(rightInput);
-        } else {
-            right.disconnect();
+    }
+};
+
+//--------------------------------------------------------------
+// MonoMix
+//--------------------------------------------------------------
+
+struct MonoMix {
+
+    float sum = 0.0f;
+    VuLevel vuLevel;
+
+    void onSampleRateChange(float sampleRate) {
+        vuLevel.onSampleRateChange(sampleRate);
+    }
+
+    void process(StereoTrack tracks[], int numTracks, bool isLeft) {
+
+        sum = 0.0f;
+        for (int t = 0; t < numTracks; t++) {
+            float in = isLeft ? tracks[t].left.sum : tracks[t].right.sum;
+
+            // TODO
+            float out = in;
+
+            sum += out;
         }
+
+        vuLevel.process(sum);
+    }
+};
+
+//--------------------------------------------------------------
+// StereoMix
+//--------------------------------------------------------------
+
+struct StereoMix {
+
+    MonoMix left;
+    MonoMix right;
+
+    void onSampleRateChange(float sampleRate) {
+        left.onSampleRateChange(sampleRate);
+        right.onSampleRateChange(sampleRate);
+    }
+
+    void process(StereoTrack tracks[], int numTracks) {
+        left.process(tracks, numTracks, true);
+        right.process(tracks, numTracks, false);
     }
 };
 

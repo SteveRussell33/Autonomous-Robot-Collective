@@ -13,6 +13,7 @@ struct MIX2 : Module {
     static const int kNumTracks = 2;
 
     StereoTrack tracks[kNumTracks];
+    StereoMix mix;
 
 #ifdef MIX2_DEBUG
     float debug1;
@@ -116,12 +117,7 @@ struct MIX2 : Module {
         for (int t = 0; t < kNumTracks; t++) {
             tracks[t].onSampleRateChange(e.sampleRate);
         }
-
-#ifdef MIX2_DEBUG
-        float peak = tracks[0].left.vuLevel.peak;
-        outputs[kDebug1].setVoltage(peak);
-        outputs[kDebug2].setVoltage(bogaudio::dsp::amplitudeToDecibels(peak));
-#endif
+        mix.onSampleRateChange(e.sampleRate);
     }
 
     void process(const ProcessArgs& args) override {
@@ -130,6 +126,16 @@ struct MIX2 : Module {
         for (int t = 0; t < kNumTracks; t++) {
             tracks[t].process(inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
         }
+
+        // Process the mix
+        mix.process(tracks, kNumTracks);
+
+        // mix outputs
+        outputs[kMixLeftOutput].setChannels(1);
+        outputs[kMixLeftOutput].setVoltage(mix.left.sum);
+
+        outputs[kMixRightOutput].setChannels(1);
+        outputs[kMixRightOutput].setVoltage(mix.right.sum);
     }
 };
 
@@ -164,8 +170,8 @@ struct MIX2Widget : ModuleWidget {
 
         for (int t = 0; t < MIX2::kNumTracks; t++) {
 
-            addMeter(cols[t] - 5, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
-            addMeter(cols[t] + 2, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
+            addMeter(cols[t] - 6, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
+            addMeter(cols[t] + 1, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
 
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, MIX2::kVolumeParam1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, MIX2::kVolumeInput1 + t));
@@ -175,6 +181,9 @@ struct MIX2Widget : ModuleWidget {
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 319), module, MIX2::kLeftInput1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, MIX2::kRightInput1 + t));
         }
+
+        addMeter(mixCol - 6, 44, module ? &(module->mix.left.vuLevel) : NULL);
+        addMeter(mixCol + 1, 44, module ? &(module->mix.right.vuLevel) : NULL);
 
         addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, MIX2::kVolumeParamMix));
         addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 203), module, MIX2::kVolumeInputMix));

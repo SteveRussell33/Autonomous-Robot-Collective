@@ -104,9 +104,9 @@
 
     <symbol id="meter-strip" >
       <g transform="translate(20 4)">
-        <rect x="-5" y="-1" width="5" height="106" fill="#1a1a1a"/>
-        <rect x="2"   y="-1" width="5" height="106" fill="#1a1a1a"/>
-        <g transform="translate(-10 2.5)">
+        <rect x="-6" y="-1" width="5" height="106" fill="#1a1a1a"/>
+        <rect x="1"   y="-1" width="5" height="106" fill="#1a1a1a"/>
+        <g transform="translate(-11 2.5)">
           <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
           <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
           <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
@@ -117,7 +117,7 @@
           <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
           <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
         </g>
-        <g transform="translate(-9 0)">
+        <g transform="translate(-10 0)">
           <polyline points="0   0 2   0" class="lcd-tick"/>
           <polyline points="0  13 2  13" class="lcd-tick"/>
           <polyline points="0  26 2  26" class="lcd-tick"/>
