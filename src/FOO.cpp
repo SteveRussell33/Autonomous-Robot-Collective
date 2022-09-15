@@ -14,8 +14,6 @@ struct FOO : Module {
 
     StereoTrack tracks[kNumTracks];
 
-    dsp::ClockDivider ledDivider;
-
 #ifdef FOO_DEBUG
     float debug1;
     float debug2;
@@ -73,19 +71,8 @@ struct FOO : Module {
         kOutputsLen
     };
 
-    enum LightIds {
-        ENUMS(kLeftLights1, 8),
-        ENUMS(kLeftLights2, 8),
-        ENUMS(kLeftLightsMix, 8),
-
-        ENUMS(kRightLights1, 8),
-        ENUMS(kRightLights2, 8),
-        ENUMS(kRightLightsMix, 8),
-        kLightsLen
-    };
-
     FOO() {
-        config(kParamsLen, kInputsLen, kOutputsLen, kLightsLen);
+        config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         // configParam<FaderParamQuantity>(kLevelParam1, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
         // configParam<FaderParamQuantity>(kLevelParam2, 0.0f, 1.0f, kLevelParamDbZero, "Fader", " dB");
@@ -123,8 +110,6 @@ struct FOO : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
-
-        ledDivider.setDivision(512);
     }
 
     void process(const ProcessArgs& args) override {
@@ -132,14 +117,6 @@ struct FOO : Module {
         // Process each track
         for (int t = 0; t < kNumTracks; t++) {
             tracks[t].process(args.sampleTime, inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
-        }
-
-        // Update leds
-        if (ledDivider.process()) {
-            for (int t = 0; t < kNumTracks; t++) {
-                tracks[t].left.updateLeds(lights, kLeftLights1 + t * 8);
-                tracks[t].right.updateLeds(lights, kRightLights1 + t * 8);
-            }
         }
     }
 };
@@ -173,13 +150,6 @@ struct FOOWidget : ModuleWidget {
 
         // [168, 198, 228, 258, 288, 318, 348]
 
-        addLights(module, FOO::kLeftLights1, cols[0] - 6, 44);
-        addLights(module, FOO::kRightLights1, cols[0] + 6, 44);
-        addLights(module, FOO::kLeftLights2, cols[1] - 6, 44);
-        addLights(module, FOO::kRightLights2, cols[1] + 6, 44);
-        addLights(module, FOO::kLeftLightsMix, mixCol - 6, 44);
-        addLights(module, FOO::kRightLightsMix, mixCol + 6, 44);
-
         for (int t = 0; t < FOO::kNumTracks; t++) {
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 168), module, FOO::kLevelParam1 + t));
             addInput(createInputCentered<RmPolyPort24>(Vec(cols[t], 198), module, FOO::kLevelInput1 + t));
@@ -197,17 +167,6 @@ struct FOOWidget : ModuleWidget {
         addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 288), module, FOO::kSendRightOutput));
         addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 318), module, FOO::kMixLeftOutput));
         addOutput(createOutputCentered<RmMonoPort24>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
-    }
-
-    void addLights(FOO* module, int lightID, int x, int y) {
-        addChild(createLightCentered<SmallSimpleLight<RedLight>>(Vec(x, y), module, lightID));
-        addChild(createLightCentered<SmallSimpleLight<YellowLight>>(Vec(x, y + 14), module, lightID + 1));
-        addChild(createLightCentered<SmallSimpleLight<GreenLight>>(Vec(x, y + 28), module, lightID + 2));
-        addChild(createLightCentered<SmallSimpleLight<GreenLight>>(Vec(x, y + 42), module, lightID + 3));
-        addChild(createLightCentered<SmallSimpleLight<GreenLight>>(Vec(x, y + 56), module, lightID + 4));
-        addChild(createLightCentered<SmallSimpleLight<GreenLight>>(Vec(x, y + 70), module, lightID + 5));
-        addChild(createLightCentered<SmallSimpleLight<GreenLight>>(Vec(x, y + 84), module, lightID + 6));
-        addChild(createLightCentered<SmallSimpleLight<GreenLight>>(Vec(x, y + 98), module, lightID + 7));
     }
 };
 

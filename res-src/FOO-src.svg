@@ -28,11 +28,6 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
-    text.led-label {
-      fill: #87796c;
-      font-family: 'DIN Alternate';
-      font-size: 6pt;
-    }
     .background {
       fill: #3c3836;
     }
@@ -44,8 +39,14 @@
       stroke-width: 1.2;
       fill: none;
     }
-    polyline.connect {
-      stroke: #ebdbb2;
+
+    text.lcd-label {
+      fill: #777777;
+      font-family: 'Monaco';
+      font-size: 5pt;
+    }
+    polyline.lcd-tick {
+      stroke: #707070;
       stroke-width: 1;
       fill: none;
     }
@@ -101,19 +102,35 @@
         <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
       </g>
     </symbol>
-    <symbol id="led-strip">
-      <g transform="translate(5 2.5)">
-         <circle cx="0" cy= "0" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="14" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="28" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="42" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="56" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="70" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="84" r="2" stroke-width="1" class="blueprint"/>
-         <circle cx="0" cy="98" r="2" stroke-width="1" class="blueprint"/>
+
+    <symbol id="meter-strip" >
+      <g transform="translate(20 4)">
+        <rect x="-9" y="-1" width="8" height="106" fill="#2a2a2a"/>
+        <rect x="1"   y="-1" width="8" height="106" fill="#2a2a2a"/>
+        <g transform="translate(-12 2.5)">
+          <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
+          <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
+          <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
+          <text x="0" y= "39" class="lcd-label" text-anchor="end">9</text>
+          <text x="0" y= "52" class="lcd-label" text-anchor="end">12</text>
+          <text x="0" y= "65" class="lcd-label" text-anchor="end">18</text>
+          <text x="0" y= "78" class="lcd-label" text-anchor="end">24</text>
+          <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
+          <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
+        </g>
+        <g transform="translate(-11 0)">
+          <polyline points="0   0 2   0" class="lcd-tick"/>
+          <polyline points="0  13 2  13" class="lcd-tick"/>
+          <polyline points="0  26 2  26" class="lcd-tick"/>
+          <polyline points="0  39 2  39" class="lcd-tick"/>
+          <polyline points="0  52 2  52" class="lcd-tick"/>
+          <polyline points="0  65 2  65" class="lcd-tick"/>
+          <polyline points="0  78 2  78" class="lcd-tick"/>
+          <polyline points="0  91 2  91" class="lcd-tick"/>
+          <polyline points="0 104 2 104" class="lcd-tick"/>
+        </g>
       </g>
     </symbol>
-
   </defs>
 
   <!-- ======== body ======== -->  
@@ -122,20 +139,7 @@
   <text class="title" x="50%" y="16"  text-anchor="middle">FOO</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
-  <rect x="0" y="35" width="135" height="116" fill="#121212"/>
-
-  <g transform="translate(31 46.5)">
-    <g transform="translate(-17 0)">
-      <text x="0" y= "0" class="led-label" text-anchor="end">0</text>
-      <text x="0" y="14" class="led-label" text-anchor="end">-3</text>
-      <text x="0" y="28" class="led-label" text-anchor="end">-6</text>
-      <text x="0" y="42" class="led-label" text-anchor="end">-9</text>
-      <text x="0" y="56" class="led-label" text-anchor="end">-12</text>
-      <text x="0" y="70" class="led-label" text-anchor="end">-18</text>
-      <text x="0" y="84" class="led-label" text-anchor="end">-24</text>
-      <text x="0" y="98" class="led-label" text-anchor="end">-36</text>
-    </g>
-  </g>
+  <rect x="0" y="37" width="135" height="114" fill="#121212"/>
 
   <!-- labels -->  
   <g transform="translate(10 0)">
@@ -162,19 +166,14 @@
     </g>
   </g>
 
-  <!-- ch1 -->  
+  <!-- 1 -->  
 
-  <g transform="translate(31 31)">
+  <g transform="translate(31 33)">
     <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
   </g>
 
-  <g transform="translate(31 41)">
-    <g transform="translate(-6 0)">
-      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
-    </g>
-    <g transform="translate(6 0)">
-      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
-    </g>
+  <g transform="translate(31 42)">
+    <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
   <g transform="translate(31 168)">
@@ -199,19 +198,14 @@
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
-  <!-- ch2 -->  
+  <!-- 2 -->  
 
-  <g transform="translate(72 31)">
+  <g transform="translate(72 33)">
     <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
   </g>
 
-  <g transform="translate(72 41)">
-    <g transform="translate(-6 0)">
-      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
-    </g>
-    <g transform="translate(6 0)">
-      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
-    </g>
+  <g transform="translate(72 42)">
+    <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
   <g transform="translate(72 168)">
@@ -238,17 +232,12 @@
 
   <!-- mix -->  
 
-  <g transform="translate(113 31)">
+  <g transform="translate(113 33)">
     <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
   </g>
 
-  <g transform="translate(113 41)">
-    <g transform="translate(-6 0)">
-      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
-    </g>
-    <g transform="translate(6 0)">
-      <use xlink:href="#led-strip" transform="translate(-5 0)"/>
-    </g>
+  <g transform="translate(113 42)">
+    <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
   <g transform="translate(113 168)">
