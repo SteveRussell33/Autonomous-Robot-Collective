@@ -85,8 +85,8 @@
       font-family: 'Monaco';
       font-size: 5pt;
     }
-    polyline.lcd-label {
-      stroke: #777777;
+    polyline.lcd-tick {
+      stroke: #707070;
       stroke-width: 1;
       fill: none;
     }
@@ -191,17 +191,17 @@
            y="-1"
            width="8"
            height="106"
-           fill="#2a2a2a"
+           fill="#1a1a1a"
            id="rect38" />
         <rect
            x="1"
            y="-1"
            width="8"
            height="106"
-           fill="#2a2a2a"
+           fill="#1a1a1a"
            id="rect40" />
         <g
-           transform="translate(-12 2.5)"
+           transform="translate(-13 2.5)"
            id="g60">
           <text
              x="0"
@@ -259,43 +259,43 @@
              id="text58">48</text>
         </g>
         <g
-           transform="translate(-11 0)"
+           transform="translate(-12 0)"
            id="g80">
           <polyline
              points="0   0 2   0"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline62" />
           <polyline
              points="0  13 2  13"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline64" />
           <polyline
              points="0  26 2  26"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline66" />
           <polyline
              points="0  39 2  39"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline68" />
           <polyline
              points="0  52 2  52"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline70" />
           <polyline
              points="0  65 2  65"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline72" />
           <polyline
              points="0  78 2  78"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline74" />
           <polyline
              points="0  91 2  91"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline76" />
           <polyline
              points="0 104 2 104"
-             class="lcd-label"
+             class="lcd-tick"
              id="polyline78" />
         </g>
       </g>
@@ -432,7 +432,7 @@
   <path
      id="rect93"
      style="fill:#121212"
-     d="M 0,37 H 135 V 151 H 0 Z" />
+     d="M 0,38 H 135 V 152 H 0 Z" />
   <!-- labels -->
   <g
      transform="translate(10,168)"
@@ -545,20 +545,20 @@
   </g>
   <g
      id="use129"
-     transform="translate(11,38)">
+     transform="translate(11,39)">
     <g
        transform="translate(20,4)"
        id="g342">
       <path
          id="rect298"
-         style="fill:#2a2a2a"
+         style="fill:#1a1a1a"
          d="m -9,-1 h 8 v 106 h -8 z" />
       <path
          id="rect300"
-         style="fill:#2a2a2a"
+         style="fill:#1a1a1a"
          d="M 1,-1 H 9 V 105 H 1 Z" />
       <g
-         transform="translate(-12,2.5)"
+         transform="translate(-13,2.5)"
          id="g320">
         <g
            aria-label="0"
@@ -672,53 +672,53 @@
         </g>
       </g>
       <g
-         transform="translate(-11)"
+         transform="translate(-12)"
          id="g340">
         <path
            id="polyline322"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,0 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline324"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,13 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline326"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,26 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline328"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,39 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline330"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,52 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline332"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,65 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline334"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,78 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline336"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,91 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline338"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,104 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
       </g>
     </g>
   </g>
@@ -810,20 +810,20 @@
   </g>
   <g
      id="use165"
-     transform="translate(52,38)">
+     transform="translate(52,39)">
     <g
        transform="translate(20,4)"
        id="g438">
       <path
          id="rect394"
-         style="fill:#2a2a2a"
+         style="fill:#1a1a1a"
          d="m -9,-1 h 8 v 106 h -8 z" />
       <path
          id="rect396"
-         style="fill:#2a2a2a"
+         style="fill:#1a1a1a"
          d="M 1,-1 H 9 V 105 H 1 Z" />
       <g
-         transform="translate(-12,2.5)"
+         transform="translate(-13,2.5)"
          id="g416">
         <g
            aria-label="0"
@@ -937,53 +937,53 @@
         </g>
       </g>
       <g
-         transform="translate(-11)"
+         transform="translate(-12)"
          id="g436">
         <path
            id="polyline418"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,0 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline420"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,13 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline422"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,26 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline424"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,39 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline426"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,52 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline428"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,65 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline430"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,78 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline432"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,91 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline434"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,104 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
       </g>
     </g>
   </g>
@@ -1083,20 +1083,20 @@
   </g>
   <g
      id="use201"
-     transform="translate(93,38)">
+     transform="translate(93,39)">
     <g
        transform="translate(20,4)"
        id="g534">
       <path
          id="rect490"
-         style="fill:#2a2a2a"
+         style="fill:#1a1a1a"
          d="m -9,-1 h 8 v 106 h -8 z" />
       <path
          id="rect492"
-         style="fill:#2a2a2a"
+         style="fill:#1a1a1a"
          d="M 1,-1 H 9 V 105 H 1 Z" />
       <g
-         transform="translate(-12,2.5)"
+         transform="translate(-13,2.5)"
          id="g512">
         <g
            aria-label="0"
@@ -1210,53 +1210,53 @@
         </g>
       </g>
       <g
-         transform="translate(-11)"
+         transform="translate(-12)"
          id="g532">
         <path
            id="polyline514"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,0 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline516"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,13 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline518"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,26 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline520"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,39 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline522"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,52 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline524"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,65 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline526"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,78 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline528"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,91 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
         <path
            id="polyline530"
-           style="fill:none;stroke:#777777;stroke-width:1"
+           style="fill:none;stroke:#707070;stroke-width:1"
            d="M 0,104 H 2"
-           class="lcd-label" />
+           class="lcd-tick" />
       </g>
     </g>
   </g>

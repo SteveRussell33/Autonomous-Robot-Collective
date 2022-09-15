@@ -105,9 +105,9 @@
 
     <symbol id="meter-strip" >
       <g transform="translate(20 4)">
-        <rect x="-9" y="-1" width="8" height="106" fill="#2a2a2a"/>
-        <rect x="1"   y="-1" width="8" height="106" fill="#2a2a2a"/>
-        <g transform="translate(-12 2.5)">
+        <rect x="-9" y="-1" width="8" height="106" fill="#1a1a1a"/>
+        <rect x="1"   y="-1" width="8" height="106" fill="#1a1a1a"/>
+        <g transform="translate(-13 2.5)">
           <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
           <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
           <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
@@ -118,7 +118,7 @@
           <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
           <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
         </g>
-        <g transform="translate(-11 0)">
+        <g transform="translate(-12 0)">
           <polyline points="0   0 2   0" class="lcd-tick"/>
           <polyline points="0  13 2  13" class="lcd-tick"/>
           <polyline points="0  26 2  26" class="lcd-tick"/>
@@ -139,7 +139,7 @@
   <text class="title" x="50%" y="16"  text-anchor="middle">FOO</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
 
-  <rect x="0" y="37" width="135" height="114" fill="#121212"/>
+  <rect x="0" y="38" width="135" height="114" fill="#121212"/>
 
   <!-- labels -->  
   <g transform="translate(10 0)">
@@ -172,7 +172,7 @@
     <text x="0" y="0" class="big-label" text-anchor="middle">1</text>
   </g>
 
-  <g transform="translate(31 42)">
+  <g transform="translate(31 43)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
@@ -204,7 +204,7 @@
     <text x="0" y="0" class="big-label" text-anchor="middle">2</text>
   </g>
 
-  <g transform="translate(72 42)">
+  <g transform="translate(72 43)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
@@ -236,7 +236,7 @@
     <text x="0" y="0" class="big-label" text-anchor="middle">MIX</text>
   </g>
 
-  <g transform="translate(113 42)">
+  <g transform="translate(113 43)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
