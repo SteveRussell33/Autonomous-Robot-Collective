@@ -4,21 +4,8 @@ import os
 import subprocess
 
 files = [
-    'ATV',
-    'CLIP',
-    'FM',
     'FOO',
-    'GAIN',
-    'fader-bg',
-    'fader-handle',
-    'hswitch-0',
-    'hswitch-1',
-    'knob18',
     'knob24',
-    'knob32',
-    'knob40',
-    'MIX1',
-    'MIX2',
     'port24',
     'toggle-0',
     'toggle-1'

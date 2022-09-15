@@ -16,4 +16,4 @@ ax.grid(True)
 #ax.plot(t, a)
 ax.plot(t, b)
 
-plt.savefig('test.png')
+plt.savefig('out.png')

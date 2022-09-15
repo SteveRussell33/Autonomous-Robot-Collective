@@ -14,45 +14,9 @@
   "changelogUrl": "",
   "modules": [
     {
-      "slug": "ATV",
-      "name": "ATV",
-      "description": "ATV",
-      "tags": []
-    },
-    {
-      "slug": "CLIP",
-      "name": "CLIP",
-      "description": "CLIP",
-      "tags": []
-    },
-    {
-      "slug": "FM",
-      "name": "FM",
-      "description": "FM",
-      "tags": []
-    },
-    {
       "slug": "FOO",
       "name": "FOO",
       "description": "FOO",
-      "tags": []
-    },
-    {
-      "slug": "GAIN",
-      "name": "GAIN",
-      "description": "GAIN",
-      "tags": []
-    },
-    {
-      "slug": "MIX1",
-      "name": "MIX-1",
-      "description": "MIX-1",
-      "tags": []
-    },
-    {
-      "slug": "MIX2",
-      "name": "MIX-2",
-      "description": "MIX-2",
       "tags": []
     }
   ]

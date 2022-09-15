@@ -1,0 +1,125 @@
+  <!-- ============== styles ============== -->
+
+  <style>
+    text.title {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 11.5pt;
+    }
+    text.logo {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 10pt;
+    }
+    text.big-label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 7.5pt;
+    }
+    text.label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+    .background {
+      fill: #dfdfdf;
+    }
+    .output {
+      fill: #bbbbbb;
+    }
+    polyline.icon {
+      stroke: #343434;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    polyline.connect {
+      stroke: #343434;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    text.lcd-label {
+      fill: #777777;
+      font-family: 'Monaco';
+      font-size: 5pt;
+    }
+    polyline.lcd-tick {
+      stroke: #707070;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    .blueprint {
+      stroke: #838598;
+      fill: none;
+    }
+  </style>
+
+  <!-- ======== defs ======== -->  
+
+  <defs>
+
+    <linearGradient id="smallKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#6f6f6f" />
+      <stop offset="100%" stop-color="#3c3836" />
+    </linearGradient>
+
+    <linearGradient id="smallKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#494949" />
+      <stop offset="100%" stop-color="#282828" />
+    </linearGradient>
+
+    <symbol id="knob24" >
+      <g transform="translate(12 12)">
+        <circle r="11.5" stroke="#121212" fill="none"/>
+        <circle r="11" fill="url('#smallKnobLight')"/>
+        <circle r="10" fill="url('#smallKnobDark')"/>
+      </g>
+    </symbol>
+
+    <symbol id="toggleButton" >
+      <g transform="translate(9 9)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="8.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="port" >
+      <g transform="translate(12 12)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="meter-strip" >
+      <g transform="translate(20 4)">
+        <rect x="-9" y="-1" width="8" height="106" fill="#1a1a1a"/>
+        <rect x="1"   y="-1" width="8" height="106" fill="#1a1a1a"/>
+        <g transform="translate(-13 2.5)">
+          <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
+          <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
+          <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
+          <text x="0" y= "39" class="lcd-label" text-anchor="end">9</text>
+          <text x="0" y= "52" class="lcd-label" text-anchor="end">12</text>
+          <text x="0" y= "65" class="lcd-label" text-anchor="end">18</text>
+          <text x="0" y= "78" class="lcd-label" text-anchor="end">24</text>
+          <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
+          <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
+        </g>
+        <g transform="translate(-12 0)">
+          <polyline points="0   0 2   0" class="lcd-tick"/>
+          <polyline points="0  13 2  13" class="lcd-tick"/>
+          <polyline points="0  26 2  26" class="lcd-tick"/>
+          <polyline points="0  39 2  39" class="lcd-tick"/>
+          <polyline points="0  52 2  52" class="lcd-tick"/>
+          <polyline points="0  65 2  65" class="lcd-tick"/>
+          <polyline points="0  78 2  78" class="lcd-tick"/>
+          <polyline points="0  91 2  91" class="lcd-tick"/>
+          <polyline points="0 104 2 104" class="lcd-tick"/>
+        </g>
+      </g>
+    </symbol>
+
+  </defs>

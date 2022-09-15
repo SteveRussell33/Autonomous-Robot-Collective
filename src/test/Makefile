@@ -21,4 +21,4 @@ compile:
 clean:
 	rm -f *.o
 	rm -f run-test
-	rm -f out.*-test
+	rm -f out.*
