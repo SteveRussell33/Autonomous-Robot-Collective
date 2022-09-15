@@ -105,7 +105,7 @@
     <symbol id="meter-strip" >
       <g transform="translate(20 4)">
         <rect x="-5" y="-1" width="5" height="106" fill="#1a1a1a"/>
-        <rect x="1"   y="-1" width="5" height="106" fill="#1a1a1a"/>
+        <rect x="2"   y="-1" width="5" height="106" fill="#1a1a1a"/>
         <g transform="translate(-10 2.5)">
           <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
           <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>

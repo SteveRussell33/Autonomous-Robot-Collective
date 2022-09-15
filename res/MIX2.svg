@@ -180,7 +180,7 @@
            fill="#1a1a1a"
            id="rect29" />
         <rect
-           x="1"
+           x="2"
            y="-1"
            width="5"
            height="106"
@@ -550,7 +550,7 @@
       <path
          id="rect291"
          style="fill:#1a1a1a"
-         d="M 1,-1 H 6 V 105 H 1 Z" />
+         d="M 2,-1 H 7 V 105 H 2 Z" />
       <g
          transform="translate(-10,2.5)"
          id="g311">
@@ -815,7 +815,7 @@
       <path
          id="rect387"
          style="fill:#1a1a1a"
-         d="M 1,-1 H 6 V 105 H 1 Z" />
+         d="M 2,-1 H 7 V 105 H 2 Z" />
       <g
          transform="translate(-10,2.5)"
          id="g407">
@@ -1088,7 +1088,7 @@
       <path
          id="rect483"
          style="fill:#1a1a1a"
-         d="M 1,-1 H 6 V 105 H 1 Z" />
+         d="M 2,-1 H 7 V 105 H 2 Z" />
       <g
          transform="translate(-10,2.5)"
          id="g503">

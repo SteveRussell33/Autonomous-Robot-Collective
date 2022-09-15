@@ -167,6 +167,7 @@ struct MIX2Widget : ModuleWidget {
         for (int t = 0; t < MIX2::kNumTracks; t++) {
 
             addMeter(cols[t]-5, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
+            addMeter(cols[t]+2, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
 
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, MIX2::kVolumeParam1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, MIX2::kVolumeInput1 + t));
