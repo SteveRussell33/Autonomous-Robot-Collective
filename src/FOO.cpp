@@ -143,10 +143,10 @@ struct FOOWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
 #ifdef FOO_DEBUG
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 12), module, FOO::kDebug1));
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 36), module, FOO::kDebug2));
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 60), module, FOO::kDebug3));
-        addOutput(createOutputCentered<RmPort24>(Vec(12, 84), module, FOO::kDebug4));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FOO::kDebug1));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, FOO::kDebug2));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, FOO::kDebug3));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, FOO::kDebug4));
 #endif
 
         //////////////////////////////////////////////////////////////
@@ -158,21 +158,21 @@ struct FOOWidget : ModuleWidget {
 
         for (int t = 0; t < FOO::kNumTracks; t++) {
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, FOO::kVolumeParam1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 203), module, FOO::kVolumeInput1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, FOO::kVolumeInput1 + t));
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 232), module, FOO::kMuteParam1 + t));
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 261), module, FOO::kPanParam1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 290), module, FOO::kPanParamInput1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 319), module, FOO::kLeftInput1 + t));
-            addInput(createInputCentered<RmPort24>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 290), module, FOO::kPanParamInput1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 319), module, FOO::kLeftInput1 + t));
+            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, FOO::kRightInput1 + t));
         }
 
         addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, FOO::kVolumeParamMix));
-        addInput(createInputCentered<RmPort24>(Vec(mixCol, 203), module, FOO::kVolumeInputMix));
+        addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 203), module, FOO::kVolumeInputMix));
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 232), module, FOO::kMuteParamMix));
-        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 261), module, FOO::kSendLeftOutput));
-        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 290), module, FOO::kSendRightOutput));
-        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 319), module, FOO::kMixLeftOutput));
-        addOutput(createOutputCentered<RmPort24>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 261), module, FOO::kSendLeftOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 290), module, FOO::kSendRightOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, FOO::kMixLeftOutput));
+        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, FOO::kMixRightOutput));
     }
 };
 

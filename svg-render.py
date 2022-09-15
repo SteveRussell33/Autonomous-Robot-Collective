@@ -6,7 +6,6 @@ import subprocess
 files = [
     'FOO',
     'knob24',
-    'port24',
     'toggle-0',
     'toggle-1'
 ]
