@@ -173,21 +173,21 @@
          transform="translate(20 4)"
          id="g73">
         <rect
-           x="-9"
+           x="-5"
            y="-1"
-           width="8"
+           width="5"
            height="106"
            fill="#1a1a1a"
            id="rect29" />
         <rect
            x="1"
            y="-1"
-           width="8"
+           width="5"
            height="106"
            fill="#1a1a1a"
            id="rect31" />
         <g
-           transform="translate(-13 2.5)"
+           transform="translate(-10 2.5)"
            id="g51">
           <text
              x="0"
@@ -245,7 +245,7 @@
              id="text49">48</text>
         </g>
         <g
-           transform="translate(-12 0)"
+           transform="translate(-9 0)"
            id="g71">
           <polyline
              points="0   0 2   0"
@@ -546,13 +546,13 @@
       <path
          id="rect289"
          style="fill:#1a1a1a"
-         d="m -9,-1 h 8 v 106 h -8 z" />
+         d="M -5,-1 H 0 V 105 H -5 Z" />
       <path
          id="rect291"
          style="fill:#1a1a1a"
-         d="M 1,-1 H 9 V 105 H 1 Z" />
+         d="M 1,-1 H 6 V 105 H 1 Z" />
       <g
-         transform="translate(-13,2.5)"
+         transform="translate(-10,2.5)"
          id="g311">
         <g
            aria-label="0"
@@ -666,7 +666,7 @@
         </g>
       </g>
       <g
-         transform="translate(-12)"
+         transform="translate(-9)"
          id="g331">
         <path
            id="polyline313"
@@ -811,13 +811,13 @@
       <path
          id="rect385"
          style="fill:#1a1a1a"
-         d="m -9,-1 h 8 v 106 h -8 z" />
+         d="M -5,-1 H 0 V 105 H -5 Z" />
       <path
          id="rect387"
          style="fill:#1a1a1a"
-         d="M 1,-1 H 9 V 105 H 1 Z" />
+         d="M 1,-1 H 6 V 105 H 1 Z" />
       <g
-         transform="translate(-13,2.5)"
+         transform="translate(-10,2.5)"
          id="g407">
         <g
            aria-label="0"
@@ -931,7 +931,7 @@
         </g>
       </g>
       <g
-         transform="translate(-12)"
+         transform="translate(-9)"
          id="g427">
         <path
            id="polyline409"
@@ -1084,13 +1084,13 @@
       <path
          id="rect481"
          style="fill:#1a1a1a"
-         d="m -9,-1 h 8 v 106 h -8 z" />
+         d="M -5,-1 H 0 V 105 H -5 Z" />
       <path
          id="rect483"
          style="fill:#1a1a1a"
-         d="M 1,-1 H 9 V 105 H 1 Z" />
+         d="M 1,-1 H 6 V 105 H 1 Z" />
       <g
-         transform="translate(-13,2.5)"
+         transform="translate(-10,2.5)"
          id="g503">
         <g
            aria-label="0"
@@ -1204,7 +1204,7 @@
         </g>
       </g>
       <g
-         transform="translate(-12)"
+         transform="translate(-9)"
          id="g523">
         <path
            id="polyline505"

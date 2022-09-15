@@ -115,7 +115,15 @@ struct MIX2 : Module {
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
         for (int t = 0; t < kNumTracks; t++) {
             tracks[t].onSampleRateChange(e.sampleRate);
+
         }
+
+#ifdef MIX2_DEBUG
+        float peak = tracks[0].left.vuLevel.peak;
+        outputs[kDebug1].setVoltage(peak);
+        outputs[kDebug2].setVoltage(bogaudio::dsp::amplitudeToDecibels(peak));
+#endif
+
     }
 
     void process(const ProcessArgs& args) override {
@@ -157,6 +165,9 @@ struct MIX2Widget : ModuleWidget {
         // [174, 203, 232, 261, 290, 319, 348]
 
         for (int t = 0; t < MIX2::kNumTracks; t++) {
+
+            addMeter(cols[t]-5, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
+
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, MIX2::kVolumeParam1 + t));
             addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, MIX2::kVolumeInput1 + t));
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 232), module, MIX2::kMuteParam1 + t));
@@ -173,6 +184,13 @@ struct MIX2Widget : ModuleWidget {
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 290), module, MIX2::kSendRightOutput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, MIX2::kMixLeftOutput));
         addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, MIX2::kMixRightOutput));
+    }
+
+    void addMeter(float x, float y, VuLevel* vuLevel) {
+        VuMeter* meter = new VuMeter(vuLevel);
+        meter->box.pos = Vec(x, y);
+        meter->box.size = Vec(8, 104);
+        addChild(meter);
     }
 };
 
