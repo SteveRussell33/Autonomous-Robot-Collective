@@ -14,6 +14,12 @@
   "changelogUrl": "",
   "modules": [
     {
+      "slug": "ATV",
+      "name": "ATV",
+      "description": "ATV",
+      "tags": []
+    },
+    {
       "slug": "MIX2",
       "name": "MIX-2",
       "description": "MIX-2",

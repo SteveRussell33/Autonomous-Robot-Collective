@@ -4,8 +4,10 @@ import os
 import subprocess
 
 files = [
-    'MIX2',
+    'ATV',
+    'knob18',
     'knob24',
+    'MIX2',
     'toggle-0',
     'toggle-1'
 ]

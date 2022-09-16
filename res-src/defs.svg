@@ -1,6 +1,7 @@
   <!-- ============== styles ============== -->
 
   <style>
+
     text.title {
       fill: #a91913;
       font-family: 'DIN Alternate';
@@ -21,12 +22,17 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
+
     .background {
       fill: #dfdfdf;
     }
-    .output {
-      fill: #bbbbbb;
+    .main-output {
+      fill: #abc6a8;
     }
+    .alt-output {
+      fill: #9ebcd0;
+    }
+
     polyline.icon {
       stroke: #343434;
       stroke-width: 1.2;
@@ -38,6 +44,15 @@
       fill: none;
     }
 
+    rect.lcd-bg {
+      fill: #121212;
+    }
+    rect.lcd-bg-frame {
+      fill: #888888;
+    }
+    rect.lcd-bg-accent {
+      fill: #2a2a2a;
+    }
     text.lcd-label {
       fill: #777777;
       font-family: 'Monaco';
@@ -53,9 +68,10 @@
       stroke: #838598;
       fill: none;
     }
+
   </style>
 
-  <!-- ======== defs ======== -->  
+  <!-- ============== defs ============== -->
 
   <defs>
 
@@ -95,9 +111,9 @@
 
     <symbol id="meter-strip" >
       <g transform="translate(20 4)">
-        <rect x="-9" y="-1" width="8" height="106" fill="#1a1a1a"/>
-        <rect x="1"   y="-1" width="8" height="106" fill="#1a1a1a"/>
-        <g transform="translate(-13 2.5)">
+        <rect x="-6" y="-1" width="5" height="106" class="lcd-bg-accent"/>
+        <rect x="1"  y="-1" width="5" height="106" class="lcd-bg-accent"/>
+        <g transform="translate(-11 2.5)">
           <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
           <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
           <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
@@ -108,7 +124,7 @@
           <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
           <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
         </g>
-        <g transform="translate(-12 0)">
+        <g transform="translate(-10 0)">
           <polyline points="0   0 2   0" class="lcd-tick"/>
           <polyline points="0  13 2  13" class="lcd-tick"/>
           <polyline points="0  26 2  26" class="lcd-tick"/>
@@ -123,3 +139,5 @@
     </symbol>
 
   </defs>
+
+  <!-- ============== body ============== -->
