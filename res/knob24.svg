@@ -51,5 +51,5 @@
      id="polyline2"
      transform="translate(12,12)"
      style="fill:none;stroke:#f0f0f0;stroke-width:2.2;stroke-linecap:round"
-     d="m 0,-9 v 6.5" />
+     d="m 0,-9 v 7" />
 </svg>

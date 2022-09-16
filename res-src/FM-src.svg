@@ -125,10 +125,10 @@
       </g>
     </symbol>
 
-    <symbol id="knob40" >
-      <g transform="translate(20 20)">
-        <circle r="19.5" fill="url('#bigKnobDark')"/>
-        <circle r="17.5" fill="url('#bigKnobLight')"/>
+    <symbol id="knob45" >
+      <g transform="translate(22.5 22.5)">
+        <circle r="22" fill="url('#bigKnobDark')"/>
+        <circle r="20" fill="url('#bigKnobLight')"/>
       </g>
     </symbol>
 
@@ -195,12 +195,12 @@
 
   <!-- ======== knobs and switches ======== -->  
 
-  <g transform="translate(37.5 82)">
-    <text x="0" y="-26" class="big-label" text-anchor="middle">RATIO</text>
-    <use xlink:href="#knob40" transform="translate(-20 -20)"/>
+  <g transform="translate(37.5 84)">
+    <text x="0" y="-28" class="big-label" text-anchor="middle">RATIO</text>
+    <use xlink:href="#knob45" transform="translate(-22.5 -22.5)"/>
   </g>
 
-  <g transform="translate(37.5 118)">
+  <g transform="translate(37.5 120)">
     <use xlink:href="#hswitch14" transform="translate(-12 -7)"/>
     <g transform="translate(19 0)">
       <polyline points="-4 4 4 -4" class="icon"/>
@@ -210,9 +210,9 @@
     </g>
   </g>
 
-  <g transform="translate(37.5 180)">
-    <text x="0" y="-26" class="big-label" text-anchor="middle">OFFSET</text>
-    <use xlink:href="#knob40" transform="translate(-20 -20)"/>
+  <g transform="translate(37.5 183)">
+    <text x="0" y="-28" class="big-label" text-anchor="middle">OFFSET</text>
+    <use xlink:href="#knob45" transform="translate(-22.5 -22.5)"/>
   </g>
 
   <!-- ======== row 1 ======== -->  
