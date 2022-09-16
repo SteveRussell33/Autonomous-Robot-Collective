@@ -7,10 +7,10 @@
 
 using namespace rack;
 
-const float kMuteDb = -120.0f;
+static const float kMuteDb = -120.0f;
 
-const float kMinDb = -60.0f;
-const float kMaxDb = 12.0f;
+static const float kMinDb = -60.0f;
+static const float kMaxDb = 12.0f;
 
 //--------------------------------------------------------------
 // Volume
@@ -90,10 +90,10 @@ struct DecibelsToAmplitude {
 };
 
 //--------------------------------------------------------------
-// VolumeAmplitude
+// Volume
 //--------------------------------------------------------------
 
-struct VolumeAmplitude {
+struct Volume {
 
   private:
 
@@ -123,6 +123,44 @@ struct VolumeAmplitude {
         return amp;
     }
 };
+
+////--------------------------------------------------------------
+//// Pan
+////--------------------------------------------------------------
+//
+//struct Pan {
+//
+//  private:
+//
+//    static constexpr float kCenter = 0.7071068f;
+//    static constexpr float kTwoPi = 2.0f * M_PI;
+//
+//    float curPan = 0.0f;
+//    bogaudio::dsp::SlewLimiter panSlew;
+//
+//  public:
+//
+//    float left = kCenter;
+//    float right = kCenter;
+//
+//    void onSampleRateChange(float sampleRate) {
+//        panSlew.setParams(sampleRate, 5.0f /* ms */, 1.0f);
+//        panSlew.setLast(kCenter);
+//    }
+//
+//    void next(float pan) {
+//
+//        float ps = panSlew.next(clamp(pan, -1.0f, 1.0f));
+//        if (curPan != ps) {
+//            curPan = ps;
+//
+//            // TODO lookup table
+//            float p = (curPan + 1.0f) * 0.125f;
+//            left = std::cosf(kTwoPi * p);
+//            right = std::sinf(kTwoPi * p); // or cosf() with 0.75f....
+//        }
+//    }
+//};
 
 //--------------------------------------------------------------
 // VuLevel
@@ -220,7 +258,7 @@ struct StereoTrack {
 
   private:
 
-    VolumeAmplitude volAmp;
+    Volume volume;
 
   public:
 
@@ -228,14 +266,21 @@ struct StereoTrack {
     MonoTrack right;
 
     void onSampleRateChange(float sampleRate) {
-        volAmp.onSampleRateChange(sampleRate);
+        volume.onSampleRateChange(sampleRate);
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
 
-    void process(Input& leftInput, Input& rightInput, Param& volParam, bool muted, Input& volCvInput) {
+    void process(
+        Input& leftInput,
+        Input& rightInput,
+        Param& volParam,
+        bool muted,
+        Input& volCvInput
+        /*Param& panParam,
+        Input& panCvInput*/) {
 
-        float amp = volAmp.next(volParam, muted, volCvInput);
+        float amp = volume.next(volParam, muted, volCvInput);
 
         // left connected
         if (leftInput.isConnected()) {
@@ -287,7 +332,7 @@ struct StereoMix {
 
   private:
 
-    VolumeAmplitude volAmp;
+    Volume volume;
 
   public:
 
@@ -295,7 +340,7 @@ struct StereoMix {
     MonoMix right;
 
     void onSampleRateChange(float sampleRate) {
-        volAmp.onSampleRateChange(sampleRate);
+        volume.onSampleRateChange(sampleRate);
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
@@ -309,7 +354,7 @@ struct StereoMix {
             right.sum += tracks[t].right.sum;
         }
 
-        float amp = volAmp.next(volParam, muted, volCvInput);
+        float amp = volume.next(volParam, muted, volCvInput);
 
         left.process(amp);
         right.process(amp);

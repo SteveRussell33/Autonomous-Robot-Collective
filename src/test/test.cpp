@@ -8,7 +8,7 @@
 
 void dump(float v) {
     std::cout << std::fixed;
-    std::cout << std::setprecision(3);
+    std::cout << std::setprecision(7);
     std::cout << v;
 }
 
@@ -27,31 +27,48 @@ void dump(float v) {
 //    }
 //}
 
-void csv() {
+//void csv() {
+//
+//    std::cout << "T,A,B" << std::endl;
+//
+//    for (int i = 0; i < 10; i++) {
+//        for (int j = 0; j < 100; j++) {
+//
+//            float t = i + j/100.0f;
+//
+//            float a = foo();
+//            a = a * amplitude;
+//
+//            float b = bar();
+//            b = b * amplitude;
+//
+//            dump(t);
+//            std::cout << ",";
+//            dump(a);
+//            std::cout << ",";
+//            dump(b);
+//            std::cout << std::endl;
+//        }
+//    }
+//}
 
-    std::cout << "T,A,B" << std::endl;
+// don't forget to clamp at -1, 1
+void pan(float pan) {
 
-    for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 100; j++) {
+    float p = (pan + 1.0f) * 0.125f;
+    float left = std::cosf(2.0f * M_PI * p);
+    float right = std::sinf(2.0f * M_PI * p);
 
-            float t = i + j/100.0f;
-
-            float a = foo();
-            a = a * amplitude;
-
-            float b = bar();
-            b = b * amplitude;
-
-            dump(t);
-            std::cout << ",";
-            dump(a);
-            std::cout << ",";
-            dump(b);
-            std::cout << std::endl;
-        }
-    }
+    dump(pan);
+    std::cout << ",";
+    dump(left);
+    std::cout << ",";
+    dump(right);
+    std::cout << std::endl;
 }
 
 int main() {
-    csv();
+    for (int i = -10; i <= 10; i++) {
+        pan(i/10.0f);
+    }
 }
