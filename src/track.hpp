@@ -82,7 +82,7 @@ struct DecibelsToAmplitude {
         if (curDb != dbs) {
             curDb = dbs;
 
-            // TODO perhaps we should use a lookup table here.
+            // TODO lookup table
             curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
         }
         return curAmp;
@@ -90,10 +90,10 @@ struct DecibelsToAmplitude {
 };
 
 //--------------------------------------------------------------
-// Volume
+// VolumeControl
 //--------------------------------------------------------------
 
-struct Volume {
+struct VolumeControl {
 
   private:
 
@@ -125,10 +125,10 @@ struct Volume {
 };
 
 ////--------------------------------------------------------------
-//// Pan
+//// PanControl
 ////--------------------------------------------------------------
 //
-//struct Pan {
+//struct PanControl {
 //
 //  private:
 //
@@ -230,6 +230,7 @@ struct VuLevel {
 
 struct MonoTrack {
 
+    // TODO: volume, pan per channel 
     float sum = 0.0f;
     VuLevel vuLevel;
 
@@ -258,7 +259,7 @@ struct StereoTrack {
 
   private:
 
-    Volume volume;
+    VolumeControl volControl;
 
   public:
 
@@ -266,7 +267,7 @@ struct StereoTrack {
     MonoTrack right;
 
     void onSampleRateChange(float sampleRate) {
-        volume.onSampleRateChange(sampleRate);
+        volControl.onSampleRateChange(sampleRate);
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
@@ -280,7 +281,7 @@ struct StereoTrack {
         /*Param& panParam,
         Input& panCvInput*/) {
 
-        float amp = volume.next(volParam, muted, volCvInput);
+        float amp = volControl.next(volParam, muted, volCvInput);
 
         // left connected
         if (leftInput.isConnected()) {
@@ -332,7 +333,7 @@ struct StereoMix {
 
   private:
 
-    Volume volume;
+    VolumeControl volControl;
 
   public:
 
@@ -340,7 +341,7 @@ struct StereoMix {
     MonoMix right;
 
     void onSampleRateChange(float sampleRate) {
-        volume.onSampleRateChange(sampleRate);
+        volControl.onSampleRateChange(sampleRate);
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
@@ -354,7 +355,7 @@ struct StereoMix {
             right.sum += tracks[t].right.sum;
         }
 
-        float amp = volume.next(volParam, muted, volCvInput);
+        float amp = volControl.next(volParam, muted, volCvInput);
 
         left.process(amp);
         right.process(amp);
