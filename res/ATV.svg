@@ -12,11 +12,11 @@
    width="30"
    height="380"
    viewBox="0 0 30 380"
-   id="svg153"
+   id="svg144"
    sodipodi:docname="ATV.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
-     id="metadata157">
+     id="metadata148">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -37,7 +37,7 @@
      inkscape:pageshadow="2"
      inkscape:window-width="689"
      inkscape:window-height="480"
-     id="namedview155"
+     id="namedview146"
      showgrid="false"
      inkscape:zoom="2.1763158"
      inkscape:cx="15"
@@ -45,7 +45,7 @@
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg153" />
+     inkscape:current-layer="svg144" />
   <!-- ============== styles ============== -->
   <style
      id="style2">
@@ -70,15 +70,20 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
+    text.white-label {
+      fill: #dfdfdf;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
 
     .background {
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #abc6a8;
+      fill: #a67775;
     }
     .alt-output {
-      fill: #9ebcd0;
+      fill: #839cac;
     }
 
     polyline.icon {
@@ -120,7 +125,7 @@
   </style>
   <!-- ============== defs ============== -->
   <defs
-     id="defs85">
+     id="defs76">
     <linearGradient
        id="smallKnobLight"
        x1="0%"
@@ -152,399 +157,319 @@
          id="stop11" />
     </linearGradient>
     <symbol
-       id="knob18">
-      <g
-         transform="translate(9 9)"
-         id="g20">
-        <circle
-           r="8.5"
-           stroke="#121212"
-           fill="none"
-           id="circle14" />
-        <circle
-           r="8"
-           fill="url('#smallKnobLight')"
-           id="circle16" />
-        <circle
-           r="7"
-           fill="url('#smallKnobDark')"
-           id="circle18" />
-      </g>
-    </symbol>
-    <symbol
        id="knob24">
       <g
          transform="translate(12 12)"
-         id="g29">
+         id="g20">
         <circle
            r="11.5"
            stroke="#121212"
            fill="none"
-           id="circle23" />
+           id="circle14" />
         <circle
            r="11"
            fill="url('#smallKnobLight')"
-           id="circle25" />
+           id="circle16" />
         <circle
            r="10"
            fill="url('#smallKnobDark')"
-           id="circle27" />
+           id="circle18" />
       </g>
     </symbol>
     <symbol
        id="toggleButton">
       <g
          transform="translate(9 9)"
-         id="g32" />
+         id="g23" />
     </symbol>
     <symbol
        id="port">
       <g
          transform="translate(12 12)"
-         id="g35" />
+         id="g26" />
     </symbol>
     <symbol
        id="meter-strip">
       <g
          transform="translate(20 4)"
-         id="g82">
+         id="g73">
         <rect
            x="-6"
            y="-1"
            width="5"
            height="106"
            class="lcd-bg-accent"
-           id="rect38" />
+           id="rect29" />
         <rect
            x="1"
            y="-1"
            width="5"
            height="106"
            class="lcd-bg-accent"
-           id="rect40" />
+           id="rect31" />
         <g
            transform="translate(-11 2.5)"
-           id="g60">
+           id="g51">
           <text
              x="0"
              y="0"
              class="lcd-label"
              text-anchor="end"
-             id="text42">0</text>
+             id="text33">0</text>
           <text
              x="0"
              y="13"
              class="lcd-label"
              text-anchor="end"
-             id="text44">3</text>
+             id="text35">3</text>
           <text
              x="0"
              y="26"
              class="lcd-label"
              text-anchor="end"
-             id="text46">6</text>
+             id="text37">6</text>
           <text
              x="0"
              y="39"
              class="lcd-label"
              text-anchor="end"
-             id="text48">9</text>
+             id="text39">9</text>
           <text
              x="0"
              y="52"
              class="lcd-label"
              text-anchor="end"
-             id="text50">12</text>
+             id="text41">12</text>
           <text
              x="0"
              y="65"
              class="lcd-label"
              text-anchor="end"
-             id="text52">18</text>
+             id="text43">18</text>
           <text
              x="0"
              y="78"
              class="lcd-label"
              text-anchor="end"
-             id="text54">24</text>
+             id="text45">24</text>
           <text
              x="0"
              y="91"
              class="lcd-label"
              text-anchor="end"
-             id="text56">36</text>
+             id="text47">36</text>
           <text
              x="0"
              y="104"
              class="lcd-label"
              text-anchor="end"
-             id="text58">48</text>
+             id="text49">48</text>
         </g>
         <g
            transform="translate(-10 0)"
-           id="g80">
+           id="g71">
           <polyline
              points="0   0 2   0"
              class="lcd-tick"
-             id="polyline62" />
+             id="polyline53" />
           <polyline
              points="0  13 2  13"
              class="lcd-tick"
-             id="polyline64" />
+             id="polyline55" />
           <polyline
              points="0  26 2  26"
              class="lcd-tick"
-             id="polyline66" />
+             id="polyline57" />
           <polyline
              points="0  39 2  39"
              class="lcd-tick"
-             id="polyline68" />
+             id="polyline59" />
           <polyline
              points="0  52 2  52"
              class="lcd-tick"
-             id="polyline70" />
+             id="polyline61" />
           <polyline
              points="0  65 2  65"
              class="lcd-tick"
-             id="polyline72" />
+             id="polyline63" />
           <polyline
              points="0  78 2  78"
              class="lcd-tick"
-             id="polyline74" />
+             id="polyline65" />
           <polyline
              points="0  91 2  91"
              class="lcd-tick"
-             id="polyline76" />
+             id="polyline67" />
           <polyline
              points="0 104 2 104"
              class="lcd-tick"
-             id="polyline78" />
+             id="polyline69" />
         </g>
       </g>
     </symbol>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#smallKnobLight"
-       id="linearGradient193"
-       x1="-8"
-       y1="-8"
-       x2="-8"
-       y2="8"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#smallKnobDark"
-       id="linearGradient195"
-       x1="-7"
-       y1="-7"
-       x2="-7"
-       y2="7"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#smallKnobLight"
-       id="linearGradient215"
-       x1="-8"
-       y1="-8"
-       x2="-8"
-       y2="8"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#smallKnobDark"
-       id="linearGradient217"
-       x1="-7"
-       y1="-7"
-       x2="-7"
-       y2="7"
-       gradientUnits="userSpaceOnUse" />
   </defs>
   <!-- ============== body ============== -->
   <path
-     id="rect87"
+     id="rect78"
      style="fill:#dfdfdf"
      d="M 0,0 H 30 V 380 H 0 Z"
      class="background" />
   <g
      aria-label="ATV"
-     id="text89"
+     id="text80"
      style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="title">
     <path
        d="m 5.8808596,26.091797 1.5797525,-4.769206 h 0.029948 l 1.5797525,4.769206 z M 10.388021,30 h 1.744466 L 8.1643882,19.083985 H 6.779297 L 2.8111982,30 h 1.7519531 l 0.8385416,-2.440755 h 4.1402994 z"
        style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path248" />
+       id="path205" />
     <path
        d="m 14.004231,30 h 1.66211 v -9.441081 h 2.987304 v -1.474934 h -7.636718 v 1.474934 h 2.987304 z"
        style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path250" />
+       id="path207" />
     <path
        d="m 22.28483,30 h 1.28776 l 3.608724,-10.916015 h -1.751953 l -2.485677,8.310546 h -0.02995 l -2.47819,-8.310546 h -1.751953 z"
        style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path252" />
+       id="path209" />
   </g>
   <g
      aria-label="RM"
-     id="text91"
+     id="text82"
      style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="logo">
     <path
        d="m 3.3268231,367.79036 h 2.2526041 q 0.6901041,0 1.0546875,0.29297 0.4622395,0.33203 0.4752604,1.07422 0,0.61849 -0.3971354,1.04167 -0.4036459,0.45573 -1.2109375,0.46875 H 3.3268231 Z M 1.888021,376 h 1.4388021 v -4.05599 H 5.1627605 L 7.1223959,376 h 1.7122395 l -2.2005207,-4.21224 q 1.8098958,-0.69661 1.8359374,-2.63021 -0.039063,-1.3151 -0.9440104,-2.02474 -0.7486979,-0.625 -1.9335937,-0.625 H 1.888021 Z"
        style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path243" />
+       id="path200" />
     <path
        d="m 10.013021,376 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 376 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
        style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path245" />
+       id="path202" />
   </g>
   <!-- ======== A ======== -->
   <path
-     id="rect93"
-     style="fill:#abc6a8"
+     id="rect84"
+     style="fill:#a67775"
      d="m 5,144 h 20 c 1.662,0 3,1.338 3,3 v 22 c 0,1.662 -1.338,3 -3,3 H 5 c -1.662,0 -3,-1.338 -3,-3 v -22 c 0,-1.662 1.338,-3 3,-3 z"
      class="main-output" />
   <path
-     id="polyline97"
+     id="polyline88"
      transform="translate(15,74)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 84"
      class="connect" />
   <g
      aria-label="A"
-     id="text101"
+     id="text92"
      style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="big-label">
     <path
        d="m 13.964844,53.451172 1.030273,-3.110352 h 0.01953 l 1.030274,3.110352 z M 16.904297,56 h 1.137695 l -2.58789,-7.119141 H 14.550781 L 11.962891,56 h 1.142578 l 0.546875,-1.591797 h 2.700195 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path239" />
+       id="path196" />
   </g>
   <g
-     id="use103"
+     id="use94"
      transform="translate(3,62)">
     <g
        transform="translate(12,12)"
-       id="g179" />
+       id="g170" />
   </g>
-  <g
-     id="use107"
-     transform="translate(6,107)">
-    <g
-       transform="translate(9,9)"
-       id="g189">
-      <path
-         id="circle183"
-         style="fill:none;stroke:#121212"
-         d="M 8.5,0 A 8.5,8.5 0 0 1 0,8.5 8.5,8.5 0 0 1 -8.5,0 8.5,8.5 0 0 1 0,-8.5 8.5,8.5 0 0 1 8.5,0 Z" />
-      <path
-         id="circle185"
-         style="fill:url(#linearGradient193)"
-         d="M 8,0 A 8,8 0 0 1 0,8 8,8 0 0 1 -8,0 8,8 0 0 1 0,-8 8,8 0 0 1 8,0 Z" />
-      <path
-         id="circle187"
-         style="fill:url(#linearGradient195)"
-         d="M 7,0 A 7,7 0 0 1 0,7 7,7 0 0 1 -7,0 7,7 0 0 1 0,-7 7,7 0 0 1 7,0 Z" />
-    </g>
-  </g>
+  <use
+     xlink:href="#knob18"
+     transform="translate(6,107)"
+     id="use98"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" />
   <g
      transform="translate(15,131)"
-     id="g115">
+     id="g106">
     <path
-       id="polyline109"
+       id="polyline100"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="m -7,0 h 4"
        class="icon" />
     <path
-       id="polyline111"
+       id="polyline102"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 7,0 H 3"
        class="icon" />
     <path
-       id="polyline113"
+       id="polyline104"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 5,-2 V 2"
        class="icon" />
   </g>
   <g
-     id="use119"
+     id="use110"
      transform="translate(3,146)">
     <g
        transform="translate(12,12)"
-       id="g197" />
+       id="g174" />
   </g>
   <!-- ======== B ======== -->
   <path
-     id="rect123"
-     style="fill:#abc6a8"
+     id="rect114"
+     style="fill:#a67775"
      d="m 5,294 h 20 c 1.662,0 3,1.338 3,3 v 22 c 0,1.662 -1.338,3 -3,3 H 5 c -1.662,0 -3,-1.338 -3,-3 v -22 c 0,-1.662 1.338,-3 3,-3 z"
      class="main-output" />
   <path
-     id="polyline127"
+     id="polyline118"
      transform="translate(15,224)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 84"
      class="connect" />
   <g
      aria-label="B"
-     id="text131"
+     id="text122"
      style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="big-label">
     <path
        d="m 12.705078,206 h 2.998047 q 0.839844,0 1.401367,-0.56152 0.566406,-0.53711 0.576172,-1.45996 0,-0.55665 -0.27832,-1.03028 -0.297852,-0.45898 -0.878907,-0.61035 v -0.0195 q 0.307618,-0.14649 0.517579,-0.32715 0.209961,-0.1709 0.322265,-0.36133 0.219727,-0.40039 0.209961,-0.83984 0,-0.85938 -0.532226,-1.38184 -0.527344,-0.51758 -1.577149,-0.52734 h -2.758789 z m 2.739258,-3.15918 q 0.600586,0.01 0.878906,0.31738 0.27832,0.3125 0.27832,0.75196 0,0.42968 -0.27832,0.74218 -0.27832,0.31739 -0.878906,0.32715 H 13.78418 v -2.13867 z m -0.102539,-2.99805 q 0.59082,0.01 0.86914,0.28809 0.283204,0.29785 0.283204,0.72754 0,0.42969 -0.283204,0.71289 -0.27832,0.30762 -0.86914,0.30762 H 13.78418 v -2.03614 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path229" />
+       id="path189" />
   </g>
   <g
-     id="use133"
+     id="use124"
      transform="translate(3,212)">
     <g
        transform="translate(12,12)"
-       id="g201" />
+       id="g178" />
   </g>
-  <g
-     id="use137"
-     transform="translate(6,257)">
-    <g
-       transform="translate(9,9)"
-       id="g211">
-      <path
-         id="circle205"
-         style="fill:none;stroke:#121212"
-         d="M 8.5,0 A 8.5,8.5 0 0 1 0,8.5 8.5,8.5 0 0 1 -8.5,0 8.5,8.5 0 0 1 0,-8.5 8.5,8.5 0 0 1 8.5,0 Z" />
-      <path
-         id="circle207"
-         style="fill:url(#linearGradient215)"
-         d="M 8,0 A 8,8 0 0 1 0,8 8,8 0 0 1 -8,0 8,8 0 0 1 0,-8 8,8 0 0 1 8,0 Z" />
-      <path
-         id="circle209"
-         style="fill:url(#linearGradient217)"
-         d="M 7,0 A 7,7 0 0 1 0,7 7,7 0 0 1 -7,0 7,7 0 0 1 0,-7 7,7 0 0 1 7,0 Z" />
-    </g>
-  </g>
+  <use
+     xlink:href="#knob18"
+     transform="translate(6,257)"
+     id="use128"
+     x="0"
+     y="0"
+     width="100%"
+     height="100%" />
   <g
      transform="translate(15,281)"
-     id="g145">
+     id="g136">
     <path
-       id="polyline139"
+       id="polyline130"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="m -7,0 h 4"
        class="icon" />
     <path
-       id="polyline141"
+       id="polyline132"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 7,0 H 3"
        class="icon" />
     <path
-       id="polyline143"
+       id="polyline134"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 5,-2 V 2"
        class="icon" />
   </g>
   <g
-     id="use149"
+     id="use140"
      transform="translate(3,296)">
     <g
        transform="translate(12,12)"
-       id="g219" />
+       id="g182" />
   </g>
 </svg>

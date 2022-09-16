@@ -31,15 +31,20 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
+    text.white-label {
+      fill: #dfdfdf;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
 
     .background {
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #abc6a8;
+      fill: #a67775;
     }
     .alt-output {
-      fill: #9ebcd0;
+      fill: #839cac;
     }
 
     polyline.icon {
@@ -271,22 +276,22 @@
   <g transform="translate(113 261)">
     <rect x="-22" y="-14" width="37" height="57" rx="3" class="alt-output"/>
 
-    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
+    <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(113 290)">
-    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">R</text>
+    <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">R</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <g transform="translate(113 319)">
     <rect x="-22" y="-14" width="37" height="57" rx="3" class="main-output"/>
 
-    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
+    <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(113 348)">
-    <text x ="-16.5" y="2.5" class="label" text-anchor="middle">R</text>
+    <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">R</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 

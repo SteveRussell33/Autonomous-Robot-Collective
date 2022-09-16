@@ -22,15 +22,20 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
+    text.white-label {
+      fill: #dfdfdf;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
 
     .background {
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #abc6a8;
+      fill: #a67775;
     }
     .alt-output {
-      fill: #9ebcd0;
+      fill: #839cac;
     }
 
     polyline.icon {
@@ -84,14 +89,6 @@
       <stop offset="0%"   stop-color="#494949" />
       <stop offset="100%" stop-color="#282828" />
     </linearGradient>
-
-    <symbol id="knob18" >
-      <g transform="translate(9 9)">
-        <circle r="8.5" stroke="#121212" fill="none"/>
-        <circle r="8" fill="url('#smallKnobLight')"/>
-        <circle r="7" fill="url('#smallKnobDark')"/>
-      </g>
-    </symbol>
 
     <symbol id="knob24" >
       <g transform="translate(12 12)">

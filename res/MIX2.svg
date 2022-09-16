@@ -70,15 +70,20 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
+    text.white-label {
+      fill: #dfdfdf;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
 
     .background {
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #abc6a8;
+      fill: #a67775;
     }
     .alt-output {
-      fill: #9ebcd0;
+      fill: #839cac;
     }
 
     polyline.icon {
@@ -1323,17 +1328,17 @@
   </g>
   <path
      id="rect212"
-     style="fill:#9ebcd0"
+     style="fill:#839cac"
      d="m 94,247 h 31 c 1.662,0 3,1.338 3,3 v 51 c 0,1.662 -1.338,3 -3,3 H 94 c -1.662,0 -3,-1.338 -3,-3 v -51 c 0,-1.662 1.338,-3 3,-3 z"
      class="alt-output" />
   <g
      aria-label="L"
      id="text214"
-     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-     class="label">
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+     class="white-label">
     <path
        d="m 94.875,263.5 h 3.636719 v -0.81641 h -2.773438 v -4.8789 H 94.875 Z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
        id="path581" />
   </g>
   <g
@@ -1346,11 +1351,11 @@
   <g
      aria-label="R"
      id="text220"
-     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-     class="label">
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+     class="white-label">
     <path
        d="m 95.527344,287.57422 h 1.351562 q 0.414063,0 0.632813,0.17578 0.277343,0.19922 0.285156,0.64453 0,0.37109 -0.238281,0.625 -0.242188,0.27344 -0.726563,0.28125 H 95.527344 Z M 94.664062,292.5 h 0.863282 v -2.43359 h 1.101562 L 97.804687,292.5 h 1.027344 l -1.320312,-2.52734 q 1.085937,-0.41797 1.101562,-1.57813 -0.02344,-0.78906 -0.566406,-1.21484 -0.449219,-0.375 -1.160156,-0.375 h -2.222657 z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
        id="path578" />
   </g>
   <g
@@ -1362,17 +1367,17 @@
   </g>
   <path
      id="rect226"
-     style="fill:#abc6a8"
+     style="fill:#a67775"
      d="m 94,305 h 31 c 1.662,0 3,1.338 3,3 v 51 c 0,1.662 -1.338,3 -3,3 H 94 c -1.662,0 -3,-1.338 -3,-3 v -51 c 0,-1.662 1.338,-3 3,-3 z"
      class="main-output" />
   <g
      aria-label="L"
      id="text228"
-     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-     class="label">
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+     class="white-label">
     <path
        d="m 94.875,321.5 h 3.636719 v -0.81641 h -2.773438 v -4.8789 H 94.875 Z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
        id="path574" />
   </g>
   <g
@@ -1385,11 +1390,11 @@
   <g
      aria-label="R"
      id="text234"
-     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-     class="label">
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+     class="white-label">
     <path
        d="m 95.527344,345.57422 h 1.351562 q 0.414063,0 0.632813,0.17578 0.277343,0.19922 0.285156,0.64453 0,0.37109 -0.238281,0.625 -0.242188,0.27344 -0.726563,0.28125 H 95.527344 Z M 94.664062,350.5 h 0.863282 v -2.43359 h 1.101562 L 97.804687,350.5 h 1.027344 l -1.320312,-2.52734 q 1.085937,-0.41797 1.101562,-1.57813 -0.02344,-0.78906 -0.566406,-1.21484 -0.449219,-0.375 -1.160156,-0.375 h -2.222657 z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
        id="path571" />
   </g>
   <g
