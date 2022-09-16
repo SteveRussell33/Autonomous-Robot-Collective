@@ -7,6 +7,87 @@
 
 using namespace rack;
 
+const float kMaxDb = 12.0f;
+const float kMinDb = -60.0f;
+const float kMuteDb = -120.0f;
+
+//--------------------------------------------------------------
+// Volume
+//--------------------------------------------------------------
+
+static float volumeToDb(float v) {
+    // clang-format off
+    if      (v >= 0.5) return rescale(v, 0.5f, 1.0f, -12.0f,  12.0f);
+    else if (v >= 0.2) return rescale(v, 0.2f, 0.5f, -36.0f, -12.0f);
+    else               return rescale(v, 0.0f, 0.2f, -60.0f, -36.0f);
+    // clang-format on
+}
+
+struct VolumeParamQuantity : ParamQuantity {
+
+    float getDisplayValue() override {
+        float v = getValue();
+        if (!module) {
+            return v;
+        }
+
+        return volumeToDb(v);
+    }
+
+    void setDisplayValue(float v) override {
+        if (!module) {
+            return;
+        }
+
+        v = clamp(v, -60.0f, 12.0f);
+
+        // clang-format off
+        if      (v >= -12.0f) v =  rescale(v, -12.0f,  12.0f, 0.5f, 1.0f);
+        else if (v >= -36.0f) v =  rescale(v, -36.0f, -12.0f, 0.2f, 0.5f);
+        else                  v =  rescale(v, -60.0f, -36.0f, 0.0f, 0.2f);
+        // clang-format on
+
+        setValue(v);
+    }
+};
+
+//--------------------------------------------------------------
+// DecibelsToAmplitude
+//--------------------------------------------------------------
+
+struct DecibelsToAmplitude {
+
+  private:
+
+    float curDb;
+    float curAmp;
+    bogaudio::dsp::SlewLimiter dbSlew;
+
+  public:
+
+    DecibelsToAmplitude() {
+        curDb = kMinDb;
+        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        dbSlew.setLast(curDb);
+    }
+
+    void onSampleRateChange(float sampleRate) {
+        dbSlew.setParams(sampleRate, 10.0f /* ms */, kMaxDb - kMinDb);
+    }
+
+    float next(float db) {
+
+        float dbs = dbSlew.next(db);
+        if (curDb != dbs) {
+            curDb = dbs;
+
+            // TODO perhaps we should use a lookup table here.
+            curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        }
+        return curAmp;
+    }
+};
+
 //--------------------------------------------------------------
 // VuLevel
 //--------------------------------------------------------------
@@ -82,18 +163,9 @@ struct MonoTrack {
         vuLevel.onSampleRateChange(sampleRate);
     }
 
-    void process(Input& input) {
+    void process(Input& input, float amp) {
 
-        sum = 0.0f;
-        int channels = std::max(input.getChannels(), 1);
-        for (int ch = 0; ch < channels; ch++) {
-            float in = input.getPolyVoltage(ch);
-
-            // TODO
-            float out = in;
-
-            sum += out;
-        }
+        sum = input.getVoltageSum() * amp;
 
         vuLevel.process(sum);
     }
@@ -110,34 +182,52 @@ struct MonoTrack {
 
 struct StereoTrack {
 
+private:
+
+    DecibelsToAmplitude volD2A;
+
+public:
+
     MonoTrack left;
     MonoTrack right;
 
     void onSampleRateChange(float sampleRate) {
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
+        volD2A.onSampleRateChange(sampleRate);
     }
 
-    void process(Input& leftInput, Input& rightInput) {
+    void process(Input& leftInput, Input& rightInput, Param& volParam, bool muted) {
 
+        float amp = 0.0f;
+
+        if (muted) {
+            amp = volD2A.next(kMuteDb);
+        } else {
+            float volDb = volumeToDb(volParam.getValue());
+            amp = volD2A.next(volDb);
+        }
+
+        // left connected
         if (leftInput.isConnected()) {
-            left.process(leftInput);
+            left.process(leftInput, amp);
 
             if (rightInput.isConnected()) {
-                right.process(rightInput); // stereo
+                right.process(rightInput, amp); // stereo
             } else {
-                right.process(leftInput); // mono
+                right.process(leftInput, amp); // mono
             }
-        } else {
+        } 
+        // left disconnected
+        else {
             left.disconnect();
 
             if (rightInput.isConnected()) {
-                right.process(rightInput);
+                right.process(rightInput, amp); // right only
             } else {
-                right.disconnect();
+                right.disconnect(); // no inputs
             }
         }
-
     }
 };
 
@@ -270,11 +360,7 @@ struct VuMeter : OpaqueWidget {
         // clang-format off
         drawSegment(args, x, db,  -3.0f,   0.0f,  13.0f, -1.0f, colors.orange, NVGpaint{},  true);
         drawSegment(args, x, db,  -6.0f,  -3.0f,  26.0f, 13.0f, colors.yellow, NVGpaint{},  true);
-
-        //drawSegment(args, x, db,  -9.0f,  -6.0f,  39.0f, 26.0f, NVGcolor{},    yellowGreen, false);
-        //drawSegment(args, x, db, -12.0f,  -9.0f,  52.0f, 39.0f, colors.green,  NVGpaint{},  true);
         drawSegment(args, x, db, -12.0f,  -6.0f,  52.0f, 26.0f, NVGcolor{},    yellowGreen, false);
-
         drawSegment(args, x, db, -18.0f, -12.0f,  65.0f, 52.0f, colors.green,  NVGpaint{},  true);
         drawSegment(args, x, db, -24.0f, -18.0f,  78.0f, 65.0f, colors.green,  NVGpaint{},  true);
         drawSegment(args, x, db, -36.0f, -24.0f,  91.0f, 78.0f, colors.green,  NVGpaint{},  true);
@@ -286,11 +372,7 @@ struct VuMeter : OpaqueWidget {
         // clang-format off
         if      (db >=  -3.0f) return colors.orange;
         else if (db >=  -6.0f) return colors.yellow;
-
-        //else if (db >=  -9.0f) return nvgLerpRGBA(colors.green, colors.yellow, invLerp(db, -9.0f, -6.0f));
-        //else if (db >= -12.0f) return colors.green;
         else if (db >= -12.0f) return nvgLerpRGBA(colors.green, colors.yellow, invLerp(db, -12.0f, -6.0f));
-
         else if (db >= -18.0f) return colors.green;
         else if (db >= -24.0f) return colors.green;
         else if (db >= -36.0f) return colors.green;
@@ -302,11 +384,7 @@ struct VuMeter : OpaqueWidget {
         // clang-format off
         if      (db >=  -3.0f) return rescale(db,  -3.0f,   0.0f,  13.0f, -1.0f);
         else if (db >=  -6.0f) return rescale(db,  -6.0f,  -3.0f,  26.0f, 13.0f);
-
-        //else if (db >=  -9.0f) return rescale(db,  -9.0f,  -6.0f,  39.0f, 26.0f);
-        //else if (db >= -12.0f) return rescale(db, -12.0f,  -9.0f,  52.0f, 39.0f);
         else if (db >= -12.0f) return rescale(db, -12.0f,  -6.0f,  52.0f, 26.0f);
-
         else if (db >= -18.0f) return rescale(db, -18.0f, -12.0f,  65.0f, 52.0f);
         else if (db >= -24.0f) return rescale(db, -24.0f, -18.0f,  78.0f, 65.0f);
         else if (db >= -36.0f) return rescale(db, -36.0f, -24.0f,  91.0f, 78.0f);
@@ -337,41 +415,5 @@ struct VuMeter : OpaqueWidget {
         drawLevel(args, 0, vuLevel->peak, fadedColors);
         drawMaxPeak(args, 0, vuLevel->maxPeak, boldColors);
         drawLevel(args, 0, vuLevel->rms, boldColors);
-    }
-};
-
-//--------------------------------------------------------------
-// Volume
-//--------------------------------------------------------------
-
-struct VolumeParamQuantity : ParamQuantity {
-
-    float getDisplayValue() override {
-        float v = getValue();
-        if (!module) {
-            return v;
-        }
-
-        // clang-format off
-        if      (v >= 0.5) return rescale(v, 0.5f, 1.0f, -12.0f,  12.0f);
-        else if (v >= 0.2) return rescale(v, 0.2f, 0.5f, -36.0f, -12.0f);
-        else               return rescale(v, 0.0f, 0.2f, -60.0f, -36.0f);
-        // clang-format on
-    }
-
-    void setDisplayValue(float v) override {
-        if (!module) {
-            return;
-        }
-
-        v = clamp(v, -60.0f, 12.0f);
-
-        // clang-format off
-        if      (v >= -12.0f) v =  rescale(v, -12.0f,  12.0f, 0.5f, 1.0f);
-        else if (v >= -36.0f) v =  rescale(v, -36.0f, -12.0f, 0.2f, 0.5f);
-        else                  v =  rescale(v, -60.0f, -36.0f, 0.0f, 0.2f);
-        // clang-format on
-
-        setValue(v);
     }
 };

@@ -124,7 +124,11 @@ struct MIX2 : Module {
 
         // Process each track
         for (int t = 0; t < kNumTracks; t++) {
-            tracks[t].process(inputs[kLeftInput1 + t], inputs[kRightInput1 + t]);
+            tracks[t].process(
+                inputs[kLeftInput1 + t], 
+                inputs[kRightInput1 + t],
+                params[kVolumeParam1 + t],
+                params[kMuteParam1 + t].getValue() > 0.5f);
         }
 
         // Process the mix
