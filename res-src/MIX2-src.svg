@@ -36,7 +36,7 @@
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #abc6a8;
+      fill: #d39a98;
     }
     .alt-output {
       fill: #9ebcd0;
@@ -269,7 +269,7 @@
   </g>
 
   <g transform="translate(113 261)">
-    <rect x="-22" y="-14" width="37" height="57" rx="4" class="alt-output"/>
+    <rect x="-22" y="-14" width="37" height="57" rx="3" class="alt-output"/>
 
     <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
@@ -280,7 +280,7 @@
   </g>
 
   <g transform="translate(113 319)">
-    <rect x="-22" y="-14" width="37" height="57" rx="4" class="main-output"/>
+    <rect x="-22" y="-14" width="37" height="57" rx="3" class="main-output"/>
 
     <text x ="-16.5" y="2.5" class="label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
