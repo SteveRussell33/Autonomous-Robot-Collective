@@ -41,10 +41,10 @@
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #a67775;
+      fill: #895553;
     }
     .alt-output {
-      fill: #839cac;
+      fill: #5e7a8c;
     }
 
     polyline.icon {
