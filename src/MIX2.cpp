@@ -75,9 +75,9 @@ struct MIX2 : Module {
     MIX2() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        // configParam<FaderParamQuantity>(kVolumeParam1, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
-        // configParam<FaderParamQuantity>(kVolumeParam2, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
-        // configParam<FaderParamQuantity>(kVolumeParamMix, 0.0f, 1.0f, kVolumeParamDbZero, "Fader", " dB");
+        configParam<VolumeParamQuantity>(kVolumeParam1, 0.0f, 1.0f, 0.75f, "Volume", " dB");
+        configParam<VolumeParamQuantity>(kVolumeParam2, 0.0f, 1.0f, 0.75f, "Volume", " dB");
+        configParam<VolumeParamQuantity>(kVolumeParamMix, 0.0f, 1.0f, 0.75f, "Volume", " dB");
 
         configSwitch(kMuteParam1, 0.f, 1.f, 0.f, "Track 1 Mute", {"Off", "On"});
         configSwitch(kMuteParam2, 0.f, 1.f, 0.f, "Track 2 Mute", {"Off", "On"});
