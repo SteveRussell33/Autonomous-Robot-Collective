@@ -1,4 +1,6 @@
 
+#include "bogaudio/dsp/signal.hpp"
+
 #include "plugin.hpp"
 #include "widgets.hpp"
 
@@ -40,6 +42,8 @@ struct ATV : Module {
         kOutputsLen
     };
 
+    bogaudio::dsp::SlewLimiter paramSlew[kParamsLen];
+
     ATV() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
@@ -60,22 +64,32 @@ struct ATV : Module {
 #endif
     }
 
-    void applyCV(int inputID, int cvParamID, int outputID) {
+    inline float slewParam(int id) {
+        float v = params[id].getValue();
+        return paramSlew[id].next(v);
+    }
+
+    void applyCV(int inputID, int paramID, int outputID) {
 
         if (!outputs[outputID].isConnected()) {
             return;
         }
 
-        float cvAmount = params[cvParamID].getValue();
+        float pv = slewParam(paramID);
 
         int channels = std::max(inputs[inputID].getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
             float in = inputs[inputID].getPolyVoltage(ch);
-            outputs[outputID].setVoltage(in * cvAmount, ch);
+            outputs[outputID].setVoltage(in * pv, ch);
         }
 
         outputs[outputID].setChannels(channels);
+    }
+
+    void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        paramSlew[kCvParamA].setParams(e.sampleRate, 5.0f, 2.0f);
+        paramSlew[kCvParamB].setParams(e.sampleRate, 5.0f, 2.0f);
     }
 
     void process(const ProcessArgs& args) override {
