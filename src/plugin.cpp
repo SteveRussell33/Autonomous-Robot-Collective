@@ -6,5 +6,6 @@ void init(Plugin* p) {
     pluginInstance = p;
 
     p->addModel(modelATV);
+    p->addModel(modelFM);
     p->addModel(modelMIX2);
 }

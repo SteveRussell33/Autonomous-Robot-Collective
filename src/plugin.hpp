@@ -6,4 +6,5 @@ using namespace rack;
 extern Plugin* pluginInstance;
 
 extern Model* modelATV;
+extern Model* modelFM;
 extern Model* modelMIX2;

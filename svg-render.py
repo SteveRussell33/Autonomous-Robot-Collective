@@ -5,8 +5,12 @@ import subprocess
 
 files = [
     'ATV',
+    'FM',
+    'hswitch-0',
+    'hswitch-1',
     'knob18',
     'knob24',
+    'knob40',
     'MIX2',
     'toggle-0',
     'toggle-1'

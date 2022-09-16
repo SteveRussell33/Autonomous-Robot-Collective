@@ -27,6 +27,20 @@ struct RmKnob24 : RmKnob {
     }
 };
 
+struct RmKnob40 : RmKnob {
+    RmKnob40() : RmKnob("res/knob40.svg", 40) {
+        shadow->blurRadius = 2.0;
+        shadow->box.pos = Vec(0.0, 3.0);
+    }
+};
+
+struct RmHSwitch : SvgSwitch {
+    RmHSwitch() {
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/hswitch-0.svg")));
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/hswitch-1.svg")));
+    }
+};
+
 struct RmToggleButton : SvgSwitch {
     RmToggleButton() {
         addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-0.svg")));

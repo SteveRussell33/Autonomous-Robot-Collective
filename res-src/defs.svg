@@ -82,7 +82,7 @@
 
     <linearGradient id="smallKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%"   stop-color="#6f6f6f" />
-      <stop offset="100%" stop-color="#3c3836" />
+      <stop offset="100%" stop-color="#383838" />
     </linearGradient>
 
     <linearGradient id="smallKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -90,11 +90,36 @@
       <stop offset="100%" stop-color="#282828" />
     </linearGradient>
 
+    <linearGradient id="bigKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#888" />
+      <stop offset="100%" stop-color="#333" />
+    </linearGradient>
+
+    <linearGradient id="bigKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#5c5c5c" />
+      <stop offset="100%" stop-color="#282828" />
+    </linearGradient>
+
+    <symbol id="knob18" >
+      <g transform="translate(9 9)">
+        <circle r="8.5" stroke="#222" fill="none"/>
+        <circle r="8" fill="url('#smallKnobLight')"/>
+        <circle r="7" fill="url('#smallKnobDark')"/>
+      </g>
+    </symbol>
+
     <symbol id="knob24" >
       <g transform="translate(12 12)">
         <circle r="11.5" stroke="#121212" fill="none"/>
         <circle r="11" fill="url('#smallKnobLight')"/>
         <circle r="10" fill="url('#smallKnobDark')"/>
+      </g>
+    </symbol>
+
+    <symbol id="knob40" >
+      <g transform="translate(20 20)">
+        <circle r="19.5" fill="url('#bigKnobDark')"/>
+        <circle r="17.5" fill="url('#bigKnobLight')"/>
       </g>
     </symbol>
 
@@ -111,6 +136,14 @@
         <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
         <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
         <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="hswitch14" >
+      <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
+      <g transform="translate(12 7)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
       </g>
     </symbol>
 
