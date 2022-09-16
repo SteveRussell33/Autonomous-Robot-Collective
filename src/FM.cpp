@@ -2,6 +2,7 @@
 #include "widgets.hpp"
 
 #include "bogaudio/dsp/pitch.hpp"
+#include "bogaudio/dsp/signal.hpp"
 
 // define FM_DEBUG
 
@@ -36,6 +37,8 @@ struct FM : Module {
 #endif
         kOutputsLen
     };
+
+    bogaudio::dsp::SlewLimiter paramSlew[kParamsLen];
 
     FM() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
@@ -74,20 +77,34 @@ struct FM : Module {
             return round(ratio);
     }
 
+    inline float slewParam(int id) {
+        float v = params[id].getValue();
+        return paramSlew[id].next(v);
+    }
+
+    void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        // clang-format off
+        paramSlew[kRatioParam]         .setParams(e.sampleRate, 5.0f, 10.0f);
+        paramSlew[kRatioCvAmountParam] .setParams(e.sampleRate, 5.0f,  2.0f);
+        paramSlew[kOffsetParam]        .setParams(e.sampleRate, 5.0f, 10.0f);
+        paramSlew[kOffsetCvAmountParam].setParams(e.sampleRate, 5.0f,  2.0f);
+        // clang-format on
+    }
+
     void process(const ProcessArgs& args) override {
 
         if (!outputs[kModulatorPitchOutput].isConnected()) {
             return;
         }
 
-        float pRatio = params[kRatioParam].getValue();
-        float pRatioCvAmount = params[kRatioCvAmountParam].getValue();
+        float pRatio = slewParam(kRatioParam);
+        float pRatioCvAmount = slewParam(kRatioCvAmountParam);
+        float pOffset = slewParam(kOffsetParam);
+        float pOffsetCvAmount = slewParam(kOffsetCvAmountParam);
+
         bool pRatioQuant = params[kRatioQuantParam].getValue() < 0.5f;
-        float pOffset = params[kOffsetParam].getValue();
-        float pOffsetCvAmount = params[kOffsetCvAmountParam].getValue();
 
         int channels = std::max(inputs[kCarrierPitchInput].getChannels(), 1);
-
         for (int ch = 0; ch < channels; ch++) {
 
             float inRatioCv = inputs[kRatioCvInput].getPolyVoltage(ch);

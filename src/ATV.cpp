@@ -64,11 +64,6 @@ struct ATV : Module {
 #endif
     }
 
-    inline float slewParam(int id) {
-        float v = params[id].getValue();
-        return paramSlew[id].next(v);
-    }
-
     void applyCV(int inputID, int paramID, int outputID) {
 
         if (!outputs[outputID].isConnected()) {
@@ -85,6 +80,11 @@ struct ATV : Module {
         }
 
         outputs[outputID].setChannels(channels);
+    }
+
+    inline float slewParam(int id) {
+        float v = params[id].getValue();
+        return paramSlew[id].next(v);
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
