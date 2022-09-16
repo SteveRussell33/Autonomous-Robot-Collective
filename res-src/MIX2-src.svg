@@ -307,7 +307,10 @@
   </g>
 
   <g transform="translate(113 261)">
-    <rect x="-22" y="-14" width="37" height="57" rx="3" class="alt-output"/>
+
+    <g transform="translate(-22 -15)">
+      <rect x="0" y="0" width="38" height="61.5" rx="3" class="alt-output"/>
+    </g>
 
     <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
@@ -318,7 +321,11 @@
   </g>
 
   <g transform="translate(113 319)">
-    <rect x="-22" y="-14" width="37" height="57" rx="3" class="main-output"/>
+
+    <g transform="translate(-22 -14.5)">
+      <rect x="0" y="0" width="38" height="56" class="main-output"/>
+      <rect x="0" y="53" width="38" height="6" rx="3" class="main-output"/>
+    </g>
 
     <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">L</text>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
