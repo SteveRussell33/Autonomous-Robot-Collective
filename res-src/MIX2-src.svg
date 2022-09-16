@@ -36,7 +36,7 @@
       fill: #dfdfdf;
     }
     .main-output {
-      fill: #d39a98;
+      fill: #cb9795;
     }
     .alt-output {
       fill: #9ebcd0;
