@@ -227,16 +227,16 @@
       </g>
     </symbol>
     <symbol
-       id="knob40">
+       id="knob45">
       <g
-         transform="translate(20 20)"
+         transform="translate(22.5 22.5)"
          id="g46">
         <circle
-           r="19.5"
+           r="22"
            fill="url('#bigKnobDark')"
            id="circle42" />
         <circle
-           r="17.5"
+           r="20"
            fill="url('#bigKnobLight')"
            id="circle44" />
       </g>
