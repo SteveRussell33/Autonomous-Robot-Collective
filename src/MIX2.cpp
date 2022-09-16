@@ -131,10 +131,12 @@ struct MIX2 : Module {
                 params[kMuteParam1 + t].getValue() > 0.5f);
         }
 
-        // Process the mix
-        mix.process(tracks, kNumTracks);
+        // Process final the mix
+        mix.process(tracks, kNumTracks,
+                params[kVolumeParamMix],
+                params[kMuteParamMix].getValue() > 0.5f);
 
-        // mix outputs
+        // Set the mix outputs
         outputs[kMixLeftOutput].setChannels(1);
         outputs[kMixLeftOutput].setVoltage(mix.left.sum);
 

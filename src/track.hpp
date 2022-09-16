@@ -72,7 +72,7 @@ struct DecibelsToAmplitude {
     }
 
     void onSampleRateChange(float sampleRate) {
-        dbSlew.setParams(sampleRate, 10.0f /* ms */, kMaxDb - kMinDb);
+        dbSlew.setParams(sampleRate, 5.0f /* ms */, kMaxDb - kMinDb);
     }
 
     float next(float db) {
@@ -200,7 +200,6 @@ public:
     void process(Input& leftInput, Input& rightInput, Param& volParam, bool muted) {
 
         float amp = 0.0f;
-
         if (muted) {
             amp = volD2A.next(kMuteDb);
         } else {
@@ -244,18 +243,8 @@ struct MonoMix {
         vuLevel.onSampleRateChange(sampleRate);
     }
 
-    void process(StereoTrack tracks[], int numTracks, bool isLeft) {
-
-        sum = 0.0f;
-        for (int t = 0; t < numTracks; t++) {
-            float in = isLeft ? tracks[t].left.sum : tracks[t].right.sum;
-
-            // TODO
-            float out = in;
-
-            sum += out;
-        }
-
+    void process(float amp) {
+        sum = sum * amp;
         vuLevel.process(sum);
     }
 };
@@ -266,6 +255,12 @@ struct MonoMix {
 
 struct StereoMix {
 
+private:
+
+    DecibelsToAmplitude volD2A;
+
+public:
+
     MonoMix left;
     MonoMix right;
 
@@ -274,9 +269,25 @@ struct StereoMix {
         right.onSampleRateChange(sampleRate);
     }
 
-    void process(StereoTrack tracks[], int numTracks) {
-        left.process(tracks, numTracks, true);
-        right.process(tracks, numTracks, false);
+    void process(StereoTrack tracks[], int numTracks, Param& volParam, bool muted) {
+
+        float amp = 0.0f;
+        if (muted) {
+            amp = volD2A.next(kMuteDb);
+        } else {
+            float volDb = volumeToDb(volParam.getValue());
+            amp = volD2A.next(volDb);
+        }
+
+        left.sum = 0.0f;
+        right.sum = 0.0f;
+        for (int t = 0; t < numTracks; t++) {
+            left.sum += tracks[t].left.sum;
+            right.sum += tracks[t].right.sum;
+        }
+
+        left.process(amp);
+        right.process(amp);
     }
 };
 
