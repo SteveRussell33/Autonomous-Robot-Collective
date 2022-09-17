@@ -12,12 +12,12 @@
   <style>
 
     text.title {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
@@ -40,11 +40,11 @@
     .background {
       fill: #dfdfdf;
     }
-    .main-output {
-      fill: #895553;
+    .polyphonic {
+      fill: #558955;
     }
-    .alt-output {
-      fill: #5e7a8c;
+    .monophonic {
+      fill: #5b719e;
     }
 
     polyline.icon {
@@ -261,7 +261,7 @@
   </g>
 
   <g transform="translate(55.5 334)">
-    <rect x="-15" y="-16" width="30" height="42" rx="3" class="main-output"/>
+    <rect x="-15" y="-16" width="30" height="42" rx="3" class="polyphonic"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
     <text x="0" y="22" class="white-label" text-anchor="middle">MOD</text>
   </g>

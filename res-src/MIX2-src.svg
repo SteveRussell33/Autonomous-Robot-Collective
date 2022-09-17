@@ -12,12 +12,12 @@
   <style>
 
     text.title {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
@@ -40,11 +40,11 @@
     .background {
       fill: #dfdfdf;
     }
-    .main-output {
-      fill: #895553;
+    .polyphonic {
+      fill: #558955;
     }
-    .alt-output {
-      fill: #5e7a8c;
+    .monophonic {
+      fill: #5b719e;
     }
 
     polyline.icon {
@@ -309,7 +309,7 @@
   <g transform="translate(113 261)">
 
     <g transform="translate(-22 -15)">
-      <rect x="0" y="0" width="38" height="61.5" rx="3" class="alt-output"/>
+      <rect x="0" y="0" width="38" height="61.5" rx="3" class="polyphonic"/>
     </g>
 
     <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">L</text>
@@ -323,8 +323,8 @@
   <g transform="translate(113 319)">
 
     <g transform="translate(-22 -14.5)">
-      <rect x="0" y="0" width="38" height="56" class="main-output"/>
-      <rect x="0" y="53" width="38" height="6" rx="3" class="main-output"/>
+      <rect x="0" y="0" width="38" height="56" class="monophonic"/>
+      <rect x="0" y="53" width="38" height="6" rx="3" class="monophonic"/>
     </g>
 
     <text x ="-16.5" y="2.5" class="white-label" text-anchor="middle">L</text>

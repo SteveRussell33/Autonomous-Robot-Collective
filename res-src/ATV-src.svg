@@ -12,12 +12,12 @@
   <style>
 
     text.title {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
@@ -40,11 +40,11 @@
     .background {
       fill: #dfdfdf;
     }
-    .main-output {
-      fill: #895553;
+    .polyphonic {
+      fill: #558955;
     }
-    .alt-output {
-      fill: #5e7a8c;
+    .monophonic {
+      fill: #5b719e;
     }
 
     polyline.icon {
@@ -196,7 +196,7 @@
   <!-- ======== A ======== -->  
 
   <g transform="translate(15 158)">
-    <rect x="-13" y="-15" width="26" height="30" rx="3" class="main-output"/>
+    <rect x="-13" y="-15" width="26" height="30" rx="3" class="polyphonic"/>
   </g>
 
   <g transform="translate(15 74)">
@@ -224,7 +224,7 @@
   <!-- ======== B ======== -->  
 
   <g transform="translate(15 308)">
-    <rect x="-13" y="-15" width="26" height="30" rx="3" class="main-output"/>
+    <rect x="-13" y="-15" width="26" height="30" rx="3" class="polyphonic"/>
   </g>
 
   <g transform="translate(15 224)">

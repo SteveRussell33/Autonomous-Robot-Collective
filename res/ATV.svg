@@ -51,12 +51,12 @@
      id="style2">
 
     text.title {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #a91913;
+      fill: #0b5f0b;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
@@ -79,11 +79,11 @@
     .background {
       fill: #dfdfdf;
     }
-    .main-output {
-      fill: #895553;
+    .polyphonic {
+      fill: #558955;
     }
-    .alt-output {
-      fill: #5e7a8c;
+    .monophonic {
+      fill: #5b719e;
     }
 
     polyline.icon {
@@ -424,41 +424,41 @@
   <g
      aria-label="ATV"
      id="text109"
-     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
      class="title">
     <path
        d="m 5.8808596,26.091797 1.5797525,-4.769206 h 0.029948 l 1.5797525,4.769206 z M 10.388021,30 h 1.744466 L 8.1643882,19.083985 H 6.779297 L 2.8111982,30 h 1.7519531 l 0.8385416,-2.440755 h 4.1402994 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
        id="path268" />
     <path
        d="m 14.004231,30 h 1.66211 v -9.441081 h 2.987304 v -1.474934 h -7.636718 v 1.474934 h 2.987304 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
        id="path270" />
     <path
        d="m 22.28483,30 h 1.28776 l 3.608724,-10.916015 h -1.751953 l -2.485677,8.310546 h -0.02995 l -2.47819,-8.310546 h -1.751953 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
        id="path272" />
   </g>
   <g
      aria-label="RM"
      id="text111"
-     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
      class="logo">
     <path
        d="m 3.3268231,367.79036 h 2.2526041 q 0.6901041,0 1.0546875,0.29297 0.4622395,0.33203 0.4752604,1.07422 0,0.61849 -0.3971354,1.04167 -0.4036459,0.45573 -1.2109375,0.46875 H 3.3268231 Z M 1.888021,376 h 1.4388021 v -4.05599 H 5.1627605 L 7.1223959,376 h 1.7122395 l -2.2005207,-4.21224 q 1.8098958,-0.69661 1.8359374,-2.63021 -0.039063,-1.3151 -0.9440104,-2.02474 -0.7486979,-0.625 -1.9335937,-0.625 H 1.888021 Z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
        id="path263" />
     <path
        d="m 10.013021,376 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 376 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
        id="path265" />
   </g>
   <!-- ======== A ======== -->
   <path
      id="rect113"
-     style="fill:#895553"
+     style="fill:#558955"
      d="m 5,143 h 20 c 1.662,0 3,1.338 3,3 v 24 c 0,1.662 -1.338,3 -3,3 H 5 c -1.662,0 -3,-1.338 -3,-3 v -24 c 0,-1.662 1.338,-3 3,-3 z"
-     class="main-output" />
+     class="polyphonic" />
   <path
      id="polyline117"
      transform="translate(15,74)"
@@ -531,9 +531,9 @@
   <!-- ======== B ======== -->
   <path
      id="rect143"
-     style="fill:#895553"
+     style="fill:#558955"
      d="m 5,293 h 20 c 1.662,0 3,1.338 3,3 v 24 c 0,1.662 -1.338,3 -3,3 H 5 c -1.662,0 -3,-1.338 -3,-3 v -24 c 0,-1.662 1.338,-3 3,-3 z"
-     class="main-output" />
+     class="polyphonic" />
   <path
      id="polyline147"
      transform="translate(15,224)"
