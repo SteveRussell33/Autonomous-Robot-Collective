@@ -1,5 +1,5 @@
-#include "plugin.hpp"
 #include "mix2.hpp"
+#include "plugin.hpp"
 #include "widgets.hpp"
 
 // define MIX2_DEBUG

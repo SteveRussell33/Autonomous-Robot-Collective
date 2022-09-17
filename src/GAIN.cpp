@@ -1,6 +1,6 @@
 #include "plugin.hpp"
-#include "widgets.hpp"
 #include "track.hpp"
+#include "widgets.hpp"
 
 // define GAIN_DEBUG
 
@@ -19,18 +19,9 @@ struct GAIN : Module {
     float debug4;
 #endif
 
-    enum ParamId {
-        kFaderParam,
-        kMuteParam,
-        kParamsLen
-    };
+    enum ParamId { kFaderParam, kMuteParam, kParamsLen };
 
-    enum InputId {
-        kLeftInput,
-        kRightInput,
-        kFaderCvInput,
-        kInputsLen
-    };
+    enum InputId { kLeftInput, kRightInput, kFaderCvInput, kInputsLen };
 
     enum OutputId {
         kLeftOutput,
@@ -48,7 +39,7 @@ struct GAIN : Module {
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        //configParam<FaderParamQuantity>(kFaderParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
+        // configParam<FaderParamQuantity>(kFaderParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
         configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
         configInput(kFaderCvInput, "Track 1 Level CV");
 
@@ -67,9 +58,11 @@ struct GAIN : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        track.onSampleRateChange(e.sampleRate);
     }
 
     void process(const ProcessArgs& args) override {
+        track.process(inputs[kLeftInput], inputs[kRightInput]);
     }
 };
 
@@ -83,10 +76,10 @@ struct GAINWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/GAIN.svg")));
 
-        //addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        //addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        //addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        //addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
+        // addChild(createWidget<ScrewSilver>(Vec(15, 0)));
+        // addChild(createWidget<ScrewSilver>(Vec(15, 365)));
+        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
+        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 

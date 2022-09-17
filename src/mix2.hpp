@@ -129,7 +129,7 @@ struct VolumeControl {
 //// PanControl
 ////--------------------------------------------------------------
 //
-//struct PanControl {
+// struct PanControl {
 //
 //  private:
 //
@@ -169,7 +169,7 @@ struct VolumeControl {
 
 struct MonoTrack {
 
-    // TODO: volume, pan per channel 
+    // TODO: volume, pan per channel
     float sum = 0.0f;
     VuLevel vuLevel;
 
