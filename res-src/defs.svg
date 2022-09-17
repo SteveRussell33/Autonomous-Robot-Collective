@@ -3,12 +3,12 @@
   <style>
 
     text.title {
-      fill: #0b5f0b;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #0b5f0b;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }

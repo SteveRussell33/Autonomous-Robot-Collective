@@ -51,12 +51,12 @@
      id="style2">
 
     text.title {
-      fill: #0b5f0b;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #0b5f0b;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
@@ -460,29 +460,29 @@
   <g
      aria-label="FM"
      id="text109"
-     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="title">
     <path
        d="m 28.725261,30 h 1.654622 v -4.664388 h 4.537109 v -1.467448 h -4.537109 v -3.219401 h 5.315755 v -1.564778 h -6.970377 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path350" />
     <path
        d="m 36.960937,30 h 1.654623 v -6.805664 h 0.02995 l 2.283528,5.240885 h 1.377604 l 2.283529,-5.240885 h 0.03743 V 30 h 1.654622 V 19.083985 h -1.564778 l -3.069662,7.11263 v 0 l -3.129557,-7.11263 h -1.557292 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path352" />
   </g>
   <g
      aria-label="RM"
      id="text111"
-     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="logo">
     <path
        d="m 30.826823,367.79036 h 2.252604 q 0.690104,0 1.054688,0.29297 0.462239,0.33203 0.47526,1.07422 0,0.61849 -0.397135,1.04167 -0.403646,0.45573 -1.210938,0.46875 H 30.826823 Z M 29.388021,376 h 1.438802 v -4.05599 h 1.835938 L 34.622396,376 h 1.712239 l -2.20052,-4.21224 q 1.809895,-0.69661 1.835937,-2.63021 -0.03906,-1.3151 -0.94401,-2.02474 -0.748698,-0.625 -1.933594,-0.625 h -3.704427 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path345" />
     <path
        d="m 37.513021,376 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 376 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path347" />
   </g>
   <!-- ======== knobs and switches ======== -->

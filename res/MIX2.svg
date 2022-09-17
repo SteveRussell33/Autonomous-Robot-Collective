@@ -51,12 +51,12 @@
      id="style2">
 
     text.title {
-      fill: #0b5f0b;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
     text.logo {
-      fill: #0b5f0b;
+      fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 10pt;
     }
@@ -478,41 +478,41 @@
   <g
      aria-label="MIX-2"
      id="text109"
-     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="title">
     <path
        d="m 49.950521,16 h 1.654623 V 9.1943361 h 0.02995 l 2.283529,5.2408849 h 1.377604 l 2.283529,-5.2408849 h 0.03744 V 16 H 59.27181 V 5.0839846 H 57.707031 L 54.63737,12.196615 v 0 L 51.507813,5.0839846 h -1.557292 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path791" />
     <path
        d="m 61.570312,16 h 1.654623 V 5.0839846 h -1.654623 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path793" />
     <path
        d="M 68.480794,11.93457 70.86914,16 h 1.871745 L 69.401692,10.407227 72.523763,5.0839846 H 70.659505 L 68.480794,8.872396 v 0 L 66.302083,5.0839846 H 64.430338 L 67.559896,10.407227 64.220703,16 h 1.864258 l 2.395833,-4.06543 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path795" />
     <path
        d="M 73.422201,12.533529 H 78.03418 V 10.96875 h -4.611979 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path797" />
     <path
        d="m 79.329427,16 h 6.221679 v -1.564779 h -4.170247 l 3.511393,-4.402343 Q 85.551106,9.1943361 85.551106,8.1162111 85.536132,6.7685549 84.645182,5.8925783 83.769205,5.0091148 82.361653,4.9941409 81.103841,5.0091148 80.242838,5.8776044 79.389323,6.7685549 79.329427,8.1311851 h 1.557291 q 0.08236,-0.7486979 0.524089,-1.1604818 0.426758,-0.4117838 1.070638,-0.4117838 0.726237,0.014974 1.123047,0.4716796 0.381836,0.4567058 0.381836,1.070638 0,0.2320964 -0.0599,0.4941407 -0.08984,0.2770182 -0.336914,0.5989583 l -4.260091,5.3307289 z"
-       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path799" />
   </g>
   <g
      aria-label="RM"
      id="text111"
-     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="logo">
     <path
        d="m 60.826823,367.79036 h 2.252604 q 0.690104,0 1.054688,0.29297 0.462239,0.33203 0.47526,1.07422 0,0.61849 -0.397135,1.04167 -0.403646,0.45573 -1.210938,0.46875 H 60.826823 Z M 59.388021,376 h 1.438802 v -4.05599 h 1.835938 L 64.622396,376 h 1.712239 l -2.20052,-4.21224 q 1.809895,-0.69661 1.835937,-2.63021 -0.03906,-1.3151 -0.94401,-2.02474 -0.748698,-0.625 -1.933594,-0.625 h -3.704427 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path786" />
     <path
        d="m 67.513021,376 h 1.438802 v -5.91797 h 0.02604 l 1.985677,4.55729 h 1.197916 l 1.985677,-4.55729 h 0.03255 V 376 h 1.438802 v -9.49219 h -1.360677 l -2.669271,6.1849 v 0 l -2.721354,-6.1849 h -1.354167 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#0b5f0b"
+       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
        id="path788" />
   </g>
   <path
