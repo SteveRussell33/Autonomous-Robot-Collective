@@ -1,6 +1,5 @@
 #include "plugin.hpp"
-#include "track.hpp"
-#include "vu_meter.hpp"
+#include "mix2.hpp"
 #include "widgets.hpp"
 
 // define MIX2_DEBUG
