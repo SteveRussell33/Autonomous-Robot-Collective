@@ -21,13 +21,6 @@ struct MonoTrack {
 		}
 	}
 
-	void sumVoltages() {
-		sum = 0.f;
-		for (int c = 0; c < channels; c++) {
-			sum += voltages[c];
-		}
-	}
-
   public:
 
     int channels = 0;
@@ -50,11 +43,17 @@ struct MonoTrack {
 
         // fader CV
         // TODO
+    }
 
-        // create summed voltage
-        sumVoltages();
+    //void pan() {
+    //}
 
-        // update vu level
+    void summarize() {
+		sum = 0.f;
+		for (int c = 0; c < channels; c++) {
+			sum += voltages[c];
+		}
+        
         vuLevel.process(sum);
     }
 
@@ -86,10 +85,23 @@ struct StereoTrack {
         // left connected
         if (leftInput.isConnected()) {
             left.amplify(leftInput);
+            //left.pan();
+            left.summarize();
         }
         // left disconnected
         else {
             left.disconnect();
+        }
+
+        // right connected
+        if (rightInput.isConnected()) {
+            right.amplify(rightInput);
+            //right.pan();
+            right.summarize();
+        }
+        // right disconnected
+        else {
+            right.disconnect();
         }
     }
 };

@@ -62,7 +62,15 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
+
         track.process(inputs[kLeftInput], inputs[kRightInput]);
+
+        // populate outputs
+        outputs[kLeftOutput].channels = track.left.channels;
+        outputs[kLeftOutput].writeVoltages(track.left.voltages);
+
+        outputs[kRightOutput].channels = track.right.channels;
+        outputs[kRightOutput].writeVoltages(track.right.voltages);
     }
 };
 
