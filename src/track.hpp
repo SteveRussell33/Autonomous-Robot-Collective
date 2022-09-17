@@ -57,7 +57,7 @@ static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
-// Amplitude is adapted from somewhere in the bogaudio codebase, but 
+// Amplitude is adapted from somewhere in the bogaudio codebase, but
 // I can't remember where.
 struct Amplitude {
 
