@@ -57,6 +57,8 @@ static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
+// Amplitude is adapted from somewhere in the github.com/bogaudio/BogaudioModules
+// codebase, but now I can't remember where.
 struct Amplitude {
 
   private:
@@ -96,7 +98,16 @@ struct Amplitude {
 
 struct MonoTrack {
 
+  private:
+
     Amplitude faderAmp;
+    Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
+
+    float nextLevelAmplitude(Input& faderCvInput, int ch) {
+        float v = faderCvInput.getPolyVoltage(ch);
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return levelAmps[ch].next(db);
+    }
 
   public:
 
@@ -107,10 +118,13 @@ struct MonoTrack {
 
     void onSampleRateChange(float sampleRate) {
         faderAmp.onSampleRateChange(sampleRate);
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelAmps[ch].onSampleRateChange(sampleRate);
+        }
         vuLevel.onSampleRateChange(sampleRate);
     }
 
-    void amplify(Input& input, bool muted, Param& faderParam) {
+    void amplify(Input& input, bool muted, Param& faderParam, Input& faderCvInput) {
 
         // fader amplitude
         float ampF = 0.0f;
@@ -124,27 +138,25 @@ struct MonoTrack {
         channels = std::max(input.getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
-            //// channel amplitude
+            // channel amplitude
             float ampCh = ampF;
-            //if (!muted && inputs[kLevelInput].isConnected()) {
-            //    ampCh = ampCh * nextLevelAmplitude(ch);
-            //}
-            // process sample
-            //
-            
+            if (!muted && faderCvInput.isConnected()) {
+                ampCh = ampCh * nextLevelAmplitude(faderCvInput, ch);
+            }
+
             voltages[ch] = clamp(input.getPolyVoltage(ch) * ampCh, -10.0f, 10.0f);
         }
     }
 
-    //void pan() {
-    //}
+    // void pan() {
+    // }
 
     void summarize() {
-		sum = 0.f;
-		for (int c = 0; c < channels; c++) {
-			sum += voltages[c];
-		}
-        
+        sum = 0.f;
+        for (int c = 0; c < channels; c++) {
+            sum += voltages[c];
+        }
+
         vuLevel.process(sum);
     }
 
@@ -171,12 +183,12 @@ struct StereoTrack {
         right.onSampleRateChange(sampleRate);
     }
 
-    void process(Input& leftInput, Input& rightInput, bool muted, Param& faderParam) {
+    void process(Input& leftInput, Input& rightInput, bool muted, Param& faderParam, Input& faderCvInput) {
 
         // left connected
         if (leftInput.isConnected()) {
-            left.amplify(leftInput, muted, faderParam);
-            //left.pan();
+            left.amplify(leftInput, muted, faderParam, faderCvInput);
+            // left.pan();
             left.summarize();
         }
         // left disconnected
@@ -186,8 +198,8 @@ struct StereoTrack {
 
         // right connected
         if (rightInput.isConnected()) {
-            right.amplify(rightInput, muted, faderParam);
-            //right.pan();
+            right.amplify(rightInput, muted, faderParam, faderCvInput);
+            // right.pan();
             right.summarize();
         }
         // right disconnected
