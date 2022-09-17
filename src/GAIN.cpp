@@ -95,20 +95,20 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        //addMeter(22.5 - 6, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
-        //addMeter(22.5 + 1, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
-        addMeter(22.5 - 6, 44, NULL);
-        addMeter(22.5 + 1, 44, NULL);
+        //addMeter(26 - 6, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
+        //addMeter(26 + 1, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
+        addMeter(26 - 6, 44, NULL);
+        addMeter(26 + 1, 44, NULL);
 
-        addParam(createParamCentered<RmKnob24>(Vec(22.5, 174), module, GAIN::kFaderParam));
-        addInput(createInputCentered<RmPolyPort>(Vec(22.5, 203), module, GAIN::kFaderCvInput));
-        addParam(createParamCentered<RmToggleButton>(Vec(22.5, 232), module, GAIN::kMuteParam));
+        addParam(createParamCentered<RmKnob24>(Vec(26, 174), module, GAIN::kFaderParam));
+        addInput(createInputCentered<RmPolyPort>(Vec(26, 203), module, GAIN::kFaderCvInput));
+        addParam(createParamCentered<RmToggleButton>(Vec(26, 232), module, GAIN::kMuteParam));
 
-        addInput(createInputCentered<RmPolyPort>(Vec(22.5, 261), module, GAIN::kLeftInput));
-        addInput(createInputCentered<RmPolyPort>(Vec(22.5, 290), module, GAIN::kRightInput));
+        addInput(createInputCentered<RmPolyPort>(Vec(26, 261), module, GAIN::kLeftInput));
+        addInput(createInputCentered<RmPolyPort>(Vec(26, 290), module, GAIN::kRightInput));
 
-        addOutput(createOutputCentered<RmMonoPort>(Vec(22.5, 319), module, GAIN::kLeftOutput));
-        addOutput(createOutputCentered<RmMonoPort>(Vec(22.5, 348), module, GAIN::kRightOutput));
+        addOutput(createOutputCentered<RmMonoPort>(Vec(26, 319), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<RmMonoPort>(Vec(26, 348), module, GAIN::kRightOutput));
     }
 
     void addMeter(float x, float y, VuLevel* vuLevel) {

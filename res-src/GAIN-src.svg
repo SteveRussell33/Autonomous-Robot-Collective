@@ -197,7 +197,7 @@
   <rect x="0" y="36" width="45" height="120" rx="2" class="lcd-bg"/>
 
   <!-- labels -->  
-  <g transform="translate(4 0)">
+  <g transform="translate(5 0)">
     <g transform="translate(0 174)">
       <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
@@ -221,33 +221,33 @@
     </g>
   </g>
 
-  <g transform="translate(22.5 44)">
+  <g transform="translate(25 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(22.5 174)">
+  <g transform="translate(25 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(22.5 203)">
+  <g transform="translate(25 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(22.5 232)">
+  <g transform="translate(25 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(22.5 261)">
+  <g transform="translate(25 261)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(22.5 290)">
+  <g transform="translate(25 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- mix -->  
 
-  <g transform="translate(22.5 319)">
+  <g transform="translate(25 319)">
     <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="polyphonic"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(22.5 348)">
+  <g transform="translate(25 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 

@@ -451,7 +451,7 @@
      class="lcd-bg" />
   <!-- labels -->
   <g
-     transform="translate(4,174)"
+     transform="translate(5,174)"
      id="g119">
     <g
        aria-label="V"
@@ -465,7 +465,7 @@
     </g>
   </g>
   <g
-     transform="translate(4,203)"
+     transform="translate(5,203)"
      id="g123">
     <g
        aria-label="V"
@@ -479,7 +479,7 @@
     </g>
   </g>
   <g
-     transform="translate(4,232)"
+     transform="translate(5,232)"
      id="g127">
     <g
        aria-label="M"
@@ -493,7 +493,7 @@
     </g>
   </g>
   <g
-     transform="translate(4,261)"
+     transform="translate(5,261)"
      id="g131">
     <g
        aria-label="L"
@@ -507,7 +507,7 @@
     </g>
   </g>
   <g
-     transform="translate(4,290)"
+     transform="translate(5,290)"
      id="g135">
     <g
        aria-label="R"
@@ -521,7 +521,7 @@
     </g>
   </g>
   <g
-     transform="translate(4,319)"
+     transform="translate(5,319)"
      id="g139">
     <g
        aria-label="L"
@@ -535,7 +535,7 @@
     </g>
   </g>
   <g
-     transform="translate(4,348)"
+     transform="translate(5,348)"
      id="g143">
     <g
        aria-label="R"
@@ -550,7 +550,7 @@
   </g>
   <g
      id="use147"
-     transform="translate(2.5,40)">
+     transform="translate(5,40)">
     <g
        transform="translate(20,4)"
        id="g258">
@@ -731,7 +731,7 @@
   </g>
   <g
      id="use151"
-     transform="translate(10.5,162)">
+     transform="translate(13,162)">
     <g
        transform="translate(12,12)"
        id="g268">
@@ -751,28 +751,28 @@
   </g>
   <g
      id="use155"
-     transform="translate(10.5,191)">
+     transform="translate(13,191)">
     <g
        transform="translate(12,12)"
        id="g276" />
   </g>
   <g
      id="use159"
-     transform="translate(13.5,223)">
+     transform="translate(16,223)">
     <g
        transform="translate(9,9)"
        id="g280" />
   </g>
   <g
      id="use163"
-     transform="translate(10.5,249)">
+     transform="translate(13,249)">
     <g
        transform="translate(12,12)"
        id="g284" />
   </g>
   <g
      id="use167"
-     transform="translate(10.5,278)">
+     transform="translate(13,278)">
     <g
        transform="translate(12,12)"
        id="g288" />
@@ -781,18 +781,18 @@
   <path
      id="rect171"
      style="fill:#558955"
-     d="m 11,304 h 23 c 1.662,0 3,1.338 3,3 v 53 c 0,1.662 -1.338,3 -3,3 H 11 c -1.662,0 -3,-1.338 -3,-3 v -53 c 0,-1.662 1.338,-3 3,-3 z"
+     d="m 13.5,304 h 23 c 1.662,0 3,1.338 3,3 v 53 c 0,1.662 -1.338,3 -3,3 h -23 c -1.662,0 -3,-1.338 -3,-3 v -53 c 0,-1.662 1.338,-3 3,-3 z"
      class="polyphonic" />
   <g
      id="use173"
-     transform="translate(10.5,307)">
+     transform="translate(13,307)">
     <g
        transform="translate(12,12)"
        id="g210" />
   </g>
   <g
      id="use177"
-     transform="translate(10.5,336)">
+     transform="translate(13,336)">
     <g
        transform="translate(12,12)"
        id="g292" />
