@@ -39,7 +39,7 @@ struct GAIN : Module {
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        // configParam<FaderParamQuantity>(kFaderParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
+        configParam<FaderParamQuantity>(kFaderParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
         configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
         configInput(kFaderCvInput, "Track 1 Level CV");
 
@@ -63,7 +63,8 @@ struct GAIN : Module {
 
     void process(const ProcessArgs& args) override {
 
-        track.process(inputs[kLeftInput], inputs[kRightInput]);
+        bool muted = params[kMuteParam].getValue() > 0.5f;
+        track.process(inputs[kLeftInput], inputs[kRightInput], muted, params[kFaderParam]);
 
         // populate outputs
         outputs[kLeftOutput].channels = track.left.channels;
