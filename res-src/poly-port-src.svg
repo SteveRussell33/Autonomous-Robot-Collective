@@ -8,24 +8,42 @@
 >
 
   <defs>
-    <linearGradient id="ring" x1="0%" y1="0%" x2="0%" y2="100%">
+    <linearGradient id="white-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%"   stop-color="#ffffff" />
       <stop offset="100%" stop-color="#686868" />
+    </linearGradient>
+
+    <linearGradient id="reverse-white-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#686868" />
+      <stop offset="100%" stop-color="#ffffff" />
+    </linearGradient>
+
+    <linearGradient id="red-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#d68784" />
+      <stop offset="100%" stop-color="#5a3938" />
+    </linearGradient>
+
+    <linearGradient id="reverse-red-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#5a3938" />
+      <stop offset="100%" stop-color="#d68784" />
     </linearGradient>
   </defs>
 
   <g transform="translate(12 12)">
 
     <circle r="11.5" fill="#444444"/>
-    <circle r="11.0" fill="url('#ring')"/>
-    <circle r="10.5" fill="#895553"/>
+    <circle r="11.0" fill="url('#white-gradient')"/>
+    <circle r="10.5" fill="#e0e0e0"/>
 
-    <circle r="8.5"  fill="#333333"/>
-    <circle r="7.5"  fill="url('#ring')"/>
-    <circle r="6.7"  fill="#e0e0e0"/>
+    <rect x="-11" y="-1.5" width="22" height="3" rx="1.5" fill="url('#reverse-white-gradient')"/>
+    <ellipse cx="0" cy="0.8" rx="8" ry="9.2" fill="#b0b0b0"/>
 
-    <circle r="5.0"  fill="#666666"/>
-    <circle r="4.5"  fill="#121212"/>
+    <circle r="8.5" fill="#333333"/>
+    <circle r="7.5" fill="url('#red-gradient')"/>
+    <circle r="6.7" fill="#895553"/>
+
+    <circle r="5.5" fill="url('#reverse-red-gradient')"/>
+    <circle r="5.0" fill="#121212"/>
 
   </g>
 
