@@ -166,10 +166,10 @@ struct MIX2Widget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
 #ifdef MIX2_DEBUG
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, MIX2::kDebug1));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, MIX2::kDebug2));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, MIX2::kDebug3));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, MIX2::kDebug4));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 12), module, MIX2::kDebug1));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 36), module, MIX2::kDebug2));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 60), module, MIX2::kDebug3));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, MIX2::kDebug4));
 #endif
 
         //////////////////////////////////////////////////////////////
@@ -185,24 +185,24 @@ struct MIX2Widget : ModuleWidget {
             addMeter(cols[t] + 1, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
 
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 174), module, MIX2::kVolParam1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 203), module, MIX2::kVolCvInput1 + t));
+            addInput(createInputCentered<RmPolyPort>(Vec(cols[t], 203), module, MIX2::kVolCvInput1 + t));
             addParam(createParamCentered<RmToggleButton>(Vec(cols[t], 232), module, MIX2::kMuteParam1 + t));
             addParam(createParamCentered<RmKnob24>(Vec(cols[t], 261), module, MIX2::kPanParam1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 290), module, MIX2::kPanCvInput1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 319), module, MIX2::kLeftInput1 + t));
-            addInput(createInputCentered<PJ301MPort>(Vec(cols[t], 348), module, MIX2::kRightInput1 + t));
+            addInput(createInputCentered<RmPolyPort>(Vec(cols[t], 290), module, MIX2::kPanCvInput1 + t));
+            addInput(createInputCentered<RmPolyPort>(Vec(cols[t], 319), module, MIX2::kLeftInput1 + t));
+            addInput(createInputCentered<RmPolyPort>(Vec(cols[t], 348), module, MIX2::kRightInput1 + t));
         }
 
         addMeter(mixCol - 6, 44, module ? &(module->mix.left.vuLevel) : NULL);
         addMeter(mixCol + 1, 44, module ? &(module->mix.right.vuLevel) : NULL);
 
         addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, MIX2::kVolParamMix));
-        addInput(createInputCentered<PJ301MPort>(Vec(mixCol, 203), module, MIX2::kVolCvInputMix));
+        addInput(createInputCentered<RmPolyPort>(Vec(mixCol, 203), module, MIX2::kVolCvInputMix));
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 232), module, MIX2::kMuteParamMix));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 261), module, MIX2::kSendLeftOutput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 290), module, MIX2::kSendRightOutput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 319), module, MIX2::kMixLeftOutput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(mixCol, 348), module, MIX2::kMixRightOutput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 261), module, MIX2::kSendLeftOutput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 290), module, MIX2::kSendRightOutput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 319), module, MIX2::kMixLeftOutput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 348), module, MIX2::kMixRightOutput));
     }
 
     void addMeter(float x, float y, VuLevel* vuLevel) {
