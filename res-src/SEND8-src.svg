@@ -1,0 +1,245 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="90"
+  height="380"
+  viewBox="0 0 90 380"
+>
+
+  <!-- ============== styles ============== -->
+
+  <style>
+
+    text.title {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 11.5pt;
+    }
+    text.logo {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 10pt;
+    }
+    text.big-label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 7.5pt;
+    }
+    text.label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+    text.white-label {
+      fill: #dfdfdf;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+
+    .background {
+      fill: #dfdfdf;
+    }
+    .polyphonic {
+      fill: #558955;
+    }
+    .monophonic {
+      fill: #636c9d;
+    }
+
+    polyline.icon {
+      stroke: #343434;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    polyline.connect {
+      stroke: #343434;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    rect.lcd-bg {
+      fill: #121212;
+    }
+    rect.lcd-bg-frame {
+      fill: #888888;
+    }
+    rect.lcd-bg-accent {
+      fill: #2a2a2a;
+    }
+    text.lcd-label {
+      fill: #777777;
+      font-family: 'Monaco';
+      font-size: 5pt;
+    }
+    polyline.lcd-tick {
+      stroke: #707070;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    .blueprint {
+      stroke: black;
+      fill: none;
+    }
+
+  </style>
+
+  <!-- ============== defs ============== -->
+
+  <defs>
+
+    <linearGradient id="smallKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#6f6f6f" />
+      <stop offset="100%" stop-color="#383838" />
+    </linearGradient>
+
+    <linearGradient id="smallKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#494949" />
+      <stop offset="100%" stop-color="#282828" />
+    </linearGradient>
+
+    <linearGradient id="bigKnobLight" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#888" />
+      <stop offset="100%" stop-color="#333" />
+    </linearGradient>
+
+    <linearGradient id="bigKnobDark" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#5c5c5c" />
+      <stop offset="100%" stop-color="#282828" />
+    </linearGradient>
+
+    <symbol id="knob18" >
+      <g transform="translate(9 9)">
+        <circle r="8.5" stroke="#222" fill="none"/>
+        <circle r="8" fill="url('#smallKnobLight')"/>
+        <circle r="7" fill="url('#smallKnobDark')"/>
+      </g>
+    </symbol>
+
+    <symbol id="knob24" >
+      <g transform="translate(12 12)">
+        <circle r="11.5" stroke="#121212" fill="none"/>
+        <circle r="11" fill="url('#smallKnobLight')"/>
+        <circle r="10" fill="url('#smallKnobDark')"/>
+      </g>
+    </symbol>
+
+    <symbol id="knob45" >
+      <g transform="translate(22.5 22.5)">
+        <circle r="22" fill="url('#bigKnobDark')"/>
+        <circle r="20" fill="url('#bigKnobLight')"/>
+      </g>
+    </symbol>
+
+    <symbol id="toggleButton" >
+      <g transform="translate(9 9)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="8.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="port" >
+      <g transform="translate(12 12)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+        <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="hswitch14" >
+      <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
+      <g transform="translate(12 7)">
+        <polyline points="-5,0 5,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
+      </g>
+    </symbol>
+
+    <symbol id="meter-strip" >
+      <g transform="translate(20 4)">
+        <rect x="-6" y="-1" width="5" height="106" class="lcd-bg-accent"/>
+        <rect x="1"  y="-1" width="5" height="106" class="lcd-bg-accent"/>
+        <g transform="translate(-11 2.5)">
+          <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
+          <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
+          <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
+          <text x="0" y= "39" class="lcd-label" text-anchor="end">9</text>
+          <text x="0" y= "52" class="lcd-label" text-anchor="end">12</text>
+          <text x="0" y= "65" class="lcd-label" text-anchor="end">18</text>
+          <text x="0" y= "78" class="lcd-label" text-anchor="end">24</text>
+          <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
+          <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
+        </g>
+        <g transform="translate(-10 0)">
+          <polyline points="0   0 2   0" class="lcd-tick"/>
+          <polyline points="0  13 2  13" class="lcd-tick"/>
+          <polyline points="0  26 2  26" class="lcd-tick"/>
+          <polyline points="0  39 2  39" class="lcd-tick"/>
+          <polyline points="0  52 2  52" class="lcd-tick"/>
+          <polyline points="0  65 2  65" class="lcd-tick"/>
+          <polyline points="0  78 2  78" class="lcd-tick"/>
+          <polyline points="0  91 2  91" class="lcd-tick"/>
+          <polyline points="0 104 2 104" class="lcd-tick"/>
+        </g>
+      </g>
+    </symbol>
+
+  </defs>
+
+  <!-- ============== body ============== -->
+
+  <rect class="background" width="100%" height="100%"/>
+  <text class="title" x="50%" y="16"  text-anchor="middle">SEND-8</text>
+  <text class="logo" x="50%" y="376" text-anchor="middle">RM</text>
+
+  <g transform="translate(0 41)">
+    <g transform="translate(36 0)">
+      <text x="0" y="0" class="big-label" text-anchor="middle">L</text>
+    </g>
+    <g transform="translate(68 0)">
+      <text x="0" y="0" class="big-label" text-anchor="middle">R</text>
+    </g>
+  </g>
+
+  <!-- 1 -->
+  <g transform="translate(0 64)">
+    <g transform="translate(10 0)">
+      <text x="0" y="3" class="big-label" text-anchor="middle">1</text>
+    </g>
+    <g transform="translate(36 0)">
+      <rect x="-16" y="-16" width="64" height="312" rx="3" class="polyphonic"/>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(68 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+  <!-- 8 -->
+  <g transform="translate(0 309)">
+    <g transform="translate(10 0)">
+      <text x="0" y="3" class="big-label" text-anchor="middle">8</text>
+    </g>
+    <g transform="translate(36 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(68 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+  <!-- MIX -->
+  <g transform="translate(0 344)">
+    <g transform="translate(10 0)">
+      <text x="0" y="3" class="big-label" text-anchor="middle">MIX</text>
+    </g>
+    <g transform="translate(36 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(68 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+</svg>

@@ -2,9 +2,9 @@
   version="1.1"
   xmlns="http://www.w3.org/2000/svg"
   xmlns:xlink="http://www.w3.org/1999/xlink"
-  width="240"
+  width="255"
   height="380"
-  viewBox="0 0 240 380"
+  viewBox="0 0 255 380"
 >
 
   <!-- ============== styles ============== -->
@@ -79,7 +79,7 @@
     }
 
     .blueprint {
-      stroke: #838598;
+      stroke: black;
       fill: none;
     }
 
@@ -382,15 +382,64 @@
     </g>
   </g>
 
-  <!-- Send -->  
+  <!-- ============================================================ -->
 
-  <g transform="translate(190 0)">
-    <g transform="translate(30 319)">
-      <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="polyphonic"/>
-      <text x="0" y="-18" class="label" text-anchor="middle">SEND</text>
+  <!-- 1 -->  
+  <g transform="translate(0 51)">
+    <g transform="translate(220 0)">
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <text x="0" y="-16" class="label" text-anchor="middle">1</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 348)">
+    <g transform="translate(220 29)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+  <!-- 2 -->  
+  <g transform="translate(0 118)">
+    <g transform="translate(220 0)">
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <text x="0" y="-16" class="label" text-anchor="middle">2</text>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(220 29)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+  <!-- 3 -->  
+  <g transform="translate(0 185)">
+    <g transform="translate(220 0)">
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <text x="0" y="-16" class="label" text-anchor="middle">3</text>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(220 29)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+  <!-- 4 -->  
+  <g transform="translate(0 252)">
+    <g transform="translate(220 0)">
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <text x="0" y="-16" class="label" text-anchor="middle">4</text>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(220 29)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+  </g>
+
+  <!-- MIX -->  
+  <g transform="translate(0 319)">
+    <g transform="translate(220 0)">
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <text x="0" y="-16" class="label" text-anchor="middle">MIX</text>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <g transform="translate(220 29)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
   </g>
