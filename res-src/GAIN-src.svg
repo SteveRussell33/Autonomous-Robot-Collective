@@ -221,33 +221,33 @@
     </g>
   </g>
 
-  <g transform="translate(25 44)">
+  <g transform="translate(24 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(25 174)">
+  <g transform="translate(24 174)">
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(25 203)">
+  <g transform="translate(24 203)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(25 232)">
+  <g transform="translate(24 232)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(25 261)">
+  <g transform="translate(24 261)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(25 290)">
+  <g transform="translate(24 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- mix -->  
 
-  <g transform="translate(25 319)">
+  <g transform="translate(24 319)">
     <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="polyphonic"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(25 348)">
+  <g transform="translate(24 348)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 

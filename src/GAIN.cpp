@@ -10,6 +10,8 @@
 
 struct GAIN : Module {
 
+    StereoTrack track;
+
 #ifdef GAIN_DEBUG
     float debug1;
     float debug2;
@@ -95,20 +97,18 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        //addMeter(26 - 6, 44, module ? &(module->tracks[t].left.vuLevel) : NULL);
-        //addMeter(26 + 1, 44, module ? &(module->tracks[t].right.vuLevel) : NULL);
-        addMeter(26 - 6, 44, NULL);
-        addMeter(26 + 1, 44, NULL);
+        addMeter(24 - 6, 44, module ? &(module->track.left.vuLevel) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->track.right.vuLevel) : NULL);
 
-        addParam(createParamCentered<RmKnob24>(Vec(26, 174), module, GAIN::kFaderParam));
-        addInput(createInputCentered<RmPolyPort>(Vec(26, 203), module, GAIN::kFaderCvInput));
-        addParam(createParamCentered<RmToggleButton>(Vec(26, 232), module, GAIN::kMuteParam));
+        addParam(createParamCentered<RmKnob24>(Vec(24, 174), module, GAIN::kFaderParam));
+        addInput(createInputCentered<RmPolyPort>(Vec(24, 203), module, GAIN::kFaderCvInput));
+        addParam(createParamCentered<RmToggleButton>(Vec(24, 232), module, GAIN::kMuteParam));
 
-        addInput(createInputCentered<RmPolyPort>(Vec(26, 261), module, GAIN::kLeftInput));
-        addInput(createInputCentered<RmPolyPort>(Vec(26, 290), module, GAIN::kRightInput));
+        addInput(createInputCentered<RmPolyPort>(Vec(24, 261), module, GAIN::kLeftInput));
+        addInput(createInputCentered<RmPolyPort>(Vec(24, 290), module, GAIN::kRightInput));
 
-        addOutput(createOutputCentered<RmMonoPort>(Vec(26, 319), module, GAIN::kLeftOutput));
-        addOutput(createOutputCentered<RmMonoPort>(Vec(26, 348), module, GAIN::kRightOutput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(24, 319), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(24, 348), module, GAIN::kRightOutput));
     }
 
     void addMeter(float x, float y, VuLevel* vuLevel) {
