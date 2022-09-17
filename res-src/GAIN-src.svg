@@ -244,7 +244,7 @@
   <!-- mix -->  
 
   <g transform="translate(22.5 319)">
-    <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="monophonic"/>
+    <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="polyphonic"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(22.5 348)">

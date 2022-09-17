@@ -7,5 +7,6 @@ void init(Plugin* p) {
 
     p->addModel(modelATV);
     p->addModel(modelFM);
+    p->addModel(modelGAIN);
     p->addModel(modelMIX2);
 }
