@@ -199,10 +199,12 @@ struct MIX2Widget : ModuleWidget {
         addParam(createParamCentered<RmKnob24>(Vec(mixCol, 174), module, MIX2::kVolParamMix));
         addInput(createInputCentered<RmPolyPort>(Vec(mixCol, 203), module, MIX2::kVolCvInputMix));
         addParam(createParamCentered<RmToggleButton>(Vec(mixCol, 232), module, MIX2::kMuteParamMix));
+
         addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 261), module, MIX2::kSendLeftOutput));
         addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 290), module, MIX2::kSendRightOutput));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 319), module, MIX2::kMixLeftOutput));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(mixCol, 348), module, MIX2::kMixRightOutput));
+
+        addOutput(createOutputCentered<RmMonoPort>(Vec(mixCol, 319), module, MIX2::kMixLeftOutput));
+        addOutput(createOutputCentered<RmMonoPort>(Vec(mixCol, 348), module, MIX2::kMixRightOutput));
     }
 
     void addMeter(float x, float y, VuLevel* vuLevel) {
