@@ -150,18 +150,18 @@ struct FMWidget : ModuleWidget {
         addParam(createParamCentered<RmKnob18>(Vec(55.5, 250), module, FM::kOffsetCvAmountParam));
 
         // row 2
-        addInput(createInputCentered<PJ301MPort>(Vec(19.5, 292), module, FM::kRatioCvInput));
-        addInput(createInputCentered<PJ301MPort>(Vec(55.5, 292), module, FM::kOffsetCvInput));
+        addInput(createInputCentered<RmPolyPort>(Vec(19.5, 292), module, FM::kRatioCvInput));
+        addInput(createInputCentered<RmPolyPort>(Vec(55.5, 292), module, FM::kOffsetCvInput));
 
         // row 3
-        addInput(createInputCentered<PJ301MPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
+        addInput(createInputCentered<RmPolyPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
 
 #ifdef FM_DEBUG
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 12), module, FM::kDebug1));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 36), module, FM::kDebug2));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 60), module, FM::kDebug3));
-        addOutput(createOutputCentered<PJ301MPort>(Vec(12, 84), module, FM::kDebug4));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 12), module, FM::kDebug1));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 36), module, FM::kDebug2));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 60), module, FM::kDebug3));
+        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, FM::kDebug4));
 #endif
     }
 };

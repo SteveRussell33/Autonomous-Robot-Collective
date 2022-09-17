@@ -1,0 +1,51 @@
+<svg
+  version="1.1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  width="24"
+  height="24"
+  viewBox="0 0 24 24"
+>
+
+  <defs>
+
+    <linearGradient id="inner" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#ffffff" />
+      <stop offset="100%" stop-color="#636363" />
+    </linearGradient>
+
+    <linearGradient id="outer" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#f89a97" />
+      <stop offset="100%" stop-color="#66403e" />
+    </linearGradient>
+
+    <!--linearGradient id="bar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%"   stop-color="#66403e" />
+      <stop offset="100%" stop-color="#f89a97" />
+    </linearGradient-->
+
+  </defs>
+
+<!--g transform="scale(16 16)"-->
+
+  <g transform="translate(12 12)">
+
+    <circle r="11.5" fill="#666666"/>
+    <!--circle r="11" fill="#f0f0f0"/-->
+    <circle r="11" fill="url('#outer')"/>
+    <circle r="10.3" fill="#895553"/>
+
+    <!--rect x="-11" y="-1.5" width="22" height="3" rx="1.5" fill="url('#bar')"/-->
+
+    <circle r="8.5" fill="#222222"/>
+    <circle r="8" fill="url('#inner')"/>
+    <circle r="7.3" fill="#e0e0e0"/>
+
+    <circle r="5"  fill="#666666"/>
+    <circle r="4.5"  fill="#121212"/>
+
+  </g>
+
+<!--/g-->
+
+</svg>

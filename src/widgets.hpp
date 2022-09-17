@@ -6,6 +6,15 @@ using namespace rack;
 
 extern Plugin* pluginInstance;
 
+struct RmPolyPort : SvgPort {
+    RmPolyPort() {
+        setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, "res/poly-port.svg")));
+        box.size = Vec(24, 24);
+        shadow->blurRadius = 2.0;
+        shadow->box.pos = Vec(0.0, 3.0);
+    }
+};
+
 struct RmKnob : RoundKnob {
     RmKnob(const char* svg, int dim) {
         setSvg(APP->window->loadSvg(asset::plugin(pluginInstance, svg)));
@@ -29,8 +38,8 @@ struct RmKnob24 : RmKnob {
 
 struct RmKnob45 : RmKnob {
     RmKnob45() : RmKnob("res/knob45.svg", 45) {
-        shadow->blurRadius = 2.0;
-        shadow->box.pos = Vec(0.0, 3.0);
+        shadow->blurRadius = 2.5;
+        shadow->box.pos = Vec(0.0, 3.5);
     }
 };
 
