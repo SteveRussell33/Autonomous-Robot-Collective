@@ -57,8 +57,8 @@ static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
-// Amplitude is adapted from somewhere in the github.com/bogaudio/BogaudioModules
-// codebase, but now I can't remember where.
+// Amplitude is adapted from somewhere in the bogaudio codebase, but 
+// I can't remember where.
 struct Amplitude {
 
   private:
@@ -124,11 +124,9 @@ struct MonoTrack {
 
     void amplify(Input& input, Input& faderCvInput, float ampF, bool applyFaderCv) {
 
-        // process each channel
         channels = std::max(input.getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
-            // channel amplitude
             float ampCh = ampF;
             if (applyFaderCv) {
                 ampCh = ampCh * nextFaderCvAmp(faderCvInput, ch);
