@@ -83,7 +83,7 @@
       fill: #558955;
     }
     .monophonic {
-      fill: #5b719e;
+      fill: #636c9d;
     }
 
     polyline.icon {
@@ -1445,12 +1445,12 @@
      id="g261">
     <path
        id="rect257"
-       style="fill:#5b719e"
+       style="fill:#636c9d"
        d="M 0,0 H 38 V 56 H 0 Z"
        class="monophonic" />
     <path
        id="rect259"
-       style="fill:#5b719e"
+       style="fill:#636c9d"
        d="m 3,53 h 32 c 1.662,0 3,1.338 3,3 0,1.662 -1.338,3 -3,3 H 3 C 1.338,59 0,57.662 0,56 0,54.338 1.338,53 3,53 Z"
        class="monophonic" />
   </g>
