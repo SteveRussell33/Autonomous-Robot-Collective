@@ -79,7 +79,7 @@
     }
 
     .blueprint {
-      stroke: #838598;
+      stroke: black;
       fill: none;
     }
 
@@ -201,9 +201,6 @@
     <g transform="translate(0 174)">
       <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
-    <g transform="translate(0 203)">
-      <text x="0" y="3" class="label" text-anchor="middle">V</text>
-    </g>
     <g transform="translate(0 232)">
       <text x="0" y="3" class="label" text-anchor="middle">M</text>
     </g>
@@ -226,6 +223,7 @@
   </g>
 
   <g transform="translate(24 174)">
+    <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(24 203)">

@@ -79,7 +79,7 @@
     }
 
     .blueprint {
-      stroke: #838598;
+      stroke: black;
       fill: none;
     }
 

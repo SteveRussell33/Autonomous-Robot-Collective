@@ -202,16 +202,10 @@
     <g transform="translate(0 174)">
       <text x="0" y="3" class="label" text-anchor="middle">V</text>
     </g>
-    <g transform="translate(0 203)">
-      <text x="0" y="3" class="label" text-anchor="middle">V</text>
-    </g>
     <g transform="translate(0 232)">
       <text x="0" y="3" class="label" text-anchor="middle">M</text>
     </g>
     <g transform="translate(0 261)">
-      <text x="0" y="3" class="label" text-anchor="middle">P</text>
-    </g>
-    <g transform="translate(0 290)">
       <text x="0" y="3" class="label" text-anchor="middle">P</text>
     </g>
     <g transform="translate(0 319)">
@@ -231,6 +225,7 @@
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
   <g transform="translate(30 174)">
+    <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(30 203)">
@@ -240,6 +235,7 @@
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
   <g transform="translate(30 261)">
+    <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(30 290)">
@@ -262,6 +258,7 @@
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
     <g transform="translate(30 174)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 203)">
@@ -271,6 +268,7 @@
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
     <g transform="translate(30 261)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
@@ -294,6 +292,7 @@
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
     <g transform="translate(30 174)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 203)">
@@ -303,6 +302,7 @@
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
     <g transform="translate(30 261)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
@@ -326,6 +326,7 @@
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
     <g transform="translate(30 174)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 203)">
@@ -335,6 +336,7 @@
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
     <g transform="translate(30 261)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
@@ -358,6 +360,7 @@
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
     <g transform="translate(30 174)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 203)">
@@ -367,6 +370,7 @@
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
     <g transform="translate(30 261)">
+      <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
@@ -388,7 +392,7 @@
   <g transform="translate(0 51)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">SND 1</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">1</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -400,7 +404,7 @@
   <g transform="translate(0 118)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">SND 2</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">2</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -412,7 +416,7 @@
   <g transform="translate(0 185)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">SND 3</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">3</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -424,7 +428,7 @@
   <g transform="translate(0 252)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">SND 4</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">4</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -436,7 +440,7 @@
   <g transform="translate(0 319)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">SND MIX</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">MIX</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
