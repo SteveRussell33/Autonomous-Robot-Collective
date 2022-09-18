@@ -4,7 +4,11 @@
 #include <sstream>
 #include <vector>
 
-//include "../../lib/bogaudio/dsp/signal.hpp"
+#include "../lib/bogaudio/dsp/signal.hpp"
+
+inline float clamp(float x, float a = 0.f, float b = 1.f) {
+	return std::fmax(std::fmin(x, b), a);
+}
 
 void dump(float v) {
     std::cout << std::fixed;
@@ -12,32 +16,81 @@ void dump(float v) {
     std::cout << v;
 }
 
-// "amplitude" is 0-whatever here, with 1 (=0db) meaning unity gain.
-inline float decibelsToAmplitude(float db) {
-	return powf(10.0f, db * 0.05f);
+const float sampleRate = 48000.0f;
+
+//--------------------------------------------------------------
+// Amplitude
+//--------------------------------------------------------------
+
+static const float kMuteDb = -120.0f;
+static const float kMinDb = -60.0f;
+static const float kMaxDb = 12.0f;
+
+// I think I adapted this from somewhere in the bogaudio codebase...
+struct Amplitude {
+
+  private:
+
+    float curDb;
+    float curAmp;
+    bogaudio::dsp::SlewLimiter slew;
+
+  public:
+
+    Amplitude() {
+        curDb = kMinDb;
+        // TODO use a lookup table
+        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        slew.setLast(curDb);
+    }
+
+    void onSampleRateChange(float sampleRate) {
+        slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+    }
+
+    float next(float db) {
+
+        float dbs = slew.next(db);
+        if (curDb != dbs) {
+            curDb = dbs;
+
+            // TODO use a lookup table
+            curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        }
+        return curAmp;
+    }
+};
+
+void testAmplitude() {
+
+    Amplitude faderAmp;
+
+    faderAmp.onSampleRateChange(sampleRate);
+
+    for (int i = 0; i < 100 * 10; i++) {
+        float ampF = faderAmp.next(0.0f);
+
+        std::cout << i << ": ";
+        dump(ampF);
+        std::cout << std::endl;
+    }
 }
 
-inline float amplitudeToDecibels(float amplitude) {
-	if (amplitude < 0.000001f) {
-		return -120.0f;
-	}
-	return 20.0f * log10f(amplitude);
-}
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//--------------------------------------------------------------
 
-//void slew() {
-//
-//    const float sampleRate = 48000.0f;
-//    const float slewTime = 5.0f; // millis
-//
-//    bogaudio::dsp::SlewLimiter slew;
-//    slew.setParams(sampleRate, slewTime, 1.0f);
-//
-//    slew.setLast(0.9);
-//    for (int i = 0; i < 100; i++) {
-//        dump(slew.next(1.1f));
-//        std::cout << std::endl;
-//    }
-//}
+void testSlew() {
+
+    bogaudio::dsp::SlewLimiter slew;
+    slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+
+    slew.setLast(0);
+    for (int i = 0; i < 100 * 10; i++) {
+        dump(slew.next(kMuteDb));
+        std::cout << std::endl;
+    }
+}
 
 //void csv() {
 //
@@ -64,31 +117,77 @@ inline float amplitudeToDecibels(float amplitude) {
 //    }
 //}
 
-// don't forget to clamp at -1, 1
-void pan(float pan) {
+//// don't forget to clamp at -1, 1
+//void pan(float pan) {
+//
+//    float p = (pan + 1.0f) * 0.125f;
+//    float left = std::cosf(2.0f * M_PI * p);
+//    float right = std::sinf(2.0f * M_PI * p);
+//
+//}
 
-    float p = (pan + 1.0f) * 0.125f;
-    float left = std::cosf(2.0f * M_PI * p);
-    float right = std::sinf(2.0f * M_PI * p);
+//--------------------------------------------------------------
+// Pan
+//--------------------------------------------------------------
 
-    dump(pan);
-    std::cout << ",";
-    dump(left);
-    std::cout << ",";
-    dump(right);
-    std::cout << std::endl;
-}
+struct Pan {
+
+  private:
+
+    float curPan = 0.0f;
+
+    bogaudio::dsp::SlewLimiter slew;
+
+  public:
+
+    float left = 0.7071068f;
+    float right = 0.7071068f;
+
+    Pan() {
+        slew.setLast(0.0f);
+    }
+
+    void onSampleRateChange(float sampleRate) {
+        slew.setParams(sampleRate, 5.0f, 2.0f);
+    }
+
+    void next(float pan) {
+
+        pan = clamp(pan, -1.0f, 1.0f);
+
+        float ps = slew.next(pan);
+        if (curPan != ps) {
+            curPan = ps;
+
+            float p = (curPan + 1.0f) * 0.125f;
+
+            // TODO use lookup tables
+            left = std::cosf(2.0f * M_PI * p);
+            right = std::sinf(2.0f * M_PI * p);
+        }
+    }
+};
 
 void testPan() {
-    for (int i = -10; i <= 10; i++) {
-        pan(i/10.0f);
+
+    Pan pan;
+    pan.onSampleRateChange(sampleRate);
+
+    for (int i = 0; i < 100 * 10; i++) {
+        pan.next(1.0f);
+
+        std::cout << i << ": ";
+        dump(pan.left);
+        std::cout << ", ";
+        dump(pan.right);
+        std::cout << std::endl;
     }
 }
 
 void testDb() {
 
     int db = -120.0f;
-    float amp = decibelsToAmplitude(db);
+    float amp = bogaudio::dsp::decibelsToAmplitude(db);
 
     dump(db);
     std::cout << ",";
@@ -96,7 +195,7 @@ void testDb() {
     std::cout << std::endl;
 
     for (db = -60; db <= 12; db++) {
-        amp = decibelsToAmplitude(db);
+        amp = bogaudio::dsp::decibelsToAmplitude(db);
 
         dump(db);
         std::cout << ",";
@@ -106,5 +205,5 @@ void testDb() {
 }
 
 int main() {
-    testDb();
+    testPan();
 }

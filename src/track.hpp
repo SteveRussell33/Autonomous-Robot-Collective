@@ -53,41 +53,83 @@ struct FaderParamQuantity : ParamQuantity {
 // Amplitude
 //--------------------------------------------------------------
 
+static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
-// Amplitude is adapted from somewhere in the bogaudio codebase, but
-// I can't remember where.
 struct Amplitude {
 
   private:
 
     float curDb;
     float curAmp;
-    bogaudio::dsp::SlewLimiter dbSlew;
+    bogaudio::dsp::SlewLimiter slew;
 
   public:
 
     Amplitude() {
         curDb = kMinDb;
+        // TODO use a lookup table
         curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
-        dbSlew.setLast(curDb);
+        slew.setLast(curDb);
     }
 
     void onSampleRateChange(float sampleRate) {
-        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+        slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
     }
 
     float next(float db) {
 
-        float dbs = dbSlew.next(db);
+        float dbs = slew.next(db);
         if (curDb != dbs) {
             curDb = dbs;
 
-            // TODO perhaps we should use a lookup table here.
+            // TODO use a lookup table
             curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
         }
         return curAmp;
+    }
+};
+
+//--------------------------------------------------------------
+// Pan
+//--------------------------------------------------------------
+
+struct Pan {
+
+  private:
+
+    float curPan = 0.0f;
+
+    bogaudio::dsp::SlewLimiter slew;
+
+  public:
+
+    float left = 0.7071068f;
+    float right = 0.7071068f;
+
+    Pan() {
+        slew.setLast(0.0f);
+    }
+
+    void onSampleRateChange(float sampleRate) {
+        slew.setParams(sampleRate, 5.0f, 2.0f);
+    }
+
+    void next(float pan) {
+
+        pan = clamp(pan, -1.0f, 1.0f);
+
+        float ps = slew.next(pan);
+        if (curPan != ps) {
+            curPan = ps;
+
+            float p = (curPan + 1.0f) * 0.125f;
+
+            // TODO use lookup tables
+            left = std::cosf(2.0f * M_PI * p);
+            right = std::sinf(2.0f * M_PI * p);
+        }
     }
 };
 
@@ -187,7 +229,7 @@ struct StereoTrack {
         // fader amplitude
         float ampF = 0.0f;
         if (muted) {
-            ampF = faderAmp.next(kMinDb);
+            ampF = faderAmp.next(kMuteDb);
         } else {
             ampF = faderAmp.next(faderToDb(faderParam.getValue()));
         }
