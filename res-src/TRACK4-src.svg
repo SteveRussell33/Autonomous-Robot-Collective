@@ -440,7 +440,7 @@
   <g transform="translate(0 319)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">MIX</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">PRE MIX</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
