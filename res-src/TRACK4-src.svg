@@ -388,7 +388,7 @@
   <g transform="translate(0 51)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">1</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">SND 1</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -400,7 +400,7 @@
   <g transform="translate(0 118)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">2</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">SND 2</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -412,7 +412,7 @@
   <g transform="translate(0 185)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">3</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">SND 3</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -424,7 +424,7 @@
   <g transform="translate(0 252)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">4</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">SND 4</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
@@ -436,7 +436,7 @@
   <g transform="translate(0 319)">
     <g transform="translate(220 0)">
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">MIX</text>
+      <text x="0" y="-16" class="label" text-anchor="middle">SND MIX</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(220 29)">
