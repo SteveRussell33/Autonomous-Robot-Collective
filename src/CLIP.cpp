@@ -17,7 +17,7 @@ struct CLIP : Module {
     float debug4;
 #endif
 
-    enum ParamId { kLevelParam, kParamsLen };
+    enum ParamId { kLevelParam, kLevelCvAmountParam, kParamsLen };
 
     enum InputId { kInput, kLevelCvInput, kInputsLen };
 
@@ -37,6 +37,7 @@ struct CLIP : Module {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         configParam<FaderParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
+        configParam(kLevelCvAmountParam, -1.0f, 1.0f, 0.0f, "Level CV amount");
         configInput(kLevelCvInput, "Level CV");
 
         configInput(kInput, "Audio");
@@ -85,6 +86,7 @@ struct CLIPWidget : ModuleWidget {
         //addMeter(24 + 1, 44, module ? &(module->track.right.vuLevel) : NULL);
 
         addParam(createParamCentered<RmKnob24>(Vec(22.5, 188), module, CLIP::kLevelParam));
+        addParam(createParamCentered<RmKnob18>(Vec(22.5, 224), module, CLIP::kLevelCvAmountParam));
         addInput(createInputCentered<RmPolyPort>(Vec(22.5, 260), module, CLIP::kLevelCvInput));
 
         addInput(createInputCentered<RmPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
