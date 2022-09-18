@@ -12,6 +12,18 @@ void dump(float v) {
     std::cout << v;
 }
 
+// "amplitude" is 0-whatever here, with 1 (=0db) meaning unity gain.
+inline float decibelsToAmplitude(float db) {
+	return powf(10.0f, db * 0.05f);
+}
+
+inline float amplitudeToDecibels(float amplitude) {
+	if (amplitude < 0.000001f) {
+		return -120.0f;
+	}
+	return 20.0f * log10f(amplitude);
+}
+
 //void slew() {
 //
 //    const float sampleRate = 48000.0f;
@@ -67,8 +79,32 @@ void pan(float pan) {
     std::cout << std::endl;
 }
 
-int main() {
+void testPan() {
     for (int i = -10; i <= 10; i++) {
         pan(i/10.0f);
     }
+}
+
+void testDb() {
+
+    int db = -120.0f;
+    float amp = decibelsToAmplitude(db);
+
+    dump(db);
+    std::cout << ",";
+    dump(amp);
+    std::cout << std::endl;
+
+    for (db = -60; db <= 12; db++) {
+        amp = decibelsToAmplitude(db);
+
+        dump(db);
+        std::cout << ",";
+        dump(amp);
+        std::cout << std::endl;
+    }
+}
+
+int main() {
+    testDb();
 }
