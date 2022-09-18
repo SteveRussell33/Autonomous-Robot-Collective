@@ -63,16 +63,14 @@ struct GAIN : Module {
 
     void process(const ProcessArgs& args) override {
 
-        bool muted = params[kMuteParam].getValue() > 0.5f;
         track.process(
-            inputs[kLeftInput], inputs[kRightInput], muted, params[kFaderParam], inputs[kFaderCvInput]);
-
-        // populate outputs
-        outputs[kLeftOutput].channels = track.left.channels;
-        outputs[kLeftOutput].writeVoltages(track.left.voltages);
-
-        outputs[kRightOutput].channels = track.right.channels;
-        outputs[kRightOutput].writeVoltages(track.right.voltages);
+            inputs[kLeftInput],
+            inputs[kRightInput],
+            params[kFaderParam],
+            inputs[kFaderCvInput],
+            params[kMuteParam],
+            outputs[kLeftOutput],
+            outputs[kRightOutput]);
     }
 };
 

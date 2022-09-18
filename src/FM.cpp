@@ -155,7 +155,8 @@ struct FMWidget : ModuleWidget {
 
         // row 3
         addInput(createInputCentered<RmPolyPort>(Vec(19.5, 334), module, FM::kCarrierPitchInput));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
+        addOutput(
+            createOutputCentered<RmPolyPort>(Vec(55.5, 334), module, FM::kModulatorPitchOutput));
 
 #ifdef FM_DEBUG
         addOutput(createOutputCentered<RmPolyPort>(Vec(12, 12), module, FM::kDebug1));

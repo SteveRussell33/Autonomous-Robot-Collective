@@ -53,7 +53,6 @@ struct FaderParamQuantity : ParamQuantity {
 // Amplitude
 //--------------------------------------------------------------
 
-static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
@@ -110,8 +109,6 @@ struct MonoTrack {
 
   public:
 
-    int channels = 0;
-    float voltages[engine::PORT_MAX_CHANNELS] = {};
     float sum = 0.0f;
     VuLevel vuLevel;
 
@@ -122,9 +119,9 @@ struct MonoTrack {
         vuLevel.onSampleRateChange(sampleRate);
     }
 
-    void amplify(Input& input, Input& faderCvInput, float ampF, bool applyFaderCv) {
+    void amplify(Input& input, Input& faderCvInput, float ampF, bool applyFaderCv, Output& output) {
 
-        channels = std::max(input.getChannels(), 1);
+        int channels = std::max(input.getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
             float ampCh = ampF;
@@ -132,24 +129,24 @@ struct MonoTrack {
                 ampCh = ampCh * nextFaderCvAmp(faderCvInput, ch);
             }
 
-            voltages[ch] = clamp(input.getPolyVoltage(ch) * ampCh, -10.0f, 10.0f);
+            // hard clip
+            float out = clamp(input.getPolyVoltage(ch) * ampCh, -10.0f, 10.0f);
+
+            output.setVoltage(out, ch);
         }
+        output.setChannels(channels);
     }
 
     // void pan() {
     // }
 
-    void summarize() {
-        sum = 0.f;
-        for (int c = 0; c < channels; c++) {
-            sum += voltages[c];
-        }
-
+    void summarize(Output& output) {
+        sum = output.getVoltageSum();
         vuLevel.process(sum);
     }
 
-    void disconnect() {
-        channels = 0;
+    void disconnect(Output& output) {
+        output.setChannels(0);
         sum = 0.0f;
         vuLevel.process(0.0f);
     }
@@ -176,12 +173,21 @@ struct StereoTrack {
         right.onSampleRateChange(sampleRate);
     }
 
-    void process(Input& leftInput, Input& rightInput, bool muted, Param& faderParam, Input& faderCvInput) {
+    void process(
+        Input& leftInput,
+        Input& rightInput,
+        Param& faderParam,
+        Input& faderCvInput,
+        Param& muteParam,
+        Output& leftOutput,
+        Output& rightOutput) {
+
+        bool muted = muteParam.getValue() > 0.5f;
 
         // fader amplitude
         float ampF = 0.0f;
         if (muted) {
-            ampF = faderAmp.next(kMuteDb);
+            ampF = faderAmp.next(kMinDb);
         } else {
             ampF = faderAmp.next(faderToDb(faderParam.getValue()));
         }
@@ -191,24 +197,24 @@ struct StereoTrack {
 
         // left connected
         if (leftInput.isConnected()) {
-            left.amplify(leftInput, faderCvInput, ampF, applyFaderCv);
+            left.amplify(leftInput, faderCvInput, ampF, applyFaderCv, leftOutput);
             // left.pan();
-            left.summarize();
+            left.summarize(leftOutput);
         }
         // left disconnected
         else {
-            left.disconnect();
+            left.disconnect(leftOutput);
         }
 
         // right connected
         if (rightInput.isConnected()) {
-            right.amplify(rightInput, faderCvInput, ampF, applyFaderCv);
+            right.amplify(rightInput, faderCvInput, ampF, applyFaderCv, rightOutput);
             // right.pan();
-            right.summarize();
+            right.summarize(rightOutput);
         }
         // right disconnected
         else {
-            right.disconnect();
+            right.disconnect(rightOutput);
         }
     }
 };

@@ -4,7 +4,7 @@ AlignAfterOpenBracket: AlwaysBreak
 AllowShortFunctionsOnASingleLine: false
 BinPackArguments: false
 BinPackParameters: false
-ColumnLimit: 110
+ColumnLimit: 100
 EmptyLineAfterAccessModifier: Always
 IndentWidth: 4
 PenaltyReturnTypeOnItsOwnLine: 9999
