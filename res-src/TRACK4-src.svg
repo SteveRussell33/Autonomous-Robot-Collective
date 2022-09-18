@@ -200,7 +200,7 @@
   <!-- labels -->  
   <g transform="translate(9 0)">
     <g transform="translate(0 174)">
-      <text x="0" y="3" class="label" text-anchor="middle">V</text>
+      <text x="0" y="3" class="label" text-anchor="middle">LV</text>
     </g>
     <g transform="translate(0 232)">
       <text x="0" y="3" class="label" text-anchor="middle">M</text>

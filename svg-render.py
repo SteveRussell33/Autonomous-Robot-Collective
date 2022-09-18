@@ -5,6 +5,7 @@ import subprocess
 
 files = [
     'ATV',
+    'ClIP',
     'FM',
     'GAIN',
     'hswitch-0',
