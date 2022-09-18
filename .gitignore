@@ -5,7 +5,6 @@
 /plugin.dll
 .DS_Store
 
-/src/test/*.o
-/src/test/run-test
-
-/src/test/out.*
+/test/*.o
+/test/run-test
+/test/out.*

@@ -53,6 +53,7 @@ struct FaderParamQuantity : ParamQuantity {
 // Amplitude
 //--------------------------------------------------------------
 
+static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
@@ -180,7 +181,7 @@ struct StereoTrack {
         // fader amplitude
         float ampF = 0.0f;
         if (muted) {
-            ampF = faderAmp.next(kMinDb);
+            ampF = faderAmp.next(kMuteDb);
         } else {
             ampF = faderAmp.next(faderToDb(faderParam.getValue()));
         }
