@@ -1,4 +1,5 @@
 #include "plugin.hpp"
+#include "rm_dsp.hpp"
 #include "track.hpp"
 #include "widgets.hpp"
 
@@ -9,6 +10,13 @@
 //--------------------------------------------------------------
 
 struct CLIP : Module {
+
+    const int kOversampleFactor = 4;
+    rm::dsp::Oversample oversample{kOversampleFactor};
+
+    VuLevel vuLevel;
+    Amplitude levelAmp;
+    //Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
 
 #ifdef CLIP_DEBUG
     float debug1;
@@ -43,6 +51,8 @@ struct CLIP : Module {
         configInput(kInput, "Audio");
         configOutput(kOutput, "Audio");
 
+        configBypass(kInput, kOutput);
+
 #ifdef CLIP_DEBUG
         configOutput(kDebug1, "Debug 1");
         configOutput(kDebug2, "Debug 2");
@@ -52,9 +62,55 @@ struct CLIP : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        vuLevel.onSampleRateChange(e.sampleRate);
+        levelAmp.onSampleRateChange(e.sampleRate);
+    }
+
+    float oversampleSoftClip(float in) {
+
+        float buffer[rm::dsp::kMaxOversample] = {};
+        oversample.upsample(in, buffer);
+
+        for (int i = 0; i < kOversampleFactor; i++) {
+            buffer[i] = rm::dsp::softClip(buffer[i]);
+        }
+
+        return oversample.downsample(buffer);
     }
 
     void process(const ProcessArgs& args) override {
+
+        if (!outputs[kOutput].isConnected()) {
+            vuLevel.process(0.0f);
+            return;
+        }
+
+        // fader amplitude
+        float db = faderToDb(params[kLevelParam].getValue());
+        float ampF = levelAmp.next(db);
+
+        // process each channel
+        float sum = 0;
+        int channels = std::max(inputs[kInput].getChannels(), 1);
+        for (int ch = 0; ch < channels; ch++) {
+            float in = inputs[kInput].getPolyVoltage(ch);
+
+            // channel amplitude
+            float ampCh = ampF;
+            //if (inputs[kLevelInput].isConnected()) {
+            //    ampCh = ampCh * nextLevelAmplitude(ch);
+            //}
+
+            // process sample
+            float limit = 5.0f * ampCh;
+            float out = oversampleSoftClip(in / limit) * limit;
+
+            sum += out;
+            outputs[kOutput].setVoltage(out, ch);
+        }
+        outputs[kOutput].setChannels(channels);
+
+        vuLevel.process(sum);
     }
 };
 
@@ -82,8 +138,8 @@ struct CLIPWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
 #endif
 
-        //addMeter(24 - 6, 44, module ? &(module->track.left.vuLevel) : NULL);
-        //addMeter(24 + 1, 44, module ? &(module->track.right.vuLevel) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->vuLevel) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->vuLevel) : NULL);
 
         addParam(createParamCentered<RmKnob24>(Vec(22.5, 188), module, CLIP::kLevelParam));
         addParam(createParamCentered<RmKnob18>(Vec(22.5, 224), module, CLIP::kLevelCvAmountParam));
@@ -93,12 +149,12 @@ struct CLIPWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
     }
 
-    //void addMeter(float x, float y, VuLevel* vuLevel) {
-    //    VuMeter* meter = new VuMeter(vuLevel);
-    //    meter->box.pos = Vec(x, y);
-    //    meter->box.size = Vec(8, 104);
-    //    addChild(meter);
-    //}
+    void addMeter(float x, float y, VuLevel* vuLevel) {
+        VuMeter* meter = new VuMeter(vuLevel);
+        meter->box.pos = Vec(x, y);
+        meter->box.size = Vec(8, 104);
+        addChild(meter);
+    }
 };
 
 Model* modelCLIP = createModel<CLIP, CLIPWidget>("CLIP");
