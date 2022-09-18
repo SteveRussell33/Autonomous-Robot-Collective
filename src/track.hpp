@@ -143,36 +143,14 @@ struct MonoTrack {
 
     Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
 
-    Input* input; 
-    Input* faderCvInput; 
+    Input* input;
+    Input* faderCvInput;
     Output* output;
 
     float nextFaderCvAmp(Input* faderCvInput, int ch) {
         float v = faderCvInput->getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
         return levelAmps[ch].next(db);
-    }
-
-  public:
-
-    float sum = 0.0f;
-    VuLevel vuLevel;
-
-    void init(
-        Input* input_,
-        Input* faderCvInput_,
-        Output* output_) {
-
-        input = input_;
-        faderCvInput = faderCvInput_;
-        output = output_;
-    }
-
-    void onSampleRateChange(float sampleRate) {
-        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            levelAmps[ch].onSampleRateChange(sampleRate);
-        }
-        vuLevel.onSampleRateChange(sampleRate);
     }
 
     void amplify(float ampF, bool applyFaderCv) {
@@ -199,6 +177,37 @@ struct MonoTrack {
     void summarize() {
         sum = output->getVoltageSum();
         vuLevel.process(sum);
+    }
+
+  public:
+
+    float sum = 0.0f;
+    VuLevel vuLevel;
+
+    void init(Input* input_, Input* faderCvInput_, Output* output_) {
+
+        input = input_;
+        faderCvInput = faderCvInput_;
+        output = output_;
+    }
+
+    void onSampleRateChange(float sampleRate) {
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelAmps[ch].onSampleRateChange(sampleRate);
+        }
+        vuLevel.onSampleRateChange(sampleRate);
+    }
+
+    void process(float ampF, bool applyFaderCv) {
+        amplify(ampF, applyFaderCv);
+        // pan();
+        summarize();
+    }
+
+    void copyFrom(MonoTrack& trk) {
+        output->setChannels(trk.output->getChannels());
+        output->writeVoltages(trk.output->voltages);
+        summarize();
     }
 
     void disconnect() {
@@ -273,26 +282,28 @@ struct StereoTrack {
         // fader cv
         bool applyFaderCv = (!muted && faderCvInput->isConnected());
 
-        // left connected
         if (leftInput->isConnected()) {
-            left.amplify(ampF, applyFaderCv);
-            // left.pan();
-            left.summarize();
-        }
-        // left disconnected
-        else {
-            left.disconnect();
-        }
+            left.process(ampF, applyFaderCv);
 
-        // right connected
-        if (rightInput->isConnected()) {
-            right.amplify(ampF, applyFaderCv);
-            // right.pan();
-            right.summarize();
-        }
-        // right disconnected
-        else {
-            right.disconnect();
+            // stereo
+            if (rightInput->isConnected()) {
+                right.process(ampF, applyFaderCv);
+            }
+            // mono: copy left to right
+            else {
+                right.copyFrom(left);
+            }
+        } else {
+            // mono: copy right to left
+            if (rightInput->isConnected()) {
+                right.process(ampF, applyFaderCv);
+                left.copyFrom(right);
+            }
+            // no inputs
+            else {
+                left.disconnect();
+                right.disconnect();
+            }
         }
     }
 };
