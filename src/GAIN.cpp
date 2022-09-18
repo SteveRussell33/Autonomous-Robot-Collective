@@ -55,6 +55,17 @@ struct GAIN : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
+
+        //------------------------------------------------------
+
+        track.init(
+            &(inputs[kLeftInput]),
+            &(inputs[kRightInput]),
+            &(params[kFaderParam]),
+            &(inputs[kFaderCvInput]),
+            &(params[kMuteParam]),
+            &(outputs[kLeftOutput]),
+            &(outputs[kRightOutput]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
@@ -62,15 +73,7 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
-
-        track.process(
-            inputs[kLeftInput],
-            inputs[kRightInput],
-            params[kFaderParam],
-            inputs[kFaderCvInput],
-            params[kMuteParam],
-            outputs[kLeftOutput],
-            outputs[kRightOutput]);
+        track.process();
     }
 };
 
