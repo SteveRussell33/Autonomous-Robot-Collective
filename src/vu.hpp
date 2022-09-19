@@ -8,11 +8,11 @@
 using namespace rack;
 
 //--------------------------------------------------------------
-// VuLevel
+// VuStats
 //--------------------------------------------------------------
 
-// VuLevel is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
-struct VuLevel {
+// VuStats is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
+struct VuStats {
 
   private:
 
@@ -85,7 +85,7 @@ struct VuMeter : OpaqueWidget {
 
     static const int kWidth = 5;
 
-    VuLevel* vuLevel = NULL;
+    VuStats* vuStats = NULL;
 
     // clang-format off
     VuColors fadedColors = {
@@ -201,16 +201,16 @@ struct VuMeter : OpaqueWidget {
 
   public:
 
-    VuMeter(VuLevel* vuLevel_) : vuLevel(vuLevel_) {
+    VuMeter(VuStats* vuStats_) : vuStats(vuStats_) {
     }
 
     void draw(const DrawArgs& args) override {
-        if (!vuLevel) {
+        if (!vuStats) {
             return;
         }
 
-        drawLevel(args, 0, vuLevel->peak, fadedColors);
-        drawMaxPeak(args, 0, vuLevel->maxPeak, boldColors);
-        drawLevel(args, 0, vuLevel->rms, boldColors);
+        drawLevel(args, 0, vuStats->peak, fadedColors);
+        drawMaxPeak(args, 0, vuStats->maxPeak, boldColors);
+        drawLevel(args, 0, vuStats->rms, boldColors);
     }
 };

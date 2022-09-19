@@ -19,9 +19,9 @@ struct GAIN : Module {
     float debug4;
 #endif
 
-    enum ParamId { kFaderParam, kMuteParam, kParamsLen };
+    enum ParamId { kLevelParam, kMuteParam, kParamsLen };
 
-    enum InputId { kLeftInput, kRightInput, kFaderCvInput, kInputsLen };
+    enum InputId { kLeftInput, kRightInput, kLevelCvInput, kInputsLen };
 
     enum OutputId {
         kLeftOutput,
@@ -39,9 +39,9 @@ struct GAIN : Module {
     GAIN() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        configParam<FaderParamQuantity>(kFaderParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
+        configParam<LevelParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
         configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
-        configInput(kFaderCvInput, "Track 1 Level CV");
+        configInput(kLevelCvInput, "Level CV");
 
         configInput(kLeftInput, "Left");
         configInput(kRightInput, "Right");
@@ -61,8 +61,8 @@ struct GAIN : Module {
         track.init(
             &(inputs[kLeftInput]),
             &(inputs[kRightInput]),
-            &(params[kFaderParam]),
-            &(inputs[kFaderCvInput]),
+            &(params[kLevelParam]),
+            &(inputs[kLevelCvInput]),
             &(params[kMuteParam]),
             &(outputs[kLeftOutput]),
             &(outputs[kRightOutput]));
@@ -101,11 +101,11 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        addMeter(24 - 6, 44, module ? &(module->track.left.vuLevel) : NULL);
-        addMeter(24 + 1, 44, module ? &(module->track.right.vuLevel) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
 
-        addParam(createParamCentered<RmKnob24>(Vec(24, 174), module, GAIN::kFaderParam));
-        addInput(createInputCentered<RmPolyPort>(Vec(24, 203), module, GAIN::kFaderCvInput));
+        addParam(createParamCentered<RmKnob24>(Vec(24, 174), module, GAIN::kLevelParam));
+        addInput(createInputCentered<RmPolyPort>(Vec(24, 203), module, GAIN::kLevelCvInput));
         addParam(createParamCentered<RmToggleButton>(Vec(24, 232), module, GAIN::kMuteParam));
 
         addInput(createInputCentered<RmPolyPort>(Vec(24, 261), module, GAIN::kLeftInput));
@@ -115,8 +115,8 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(24, 348), module, GAIN::kRightOutput));
     }
 
-    void addMeter(float x, float y, VuLevel* vuLevel) {
-        VuMeter* meter = new VuMeter(vuLevel);
+    void addMeter(float x, float y, VuStats* vuStats) {
+        VuMeter* meter = new VuMeter(vuStats);
         meter->box.pos = Vec(x, y);
         meter->box.size = Vec(8, 104);
         addChild(meter);

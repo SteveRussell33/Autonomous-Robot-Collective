@@ -14,7 +14,7 @@ struct CLIP : Module {
     const int kOversampleFactor = 4;
     rm::dsp::Oversample oversample{kOversampleFactor};
 
-    VuLevel vuLevel;
+    VuStats vuStats;
     Amplitude levelAmp;
     //Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
 
@@ -44,7 +44,7 @@ struct CLIP : Module {
     CLIP() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
-        configParam<FaderParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
+        configParam<LevelParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
         configParam(kLevelCvAmountParam, -1.0f, 1.0f, 0.0f, "Level CV amount");
         configInput(kLevelCvInput, "Level CV");
 
@@ -62,7 +62,7 @@ struct CLIP : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        vuLevel.onSampleRateChange(e.sampleRate);
+        vuStats.onSampleRateChange(e.sampleRate);
         levelAmp.onSampleRateChange(e.sampleRate);
     }
 
@@ -81,13 +81,13 @@ struct CLIP : Module {
     void process(const ProcessArgs& args) override {
 
         if (!outputs[kOutput].isConnected()) {
-            vuLevel.process(0.0f);
+            vuStats.process(0.0f);
             return;
         }
 
-        // fader amplitude
-        float db = faderToDb(params[kLevelParam].getValue());
-        float ampF = levelAmp.next(db);
+        // level amplitude
+        float db = levelToDb(params[kLevelParam].getValue());
+        float ampL = levelAmp.next(db);
 
         // process each channel
         float sum = 0;
@@ -96,7 +96,7 @@ struct CLIP : Module {
             float in = inputs[kInput].getPolyVoltage(ch);
 
             // channel amplitude
-            float ampCh = ampF;
+            float ampCh = ampL;
             //if (inputs[kLevelInput].isConnected()) {
             //    ampCh = ampCh * nextLevelAmplitude(ch);
             //}
@@ -110,7 +110,7 @@ struct CLIP : Module {
         }
         outputs[kOutput].setChannels(channels);
 
-        vuLevel.process(sum);
+        vuStats.process(sum);
     }
 };
 
@@ -138,8 +138,8 @@ struct CLIPWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
 #endif
 
-        addMeter(24 - 6, 44, module ? &(module->vuLevel) : NULL);
-        addMeter(24 + 1, 44, module ? &(module->vuLevel) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
 
         addParam(createParamCentered<RmKnob24>(Vec(22.5, 188), module, CLIP::kLevelParam));
         addParam(createParamCentered<RmKnob18>(Vec(22.5, 224), module, CLIP::kLevelCvAmountParam));
@@ -149,8 +149,8 @@ struct CLIPWidget : ModuleWidget {
         addOutput(createOutputCentered<RmPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
     }
 
-    void addMeter(float x, float y, VuLevel* vuLevel) {
-        VuMeter* meter = new VuMeter(vuLevel);
+    void addMeter(float x, float y, VuStats* vuStats) {
+        VuMeter* meter = new VuMeter(vuStats);
         meter->box.pos = Vec(x, y);
         meter->box.size = Vec(8, 104);
         addChild(meter);

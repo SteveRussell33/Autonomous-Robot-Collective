@@ -10,10 +10,10 @@
 using namespace rack;
 
 //--------------------------------------------------------------
-// FaderParamQuantity
+// LevelParamQuantity
 //--------------------------------------------------------------
 
-static float faderToDb(float v) {
+static float levelToDb(float v) {
     // clang-format off
     if      (v >= 0.5) return rescale(v, 0.5f, 1.0f, -12.0f,  12.0f);
     else if (v >= 0.2) return rescale(v, 0.2f, 0.5f, -36.0f, -12.0f);
@@ -21,7 +21,7 @@ static float faderToDb(float v) {
     // clang-format on
 }
 
-struct FaderParamQuantity : ParamQuantity {
+struct LevelParamQuantity : ParamQuantity {
 
     float getDisplayValue() override {
         float v = getValue();
@@ -29,7 +29,7 @@ struct FaderParamQuantity : ParamQuantity {
             return v;
         }
 
-        return faderToDb(v);
+        return levelToDb(v);
     }
 
     void setDisplayValue(float v) override {
@@ -141,26 +141,26 @@ struct MonoTrack {
 
   private:
 
-    Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
+    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
     Input* input;
-    Input* faderCvInput;
+    Input* levelCvInput;
     Output* output;
 
-    float nextFaderCvAmp(Input* faderCvInput, int ch) {
-        float v = faderCvInput->getPolyVoltage(ch);
+    float nextLevelCvAmp(Input* levelCvInput, int ch) {
+        float v = levelCvInput->getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        return levelAmps[ch].next(db);
+        return levelCvAmps[ch].next(db);
     }
 
-    void amplify(float ampF, bool applyFaderCv) {
+    void amplify(float ampL, bool applyLevelCv) {
 
         int channels = std::max(input->getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
-            float ampCh = ampF;
-            if (applyFaderCv) {
-                ampCh = ampCh * nextFaderCvAmp(faderCvInput, ch);
+            float ampCh = ampL;
+            if (applyLevelCv) {
+                ampCh = ampCh * nextLevelCvAmp(levelCvInput, ch);
             }
 
             // hard clip
@@ -176,30 +176,30 @@ struct MonoTrack {
 
     void summarize() {
         sum = output->getVoltageSum();
-        vuLevel.process(sum);
+        vuStats.process(sum);
     }
 
   public:
 
     float sum = 0.0f;
-    VuLevel vuLevel;
+    VuStats vuStats;
 
-    void init(Input* input_, Input* faderCvInput_, Output* output_) {
+    void init(Input* input_, Input* levelCvInput_, Output* output_) {
 
         input = input_;
-        faderCvInput = faderCvInput_;
+        levelCvInput = levelCvInput_;
         output = output_;
     }
 
     void onSampleRateChange(float sampleRate) {
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            levelAmps[ch].onSampleRateChange(sampleRate);
+            levelCvAmps[ch].onSampleRateChange(sampleRate);
         }
-        vuLevel.onSampleRateChange(sampleRate);
+        vuStats.onSampleRateChange(sampleRate);
     }
 
-    void process(float ampF, bool applyFaderCv) {
-        amplify(ampF, applyFaderCv);
+    void process(float ampL, bool applyLevelCv) {
+        amplify(ampL, applyLevelCv);
         // pan();
         summarize();
     }
@@ -213,7 +213,7 @@ struct MonoTrack {
     void disconnect() {
         output->setChannels(0);
         sum = 0.0f;
-        vuLevel.process(0.0f);
+        vuStats.process(0.0f);
     }
 };
 
@@ -225,12 +225,12 @@ struct StereoTrack {
 
   private:
 
-    Amplitude faderAmp;
+    Amplitude levelAmp;
 
     Input* leftInput = NULL;
     Input* rightInput = NULL;
-    Param* faderParam = NULL;
-    Input* faderCvInput = NULL;
+    Param* levelParam = NULL;
+    Input* levelCvInput = NULL;
     Param* muteParam = NULL;
     Output* leftOutput = NULL;
     Output* rightOutput = NULL;
@@ -241,7 +241,7 @@ struct StereoTrack {
     MonoTrack right;
 
     void onSampleRateChange(float sampleRate) {
-        faderAmp.onSampleRateChange(sampleRate);
+        levelAmp.onSampleRateChange(sampleRate);
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
@@ -249,45 +249,45 @@ struct StereoTrack {
     void init(
         Input* leftInput_,
         Input* rightInput_,
-        Param* faderParam_,
-        Input* faderCvInput_,
+        Param* levelParam_,
+        Input* levelCvInput_,
         Param* muteParam_,
         Output* leftOutput_,
         Output* rightOutput_) {
 
         leftInput = leftInput_;
         rightInput = rightInput_;
-        faderParam = faderParam_;
-        faderCvInput = faderCvInput_;
+        levelParam = levelParam_;
+        levelCvInput = levelCvInput_;
         muteParam = muteParam_;
         leftOutput = leftOutput_;
         rightOutput = rightOutput_;
 
-        left.init(leftInput, faderCvInput, leftOutput);
-        right.init(rightInput, faderCvInput, rightOutput);
+        left.init(leftInput, levelCvInput, leftOutput);
+        right.init(rightInput, levelCvInput, rightOutput);
     }
 
     void process() {
 
         bool muted = muteParam->getValue() > 0.5f;
 
-        // fader amplitude
-        float ampF = 0.0f;
+        // level amplitude
+        float ampL = 0.0f;
         if (muted) {
-            ampF = faderAmp.next(kMuteDb);
+            ampL = levelAmp.next(kMuteDb);
         } else {
-            ampF = faderAmp.next(faderToDb(faderParam->getValue()));
+            ampL = levelAmp.next(levelToDb(levelParam->getValue()));
         }
 
-        // fader cv
-        bool applyFaderCv = (!muted && faderCvInput->isConnected());
+        // level cv
+        bool applyLevelCv = (!muted && levelCvInput->isConnected());
 
         if (leftInput->isConnected()) {
-            left.process(ampF, applyFaderCv);
+            left.process(ampL, applyLevelCv);
 
             // stereo
             if (rightInput->isConnected()) {
-                right.process(ampF, applyFaderCv);
+                right.process(ampL, applyLevelCv);
             }
             // mono: copy left to right
             else {
@@ -296,7 +296,7 @@ struct StereoTrack {
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                right.process(ampF, applyFaderCv);
+                right.process(ampL, applyLevelCv);
                 left.copyFrom(right);
             }
             // no inputs
