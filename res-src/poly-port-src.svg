@@ -27,7 +27,7 @@
     <circle r="10.5" fill="#c4c4c4"/>
     <circle r="8.5" fill="url('#inner')"/>
 
-    <ellipse cx="0" cy="0.8" rx="8" ry="9" fill="#b0b0b0"/>
+    <ellipse cx="0" cy="0.8" rx="7.7" ry="8.75" fill="#b0b0b0"/>
 
     <circle r="8.0" fill="#333333"/>
 
