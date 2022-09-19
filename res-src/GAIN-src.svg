@@ -31,7 +31,7 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
-    text.white-label {
+    text.output-label {
       fill: #dfdfdf;
       font-family: 'DIN Alternate';
       font-size: 6pt;
@@ -40,10 +40,10 @@
     .background {
       fill: #dfdfdf;
     }
-    .polyphonic {
+    .poly-output {
       fill: #558955;
     }
-    .monophonic {
+    .mono-output {
       fill: #636c9d;
     }
 
@@ -242,7 +242,7 @@
   <!-- mix -->  
 
   <g transform="translate(24 319)">
-    <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="polyphonic"/>
+    <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="poly-output"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(24 348)">

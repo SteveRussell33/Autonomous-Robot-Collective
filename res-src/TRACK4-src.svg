@@ -31,7 +31,7 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
-    text.white-label {
+    text.output-label {
       fill: #dfdfdf;
       font-family: 'DIN Alternate';
       font-size: 6pt;
@@ -40,10 +40,10 @@
     .background {
       fill: #dfdfdf;
     }
-    .polyphonic {
+    .poly-output {
       fill: #558955;
     }
-    .monophonic {
+    .mono-output {
       fill: #636c9d;
     }
 
@@ -378,7 +378,7 @@
     </g>
 
     <g transform="translate(30 319)">
-      <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="monophonic"/>
+      <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="mono-output"/>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 348)">
@@ -391,7 +391,7 @@
   <!-- 1 -->  
   <g transform="translate(0 51)">
     <g transform="translate(220 0)">
-      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
       <text x="0" y="-16" class="label" text-anchor="middle">1</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
@@ -403,7 +403,7 @@
   <!-- 2 -->  
   <g transform="translate(0 118)">
     <g transform="translate(220 0)">
-      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
       <text x="0" y="-16" class="label" text-anchor="middle">2</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
@@ -415,7 +415,7 @@
   <!-- 3 -->  
   <g transform="translate(0 185)">
     <g transform="translate(220 0)">
-      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
       <text x="0" y="-16" class="label" text-anchor="middle">3</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
@@ -427,7 +427,7 @@
   <!-- 4 -->  
   <g transform="translate(0 252)">
     <g transform="translate(220 0)">
-      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
       <text x="0" y="-16" class="label" text-anchor="middle">4</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
@@ -439,7 +439,7 @@
   <!-- MIX -->  
   <g transform="translate(0 319)">
     <g transform="translate(220 0)">
-      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="polyphonic"/>
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
       <text x="0" y="-16" class="label" text-anchor="middle">PRE MIX</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>

@@ -70,7 +70,7 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
-    text.white-label {
+    text.output-label {
       fill: #dfdfdf;
       font-family: 'DIN Alternate';
       font-size: 6pt;
@@ -79,10 +79,10 @@
     .background {
       fill: #dfdfdf;
     }
-    .polyphonic {
+    .poly-output {
       fill: #558955;
     }
-    .monophonic {
+    .mono-output {
       fill: #636c9d;
     }
 
@@ -778,7 +778,7 @@
      id="rect169"
      style="fill:#558955"
      d="m 12.5,304 h 23 c 1.662,0 3,1.338 3,3 v 53 c 0,1.662 -1.338,3 -3,3 h -23 c -1.662,0 -3,-1.338 -3,-3 v -53 c 0,-1.662 1.338,-3 3,-3 z"
-     class="polyphonic" />
+     class="poly-output" />
   <g
      id="use171"
      transform="translate(12,307)">

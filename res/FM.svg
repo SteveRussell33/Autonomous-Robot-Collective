@@ -70,7 +70,7 @@
       font-family: 'DIN Alternate';
       font-size: 6pt;
     }
-    text.white-label {
+    text.output-label {
       fill: #dfdfdf;
       font-family: 'DIN Alternate';
       font-size: 6pt;
@@ -79,10 +79,10 @@
     .background {
       fill: #dfdfdf;
     }
-    .polyphonic {
+    .poly-output {
       fill: #558955;
     }
-    .monophonic {
+    .mono-output {
       fill: #636c9d;
     }
 
@@ -771,7 +771,7 @@
      id="rect187"
      style="fill:#558955"
      d="m 43.5,318 h 24 c 1.662,0 3,1.338 3,3 v 36 c 0,1.662 -1.338,3 -3,3 h -24 c -1.662,0 -3,-1.338 -3,-3 v -36 c 0,-1.662 1.338,-3 3,-3 z"
-     class="polyphonic" />
+     class="poly-output" />
   <g
      id="use189"
      transform="translate(43.5,322)">
@@ -783,7 +783,7 @@
      aria-label="MOD"
      id="text191"
      style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
-     class="white-label">
+     class="output-label">
     <path
        d="m 48.109375,356 h 0.863281 v -3.55078 h 0.01563 l 1.191406,2.73437 h 0.71875 l 1.191407,-2.73437 h 0.01953 V 356 h 0.863281 v -5.69531 H 52.15625 l -1.601563,3.71093 v 0 l -1.632812,-3.71093 h -0.8125 z"
        style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
