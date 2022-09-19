@@ -79,7 +79,7 @@
     }
 
     .blueprint {
-      stroke: black;
+      stroke: #444444;
       fill: none;
     }
 
@@ -148,6 +148,14 @@
       </g>
     </symbol>
 
+    <symbol id="screw" >
+      <g transform="translate(6 6)">
+        <polyline points="-3,0 3,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-3 0,3" stroke-width="1" class="blueprint"/>
+      </g>
+      <circle cx="6" cy="6" r="5.5" stroke-width="1" class="blueprint"/>
+    </symbol>
+
     <symbol id="hswitch14" >
       <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
       <g transform="translate(12 7)">
@@ -192,6 +200,15 @@
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="16"  text-anchor="middle">TRACK-4</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">AR</text>
+
+  <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(0 368)"><use xlink:href="#screw"/></g>
+  <g transform="translate(243 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(243 368)"><use xlink:href="#screw"/></g>
+
+  <!-- ============================================================ -->
+  <!-- Main Board -->  
+  <!-- ============================================================ -->
 
   <!--rect x="0" y="35" width="162" height="122" rx="2" class="lcd-bg-frame"/-->
   <rect x="2" y="35" width="198" height="122" rx="2" class="lcd-bg-frame"/>
@@ -387,64 +404,87 @@
   </g>
 
   <!-- ============================================================ -->
+  <!-- Sends -->  
+  <!-- ============================================================ -->
 
-  <!-- 1 -->  
-  <g transform="translate(0 51)">
-    <g transform="translate(220 0)">
-      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
+  <g transform="translate(234 0)">
+
+    <polyline points="-27.5 15 -27.5 363" class="connect"/>
+    <text x="0" y="23" class="big-label" text-anchor="middle">SEND</text>
+
+    <!-- 1 -->  
+    <g transform="translate(0 51)">
+
       <text x="0" y="-16" class="label" text-anchor="middle">1</text>
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-    <g transform="translate(220 29)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-  </g>
 
-  <!-- 2 -->  
-  <g transform="translate(0 118)">
-    <g transform="translate(220 0)">
+      <text x="-21" y="3" class="label" text-anchor="middle">L</text>
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+      
+      <g transform="translate(0 29)">
+        <text x="-21" y="3" class="label" text-anchor="middle">R</text>
+        <use xlink:href="#port" transform="translate(-12 -12)"/>
+      </g>
+    </g>
+
+    <!-- 2 -->  
+    <g transform="translate(0 118)">
+
       <text x="0" y="-16" class="label" text-anchor="middle">2</text>
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-    <g transform="translate(220 29)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-  </g>
 
-  <!-- 3 -->  
-  <g transform="translate(0 185)">
-    <g transform="translate(220 0)">
+      <text x="-21" y="3" class="label" text-anchor="middle">L</text>
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+      
+      <g transform="translate(0 29)">
+        <text x="-21" y="3" class="label" text-anchor="middle">R</text>
+        <use xlink:href="#port" transform="translate(-12 -12)"/>
+      </g>
+    </g>
+
+    <!-- 3 -->  
+    <g transform="translate(0 185)">
+
       <text x="0" y="-16" class="label" text-anchor="middle">3</text>
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-    <g transform="translate(220 29)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-  </g>
 
-  <!-- 4 -->  
-  <g transform="translate(0 252)">
-    <g transform="translate(220 0)">
+      <text x="-21" y="3" class="label" text-anchor="middle">L</text>
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+      
+      <g transform="translate(0 29)">
+        <text x="-21" y="3" class="label" text-anchor="middle">R</text>
+        <use xlink:href="#port" transform="translate(-12 -12)"/>
+      </g>
+    </g>
+
+    <!-- 4 -->  
+    <g transform="translate(0 252)">
+
       <text x="0" y="-16" class="label" text-anchor="middle">4</text>
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-    <g transform="translate(220 29)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-  </g>
 
-  <!-- MIX -->  
-  <g transform="translate(0 319)">
-    <g transform="translate(220 0)">
+      <text x="-21" y="3" class="label" text-anchor="middle">L</text>
       <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
-      <text x="0" y="-16" class="label" text-anchor="middle">PRE MIX</text>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
+      
+      <g transform="translate(0 29)">
+        <text x="-21" y="3" class="label" text-anchor="middle">R</text>
+        <use xlink:href="#port" transform="translate(-12 -12)"/>
+      </g>
     </g>
-    <g transform="translate(220 29)">
+
+    <!-- MIX -->  
+    <g transform="translate(0 319)">
+
+      <text x="0" y="-16" class="label" text-anchor="middle">MIX</text>
+
+      <text x="-21" y="3" class="label" text-anchor="middle">L</text>
+      <rect x="-14.5" y="-14.5" width="29" height="58" rx="3" class="poly-output"/>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
+      
+      <g transform="translate(0 29)">
+        <text x="-21" y="3" class="label" text-anchor="middle">R</text>
+        <use xlink:href="#port" transform="translate(-12 -12)"/>
+      </g>
     </g>
   </g>
 

@@ -70,7 +70,7 @@
     }
 
     .blueprint {
-      stroke: black;
+      stroke: #444444;
       fill: none;
     }
 
@@ -137,6 +137,14 @@
         <polyline points="0,-5 0,5" stroke-width="1" class="blueprint"/>
         <circle cx="0" cy="0" r="10.5" stroke-width="2" class="blueprint"/>
       </g>
+    </symbol>
+
+    <symbol id="screw" >
+      <g transform="translate(6 6)">
+        <polyline points="-3,0 3,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-3 0,3" stroke-width="1" class="blueprint"/>
+      </g>
+      <circle cx="6" cy="6" r="5.5" stroke-width="1" class="blueprint"/>
     </symbol>
 
     <symbol id="hswitch14" >
