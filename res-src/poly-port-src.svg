@@ -21,7 +21,7 @@
 
   <g transform="translate(12 12)">
 
-    <circle r="11.5" fill="#444444"/>
+    <!--circle r="11.5" fill="#444444"/>
 
     <circle r="11.0" fill="url('#gradient')"/>
     <circle r="10.5" fill="#e0e0e0"/>
@@ -30,7 +30,25 @@
     <ellipse cx="0" cy="0.8" rx="8" ry="9.2" fill="#b0b0b0"/>
 
     <circle r="8.5" fill="#333333"/>
-    <circle r="7.5" fill="#80a680"/>
+    <circle r="7.5" fill="#d79921"/>
+    <circle r="5.0" fill="#121212"/-->
+
+    <!-- =========================================== -->
+
+    <circle r="11.5" fill="#444444"/>
+
+    <circle r="11.0" fill="url('#gradient')"/>
+    <circle r="10.5" fill="#d0d0d0"/>
+    <circle r="8.5" fill="url('#reverse-gradient')"/>
+
+    <ellipse cx="0" cy="0.8" rx="8" ry="9" fill="#b0b0b0"/>
+
+    <circle r="8.0" fill="#333333"/>
+
+    <circle r="7.5" fill="url('#gradient')"/>
+    <circle r="7.0" fill="#d0d0d0"/>
+    <circle r="5.5" fill="url('#reverse-gradient')"/>
+
     <circle r="5.0" fill="#121212"/>
 
   </g>
