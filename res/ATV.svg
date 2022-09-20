@@ -12,11 +12,11 @@
    width="30"
    height="380"
    viewBox="0 0 30 380"
-   id="svg173"
+   id="svg201"
    sodipodi:docname="ATV.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
-     id="metadata177">
+     id="metadata205">
     <rdf:RDF>
       <cc:Work
          rdf:about="">
@@ -37,7 +37,7 @@
      inkscape:pageshadow="2"
      inkscape:window-width="689"
      inkscape:window-height="480"
-     id="namedview175"
+     id="namedview203"
      showgrid="false"
      inkscape:zoom="2.1763158"
      inkscape:cx="15"
@@ -45,8 +45,8 @@
      inkscape:window-x="0"
      inkscape:window-y="25"
      inkscape:window-maximized="0"
-     inkscape:current-layer="svg173" />
-  <!-- ============== styles ============== -->
+     inkscape:current-layer="svg201" />
+  <!-- ================ header begin ================ -->
   <style
      id="style2">
 
@@ -54,11 +54,6 @@
       fill: #a91913;
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
-    }
-    text.logo {
-      fill: #a91913;
-      font-family: 'DIN Alternate';
-      font-size: 10pt;
     }
     text.big-label {
       fill: #343434;
@@ -118,14 +113,13 @@
     }
 
     .blueprint {
-      stroke: black;
+      stroke: #444444;
       fill: none;
     }
 
   </style>
-  <!-- ============== defs ============== -->
   <defs
-     id="defs105">
+     id="defs121">
     <linearGradient
        id="smallKnobLight"
        x1="0%"
@@ -254,134 +248,185 @@
          id="g52" />
     </symbol>
     <symbol
+       id="screw">
+      <g
+         transform="translate(6 6)"
+         id="g55" />
+    </symbol>
+    <symbol
        id="hswitch14">
       <g
          transform="translate(12 7)"
-         id="g55" />
+         id="g58" />
     </symbol>
     <symbol
        id="meter-strip">
       <g
          transform="translate(20 4)"
-         id="g102">
+         id="g105">
         <rect
            x="-6"
            y="-1"
            width="5"
            height="106"
            class="lcd-bg-accent"
-           id="rect58" />
+           id="rect61" />
         <rect
            x="1"
            y="-1"
            width="5"
            height="106"
            class="lcd-bg-accent"
-           id="rect60" />
+           id="rect63" />
         <g
            transform="translate(-11 2.5)"
-           id="g80">
+           id="g83">
           <text
              x="0"
              y="0"
              class="lcd-label"
              text-anchor="end"
-             id="text62">0</text>
+             id="text65">0</text>
           <text
              x="0"
              y="13"
              class="lcd-label"
              text-anchor="end"
-             id="text64">3</text>
+             id="text67">3</text>
           <text
              x="0"
              y="26"
              class="lcd-label"
              text-anchor="end"
-             id="text66">6</text>
+             id="text69">6</text>
           <text
              x="0"
              y="39"
              class="lcd-label"
              text-anchor="end"
-             id="text68">9</text>
+             id="text71">9</text>
           <text
              x="0"
              y="52"
              class="lcd-label"
              text-anchor="end"
-             id="text70">12</text>
+             id="text73">12</text>
           <text
              x="0"
              y="65"
              class="lcd-label"
              text-anchor="end"
-             id="text72">18</text>
+             id="text75">18</text>
           <text
              x="0"
              y="78"
              class="lcd-label"
              text-anchor="end"
-             id="text74">24</text>
+             id="text77">24</text>
           <text
              x="0"
              y="91"
              class="lcd-label"
              text-anchor="end"
-             id="text76">36</text>
+             id="text79">36</text>
           <text
              x="0"
              y="104"
              class="lcd-label"
              text-anchor="end"
-             id="text78">48</text>
+             id="text81">48</text>
         </g>
         <g
            transform="translate(-10 0)"
-           id="g100">
+           id="g103">
           <polyline
              points="0   0 2   0"
              class="lcd-tick"
-             id="polyline82" />
+             id="polyline85" />
           <polyline
              points="0  13 2  13"
              class="lcd-tick"
-             id="polyline84" />
+             id="polyline87" />
           <polyline
              points="0  26 2  26"
              class="lcd-tick"
-             id="polyline86" />
+             id="polyline89" />
           <polyline
              points="0  39 2  39"
              class="lcd-tick"
-             id="polyline88" />
+             id="polyline91" />
           <polyline
              points="0  52 2  52"
              class="lcd-tick"
-             id="polyline90" />
+             id="polyline93" />
           <polyline
              points="0  65 2  65"
              class="lcd-tick"
-             id="polyline92" />
+             id="polyline95" />
           <polyline
              points="0  78 2  78"
              class="lcd-tick"
-             id="polyline94" />
+             id="polyline97" />
           <polyline
              points="0  91 2  91"
              class="lcd-tick"
-             id="polyline96" />
+             id="polyline99" />
           <polyline
              points="0 104 2 104"
              class="lcd-tick"
-             id="polyline98" />
+             id="polyline101" />
         </g>
+      </g>
+    </symbol>
+    <symbol
+       id="logo">
+      <g
+         transform="translate(6 6)"
+         id="g118">
+        <rect
+           x="-5"
+           y="-4"
+           height="12"
+           width="10"
+           rx="2"
+           fill="#6a6a6a"
+           stroke="none"
+           id="rect108" />
+        <rect
+           x="-3"
+           y="-5"
+           height="4"
+           width="6"
+           rx="1"
+           fill="#6a6a6a"
+           stroke="none"
+           id="rect110" />
+        <path
+           d="M0,-3, 0,-5"
+           stroke="#6a6a6a"
+           stroke-width="2"
+           stroke-linecap="round"
+           id="path112" />
+        <circle
+           cx="-2.5"
+           cy="0"
+           r="1.2"
+           fill="#dfdfdf"
+           stroke="none"
+           id="circle114" />
+        <circle
+           cx="2.5"
+           cy="0"
+           r="1.2"
+           fill="#dfdfdf"
+           stroke="none"
+           id="circle116" />
       </g>
     </symbol>
     <linearGradient
        inkscape:collect="always"
        xlink:href="#smallKnobLight"
-       id="linearGradient213"
+       id="linearGradient253"
        x1="-8"
        y1="-8"
        x2="-8"
@@ -390,7 +435,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#smallKnobDark"
-       id="linearGradient215"
+       id="linearGradient255"
        x1="-7"
        y1="-7"
        x2="-7"
@@ -399,7 +444,7 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#smallKnobLight"
-       id="linearGradient235"
+       id="linearGradient275"
        x1="-8"
        y1="-8"
        x2="-8"
@@ -408,199 +453,231 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#smallKnobDark"
-       id="linearGradient237"
+       id="linearGradient277"
        x1="-7"
        y1="-7"
        x2="-7"
        y2="7"
        gradientUnits="userSpaceOnUse" />
   </defs>
-  <!-- ============== body ============== -->
+  <!-- ================ header end ================ -->
   <path
-     id="rect107"
+     id="rect123"
      style="fill:#dfdfdf"
      d="M 0,0 H 30 V 380 H 0 Z"
      class="background" />
   <g
      aria-label="ATV"
-     id="text109"
+     id="text125"
      style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
      class="title">
     <path
        d="m 5.8808596,26.091797 1.5797525,-4.769206 h 0.029948 l 1.5797525,4.769206 z M 10.388021,30 h 1.744466 L 8.1643882,19.083985 H 6.779297 L 2.8111982,30 h 1.7519531 l 0.8385416,-2.440755 h 4.1402994 z"
        style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path268" />
+       id="path321" />
     <path
        d="m 14.004231,30 h 1.66211 v -9.441081 h 2.987304 v -1.474934 h -7.636718 v 1.474934 h 2.987304 z"
        style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path270" />
+       id="path323" />
     <path
        d="m 22.28483,30 h 1.28776 l 3.608724,-10.916015 h -1.751953 l -2.485677,8.310546 h -0.02995 l -2.47819,-8.310546 h -1.751953 z"
        style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path272" />
+       id="path325" />
   </g>
   <g
-     aria-label="AR"
-     id="text111"
-     style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-     class="logo">
-    <path
-       d="m 4.5572918,372.60156 1.3736979,-4.14713 h 0.026042 l 1.3736979,4.14713 z M 8.4765625,376 H 9.9934896 L 6.5429688,366.50781 H 5.3385418 L 1.888021,376 h 1.5234375 l 0.7291666,-2.1224 h 3.6002604 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path263" />
-    <path
-       d="m 12.441406,367.79036 h 2.252604 q 0.690105,0 1.054688,0.29297 0.46224,0.33203 0.47526,1.07422 0,0.61849 -0.397135,1.04167 -0.403646,0.45573 -1.210937,0.46875 h -2.17448 z M 11.002604,376 h 1.438802 v -4.05599 h 1.835938 L 16.236979,376 h 1.71224 l -2.200521,-4.21224 q 1.809896,-0.69661 1.835937,-2.63021 -0.03906,-1.3151 -0.94401,-2.02474 -0.748698,-0.625 -1.933594,-0.625 h -3.704427 z"
-       style="font-size:13.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
-       id="path265" />
+     transform="translate(3,364)"
+     id="g129">
+    <g
+       id="use127">
+      <g
+         transform="translate(6,6)"
+         id="g293">
+        <path
+           id="rect283"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -3,-4 h 6 c 1.108,0 2,0.892 2,2 V 6 C 5,7.108 4.108,8 3,8 H -3 C -4.108,8 -5,7.108 -5,6 v -8 c 0,-1.108 0.892,-2 2,-2 z" />
+        <path
+           id="rect285"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -2,-5 h 4 c 0.554,0 1,0.446 1,1 v 2 c 0,0.554 -0.446,1 -1,1 h -4 c -0.554,0 -1,-0.446 -1,-1 v -2 c 0,-0.554 0.446,-1 1,-1 z" />
+        <path
+           d="M 0,-3 V -5"
+           stroke="#6a6a6a"
+           stroke-width="2"
+           stroke-linecap="round"
+           id="path287" />
+        <path
+           id="circle289"
+           style="fill:#dfdfdf;stroke:none"
+           d="M -1.3,0 A 1.2,1.2 0 0 1 -2.5,1.2 1.2,1.2 0 0 1 -3.7,0 1.2,1.2 0 0 1 -2.5,-1.2 1.2,1.2 0 0 1 -1.3,0 Z" />
+        <path
+           id="circle291"
+           style="fill:#dfdfdf;stroke:none"
+           d="M 3.7,0 A 1.2,1.2 0 0 1 2.5,1.2 1.2,1.2 0 0 1 1.3,0 1.2,1.2 0 0 1 2.5,-1.2 1.2,1.2 0 0 1 3.7,0 Z" />
+      </g>
+    </g>
+  </g>
+  <g
+     id="use133">
+    <g
+       transform="translate(6,6)"
+       id="g231" />
+  </g>
+  <g
+     id="use137"
+     transform="translate(18,368)">
+    <g
+       transform="translate(6,6)"
+       id="g235" />
   </g>
   <!-- ======== A ======== -->
   <path
-     id="rect113"
+     id="rect141"
      style="fill:#558955"
      d="m 5,143 h 20 c 1.662,0 3,1.338 3,3 v 24 c 0,1.662 -1.338,3 -3,3 H 5 c -1.662,0 -3,-1.338 -3,-3 v -24 c 0,-1.662 1.338,-3 3,-3 z"
      class="poly-output" />
   <path
-     id="polyline117"
+     id="polyline145"
      transform="translate(15,74)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 84"
      class="connect" />
   <g
      aria-label="A"
-     id="text121"
+     id="text149"
      style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="big-label">
     <path
        d="m 13.964844,53.451172 1.030273,-3.110352 h 0.01953 l 1.030274,3.110352 z M 16.904297,56 h 1.137695 l -2.58789,-7.119141 H 14.550781 L 11.962891,56 h 1.142578 l 0.546875,-1.591797 h 2.700195 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path259" />
+       id="path313" />
   </g>
   <g
-     id="use123"
+     id="use151"
      transform="translate(3,62)">
     <g
        transform="translate(12,12)"
-       id="g199" />
+       id="g239" />
   </g>
   <g
-     id="use127"
+     id="use155"
      transform="translate(6,107)">
     <g
        transform="translate(9,9)"
-       id="g209">
+       id="g249">
       <path
-         id="circle203"
+         id="circle243"
          style="fill:none;stroke:#222222"
          d="M 8.5,0 A 8.5,8.5 0 0 1 0,8.5 8.5,8.5 0 0 1 -8.5,0 8.5,8.5 0 0 1 0,-8.5 8.5,8.5 0 0 1 8.5,0 Z" />
       <path
-         id="circle205"
-         style="fill:url(#linearGradient213)"
+         id="circle245"
+         style="fill:url(#linearGradient253)"
          d="M 8,0 A 8,8 0 0 1 0,8 8,8 0 0 1 -8,0 8,8 0 0 1 0,-8 8,8 0 0 1 8,0 Z" />
       <path
-         id="circle207"
-         style="fill:url(#linearGradient215)"
+         id="circle247"
+         style="fill:url(#linearGradient255)"
          d="M 7,0 A 7,7 0 0 1 0,7 7,7 0 0 1 -7,0 7,7 0 0 1 0,-7 7,7 0 0 1 7,0 Z" />
     </g>
   </g>
   <g
      transform="translate(15,131)"
-     id="g135">
+     id="g163">
     <path
-       id="polyline129"
+       id="polyline157"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="m -7,0 h 4"
        class="icon" />
     <path
-       id="polyline131"
+       id="polyline159"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 7,0 H 3"
        class="icon" />
     <path
-       id="polyline133"
+       id="polyline161"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 5,-2 V 2"
        class="icon" />
   </g>
   <g
-     id="use139"
+     id="use167"
      transform="translate(3,146)">
     <g
        transform="translate(12,12)"
-       id="g217" />
+       id="g257" />
   </g>
   <!-- ======== B ======== -->
   <path
-     id="rect143"
+     id="rect171"
      style="fill:#558955"
      d="m 5,293 h 20 c 1.662,0 3,1.338 3,3 v 24 c 0,1.662 -1.338,3 -3,3 H 5 c -1.662,0 -3,-1.338 -3,-3 v -24 c 0,-1.662 1.338,-3 3,-3 z"
      class="poly-output" />
   <path
-     id="polyline147"
+     id="polyline175"
      transform="translate(15,224)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 84"
      class="connect" />
   <g
      aria-label="B"
-     id="text151"
+     id="text179"
      style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
      class="big-label">
     <path
        d="m 12.705078,206 h 2.998047 q 0.839844,0 1.401367,-0.56152 0.566406,-0.53711 0.576172,-1.45996 0,-0.55665 -0.27832,-1.03028 -0.297852,-0.45898 -0.878907,-0.61035 v -0.0195 q 0.307618,-0.14649 0.517579,-0.32715 0.209961,-0.1709 0.322265,-0.36133 0.219727,-0.40039 0.209961,-0.83984 0,-0.85938 -0.532226,-1.38184 -0.527344,-0.51758 -1.577149,-0.52734 h -2.758789 z m 2.739258,-3.15918 q 0.600586,0.01 0.878906,0.31738 0.27832,0.3125 0.27832,0.75196 0,0.42968 -0.27832,0.74218 -0.27832,0.31739 -0.878906,0.32715 H 13.78418 v -2.13867 z m -0.102539,-2.99805 q 0.59082,0.01 0.86914,0.28809 0.283204,0.29785 0.283204,0.72754 0,0.42969 -0.283204,0.71289 -0.27832,0.30762 -0.86914,0.30762 H 13.78418 v -2.03614 z"
        style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-       id="path249" />
+       id="path303" />
   </g>
   <g
-     id="use153"
+     id="use181"
      transform="translate(3,212)">
     <g
        transform="translate(12,12)"
-       id="g221" />
+       id="g261" />
   </g>
   <g
-     id="use157"
+     id="use185"
      transform="translate(6,257)">
     <g
        transform="translate(9,9)"
-       id="g231">
+       id="g271">
       <path
-         id="circle225"
+         id="circle265"
          style="fill:none;stroke:#222222"
          d="M 8.5,0 A 8.5,8.5 0 0 1 0,8.5 8.5,8.5 0 0 1 -8.5,0 8.5,8.5 0 0 1 0,-8.5 8.5,8.5 0 0 1 8.5,0 Z" />
       <path
-         id="circle227"
-         style="fill:url(#linearGradient235)"
+         id="circle267"
+         style="fill:url(#linearGradient275)"
          d="M 8,0 A 8,8 0 0 1 0,8 8,8 0 0 1 -8,0 8,8 0 0 1 0,-8 8,8 0 0 1 8,0 Z" />
       <path
-         id="circle229"
-         style="fill:url(#linearGradient237)"
+         id="circle269"
+         style="fill:url(#linearGradient277)"
          d="M 7,0 A 7,7 0 0 1 0,7 7,7 0 0 1 -7,0 7,7 0 0 1 0,-7 7,7 0 0 1 7,0 Z" />
     </g>
   </g>
   <g
      transform="translate(15,281)"
-     id="g165">
+     id="g193">
     <path
-       id="polyline159"
+       id="polyline187"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="m -7,0 h 4"
        class="icon" />
     <path
-       id="polyline161"
+       id="polyline189"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 7,0 H 3"
        class="icon" />
     <path
-       id="polyline163"
+       id="polyline191"
        style="fill:none;stroke:#343434;stroke-width:1.2"
        d="M 5,-2 V 2"
        class="icon" />
   </g>
   <g
-     id="use169"
+     id="use197"
      transform="translate(3,296)">
     <g
        transform="translate(12,12)"
-       id="g239" />
+       id="g279" />
   </g>
 </svg>

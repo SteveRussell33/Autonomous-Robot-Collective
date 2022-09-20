@@ -1,0 +1,1203 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   width="90"
+   height="380"
+   viewBox="0 0 90 380"
+   id="svg279"
+   sodipodi:docname="BUS8.svg"
+   inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
+  <metadata
+     id="metadata283">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="689"
+     inkscape:window-height="480"
+     id="namedview281"
+     showgrid="false"
+     inkscape:zoom="2.1763158"
+     inkscape:cx="45"
+     inkscape:cy="190"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg279" />
+  <!-- ================ header begin ================ -->
+  <style
+     id="style2">
+
+    text.title {
+      fill: #a91913;
+      font-family: 'DIN Alternate';
+      font-size: 11.5pt;
+    }
+    text.big-label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 7.5pt;
+    }
+    text.label {
+      fill: #343434;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+    text.output-label {
+      fill: #dfdfdf;
+      font-family: 'DIN Alternate';
+      font-size: 6pt;
+    }
+
+    .background {
+      fill: #dfdfdf;
+    }
+    .poly-output {
+      fill: #558955;
+    }
+    .mono-output {
+      fill: #636c9d;
+    }
+
+    polyline.icon {
+      stroke: #343434;
+      stroke-width: 1.2;
+      fill: none;
+    }
+    polyline.connect {
+      stroke: #343434;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    rect.lcd-bg {
+      fill: #121212;
+    }
+    rect.lcd-bg-frame {
+      fill: #888888;
+    }
+    rect.lcd-bg-accent {
+      fill: #2a2a2a;
+    }
+    text.lcd-label {
+      fill: #777777;
+      font-family: 'Monaco';
+      font-size: 5pt;
+    }
+    polyline.lcd-tick {
+      stroke: #707070;
+      stroke-width: 1;
+      fill: none;
+    }
+
+    .blueprint {
+      stroke: #444444;
+      fill: none;
+    }
+
+  </style>
+  <defs
+     id="defs121">
+    <linearGradient
+       id="smallKnobLight"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#6f6f6f"
+         id="stop4" />
+      <stop
+         offset="100%"
+         stop-color="#383838"
+         id="stop6" />
+    </linearGradient>
+    <linearGradient
+       id="smallKnobDark"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#494949"
+         id="stop9" />
+      <stop
+         offset="100%"
+         stop-color="#282828"
+         id="stop11" />
+    </linearGradient>
+    <linearGradient
+       id="bigKnobLight"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#888"
+         id="stop14" />
+      <stop
+         offset="100%"
+         stop-color="#333"
+         id="stop16" />
+    </linearGradient>
+    <linearGradient
+       id="bigKnobDark"
+       x1="0%"
+       y1="0%"
+       x2="0%"
+       y2="100%">
+      <stop
+         offset="0%"
+         stop-color="#5c5c5c"
+         id="stop19" />
+      <stop
+         offset="100%"
+         stop-color="#282828"
+         id="stop21" />
+    </linearGradient>
+    <symbol
+       id="knob18">
+      <g
+         transform="translate(9 9)"
+         id="g30">
+        <circle
+           r="8.5"
+           stroke="#222"
+           fill="none"
+           id="circle24" />
+        <circle
+           r="8"
+           fill="url('#smallKnobLight')"
+           id="circle26" />
+        <circle
+           r="7"
+           fill="url('#smallKnobDark')"
+           id="circle28" />
+      </g>
+    </symbol>
+    <symbol
+       id="knob24">
+      <g
+         transform="translate(12 12)"
+         id="g39">
+        <circle
+           r="11.5"
+           stroke="#121212"
+           fill="none"
+           id="circle33" />
+        <circle
+           r="11"
+           fill="url('#smallKnobLight')"
+           id="circle35" />
+        <circle
+           r="10"
+           fill="url('#smallKnobDark')"
+           id="circle37" />
+      </g>
+    </symbol>
+    <symbol
+       id="knob45">
+      <g
+         transform="translate(22.5 22.5)"
+         id="g46">
+        <circle
+           r="22"
+           fill="url('#bigKnobDark')"
+           id="circle42" />
+        <circle
+           r="20"
+           fill="url('#bigKnobLight')"
+           id="circle44" />
+      </g>
+    </symbol>
+    <symbol
+       id="toggleButton">
+      <g
+         transform="translate(9 9)"
+         id="g49" />
+    </symbol>
+    <symbol
+       id="port">
+      <g
+         transform="translate(12 12)"
+         id="g52" />
+    </symbol>
+    <symbol
+       id="screw">
+      <g
+         transform="translate(6 6)"
+         id="g55" />
+    </symbol>
+    <symbol
+       id="hswitch14">
+      <g
+         transform="translate(12 7)"
+         id="g58" />
+    </symbol>
+    <symbol
+       id="meter-strip">
+      <g
+         transform="translate(20 4)"
+         id="g105">
+        <rect
+           x="-6"
+           y="-1"
+           width="5"
+           height="106"
+           class="lcd-bg-accent"
+           id="rect61" />
+        <rect
+           x="1"
+           y="-1"
+           width="5"
+           height="106"
+           class="lcd-bg-accent"
+           id="rect63" />
+        <g
+           transform="translate(-11 2.5)"
+           id="g83">
+          <text
+             x="0"
+             y="0"
+             class="lcd-label"
+             text-anchor="end"
+             id="text65">0</text>
+          <text
+             x="0"
+             y="13"
+             class="lcd-label"
+             text-anchor="end"
+             id="text67">3</text>
+          <text
+             x="0"
+             y="26"
+             class="lcd-label"
+             text-anchor="end"
+             id="text69">6</text>
+          <text
+             x="0"
+             y="39"
+             class="lcd-label"
+             text-anchor="end"
+             id="text71">9</text>
+          <text
+             x="0"
+             y="52"
+             class="lcd-label"
+             text-anchor="end"
+             id="text73">12</text>
+          <text
+             x="0"
+             y="65"
+             class="lcd-label"
+             text-anchor="end"
+             id="text75">18</text>
+          <text
+             x="0"
+             y="78"
+             class="lcd-label"
+             text-anchor="end"
+             id="text77">24</text>
+          <text
+             x="0"
+             y="91"
+             class="lcd-label"
+             text-anchor="end"
+             id="text79">36</text>
+          <text
+             x="0"
+             y="104"
+             class="lcd-label"
+             text-anchor="end"
+             id="text81">48</text>
+        </g>
+        <g
+           transform="translate(-10 0)"
+           id="g103">
+          <polyline
+             points="0   0 2   0"
+             class="lcd-tick"
+             id="polyline85" />
+          <polyline
+             points="0  13 2  13"
+             class="lcd-tick"
+             id="polyline87" />
+          <polyline
+             points="0  26 2  26"
+             class="lcd-tick"
+             id="polyline89" />
+          <polyline
+             points="0  39 2  39"
+             class="lcd-tick"
+             id="polyline91" />
+          <polyline
+             points="0  52 2  52"
+             class="lcd-tick"
+             id="polyline93" />
+          <polyline
+             points="0  65 2  65"
+             class="lcd-tick"
+             id="polyline95" />
+          <polyline
+             points="0  78 2  78"
+             class="lcd-tick"
+             id="polyline97" />
+          <polyline
+             points="0  91 2  91"
+             class="lcd-tick"
+             id="polyline99" />
+          <polyline
+             points="0 104 2 104"
+             class="lcd-tick"
+             id="polyline101" />
+        </g>
+      </g>
+    </symbol>
+    <symbol
+       id="logo">
+      <g
+         transform="translate(6 6)"
+         id="g118">
+        <rect
+           x="-5"
+           y="-4"
+           height="12"
+           width="10"
+           rx="2"
+           fill="#6a6a6a"
+           stroke="none"
+           id="rect108" />
+        <rect
+           x="-3"
+           y="-5"
+           height="4"
+           width="6"
+           rx="1"
+           fill="#6a6a6a"
+           stroke="none"
+           id="rect110" />
+        <path
+           d="M0,-3, 0,-5"
+           stroke="#6a6a6a"
+           stroke-width="2"
+           stroke-linecap="round"
+           id="path112" />
+        <circle
+           cx="-2.5"
+           cy="0"
+           r="1.2"
+           fill="#dfdfdf"
+           stroke="none"
+           id="circle114" />
+        <circle
+           cx="2.5"
+           cy="0"
+           r="1.2"
+           fill="#dfdfdf"
+           stroke="none"
+           id="circle116" />
+      </g>
+    </symbol>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient353"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient355"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient367"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient369"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient381"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient383"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient395"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient397"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient409"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient411"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient423"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient425"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient437"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient439"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobLight"
+       id="linearGradient451"
+       x1="-11"
+       y1="-11"
+       x2="-11"
+       y2="11"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#smallKnobDark"
+       id="linearGradient453"
+       x1="-10"
+       y1="-10"
+       x2="-10"
+       y2="10"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <!-- ================ header end ================ -->
+  <path
+     id="rect123"
+     style="fill:#dfdfdf"
+     d="M 0,0 H 90 V 380 H 0 Z"
+     class="background" />
+  <g
+     aria-label="BUS-8"
+     id="text125"
+     style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+     class="title">
+    <path
+       d="m 25.444011,16 h 4.597005 q 1.28776,0 2.148763,-0.861003 0.868489,-0.823567 0.883463,-2.238606 0,-0.853516 -0.426757,-1.579753 -0.456706,-0.703776 -1.347657,-0.935872 v -0.02995 q 0.47168,-0.22461 0.79362,-0.5016278 0.32194,-0.2620442 0.494141,-0.5540364 0.336914,-0.6139323 0.32194,-1.2877604 0,-1.3177083 -0.816081,-2.1188151 -0.808594,-0.7936197 -2.418294,-0.8085937 h -4.230143 z m 4.200195,-4.844075 q 0.920898,0.01497 1.347656,0.486653 0.426758,0.479167 0.426758,1.152995 0,0.658854 -0.426758,1.138021 -0.426758,0.486653 -1.347656,0.501627 H 27.098633 V 11.155925 Z M 29.486979,6.5589195 q 0.905925,0.014974 1.332683,0.4417317 0.434245,0.4567057 0.434245,1.1155599 0,0.6588542 -0.434245,1.0930989 -0.426758,0.4716797 -1.332683,0.4716797 H 27.098633 V 6.5589195 Z"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       id="path588" />
+    <path
+       d="m 34.585612,12.301432 q 0.01497,1.722006 1.138021,2.732748 1.100586,1.04069 2.740235,1.055664 1.669596,-0.01497 2.762695,-1.055664 1.085612,-1.010742 1.11556,-2.732748 V 5.0839846 H 40.6875 v 7.0377604 q -0.01497,1.11556 -0.628906,1.699544 -0.628906,0.613932 -1.594726,0.613932 -0.965821,0 -1.579753,-0.613932 -0.628906,-0.583984 -0.64388,-1.699544 V 5.0839846 h -1.654623 z"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       id="path590" />
+    <path
+       d="m 44.595702,13.349609 -1.085612,1.242839 q 1.744466,1.497396 4.170248,1.497396 3.750976,-0.04492 3.833333,-3.174479 0,-1.160482 -0.726237,-2.036459 Q 50.05371,9.9879559 48.518879,9.7783204 47.740233,9.6809897 47.291015,9.6061199 46.482421,9.4563803 46.115559,9.0670574 45.748697,8.6852215 45.748697,8.2135418 q 0.01497,-0.7861328 0.546549,-1.1829427 0.509115,-0.3818359 1.272787,-0.3818359 1.474935,0.029948 2.702799,0.8385417 v 0 l 0.920899,-1.3626302 q -1.504883,-1.085612 -3.541341,-1.1305338 -1.692058,0.014974 -2.612956,0.8834635 -0.950846,0.8759765 -0.950846,2.3059895 0,1.1904297 0.756185,2.0214841 0.733724,0.808594 2.141276,1.04069 0.786132,0.112305 1.444987,0.202149 1.437499,0.24707 1.422526,1.467448 -0.02995,1.489908 -2.15625,1.519856 -1.796875,-0.01497 -3.09961,-1.085612 z"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       id="path592" />
+    <path
+       d="m 52.92871,12.533529 h 4.611979 V 10.96875 H 52.92871 Z"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       id="path594" />
+    <path
+       d="m 60.460612,8.1162111 q 0.01497,-0.7786458 0.486654,-1.1754557 0.464193,-0.3818359 1.070638,-0.3818359 0.628906,0 1.093099,0.3818359 0.456706,0.3968099 0.47168,1.1754557 -0.01497,0.7561849 -0.47168,1.1529948 -0.464193,0.4117838 -1.093099,0.4117838 -0.606445,0 -1.070638,-0.4117838 -0.47168,-0.3968099 -0.486654,-1.1529948 z m -1.766927,4.6943359 q 0.01497,1.474935 0.995769,2.358398 0.935872,0.905925 2.32845,0.920899 1.400065,-0.01497 2.365885,-0.920899 0.950847,-0.883463 0.965821,-2.358398 -0.01497,-1.579753 -1.287761,-2.455729 0.486654,-0.426758 0.79362,-0.9807944 0.291992,-0.5166016 0.291992,-1.2278646 -0.01497,-1.3626302 -0.89095,-2.2535807 -0.86849,-0.8834635 -2.238607,-0.8984374 -1.347656,0.014974 -2.201172,0.8984374 -0.905924,0.8909505 -0.920898,2.2535807 0,0.711263 0.32194,1.2278646 0.277018,0.5540364 0.763672,0.9807944 -1.272787,0.875976 -1.287761,2.455729 z m 1.564779,-0.01497 q 0.01497,-0.763672 0.539062,-1.242839 0.501628,-0.471679 1.220378,-0.486653 0.741211,0.01497 1.242839,0.486653 0.509114,0.479167 0.524088,1.242839 -0.01497,0.748698 -0.524088,1.227865 -0.501628,0.501627 -1.242839,0.501627 -0.71875,0 -1.220378,-0.501627 -0.524088,-0.479167 -0.539062,-1.227865 z"
+       style="font-size:15.3333px;font-family:'DIN Alternate';text-anchor:middle;fill:#a91913"
+       id="path596" />
+  </g>
+  <g
+     transform="translate(27,364)"
+     id="g129">
+    <g
+       id="use127">
+      <g
+         transform="translate(6,6)"
+         id="g517">
+        <path
+           id="rect507"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -3,-4 h 6 c 1.108,0 2,0.892 2,2 V 6 C 5,7.108 4.108,8 3,8 H -3 C -4.108,8 -5,7.108 -5,6 v -8 c 0,-1.108 0.892,-2 2,-2 z" />
+        <path
+           id="rect509"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -2,-5 h 4 c 0.554,0 1,0.446 1,1 v 2 c 0,0.554 -0.446,1 -1,1 h -4 c -0.554,0 -1,-0.446 -1,-1 v -2 c 0,-0.554 0.446,-1 1,-1 z" />
+        <path
+           d="M 0,-3 V -5"
+           stroke="#6a6a6a"
+           stroke-width="2"
+           stroke-linecap="round"
+           id="path511" />
+        <path
+           id="circle513"
+           style="fill:#dfdfdf;stroke:none"
+           d="M -1.3,0 A 1.2,1.2 0 0 1 -2.5,1.2 1.2,1.2 0 0 1 -3.7,0 1.2,1.2 0 0 1 -2.5,-1.2 1.2,1.2 0 0 1 -1.3,0 Z" />
+        <path
+           id="circle515"
+           style="fill:#dfdfdf;stroke:none"
+           d="M 3.7,0 A 1.2,1.2 0 0 1 2.5,1.2 1.2,1.2 0 0 1 1.3,0 1.2,1.2 0 0 1 2.5,-1.2 1.2,1.2 0 0 1 3.7,0 Z" />
+      </g>
+    </g>
+  </g>
+  <g
+     transform="translate(39,364)"
+     id="g133">
+    <g
+       id="use131">
+      <g
+         transform="translate(6,6)"
+         id="g503">
+        <path
+           id="rect493"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -3,-4 h 6 c 1.108,0 2,0.892 2,2 V 6 C 5,7.108 4.108,8 3,8 H -3 C -4.108,8 -5,7.108 -5,6 v -8 c 0,-1.108 0.892,-2 2,-2 z" />
+        <path
+           id="rect495"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -2,-5 h 4 c 0.554,0 1,0.446 1,1 v 2 c 0,0.554 -0.446,1 -1,1 h -4 c -0.554,0 -1,-0.446 -1,-1 v -2 c 0,-0.554 0.446,-1 1,-1 z" />
+        <path
+           d="M 0,-3 V -5"
+           stroke="#6a6a6a"
+           stroke-width="2"
+           stroke-linecap="round"
+           id="path497" />
+        <path
+           id="circle499"
+           style="fill:#dfdfdf;stroke:none"
+           d="M -1.3,0 A 1.2,1.2 0 0 1 -2.5,1.2 1.2,1.2 0 0 1 -3.7,0 1.2,1.2 0 0 1 -2.5,-1.2 1.2,1.2 0 0 1 -1.3,0 Z" />
+        <path
+           id="circle501"
+           style="fill:#dfdfdf;stroke:none"
+           d="M 3.7,0 A 1.2,1.2 0 0 1 2.5,1.2 1.2,1.2 0 0 1 1.3,0 1.2,1.2 0 0 1 2.5,-1.2 1.2,1.2 0 0 1 3.7,0 Z" />
+      </g>
+    </g>
+  </g>
+  <g
+     transform="translate(51,364)"
+     id="g137">
+    <g
+       id="use135">
+      <g
+         transform="translate(6,6)"
+         id="g489">
+        <path
+           id="rect479"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -3,-4 h 6 c 1.108,0 2,0.892 2,2 V 6 C 5,7.108 4.108,8 3,8 H -3 C -4.108,8 -5,7.108 -5,6 v -8 c 0,-1.108 0.892,-2 2,-2 z" />
+        <path
+           id="rect481"
+           style="fill:#6a6a6a;stroke:none"
+           d="m -2,-5 h 4 c 0.554,0 1,0.446 1,1 v 2 c 0,0.554 -0.446,1 -1,1 h -4 c -0.554,0 -1,-0.446 -1,-1 v -2 c 0,-0.554 0.446,-1 1,-1 z" />
+        <path
+           d="M 0,-3 V -5"
+           stroke="#6a6a6a"
+           stroke-width="2"
+           stroke-linecap="round"
+           id="path483" />
+        <path
+           id="circle485"
+           style="fill:#dfdfdf;stroke:none"
+           d="M -1.3,0 A 1.2,1.2 0 0 1 -2.5,1.2 1.2,1.2 0 0 1 -3.7,0 1.2,1.2 0 0 1 -2.5,-1.2 1.2,1.2 0 0 1 -1.3,0 Z" />
+        <path
+           id="circle487"
+           style="fill:#dfdfdf;stroke:none"
+           d="M 3.7,0 A 1.2,1.2 0 0 1 2.5,1.2 1.2,1.2 0 0 1 1.3,0 1.2,1.2 0 0 1 2.5,-1.2 1.2,1.2 0 0 1 3.7,0 Z" />
+      </g>
+    </g>
+  </g>
+  <g
+     id="use141">
+    <g
+       transform="translate(6,6)"
+       id="g455" />
+  </g>
+  <g
+     id="use145"
+     transform="translate(78,368)">
+    <g
+       transform="translate(6,6)"
+       id="g459" />
+  </g>
+  <g
+     aria-label="LVL"
+     id="text149"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 24.367187,30 h 3.636719 v -0.816406 h -2.773437 v -4.878907 h -0.863282 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path569" />
+    <path
+       d="m 29.214844,30 h 0.671875 l 1.882812,-5.695313 h -0.914062 l -1.296875,4.335938 h -0.01563 L 28.25,24.304687 h -0.914063 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path571" />
+    <path
+       d="m 32.382812,30 h 3.636719 v -0.816406 h -2.773437 v -4.878907 h -0.863282 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path573" />
+  </g>
+  <!-- 1 -->
+  <g
+     aria-label="1"
+     id="text153"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="M 8.6289063,44.167969 V 49 H 9.4453125 V 43.304687 H 8.6289063 l -0.8085938,0.589844 v 0.867188 0 l 0.8085938,-0.59375 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path656" />
+  </g>
+  <path
+     id="polyline155"
+     transform="translate(30,46)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use157"
+     transform="translate(18,34)">
+    <g
+       transform="translate(12,12)"
+       id="g349">
+      <path
+         id="circle343"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle345"
+         style="fill:url(#linearGradient353)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle347"
+         style="fill:url(#linearGradient355)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,46)"
+     id="g161">
+    <g
+       id="use159"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g549" />
+    </g>
+  </g>
+  <!-- 2 -->
+  <g
+     aria-label="2"
+     id="text165"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="M 7.3359375,81 H 10.582031 V 80.183594 H 8.40625 l 1.832031,-2.296875 q 0.34375,-0.4375 0.34375,-1 -0.0078,-0.703125 -0.472656,-1.160157 -0.4570312,-0.460937 -1.1914062,-0.46875 -0.65625,0.0078 -1.1054688,0.460938 -0.4453125,0.464844 -0.4765625,1.175781 h 0.8125 q 0.042969,-0.390625 0.2734375,-0.605469 0.2226563,-0.214843 0.5585938,-0.214843 0.3789062,0.0078 0.5859375,0.246093 0.1992187,0.238282 0.1992187,0.558594 0,0.121094 -0.03125,0.257813 -0.046875,0.144531 -0.1757812,0.3125 l -2.2226563,2.78125 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path649" />
+  </g>
+  <path
+     id="polyline167"
+     transform="translate(30,78)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use169"
+     transform="translate(18,66)">
+    <g
+       transform="translate(12,12)"
+       id="g363">
+      <path
+         id="circle357"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle359"
+         style="fill:url(#linearGradient367)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle361"
+         style="fill:url(#linearGradient369)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,78)"
+     id="g173">
+    <g
+       id="use171"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g545" />
+    </g>
+  </g>
+  <!-- 3 -->
+  <g
+     aria-label="3"
+     id="text177"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 8.484375,110.42578 h 0.34375 q 0.3789063,0 0.625,0.23047 0.25,0.23828 0.2578125,0.67188 -0.00781,0.42578 -0.2578125,0.65625 -0.2460937,0.24609 -0.6054687,0.24609 -0.3359375,0 -0.5390625,-0.18359 Q 8.109375,111.87109 8,111.58594 H 7.1835937 q 0.1328125,0.71094 0.5820313,1.08594 0.4492188,0.375 1.03125,0.375 0.7539063,-0.008 1.234375,-0.48047 0.488281,-0.46094 0.496094,-1.26172 0,-0.35938 -0.152344,-0.6875 -0.160156,-0.32813 -0.5195312,-0.5625 0.3515622,-0.23828 0.4882812,-0.54297 0.117188,-0.30469 0.117188,-0.63281 -0.0078,-0.64844 -0.445313,-1.125 -0.4570312,-0.48828 -1.234375,-0.4961 -0.6132812,0.008 -1.0546875,0.4375 -0.4492188,0.4336 -0.5117188,1.06641 H 8.03125 q 0.078125,-0.35156 0.3046875,-0.51953 0.2148438,-0.16797 0.4765625,-0.16797 0.3632813,0.008 0.59375,0.23047 0.2304688,0.23047 0.2382813,0.58984 0,0.35547 -0.2304688,0.57813 -0.2304687,0.23047 -0.6484375,0.23047 h -0.28125 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path642" />
+  </g>
+  <path
+     id="polyline179"
+     transform="translate(30,110)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use181"
+     transform="translate(18,98)">
+    <g
+       transform="translate(12,12)"
+       id="g377">
+      <path
+         id="circle371"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle373"
+         style="fill:url(#linearGradient381)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle375"
+         style="fill:url(#linearGradient383)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,110)"
+     id="g185">
+    <g
+       id="use183"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g541" />
+    </g>
+  </g>
+  <!-- 4 -->
+  <g
+     aria-label="4"
+     id="text189"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="M 7.1757812,144.15234 H 9.5507813 V 145 h 0.8164067 v -0.84766 h 0.453125 v -0.76953 h -0.453125 v -1.63672 H 9.5507813 v 1.63672 H 8.0625 l 1.9257813,-4.07812 H 9.078125 l -1.9023438,4.07812 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path635" />
+  </g>
+  <path
+     id="polyline191"
+     transform="translate(30,142)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use193"
+     transform="translate(18,130)">
+    <g
+       transform="translate(12,12)"
+       id="g391">
+      <path
+         id="circle385"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle387"
+         style="fill:url(#linearGradient395)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle389"
+         style="fill:url(#linearGradient397)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,142)"
+     id="g197">
+    <g
+       id="use195"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g537" />
+    </g>
+  </g>
+  <!-- 5 -->
+  <g
+     aria-label="5"
+     id="text201"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 7.4765625,174.38281 h 0.7695313 q 0.1445312,-0.26172 0.328125,-0.36719 0.1835937,-0.10156 0.40625,-0.10156 0.25,0 0.4179687,0.0703 0.1679688,0.0859 0.2539063,0.23047 0.1601562,0.30469 0.1523437,0.79297 0,0.19922 -0.00781,0.41016 -0.015625,0.21484 -0.085937,0.39844 -0.066406,0.18359 -0.234375,0.29687 -0.1757812,0.11719 -0.46875,0.11719 -0.6835937,-0.008 -0.8164062,-0.66406 H 7.375 q 0.1171875,0.78515 0.6054687,1.13671 0.4804688,0.34375 1.0585938,0.34375 0.4296875,-0.008 0.7421875,-0.19921 0.320313,-0.1836 0.488281,-0.40625 0.191407,-0.22657 0.273438,-0.51954 0.07813,-0.29687 0.07813,-0.85156 0,-0.35937 -0.02344,-0.60547 -0.02344,-0.24218 -0.07813,-0.41015 -0.105468,-0.3086 -0.34375,-0.54297 -0.160156,-0.17578 -0.4179685,-0.29688 -0.2734375,-0.10937 -0.6015625,-0.11718 -0.5117187,0 -0.9101562,0.3125 v 0 -1.28907 h 2.2656252 v -0.8164 H 7.4765625 Z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path628" />
+  </g>
+  <path
+     id="polyline203"
+     transform="translate(30,174)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use205"
+     transform="translate(18,162)">
+    <g
+       transform="translate(12,12)"
+       id="g405">
+      <path
+         id="circle399"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle401"
+         style="fill:url(#linearGradient409)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle403"
+         style="fill:url(#linearGradient411)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,174)"
+     id="g209">
+    <g
+       id="use207"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g533" />
+    </g>
+  </g>
+  <!-- 6 -->
+  <g
+     aria-label="6"
+     id="text213"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 10.046875,203.24609 q 0.0039,0 -0.03906,0.0859 -0.039063,0.082 -0.1093755,0.22656 -0.070312,0.14453 -0.1640625,0.33203 -0.09375,0.1875 -0.1992187,0.39454 -0.1015625,0.20703 -0.2109375,0.41796 -0.1054688,0.21094 -0.2070313,0.40235 -0.097656,0.1914 -0.1796875,0.34765 -0.082031,0.15625 -0.1367187,0.25 0.1132812,-0.0664 0.2539062,-0.0781 0.1445313,-0.0156 0.3320313,-0.008 0.2695312,0.008 0.46875,0.0937 0.2031252,0.0859 0.3476562,0.21484 0.144531,0.12891 0.238281,0.28906 0.09766,0.15625 0.152344,0.3086 0.05469,0.14843 0.07422,0.28125 0.02344,0.1289 0.02344,0.20312 0,0.0234 0,0.0859 0,0.0625 0,0.14062 0,0.0742 -0.0039,0.15235 0,0.0781 -0.0039,0.13281 -0.0039,0.0273 -0.02734,0.14453 -0.01953,0.11328 -0.07813,0.27344 -0.05469,0.15625 -0.160156,0.33984 -0.105469,0.17969 -0.277344,0.34375 -0.171875,0.16016 -0.4179687,0.27735 -0.2460938,0.11718 -0.5859375,0.14453 -0.3554688,0.0312 -0.6289063,-0.0469 -0.2734375,-0.0781 -0.4726562,-0.22265 -0.1992188,-0.14453 -0.3320313,-0.33203 -0.1328125,-0.19141 -0.2109375,-0.39063 -0.074219,-0.19922 -0.1015625,-0.38281 -0.023437,-0.1836 -0.00781,-0.3125 0.023437,-0.19141 0.050781,-0.33985 0.027344,-0.15234 0.0625,-0.28906 0.039063,-0.13672 0.085937,-0.26953 0.046875,-0.13281 0.109375,-0.28906 0.015625,-0.0391 0.085937,-0.1836 0.070312,-0.14843 0.171875,-0.36328 0.1054688,-0.21484 0.2343751,-0.47265 Q 8.3125,204.89062 8.4414063,204.625 8.7460938,204.00781 9.125,203.24609 Z m -0.1640625,4.16797 q 0,-0.14844 -0.011719,-0.32812 -0.011719,-0.17969 -0.089844,-0.33985 -0.074219,-0.16406 -0.2460937,-0.28125 -0.171875,-0.11718 -0.4882813,-0.14062 -0.1484375,-0.0117 -0.2695312,0.0312 -0.1210938,0.043 -0.2148438,0.11719 -0.09375,0.0742 -0.1640625,0.17187 -0.066406,0.0937 -0.1132812,0.1875 -0.042969,0.0937 -0.0625,0.17578 -0.019531,0.0781 -0.019531,0.1211 0,0.0977 0.00391,0.21875 0.00391,0.11718 0.023437,0.23828 0.023437,0.11718 0.074219,0.23047 0.050781,0.10937 0.1445313,0.19531 0.09375,0.0859 0.2382812,0.14062 0.1484375,0.0547 0.3671875,0.0547 0.1757813,0.004 0.3046875,-0.043 0.1328125,-0.0508 0.2226563,-0.125 0.09375,-0.0781 0.1523437,-0.17187 0.058594,-0.0937 0.089844,-0.1836 0.035156,-0.0898 0.046875,-0.16015 0.011719,-0.0742 0.011719,-0.10938 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path621" />
+  </g>
+  <path
+     id="polyline215"
+     transform="translate(30,206)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use217"
+     transform="translate(18,194)">
+    <g
+       transform="translate(12,12)"
+       id="g419">
+      <path
+         id="circle413"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle415"
+         style="fill:url(#linearGradient423)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle417"
+         style="fill:url(#linearGradient425)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,206)"
+     id="g221">
+    <g
+       id="use219"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g529" />
+    </g>
+  </g>
+  <!-- 7 -->
+  <g
+     aria-label="7"
+     id="text225"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 7.484375,236.94531 h 0.8164063 v -0.82422 H 9.8125 L 7.8867187,241 H 8.796875 l 1.929688,-4.87891 v -0.8164 H 7.484375 Z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path614" />
+  </g>
+  <path
+     id="polyline227"
+     transform="translate(30,238)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use229"
+     transform="translate(18,226)">
+    <g
+       transform="translate(12,12)"
+       id="g433">
+      <path
+         id="circle427"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle429"
+         style="fill:url(#linearGradient437)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle431"
+         style="fill:url(#linearGradient439)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,238)"
+     id="g233">
+    <g
+       id="use231"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g525" />
+    </g>
+  </g>
+  <!-- 8 -->
+  <g
+     aria-label="8"
+     id="text237"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 8.1835938,268.88672 q 0.00781,-0.40625 0.2539062,-0.61328 0.2421875,-0.19922 0.5585938,-0.19922 0.328125,0 0.5703125,0.19922 0.2382812,0.20703 0.2460937,0.61328 -0.00781,0.39453 -0.2460937,0.60156 -0.2421875,0.21484 -0.5703125,0.21484 -0.3164063,0 -0.5585938,-0.21484 -0.2460937,-0.20703 -0.2539062,-0.60156 z m -0.9218751,2.44922 q 0.00781,0.76953 0.5195313,1.23047 0.4882813,0.47265 1.2148438,0.48046 0.7304687,-0.008 1.2343752,-0.48046 0.496094,-0.46094 0.503906,-1.23047 -0.0078,-0.82422 -0.671875,-1.28125 0.253906,-0.22266 0.414063,-0.51172 0.152343,-0.26953 0.152343,-0.64063 -0.0078,-0.71093 -0.464843,-1.17578 -0.4531255,-0.46094 -1.1679692,-0.46875 -0.703125,0.008 -1.1484376,0.46875 -0.4726562,0.46485 -0.4804687,1.17578 0,0.3711 0.1679687,0.64063 0.1445313,0.28906 0.3984375,0.51172 -0.6640625,0.45703 -0.671875,1.28125 z m 0.8164063,-0.008 q 0.00781,-0.39843 0.28125,-0.64843 0.2617188,-0.2461 0.6367188,-0.25391 0.3867187,0.008 0.6484375,0.25391 0.265625,0.25 0.2734375,0.64843 -0.00781,0.39063 -0.2734375,0.64063 -0.2617188,0.26172 -0.6484375,0.26172 -0.375,0 -0.6367188,-0.26172 -0.2734375,-0.25 -0.28125,-0.64063 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path607" />
+  </g>
+  <path
+     id="polyline239"
+     transform="translate(30,270)"
+     style="fill:none;stroke:#343434;stroke-width:1"
+     d="M 0,0 H 38"
+     class="connect" />
+  <g
+     id="use241"
+     transform="translate(18,258)">
+    <g
+       transform="translate(12,12)"
+       id="g447">
+      <path
+         id="circle441"
+         style="fill:none;stroke:#121212"
+         d="M 11.5,0 A 11.5,11.5 0 0 1 0,11.5 11.5,11.5 0 0 1 -11.5,0 11.5,11.5 0 0 1 0,-11.5 11.5,11.5 0 0 1 11.5,0 Z" />
+      <path
+         id="circle443"
+         style="fill:url(#linearGradient451)"
+         d="M 11,0 A 11,11 0 0 1 0,11 11,11 0 0 1 -11,0 11,11 0 0 1 0,-11 11,11 0 0 1 11,0 Z" />
+      <path
+         id="circle445"
+         style="fill:url(#linearGradient453)"
+         d="M 10,0 A 10,10 0 0 1 0,10 10,10 0 0 1 -10,0 10,10 0 0 1 0,-10 10,10 0 0 1 10,0 Z" />
+    </g>
+  </g>
+  <g
+     transform="translate(68,270)"
+     id="g245">
+    <g
+       id="use243"
+       transform="translate(-12,-12)">
+      <g
+         transform="translate(12,12)"
+         id="g521" />
+    </g>
+  </g>
+  <!-- ins and outs -->
+  <g
+     aria-label="L"
+     id="text249"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 7.375,319 h 3.636719 v -0.81641 H 8.2382813 v -4.8789 H 7.375 Z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path600" />
+  </g>
+  <g
+     aria-label="R"
+     id="text253"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 8.0273438,346.07422 h 1.3515625 q 0.4140625,0 0.6328127,0.17578 0.277344,0.19922 0.285156,0.64453 0,0.37109 -0.238281,0.625 -0.2421877,0.27344 -0.7265627,0.28125 H 8.0273438 Z M 7.1640625,351 h 0.8632813 v -2.43359 H 9.1289063 L 10.304688,351 h 1.027343 l -1.320312,-2.52734 q 1.085937,-0.41797 1.101562,-1.57813 -0.02344,-0.78906 -0.566406,-1.21484 -0.449219,-0.375 -1.1601562,-0.375 H 7.1640625 Z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path566" />
+  </g>
+  <g
+     aria-label="IN"
+     id="text257"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="label">
+    <path
+       d="m 26.835937,299 h 0.863282 v -5.69531 h -0.863282 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path561" />
+    <path
+       d="m 28.898437,299 h 0.863282 v -4.04688 h 0.01563 L 32.351562,299 h 0.816407 v -5.69531 h -0.863282 v 4.04687 h -0.01563 l -2.578125,-4.04687 h -0.8125 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       id="path563" />
+  </g>
+  <g
+     id="use259"
+     transform="translate(18,304)">
+    <g
+       transform="translate(12,12)"
+       id="g463" />
+  </g>
+  <g
+     id="use263"
+     transform="translate(18,334)">
+    <g
+       transform="translate(12,12)"
+       id="g467" />
+  </g>
+  <path
+     id="rect267"
+     style="fill:#558955"
+     d="m 56,289 h 24 c 1.662,0 3,1.338 3,3 v 68 c 0,1.662 -1.338,3 -3,3 H 56 c -1.662,0 -3,-1.338 -3,-3 v -68 c 0,-1.662 1.338,-3 3,-3 z"
+     class="poly-output" />
+  <g
+     aria-label="OUT"
+     id="text269"
+     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+     class="output-label">
+    <path
+       d="m 61.445312,296.15234 q 0,0.97657 0.05859,1.32032 0.03125,0.18359 0.07813,0.30468 0.05078,0.11719 0.113281,0.2461 0.207032,0.39453 0.664063,0.69531 0.449219,0.3125 1.121094,0.32812 0.679687,-0.0156 1.132812,-0.32812 0.449219,-0.30078 0.648438,-0.69531 0.144531,-0.20703 0.199218,-0.55078 0.05078,-0.34375 0.05078,-1.32032 0,-0.99218 -0.05078,-1.32812 -0.05469,-0.33594 -0.199218,-0.54297 -0.199219,-0.39453 -0.648438,-0.70313 -0.453125,-0.3125 -1.132812,-0.32031 -0.671875,0.008 -1.121094,0.32031 -0.457031,0.3086 -0.664063,0.70313 -0.128906,0.20703 -0.191406,0.54297 -0.05859,0.33594 -0.05859,1.32812 z m 0.867188,0 q 0,-0.83984 0.0625,-1.14453 0.05469,-0.28906 0.222656,-0.47265 0.136719,-0.17579 0.359375,-0.29297 0.21875,-0.11328 0.523438,-0.1211 0.308593,0.008 0.535156,0.1211 0.214844,0.11718 0.34375,0.29297 0.167969,0.18359 0.230469,0.47265 0.05859,0.30469 0.05859,1.14453 0,0.83985 -0.05859,1.13672 -0.0625,0.29688 -0.230469,0.48047 -0.128906,0.17578 -0.34375,0.28516 -0.226563,0.1289 -0.535156,0.1289 -0.304688,0 -0.523438,-0.1289 -0.222656,-0.10938 -0.359375,-0.28516 -0.167969,-0.18359 -0.222656,-0.48047 -0.0625,-0.29687 -0.0625,-1.13672 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+       id="path553" />
+    <path
+       d="m 66.410156,297.07031 q 0.0078,0.89844 0.59375,1.42578 0.574219,0.54297 1.429688,0.55078 0.871093,-0.008 1.441406,-0.55078 0.566406,-0.52734 0.582031,-1.42578 v -3.76562 H 69.59375 v 3.67187 q -0.0078,0.58203 -0.328125,0.88672 -0.328125,0.32031 -0.832031,0.32031 -0.503907,0 -0.824219,-0.32031 -0.328125,-0.30469 -0.335938,-0.88672 v -3.67187 h -0.863281 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+       id="path555" />
+    <path
+       d="m 72.527344,299 h 0.867187 v -4.92578 h 1.558594 v -0.76953 H 70.96875 v 0.76953 h 1.558594 z"
+       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#dfdfdf"
+       id="path557" />
+  </g>
+  <g
+     id="use271"
+     transform="translate(56,304)">
+    <g
+       transform="translate(12,12)"
+       id="g471" />
+  </g>
+  <g
+     id="use275"
+     transform="translate(56,336)">
+    <g
+       transform="translate(12,12)"
+       id="g475" />
+  </g>
+</svg>

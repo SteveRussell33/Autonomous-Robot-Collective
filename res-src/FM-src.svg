@@ -16,11 +16,6 @@
       font-family: 'DIN Alternate';
       font-size: 11.5pt;
     }
-    text.logo {
-      fill: #a91913;
-      font-family: 'DIN Alternate';
-      font-size: 10pt;
-    }
     text.big-label {
       fill: #343434;
       font-family: 'DIN Alternate';
@@ -192,10 +187,13 @@
     </symbol>
 
     <symbol id="logo" >
-<g transform="translate(10 6)">
-  <circle cx="-3.5" cy="0.5" r="5.5" stroke="#a91913" stroke-width="2" fill="none"/>
-  <circle cx="2.5" cy="0.5" r="5.5" stroke="#a91913" stroke-width="2" fill="none"/>
-</g>
+        <g transform="translate(6 6)">
+          <rect x="-5" y="-4" height="12" width="10" rx="2" fill="#6a6a6a" stroke="none"/>
+          <rect x="-3" y="-5" height="4" width="6" rx="1" fill="#6a6a6a" stroke="none"/>
+          <path d="M0,-3, 0,-5" stroke="#6a6a6a" stroke-width="2" stroke-linecap="round" />
+          <circle cx="-2.5" cy="0" r="1.2" fill="#dfdfdf" stroke="none"/>
+          <circle cx="2.5"  cy="0" r="1.2" fill="#dfdfdf" stroke="none"/>
+        </g>
     </symbol>
 
   </defs>
@@ -205,7 +203,9 @@
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">FM</text>
   <g transform="translate(37.5 370)">
-    <g transform="translate(-10 -6)"><use xlink:href="#logo"/></g>
+    <g transform="translate(-18 -6)"><use xlink:href="#logo"/></g>
+    <g transform="translate(-6 -6)"><use xlink:href="#logo"/></g>
+    <g transform="translate(6 -6)"><use xlink:href="#logo"/></g>
   </g>
 
   <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
