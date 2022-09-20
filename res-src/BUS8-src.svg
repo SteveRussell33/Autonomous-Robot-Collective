@@ -196,59 +196,128 @@
   <!-- ================ header end ================ -->
 
   <rect class="background" width="100%" height="100%"/>
-  <text class="title" x="50%" y="16"  text-anchor="middle">SEND-8</text>
+  <text class="title" x="50%" y="16"  text-anchor="middle">BUS-8</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">AR</text>
 
   <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
   <g transform="translate(78 368)"><use xlink:href="#screw"/></g>
 
-  <g transform="translate(0 41)">
-    <g transform="translate(36 0)">
-      <text x="0" y="0" class="big-label" text-anchor="middle">L</text>
-    </g>
-    <g transform="translate(68 0)">
-      <text x="0" y="0" class="big-label" text-anchor="middle">R</text>
-    </g>
+  <g transform="translate(30 46)">
+    <text x="0" y="-16" class="label" text-anchor="middle">LVL</text>
   </g>
 
   <!-- 1 -->
-  <g transform="translate(0 64)">
-    <g transform="translate(10 0)">
-      <text x="0" y="3" class="big-label" text-anchor="middle">1</text>
-    </g>
-    <g transform="translate(36 0)">
-      <rect x="-16" y="-16" width="64" height="312" rx="3" class="poly-output"/>
+  <g transform="translate(30 46)">
+    <text x="-21" y="3" class="label" text-anchor="middle">1</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(68 0)">
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+  </g>
+
+  <!-- 2 -->
+  <g transform="translate(30 78)">
+    <text x="-21" y="3" class="label" text-anchor="middle">2</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+  </g>
+
+  <!-- 3 -->
+  <g transform="translate(30 110)">
+    <text x="-21" y="3" class="label" text-anchor="middle">3</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+  </g>
+
+  <!-- 4 -->
+  <g transform="translate(30 142)">
+    <text x="-21" y="3" class="label" text-anchor="middle">4</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+  </g>
+
+  <!-- 5 -->
+  <g transform="translate(30 174)">
+    <text x="-21" y="3" class="label" text-anchor="middle">5</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+  </g>
+
+  <!-- 6 -->
+  <g transform="translate(30 206)">
+    <text x="-21" y="3" class="label" text-anchor="middle">6</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+  </g>
+
+  <!-- 7 -->
+  <g transform="translate(30 238)">
+    <text x="-21" y="3" class="label" text-anchor="middle">7</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
+      <use xlink:href="#port" transform="translate(-12 -12)"/>
+    </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 8 -->
-  <g transform="translate(0 309)">
-    <g transform="translate(10 0)">
-      <text x="0" y="3" class="big-label" text-anchor="middle">8</text>
-    </g>
-    <g transform="translate(36 0)">
+  <g transform="translate(30 270)">
+    <text x="-21" y="3" class="label" text-anchor="middle">8</text>
+    <polyline points="0 0 38 0" class="connect"/>
+    <use xlink:href="#knob24" transform="translate(-12 -12)"/>
+    <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(68 0)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
+    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
-  <!-- MIX -->
-  <g transform="translate(0 344)">
-    <g transform="translate(10 0)">
-      <text x="0" y="3" class="big-label" text-anchor="middle">MIX</text>
-    </g>
-    <g transform="translate(36 0)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
-    <g transform="translate(68 0)">
-      <use xlink:href="#port" transform="translate(-12 -12)"/>
-    </g>
+  <!-- ins and outs -->
+
+  <g transform="translate(9 316)">
+    <text x="0" y="3" class="label" text-anchor="middle">L</text>
+  </g>
+  <g transform="translate(9 348)">
+    <text x="0" y="3" class="label" text-anchor="middle">R</text>
+  </g>
+
+  <g transform="translate(30 316)">
+    <text x="0" y="-17" class="label" text-anchor="middle">IN</text>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(30 346)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+
+  <g transform="translate(68 316)">
+    <rect x="-15" y="-27" width="30" height="74" rx="3" class="poly-output"/>
+    <text x="0" y="-17" class="output-label" text-anchor="middle">OUT</text>
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
+  </g>
+  <g transform="translate(68 348)">
+    <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
 </svg>

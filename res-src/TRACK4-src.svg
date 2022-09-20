@@ -408,7 +408,7 @@
   <g transform="translate(234 0)">
 
     <polyline points="-27.5 15 -27.5 363" class="connect"/>
-    <text x="0" y="23" class="big-label" text-anchor="middle">SEND</text>
+    <text x="0" y="24" class="big-label" text-anchor="middle">SEND</text>
 
     <!-- 1 -->  
     <g transform="translate(0 51)">
