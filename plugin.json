@@ -1,9 +1,9 @@
 {
-  "slug": "RedMercury",
-  "name": "Red Mercury",
+  "slug": "AutonomousRobotCollective",
+  "name": "Autonomous Robot Collective",
   "version": "2.0.0",
   "license": "GPL-3.0-or-later",
-  "brand": "Red Mercury",
+  "brand": "Autonomous Robot Collective",
   "author": "Mike Jarmy",
   "authorEmail": "mjarmy@gmail.com",
   "authorUrl": "https://github.com/mjarmy",

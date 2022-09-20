@@ -1,5 +1,5 @@
+#include "arc_dsp.hpp"
 #include "plugin.hpp"
-#include "rm_dsp.hpp"
 #include "track.hpp"
 #include "widgets.hpp"
 
@@ -12,7 +12,7 @@
 struct CLIP : Module {
 
     const int kOversampleFactor = 4;
-    rm::dsp::Oversample oversample{kOversampleFactor};
+    arc::dsp::Oversample oversample{kOversampleFactor};
 
     VuStats vuStats;
     Amplitude levelAmp;
@@ -68,11 +68,11 @@ struct CLIP : Module {
 
     float oversampleSoftClip(float in) {
 
-        float buffer[rm::dsp::kMaxOversample] = {};
+        float buffer[arc::dsp::kMaxOversample] = {};
         oversample.upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = rm::dsp::softClip(buffer[i]);
+            buffer[i] = arc::dsp::softClip(buffer[i]);
         }
 
         return oversample.downsample(buffer);
@@ -132,21 +132,21 @@ struct CLIPWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 #ifdef CLIP_DEBUG
-        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 12), module, CLIP::kDebug1));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 36), module, CLIP::kDebug2));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 60), module, CLIP::kDebug3));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
+        addOutput(createOutputCentered<MPolyPort>(Vec(12, 12), module, CLIP::kDebug1));
+        addOutput(createOutputCentered<MPolyPort>(Vec(12, 36), module, CLIP::kDebug2));
+        addOutput(createOutputCentered<MPolyPort>(Vec(12, 60), module, CLIP::kDebug3));
+        addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
 #endif
 
         addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
         addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
 
-        addParam(createParamCentered<RmKnob24>(Vec(22.5, 188), module, CLIP::kLevelParam));
-        addParam(createParamCentered<RmKnob18>(Vec(22.5, 224), module, CLIP::kLevelCvAmountParam));
-        addInput(createInputCentered<RmPolyPort>(Vec(22.5, 260), module, CLIP::kLevelCvInput));
+        addParam(createParamCentered<MKnob24>(Vec(22.5, 188), module, CLIP::kLevelParam));
+        addParam(createParamCentered<MKnob18>(Vec(22.5, 224), module, CLIP::kLevelCvAmountParam));
+        addInput(createInputCentered<MPolyPort>(Vec(22.5, 260), module, CLIP::kLevelCvInput));
 
-        addInput(createInputCentered<RmPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
-        addOutput(createOutputCentered<RmPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
+        addInput(createInputCentered<MPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
+        addOutput(createOutputCentered<MPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
     }
 
     void addMeter(float x, float y, VuStats* vuStats) {

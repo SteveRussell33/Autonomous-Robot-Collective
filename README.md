@@ -1,3 +1,5 @@
-# Red Mercury
+# Autonomous Robot Collective
 
-Modules for [VCV Rack](https://github.com/VCVRack/Rack), an open-source Eurorack-style virtual modular synthesizer.
+Autonomous Robot Collective is a set of Modules for [VCV
+Rack](https://github.com/VCVRack/Rack), an open-source Eurorack-style virtual
+modular synthesizer.
