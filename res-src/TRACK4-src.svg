@@ -199,10 +199,10 @@
   <text class="title" x="50%" y="16"  text-anchor="middle">TRACK-4</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">AR</text>
 
-  <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
-  <g transform="translate(0 368)"><use xlink:href="#screw"/></g>
-  <g transform="translate(243 0)"><use xlink:href="#screw"/></g>
-  <g transform="translate(243 368)"><use xlink:href="#screw"/></g>
+  <g transform="translate(12 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(12 368)"><use xlink:href="#screw"/></g>
+  <g transform="translate(231 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(231 368)"><use xlink:href="#screw"/></g>
 
   <!-- ============================================================ -->
   <!-- Main Board -->  

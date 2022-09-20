@@ -8,6 +8,7 @@
 >
 
   <!-- ================ header begin ================ -->
+
   <style>
 
     text.title {
@@ -78,13 +79,11 @@
     }
 
     .blueprint {
-      stroke: black;
+      stroke: #444444;
       fill: none;
     }
 
   </style>
-
-  <!-- ============== defs ============== -->
 
   <defs>
 
@@ -147,6 +146,14 @@
       </g>
     </symbol>
 
+    <symbol id="screw" >
+      <g transform="translate(6 6)">
+        <polyline points="-3,0 3,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-3 0,3" stroke-width="1" class="blueprint"/>
+      </g>
+      <circle cx="6" cy="6" r="5.5" stroke-width="1" class="blueprint"/>
+    </symbol>
+
     <symbol id="hswitch14" >
       <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
       <g transform="translate(12 7)">
@@ -185,11 +192,15 @@
     </symbol>
 
   </defs>
+
   <!-- ================ header end ================ -->
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="16"  text-anchor="middle">SEND-8</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">AR</text>
+
+  <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(78 368)"><use xlink:href="#screw"/></g>
 
   <g transform="translate(0 41)">
     <g transform="translate(36 0)">

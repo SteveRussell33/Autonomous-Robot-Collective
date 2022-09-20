@@ -199,6 +199,11 @@
   <text class="title" x="50%" y="30"  text-anchor="middle">CLIP</text>
   <text class="logo" x="50%" y="376" text-anchor="middle">AR</text>
 
+  <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(33 368)"><use xlink:href="#screw"/></g>
+
+  <!-- ======== lcd ======== -->  
+
   <rect x="0" y="35" width="45" height="122" rx="2" class="lcd-bg-frame"/>
   <rect x="0" y="36" width="45" height="120" rx="2" class="lcd-bg"/>
 

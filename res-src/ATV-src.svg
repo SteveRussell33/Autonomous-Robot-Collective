@@ -199,6 +199,9 @@
   <text class="title" x="50%" y="30"  text-anchor="middle">ATV</text>
   <text class="logo" x="10" y="376" text-anchor="middle">AR</text>
 
+  <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
+  <g transform="translate(18 368)"><use xlink:href="#screw"/></g>
+
   <!-- ======== A ======== -->  
 
   <g transform="translate(15 158)">
