@@ -22,11 +22,9 @@ const float sampleRate = 48000.0f;
 // Amplitude
 //--------------------------------------------------------------
 
-static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
-// I think I adapted this from somewhere in the bogaudio codebase...
 struct Amplitude {
 
   private:
@@ -39,8 +37,7 @@ struct Amplitude {
 
     Amplitude() {
         curDb = kMinDb;
-        // TODO use a lookup table
-        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        curAmp = 0.0f;
         slew.setLast(curDb);
     }
 
@@ -56,6 +53,10 @@ struct Amplitude {
 
             // TODO use a lookup table
             curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+
+            if (curAmp < 0.0011220 /* -59 dB */) {
+                curAmp = 0.0f;
+            }
         }
         return curAmp;
     }
@@ -67,9 +68,15 @@ void testAmplitude() {
 
     faderAmp.onSampleRateChange(sampleRate);
 
-    for (int i = 0; i < 100 * 10; i++) {
-        float ampF = faderAmp.next(0.0f);
+    for (int i = 0; i < 500; i++) {
+        float ampF = faderAmp.next(kMaxDb);
+        std::cout << i << ": ";
+        dump(ampF);
+        std::cout << std::endl;
+    }
 
+    for (int i = 0; i < 500; i++) {
+        float ampF = faderAmp.next(kMinDb);
         std::cout << i << ": ";
         dump(ampF);
         std::cout << std::endl;
@@ -87,7 +94,7 @@ void testSlew() {
 
     slew.setLast(0);
     for (int i = 0; i < 100 * 10; i++) {
-        dump(slew.next(kMuteDb));
+        dump(slew.next(kMinDb));
         std::cout << std::endl;
     }
 }
@@ -186,16 +193,11 @@ void testPan() {
 
 void testDb() {
 
-    int db = -120.0f;
-    float amp = bogaudio::dsp::decibelsToAmplitude(db);
-
-    dump(db);
-    std::cout << ",";
-    dump(amp);
-    std::cout << std::endl;
-
-    for (db = -60; db <= 12; db++) {
-        amp = bogaudio::dsp::decibelsToAmplitude(db);
+    for (int db = -60; db <= -50; db++) {
+        float amp = bogaudio::dsp::decibelsToAmplitude(db);
+        if (amp < 0.0011220 /* -59 dB */) {
+            amp = 0.0f;
+        }
 
         dump(db);
         std::cout << ",";
@@ -205,5 +207,5 @@ void testDb() {
 }
 
 int main() {
-    testPan();
+    testAmplitude();
 }

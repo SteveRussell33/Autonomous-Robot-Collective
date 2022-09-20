@@ -53,7 +53,6 @@ struct LevelParamQuantity : ParamQuantity {
 // Amplitude
 //--------------------------------------------------------------
 
-static const float kMuteDb = -120.0f;
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
@@ -69,8 +68,7 @@ struct Amplitude {
 
     Amplitude() {
         curDb = kMinDb;
-        // TODO use a lookup table
-        curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+        curAmp = 0.0f;
         slew.setLast(curDb);
     }
 
@@ -86,6 +84,11 @@ struct Amplitude {
 
             // TODO use a lookup table
             curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
+
+            // Make sure that kMinDb means 0.0 amplitude
+            if (curAmp < 0.0011220 /* -59 dB */) {
+                curAmp = 0.0f;
+            }
         }
         return curAmp;
     }
@@ -274,7 +277,7 @@ struct StereoTrack {
         // level amplitude
         float ampL = 0.0f;
         if (muted) {
-            ampL = levelAmp.next(kMuteDb);
+            ampL = levelAmp.next(kMinDb);
         } else {
             ampL = levelAmp.next(levelToDb(levelParam->getValue()));
         }
