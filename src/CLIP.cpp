@@ -16,7 +16,7 @@ struct CLIP : Module {
 
     VuStats vuStats;
     Amplitude levelAmp;
-    //Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
+    // Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
 
 #ifdef CLIP_DEBUG
     float debug1;
@@ -97,9 +97,9 @@ struct CLIP : Module {
 
             // channel amplitude
             float ampCh = ampL;
-            //if (inputs[kLevelInput].isConnected()) {
-            //    ampCh = ampCh * nextLevelAmplitude(ch);
-            //}
+            // if (inputs[kLevelInput].isConnected()) {
+            //     ampCh = ampCh * nextLevelAmplitude(ch);
+            // }
 
             // process sample
             float limit = 5.0f * ampCh;
