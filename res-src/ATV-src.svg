@@ -7,7 +7,7 @@
   viewBox="0 0 30 380"
 >
 
-  <!-- ============== styles ============== -->
+  <!-- ================ header begin ================ -->
 
   <style>
 
@@ -79,13 +79,11 @@
     }
 
     .blueprint {
-      stroke: black;
+      stroke: #444444;
       fill: none;
     }
 
   </style>
-
-  <!-- ============== defs ============== -->
 
   <defs>
 
@@ -148,6 +146,14 @@
       </g>
     </symbol>
 
+    <symbol id="screw" >
+      <g transform="translate(6 6)">
+        <polyline points="-3,0 3,0" stroke-width="1" class="blueprint"/>
+        <polyline points="0,-3 0,3" stroke-width="1" class="blueprint"/>
+      </g>
+      <circle cx="6" cy="6" r="5.5" stroke-width="1" class="blueprint"/>
+    </symbol>
+
     <symbol id="hswitch14" >
       <rect x="1" y="1" rx="2" width="20" height="12" stroke-width="2" class="blueprint" />
       <g transform="translate(12 7)">
@@ -187,7 +193,7 @@
 
   </defs>
 
-  <!-- ============== body ============== -->
+  <!-- ================ header end ================ -->
 
   <rect class="background" width="100%" height="100%"/>
   <text class="title" x="50%" y="30"  text-anchor="middle">ATV</text>
