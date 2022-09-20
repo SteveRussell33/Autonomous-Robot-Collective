@@ -214,7 +214,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 2 -->
@@ -225,7 +225,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 3 -->
@@ -236,7 +236,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 4 -->
@@ -247,7 +247,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 5 -->
@@ -258,7 +258,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 6 -->
@@ -269,7 +269,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 7 -->
@@ -280,7 +280,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- 8 -->
@@ -291,7 +291,7 @@
     <g transform="translate(38 0)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <circle cx="12" cy="12" r="2" stroke-width="1" class="blueprint"/>
+    <circle cx="-21" cy="10" r="2" stroke-width="1" class="blueprint"/>
   </g>
 
   <!-- ins and outs -->
