@@ -1,26 +1,13 @@
 #!/usr/bin/env python3
 
+import glob
 import os
 import subprocess
 
-files = [
-    'ATV',
-    'ClIP',
-    'FM',
-    'GAIN',
-    'hswitch-0',
-    'hswitch-1',
-    'knob18',
-    'knob24',
-    'knob45',
-    'poly-port',
-    'toggle-0',
-    'toggle-1'
-]
+files = glob.glob('res-src/*-src.svg')
 
-for f in files:
-    fin = 'res-src/' + f + '-src.svg'
-    fout = 'res/' + f + '.svg'
+for fin in files:
+    fout = fin.replace('-src', '')
 
     if not os.path.exists(fout) or os.path.getmtime(fin) > os.path.getmtime(fout):
         print('Processing ' + fout + '...')

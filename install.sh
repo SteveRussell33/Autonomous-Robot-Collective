@@ -1,2 +1,2 @@
-./svg-render.py
+./scripts/render.py
 make install
