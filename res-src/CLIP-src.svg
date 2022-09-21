@@ -221,24 +221,13 @@
 
   <!-- ======== level ======== -->  
 
-  <g transform="translate(22.5 182)">
-    <polyline points="0 0 0 72" class="connect"/>
+  <g transform="translate(22.5 186)">
+    <polyline points="0 0 0 36" class="connect"/>
     <text x="0" y="-17" class="label" text-anchor="middle">LEVEL</text>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
 
-  <g transform="translate(22.5 218)">
-      <g transform="translate(0 15)">
-        <polyline points="-7 0 -3 0" class="icon"/>
-        <polyline points="7 0 3 0" class="icon"/>
-        <polyline points="5 -2 5 2" class="icon"/>
-    </g>
-  </g>
-  <g transform="translate(22.5 218)">
-      <use xlink:href="#knob18" transform="translate(-9 -9)"/>
-  </g>
-
-  <g transform="translate(22.5 254)">
+  <g transform="translate(22.5 222)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 

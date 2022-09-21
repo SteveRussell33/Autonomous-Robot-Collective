@@ -26,7 +26,7 @@ struct CLIP : Module {
     float debug4;
 #endif
 
-    enum ParamId { kLevelParam, kLevelCvAmountParam, kParamsLen };
+    enum ParamId { kLevelParam, kParamsLen };
 
     enum InputId { kInput, kLevelCvInput, kInputsLen };
 
@@ -46,7 +46,6 @@ struct CLIP : Module {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         configParam<LevelParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
-        configParam(kLevelCvAmountParam, -1.0f, 1.0f, 0.0f, "Level CV amount");
         configInput(kLevelCvInput, "Level CV");
 
         configInput(kInput, "Audio");
@@ -100,8 +99,6 @@ struct CLIP : Module {
         // level amplitude
         float db = params[kLevelParam].getValue();
         float ampL = levelAmp.next(levelToDb(db));
-
-        //float pLevelCvAmount = params[kLevelCvAmountParam].getValue();
 
         // process each channel
         float sum = 0;
@@ -170,9 +167,8 @@ struct CLIPWidget : ModuleWidget {
         addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
         addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
 
-        addParam(createParamCentered<MKnob24>(Vec(22.5, 182), module, CLIP::kLevelParam));
-        addParam(createParamCentered<MKnob18>(Vec(22.5, 218), module, CLIP::kLevelCvAmountParam));
-        addInput(createInputCentered<MPolyPort>(Vec(22.5, 254), module, CLIP::kLevelCvInput));
+        addParam(createParamCentered<MKnob24>(Vec(22.5, 186), module, CLIP::kLevelParam));
+        addInput(createInputCentered<MPolyPort>(Vec(22.5, 222), module, CLIP::kLevelCvInput));
 
         addInput(createInputCentered<MPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
         addOutput(createOutputCentered<MPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
