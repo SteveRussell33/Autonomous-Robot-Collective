@@ -67,8 +67,8 @@ struct FM : Module {
     }
 
     float quantizeRatio(float ratio) {
-        if (ratio < 0.125f)
-            return 0.01f;
+        if (ratio < 0.1875f)
+            return 0.125f;
         else if (ratio < 0.375f)
             return 0.25f;
         else if (ratio < 0.75f)
