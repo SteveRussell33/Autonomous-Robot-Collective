@@ -8,7 +8,7 @@ namespace arc {
 namespace dsp {
 
 //--------------------------------------------------------------
-// soft clipo
+// soft clip
 //--------------------------------------------------------------
 
 // https://www.kvraudio.com/forum/viewtopic.php?p=2779936&sid=e1e44d1b6ec3fd37f76e4a8ca1ed422a#p2779936
@@ -72,7 +72,6 @@ struct Oversample {
 
     int oversample;
 
-    // Nuke everything above the Nyquist frequency.
     TwelvePoleLpf upLpf;
     TwelvePoleLpf downLpf;
 
@@ -81,7 +80,7 @@ struct Oversample {
     Oversample(int oversample_) : oversample(oversample_) {
     }
 
-    void sampleRateChange(float sampleRate) {
+    void onSampleRateChange(float sampleRate) {
 
         float nyquist = sampleRate / 2.0f;
         float oversampleRate = sampleRate * oversample;
@@ -92,12 +91,14 @@ struct Oversample {
 
     void upsample(float in, float* buffer) {
 
-        buffer[0] = upLpf.process(in);
+        // Apply gain to compensate for filtering
+        buffer[0] = upLpf.process(in * oversample);
 
         // Interpolate with zeros
         for (int i = 1; i < oversample; ++i) {
             buffer[i] = upLpf.process(0.0f);
         }
+
     }
 
     float downsample(float* buffer) {

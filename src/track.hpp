@@ -84,11 +84,6 @@ struct Amplitude {
 
             // TODO use a lookup table
             curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
-
-            // Make sure that kMinDb means 0.0 amplitude
-            if (curAmp < 0.0011220 /* -59 dB */) {
-                curAmp = 0.0f;
-            }
         }
         return curAmp;
     }

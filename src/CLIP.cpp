@@ -16,7 +16,7 @@ struct CLIP : Module {
 
     VuStats vuStats;
     Amplitude levelAmp;
-    // Amplitude levelAmps[engine::PORT_MAX_CHANNELS];
+    // Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
 #ifdef CLIP_DEBUG
     float debug1;
@@ -62,6 +62,7 @@ struct CLIP : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
+        oversample.onSampleRateChange(e.sampleRate);
         vuStats.onSampleRateChange(e.sampleRate);
         levelAmp.onSampleRateChange(e.sampleRate);
     }
@@ -86,8 +87,8 @@ struct CLIP : Module {
         }
 
         // level amplitude
-        float db = levelToDb(params[kLevelParam].getValue());
-        float ampL = levelAmp.next(db);
+        float db = params[kLevelParam].getValue();
+        float ampL = levelAmp.next(levelToDb(db));
 
         // process each channel
         float sum = 0;
@@ -96,13 +97,14 @@ struct CLIP : Module {
             float in = inputs[kInput].getPolyVoltage(ch);
 
             // channel amplitude
-            float ampCh = ampL;
+            //float ampCh = ampL;
             // if (inputs[kLevelInput].isConnected()) {
-            //     ampCh = ampCh * nextLevelAmplitude(ch);
+            //     ampCh = ampCh * nextLevelCvAmp(ch);
             // }
+            //float ampCh = 0.5f;
 
             // process sample
-            float limit = 5.0f * ampCh;
+            float limit = 5.0f * ampL;
             float out = oversampleSoftClip(in / limit) * limit;
 
             sum += out;
