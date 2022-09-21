@@ -98,7 +98,6 @@ struct Oversample {
         for (int i = 1; i < oversample; ++i) {
             buffer[i] = upLpf.process(0.0f);
         }
-
     }
 
     float downsample(float* buffer) {

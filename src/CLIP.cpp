@@ -82,11 +82,20 @@ struct CLIP : Module {
         return oversample.downsample(buffer);
     }
 
-    float nextLevelCvAmp(int ch) {
-        float v = inputs[kLevelCvInput].getPolyVoltage(ch);
-        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        db = clamp(db, kMinDb, kMaxDb);
-        return levelCvAmps[ch].next(db);
+    float nextCvAmplitude(int ch) {
+
+        // channel amplitude
+        float cvAmp = 1.0f;
+        if (inputs[kLevelCvInput].isConnected()) {
+            float cv = inputs[kLevelCvInput].getPolyVoltage(ch);
+            float cvDb = rescale(cv, 0.0f, 10.0f, kMinDb, kMaxDb);
+            cvAmp = levelCvAmps[ch].next(cvDb);
+        }
+//ifdef CLIP_DEBUG
+//            outputs[kDebug1 + ch].setVoltage(cvAmp);
+//            outputs[kDebug3 + ch].setVoltage(cvAmp * amp);
+//endif
+        return cvAmp;
     }
 
     void process(const ProcessArgs& args) override {
@@ -98,37 +107,19 @@ struct CLIP : Module {
 
         // level amplitude
         float db = params[kLevelParam].getValue();
-        float ampL = levelAmp.next(levelToDb(db));
+        float amp = levelAmp.next(levelToDb(db));
 
         // process each channel
         float sum = 0;
         int channels = std::max(inputs[kInput].getChannels(), 1);
+
         for (int ch = 0; ch < channels; ch++) {
             float in = inputs[kInput].getPolyVoltage(ch);
 
-            // channel amplitude
-            float ampCh = ampL;
-#ifdef CLIP_DEBUG
-            outputs[kDebug1].setVoltage(ampCh);
-#endif
-
-            if (inputs[kLevelCvInput].isConnected()) {
-                float nla = nextLevelCvAmp(ch);
-                //ampCh = ampCh * nla;
-#ifdef CLIP_DEBUG
-                if (ch == 0) {
-                    outputs[kDebug2].setVoltage(nla);
-                    outputs[kDebug3].setVoltage(ampCh + nla);
-                }
-#endif
-            }
-
-#ifdef CLIP_DEBUG
-            outputs[kDebug4].setVoltage(ampCh);
-#endif
+            float cvAmp = nextCvAmplitude(ch);
 
             // process sample
-            float limit = 5.0f * ampCh;
+            float limit = 5.0f * cvAmp * amp;
             float out = oversampleSoftClip(in / limit) * limit;
 
             sum += out;
