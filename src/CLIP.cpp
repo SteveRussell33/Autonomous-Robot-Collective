@@ -3,7 +3,7 @@
 #include "track.hpp"
 #include "widgets.hpp"
 
-// define CLIP_DEBUG
+#define CLIP_DEBUG
 
 //--------------------------------------------------------------
 // CLIP
@@ -14,9 +14,10 @@ struct CLIP : Module {
     const int kOversampleFactor = 4;
     arc::dsp::Oversample oversample{kOversampleFactor};
 
-    VuStats vuStats;
     Amplitude levelAmp;
-    // Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+
+    VuStats vuStats;
 
 #ifdef CLIP_DEBUG
     float debug1;
@@ -63,8 +64,11 @@ struct CLIP : Module {
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
         oversample.onSampleRateChange(e.sampleRate);
-        vuStats.onSampleRateChange(e.sampleRate);
         levelAmp.onSampleRateChange(e.sampleRate);
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelCvAmps[ch].onSampleRateChange(e.sampleRate);
+        }
+        vuStats.onSampleRateChange(e.sampleRate);
     }
 
     float oversampleSoftClip(float in) {
@@ -79,6 +83,13 @@ struct CLIP : Module {
         return oversample.downsample(buffer);
     }
 
+    float nextLevelCvAmp(int ch) {
+        float v = inputs[kLevelCvInput].getPolyVoltage(ch);
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        db = clamp(db, kMinDb, kMaxDb);
+        return levelCvAmps[ch].next(db);
+    }
+
     void process(const ProcessArgs& args) override {
 
         if (!outputs[kOutput].isConnected()) {
@@ -90,6 +101,8 @@ struct CLIP : Module {
         float db = params[kLevelParam].getValue();
         float ampL = levelAmp.next(levelToDb(db));
 
+        //float pLevelCvAmount = params[kLevelCvAmountParam].getValue();
+
         // process each channel
         float sum = 0;
         int channels = std::max(inputs[kInput].getChannels(), 1);
@@ -97,14 +110,28 @@ struct CLIP : Module {
             float in = inputs[kInput].getPolyVoltage(ch);
 
             // channel amplitude
-            //float ampCh = ampL;
-            // if (inputs[kLevelInput].isConnected()) {
-            //     ampCh = ampCh * nextLevelCvAmp(ch);
-            // }
-            //float ampCh = 0.5f;
+            float ampCh = ampL;
+#ifdef CLIP_DEBUG
+            outputs[kDebug1].setVoltage(ampCh);
+#endif
+
+            if (inputs[kLevelCvInput].isConnected()) {
+                float nla = nextLevelCvAmp(ch);
+                //ampCh = ampCh * nla;
+#ifdef CLIP_DEBUG
+                if (ch == 0) {
+                    outputs[kDebug2].setVoltage(nla);
+                    outputs[kDebug3].setVoltage(ampCh + nla);
+                }
+#endif
+            }
+
+#ifdef CLIP_DEBUG
+            outputs[kDebug4].setVoltage(ampCh);
+#endif
 
             // process sample
-            float limit = 5.0f * ampL;
+            float limit = 5.0f * ampCh;
             float out = oversampleSoftClip(in / limit) * limit;
 
             sum += out;
