@@ -214,12 +214,30 @@
 
   <!-- ======== knobs and switches ======== -->  
 
-  <g transform="translate(37.5 84)">
-    <text x="0" y="-28" class="big-label" text-anchor="middle">RATIO</text>
+  <g transform="translate(37.5 90)">
+    <text x="0" y="-36" class="big-label" text-anchor="middle">RATIO</text>
     <use xlink:href="#knob45" transform="translate(-22.5 -22.5)"/>
+
+    <g transform="translate(-15.25 26.41)">
+        <text x="0" y="0" class="label" text-anchor="middle">0</text>
+    </g>
+    <polyline points="-21.22 12.25 -24.68 14.25" class="icon"/>
+    <polyline points="-24.5 0.0 -28.5 0.0" class="icon"/>
+    <polyline points="-21.22 -12.25 -24.68 -14.25" class="icon"/>
+    <polyline points="-12.25 -21.22 -14.25 -24.68" class="icon"/>
+    <g transform="translate(0.0 -24.5)">
+        <text x="0" y="0" class="label" text-anchor="middle">5</text>
+    </g>
+    <polyline points="12.25 -21.22 14.25 -24.68" class="icon"/>
+    <polyline points="21.22 -12.25 24.68 -14.25" class="icon"/>
+    <polyline points="24.5 -0.0 28.5 -0.0" class="icon"/>
+    <polyline points="21.22 12.25 24.68 14.25" class="icon"/>
+    <g transform="translate(15.25 26.41)">
+        <text x="0" y="0" class="label" text-anchor="middle">10</text>
+    </g>
   </g>
 
-  <g transform="translate(37.5 120)">
+  <g transform="translate(37.5 132)">
     <use xlink:href="#hswitch14" transform="translate(-12 -7)"/>
     <g transform="translate(19 0)">
       <polyline points="-4 4 4 -4" class="icon"/>
@@ -229,9 +247,28 @@
     </g>
   </g>
 
-  <g transform="translate(37.5 183)">
-    <text x="0" y="-28" class="big-label" text-anchor="middle">OFFSET</text>
+  <g transform="translate(37.5 197)">
+    <text x="0" y="-36" class="big-label" text-anchor="middle">OFFSET</text>
     <use xlink:href="#knob45" transform="translate(-22.5 -22.5)"/>
+
+    <g transform="translate(-13.25 22.95)">
+      <polyline points="-7 0 -3 0" class="icon"/>
+    </g>
+    <polyline points="-21.22 12.25 -24.68 14.25" class="icon"/>
+    <polyline points="-24.5 0.0 -28.5 0.0" class="icon"/>
+    <polyline points="-21.22 -12.25 -24.68 -14.25" class="icon"/>
+    <polyline points="-12.25 -21.22 -14.25 -24.68" class="icon"/>
+    <g transform="translate(0.0 -24.5)">
+        <text x="0" y="0" class="label" text-anchor="middle">0</text>
+    </g>
+    <polyline points="12.25 -21.22 14.25 -24.68" class="icon"/>
+    <polyline points="21.22 -12.25 24.68 -14.25" class="icon"/>
+    <polyline points="24.5 -0.0 28.5 -0.0" class="icon"/>
+    <polyline points="21.22 12.25 24.68 14.25" class="icon"/>
+    <g transform="translate(13.25 22.95)">
+        <polyline points="7 0 3 0" class="icon"/>
+        <polyline points="5 -2 5 2" class="icon"/>
+    </g>
   </g>
 
   <!-- ======== row 1 ======== -->  

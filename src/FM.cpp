@@ -141,9 +141,9 @@ struct FMWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
         // knobs and switches
-        addParam(createParamCentered<MKnob45>(Vec(37.5, 84), module, FM::kRatioParam));
-        addParam(createParamCentered<MHSwitch>(Vec(37.5, 120), module, FM::kRatioQuantParam));
-        addParam(createParamCentered<MKnob45>(Vec(37.5, 183), module, FM::kOffsetParam));
+        addParam(createParamCentered<MKnob45>(Vec(37.5, 90), module, FM::kRatioParam));
+        addParam(createParamCentered<MHSwitch>(Vec(37.5, 132), module, FM::kRatioQuantParam));
+        addParam(createParamCentered<MKnob45>(Vec(37.5, 197), module, FM::kOffsetParam));
 
         // row 1
         addParam(createParamCentered<MKnob18>(Vec(19.5, 250), module, FM::kRatioCvAmountParam));
