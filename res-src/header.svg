@@ -150,29 +150,30 @@
 
     <symbol id="meter-strip" >
       <g transform="translate(20 4)">
-        <rect x="-6" y="-1" width="5" height="106" class="lcd-bg-accent"/>
-        <rect x="1"  y="-1" width="5" height="106" class="lcd-bg-accent"/>
+        <rect x="-6" y="-1" width="5" height="98" class="lcd-bg-accent"/>
+        <rect x="1"  y="-1" width="5" height="98" class="lcd-bg-accent"/>
         <g transform="translate(-11 2.5)">
           <text x="0" y=  "0" class="lcd-label" text-anchor="end">0</text>
-          <text x="0" y= "13" class="lcd-label" text-anchor="end">3</text>
-          <text x="0" y= "26" class="lcd-label" text-anchor="end">6</text>
-          <text x="0" y= "39" class="lcd-label" text-anchor="end">9</text>
-          <text x="0" y= "52" class="lcd-label" text-anchor="end">12</text>
-          <text x="0" y= "65" class="lcd-label" text-anchor="end">18</text>
-          <text x="0" y= "78" class="lcd-label" text-anchor="end">24</text>
-          <text x="0" y= "91" class="lcd-label" text-anchor="end">36</text>
-          <text x="0" y="104" class="lcd-label" text-anchor="end">48</text>
+          <text x="0" y= "12" class="lcd-label" text-anchor="end">3</text>
+          <text x="0" y= "24" class="lcd-label" text-anchor="end">6</text>
+          <text x="0" y= "36" class="lcd-label" text-anchor="end">9</text>
+          <text x="0" y= "48" class="lcd-label" text-anchor="end">12</text>
+          <text x="0" y= "60" class="lcd-label" text-anchor="end">18</text>
+          <text x="0" y= "72" class="lcd-label" text-anchor="end">24</text>
+          <text x="0" y= "84" class="lcd-label" text-anchor="end">36</text>
+          <text x="0" y= "96" class="lcd-label" text-anchor="end">48</text>
         </g>
+
         <g transform="translate(-10 0)">
-          <polyline points="0   0 2   0" class="lcd-tick"/>
-          <polyline points="0  13 2  13" class="lcd-tick"/>
-          <polyline points="0  26 2  26" class="lcd-tick"/>
-          <polyline points="0  39 2  39" class="lcd-tick"/>
-          <polyline points="0  52 2  52" class="lcd-tick"/>
-          <polyline points="0  65 2  65" class="lcd-tick"/>
-          <polyline points="0  78 2  78" class="lcd-tick"/>
-          <polyline points="0  91 2  91" class="lcd-tick"/>
-          <polyline points="0 104 2 104" class="lcd-tick"/>
+          <polyline points="0  0 2  0" class="lcd-tick"/>
+          <polyline points="0 12 2 12" class="lcd-tick"/>
+          <polyline points="0 24 2 24" class="lcd-tick"/>
+          <polyline points="0 36 2 36" class="lcd-tick"/>
+          <polyline points="0 48 2 48" class="lcd-tick"/>
+          <polyline points="0 60 2 60" class="lcd-tick"/>
+          <polyline points="0 72 2 72" class="lcd-tick"/>
+          <polyline points="0 84 2 84" class="lcd-tick"/>
+          <polyline points="0 96 2 96" class="lcd-tick"/>
         </g>
       </g>
     </symbol>

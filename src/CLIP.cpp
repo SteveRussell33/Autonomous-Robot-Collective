@@ -141,9 +141,9 @@ struct CLIPWidget : ModuleWidget {
         addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
         addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
 
-        addParam(createParamCentered<MKnob24>(Vec(22.5, 188), module, CLIP::kLevelParam));
-        addParam(createParamCentered<MKnob18>(Vec(22.5, 224), module, CLIP::kLevelCvAmountParam));
-        addInput(createInputCentered<MPolyPort>(Vec(22.5, 260), module, CLIP::kLevelCvInput));
+        addParam(createParamCentered<MKnob24>(Vec(22.5, 182), module, CLIP::kLevelParam));
+        addParam(createParamCentered<MKnob18>(Vec(22.5, 218), module, CLIP::kLevelCvAmountParam));
+        addInput(createInputCentered<MPolyPort>(Vec(22.5, 254), module, CLIP::kLevelCvInput));
 
         addInput(createInputCentered<MPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
         addOutput(createOutputCentered<MPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));

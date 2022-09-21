@@ -268,14 +268,14 @@
            x="-6"
            y="-1"
            width="5"
-           height="106"
+           height="98"
            class="lcd-bg-accent"
            id="rect61" />
         <rect
            x="1"
            y="-1"
            width="5"
-           height="106"
+           height="98"
            class="lcd-bg-accent"
            id="rect63" />
         <g
@@ -289,49 +289,49 @@
              id="text65">0</text>
           <text
              x="0"
-             y="13"
+             y="12"
              class="lcd-label"
              text-anchor="end"
              id="text67">3</text>
           <text
              x="0"
-             y="26"
+             y="24"
              class="lcd-label"
              text-anchor="end"
              id="text69">6</text>
           <text
              x="0"
-             y="39"
+             y="36"
              class="lcd-label"
              text-anchor="end"
              id="text71">9</text>
           <text
              x="0"
-             y="52"
+             y="48"
              class="lcd-label"
              text-anchor="end"
              id="text73">12</text>
           <text
              x="0"
-             y="65"
+             y="60"
              class="lcd-label"
              text-anchor="end"
              id="text75">18</text>
           <text
              x="0"
-             y="78"
+             y="72"
              class="lcd-label"
              text-anchor="end"
              id="text77">24</text>
           <text
              x="0"
-             y="91"
+             y="84"
              class="lcd-label"
              text-anchor="end"
              id="text79">36</text>
           <text
              x="0"
-             y="104"
+             y="96"
              class="lcd-label"
              text-anchor="end"
              id="text81">48</text>
@@ -340,39 +340,39 @@
            transform="translate(-10 0)"
            id="g103">
           <polyline
-             points="0   0 2   0"
+             points="0  0 2  0"
              class="lcd-tick"
              id="polyline85" />
           <polyline
-             points="0  13 2  13"
+             points="0 12 2 12"
              class="lcd-tick"
              id="polyline87" />
           <polyline
-             points="0  26 2  26"
+             points="0 24 2 24"
              class="lcd-tick"
              id="polyline89" />
           <polyline
-             points="0  39 2  39"
+             points="0 36 2 36"
              class="lcd-tick"
              id="polyline91" />
           <polyline
-             points="0  52 2  52"
+             points="0 48 2 48"
              class="lcd-tick"
              id="polyline93" />
           <polyline
-             points="0  65 2  65"
+             points="0 60 2 60"
              class="lcd-tick"
              id="polyline95" />
           <polyline
-             points="0  78 2  78"
+             points="0 72 2 72"
              class="lcd-tick"
              id="polyline97" />
           <polyline
-             points="0  91 2  91"
+             points="0 84 2 84"
              class="lcd-tick"
              id="polyline99" />
           <polyline
-             points="0 104 2 104"
+             points="0 96 2 96"
              class="lcd-tick"
              id="polyline101" />
         </g>
