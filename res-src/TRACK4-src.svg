@@ -218,22 +218,22 @@
   <!-- Main Board -->  
   <!-- ============================================================ -->
 
-  <!--rect x="0" y="35" width="162" height="122" rx="2" class="lcd-bg-frame"/-->
-  <rect x="2" y="35" width="198" height="122" rx="2" class="lcd-bg-frame"/>
-  <rect x="3" y="36" width="196" height="120" rx="2" class="lcd-bg"/>
+  <rect x="2" y="35" width="198" height="114" rx="2" class="lcd-bg-frame"/>
+  <rect x="3" y="36" width="196" height="112" rx="2" class="lcd-bg"/>
 
+  <!-- [168, 198, 228, 258, 288, 318, 348] -->
   <!-- labels -->  
   <g transform="translate(9 0)">
-    <g transform="translate(0 174)">
+    <g transform="translate(0 168)">
       <text x="0" y="3" class="label" text-anchor="middle">LV</text>
     </g>
-    <g transform="translate(0 232)">
+    <g transform="translate(0 228)">
       <text x="0" y="3" class="label" text-anchor="middle">M</text>
     </g>
-    <g transform="translate(0 261)">
+    <g transform="translate(0 258)">
       <text x="0" y="3" class="label" text-anchor="middle">P</text>
     </g>
-    <g transform="translate(0 319)">
+    <g transform="translate(0 318)">
       <text x="0" y="3" class="label" text-anchor="middle">L</text>
     </g>
     <g transform="translate(0 348)">
@@ -249,24 +249,24 @@
   <g transform="translate(30 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
-  <g transform="translate(30 174)">
+  <g transform="translate(30 168)">
     <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(30 203)">
+  <g transform="translate(30 198)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(30 232)">
+  <g transform="translate(30 228)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(30 261)">
+  <g transform="translate(30 258)">
     <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(30 290)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(30 319)">
+  <g transform="translate(30 318)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
   <g transform="translate(30 348)">
@@ -282,24 +282,24 @@
     <g transform="translate(30 44)">
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
-    <g transform="translate(30 174)">
+    <g transform="translate(30 168)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 203)">
+    <g transform="translate(30 198)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 232)">
+    <g transform="translate(30 228)">
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
-    <g transform="translate(30 261)">
+    <g transform="translate(30 258)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 319)">
+    <g transform="translate(30 318)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 348)">
@@ -316,24 +316,24 @@
     <g transform="translate(30 44)">
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
-    <g transform="translate(30 174)">
+    <g transform="translate(30 168)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 203)">
+    <g transform="translate(30 198)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 232)">
+    <g transform="translate(30 228)">
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
-    <g transform="translate(30 261)">
+    <g transform="translate(30 258)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 319)">
+    <g transform="translate(30 318)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 348)">
@@ -350,24 +350,24 @@
     <g transform="translate(30 44)">
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
-    <g transform="translate(30 174)">
+    <g transform="translate(30 168)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 203)">
+    <g transform="translate(30 198)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 232)">
+    <g transform="translate(30 228)">
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
-    <g transform="translate(30 261)">
+    <g transform="translate(30 258)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 290)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 319)">
+    <g transform="translate(30 318)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 348)">
@@ -384,17 +384,17 @@
     <g transform="translate(30 44)">
       <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
     </g>
-    <g transform="translate(30 174)">
+    <g transform="translate(30 168)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 203)">
+    <g transform="translate(30 198)">
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
-    <g transform="translate(30 232)">
+    <g transform="translate(30 228)">
       <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
     </g>
-    <g transform="translate(30 261)">
+    <g transform="translate(30 258)">
       <polyline points="0 0 0 29" class="connect"/>
       <use xlink:href="#knob24" transform="translate(-12 -12)"/>
     </g>
@@ -402,8 +402,8 @@
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
 
-    <g transform="translate(30 319)">
-      <rect x="-14.5" y="-15" width="29" height="59" rx="3" class="mono-output"/>
+    <g transform="translate(30 318)">
+      <rect x="-14.5" y="-15" width="29" height="60" rx="3" class="mono-output"/>
       <use xlink:href="#port" transform="translate(-12 -12)"/>
     </g>
     <g transform="translate(30 348)">
