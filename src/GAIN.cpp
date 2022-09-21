@@ -104,14 +104,15 @@ struct GAINWidget : ModuleWidget {
         addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
         addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
 
-        addParam(createParamCentered<MKnob24>(Vec(24, 174), module, GAIN::kLevelParam));
-        addInput(createInputCentered<MPolyPort>(Vec(24, 203), module, GAIN::kLevelCvInput));
-        addParam(createParamCentered<MToggleButton>(Vec(24, 232), module, GAIN::kMuteParam));
+       // [168, 198, 228, 258, 288, 318, 348]
+        addParam(createParamCentered<MKnob24>(Vec(24, 168), module, GAIN::kLevelParam));
+        addInput(createInputCentered<MPolyPort>(Vec(24, 198), module, GAIN::kLevelCvInput));
+        addParam(createParamCentered<MToggleButton>(Vec(24, 228), module, GAIN::kMuteParam));
 
-        addInput(createInputCentered<MPolyPort>(Vec(24, 261), module, GAIN::kLeftInput));
-        addInput(createInputCentered<MPolyPort>(Vec(24, 290), module, GAIN::kRightInput));
+        addInput(createInputCentered<MPolyPort>(Vec(24, 258), module, GAIN::kLeftInput));
+        addInput(createInputCentered<MPolyPort>(Vec(24, 288), module, GAIN::kRightInput));
 
-        addOutput(createOutputCentered<MPolyPort>(Vec(24, 319), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<MPolyPort>(Vec(24, 318), module, GAIN::kLeftOutput));
         addOutput(createOutputCentered<MPolyPort>(Vec(24, 348), module, GAIN::kRightOutput));
     }
 

@@ -155,13 +155,13 @@ struct VuMeter : OpaqueWidget {
             nvgLinearGradient(args.vg, 0.0f, 26.0f, 0.0f, 52.0f, colors.yellow, colors.green);
 
         // clang-format off
-        drawSegment(args, x, db,  -3.0f,   0.0f,  13.0f, -1.0f, colors.orange, NVGpaint{},  true);
-        drawSegment(args, x, db,  -6.0f,  -3.0f,  26.0f, 13.0f, colors.yellow, NVGpaint{},  true);
-        drawSegment(args, x, db, -12.0f,  -6.0f,  52.0f, 26.0f, NVGcolor{},    yellowGreen, false);
-        drawSegment(args, x, db, -18.0f, -12.0f,  65.0f, 52.0f, colors.green,  NVGpaint{},  true);
-        drawSegment(args, x, db, -24.0f, -18.0f,  78.0f, 65.0f, colors.green,  NVGpaint{},  true);
-        drawSegment(args, x, db, -36.0f, -24.0f,  91.0f, 78.0f, colors.green,  NVGpaint{},  true);
-        drawSegment(args, x, db, -48.0f, -36.0f, 105.0f, 91.0f, colors.green,  NVGpaint{},  true);
+        drawSegment(args, x, db,  -3.0f,   0.0f, 12.0f, -1.0f, colors.orange, NVGpaint{},  true);
+        drawSegment(args, x, db,  -6.0f,  -3.0f, 24.0f, 12.0f, colors.yellow, NVGpaint{},  true);
+        drawSegment(args, x, db, -12.0f,  -6.0f, 48.0f, 24.0f, NVGcolor{},    yellowGreen, false);
+        drawSegment(args, x, db, -18.0f, -12.0f, 60.0f, 48.0f, colors.green,  NVGpaint{},  true);
+        drawSegment(args, x, db, -24.0f, -18.0f, 72.0f, 60.0f, colors.green,  NVGpaint{},  true);
+        drawSegment(args, x, db, -36.0f, -24.0f, 84.0f, 72.0f, colors.green,  NVGpaint{},  true);
+        drawSegment(args, x, db, -48.0f, -36.0f, 97.0f, 84.0f, colors.green,  NVGpaint{},  true);
         // clang-format on
     }
 
@@ -179,13 +179,13 @@ struct VuMeter : OpaqueWidget {
 
     float getPeakY(float db) {
         // clang-format off
-        if      (db >=  -3.0f) return rescale(db,  -3.0f,   0.0f,  13.0f, -1.0f);
-        else if (db >=  -6.0f) return rescale(db,  -6.0f,  -3.0f,  26.0f, 13.0f);
-        else if (db >= -12.0f) return rescale(db, -12.0f,  -6.0f,  52.0f, 26.0f);
-        else if (db >= -18.0f) return rescale(db, -18.0f, -12.0f,  65.0f, 52.0f);
-        else if (db >= -24.0f) return rescale(db, -24.0f, -18.0f,  78.0f, 65.0f);
-        else if (db >= -36.0f) return rescale(db, -36.0f, -24.0f,  91.0f, 78.0f);
-        else                   return rescale(db, -48.0f, -36.0f, 105.0f, 91.0f);
+        if      (db >=  -3.0f) return rescale(db,  -3.0f,   0.0f, 12.0f, -1.0f);
+        else if (db >=  -6.0f) return rescale(db,  -6.0f,  -3.0f, 24.0f, 12.0f);
+        else if (db >= -12.0f) return rescale(db, -12.0f,  -6.0f, 48.0f, 24.0f);
+        else if (db >= -18.0f) return rescale(db, -18.0f, -12.0f, 60.0f, 48.0f);
+        else if (db >= -24.0f) return rescale(db, -24.0f, -18.0f, 72.0f, 60.0f);
+        else if (db >= -36.0f) return rescale(db, -36.0f, -24.0f, 84.0f, 72.0f);
+        else                   return rescale(db, -48.0f, -36.0f, 97.0f, 84.0f);
         // clang-format on
     }
 
