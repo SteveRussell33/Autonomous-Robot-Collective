@@ -1,4 +1,3 @@
-#include "arc_dsp.hpp"
 #include "plugin.hpp"
 #include "track.hpp"
 #include "widgets.hpp"
@@ -9,35 +8,10 @@
 // CLIP
 //--------------------------------------------------------------
 
-struct SoftClip {
-    const int kOversampleFactor = 4;
-    arc::dsp::Oversample oversample{kOversampleFactor};
-
-    void onSampleRateChange(float sampleRate) {
-        oversample.onSampleRateChange(sampleRate);
-    }
-
-    float clip(float in) {
-
-        // return arc::dsp::softClip(in);
-
-        float buffer[arc::dsp::kMaxOversample] = {};
-        oversample.upsample(in, buffer);
-
-        for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = arc::dsp::softClip(buffer[i]);
-        }
-
-        return oversample.downsample(buffer);
-    }
-};
-
 struct CLIP : Module {
 
     Amplitude levelAmp;
-    // Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
-    SoftClip softClips[engine::PORT_MAX_CHANNELS];
-    VuStats vuStats;
+    MonoTrack monoTrack;
 
 #ifdef CLIP_DEBUG
     float debug1;
@@ -79,60 +53,47 @@ struct CLIP : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
+
+        //------------------------------------------------------
+
+        monoTrack.init(
+            &(inputs[kInput]),
+            &(inputs[kLevelCvInput]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-
         levelAmp.onSampleRateChange(e.sampleRate);
-
-        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            // levelCvAmps[ch].onSampleRateChange(e.sampleRate);
-            softClips[ch].onSampleRateChange(e.sampleRate);
-        }
-
-        vuStats.onSampleRateChange(e.sampleRate);
+        monoTrack.onSampleRateChange(e.sampleRate);
     }
 
-    // float nextLevelCvAmp( int ch) {
-    //     float v = inputs[kLevelCvInput].getPolyVoltage(ch);
-    //     float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-    //     return levelCvAmps[ch].next(db);
-    // }
+    //void processOutput(Output& outputs[kOutput], MonoTrack& trk) {
+    //    if (outputs[kOutput].isConnected()) {
+    //        outputs[kOutput].setChannels(trk.channels);
+    //        outputs[kOutput].writeVoltages(trk.voltages);
+    //    } else {
+    //        outputs[kOutput].setChannels(0);
+    //    }
+    //}
 
     void process(const ProcessArgs& args) override {
 
-        if (!outputs[kOutput].isConnected()) {
-            vuStats.process(0.0f);
-            return;
+        if (inputs[kInput].isConnected()) {
+
+            float amp = levelAmp.next(levelToDb(params[kLevelParam].getValue()));
+            bool applyLevelCv = inputs[kLevelCvInput].isConnected();
+
+            monoTrack.process(amp, applyLevelCv);
+
+            if (outputs[kOutput].isConnected()) {
+                outputs[kOutput].setChannels(monoTrack.channels);
+                outputs[kOutput].writeVoltages(monoTrack.voltages);
+            } else {
+                outputs[kOutput].setChannels(0);
+            }
+        } else {
+            monoTrack.vuStats.process(0.0f);
+            outputs[kOutput].setChannels(0);
         }
-
-        // level amplitude
-        float db = params[kLevelParam].getValue();
-        float amp = levelAmp.next(levelToDb(db));
-
-        // process each channel
-        float sum = 0;
-        int channels = std::max(inputs[kInput].getChannels(), 1);
-
-        for (int ch = 0; ch < channels; ch++) {
-            float in = inputs[kInput].getPolyVoltage(ch);
-
-            // channel amplitude
-            float chAmp = amp;
-            // if (inputs[kLevelCvInput].isConnected()) {
-            //     chAmp = chAmp * nextLevelCvAmp(ch);
-            // }
-
-            // process sample
-            float limit = 5.0f * chAmp;
-            float out = softClips[ch].clip(in / limit) * limit;
-
-            sum += out;
-            outputs[kOutput].setVoltage(out, ch);
-        }
-        outputs[kOutput].setChannels(channels);
-
-        vuStats.process(sum);
     }
 };
 
@@ -160,8 +121,8 @@ struct CLIPWidget : ModuleWidget {
         addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
 #endif
 
-        addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
-        addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->monoTrack.vuStats) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->monoTrack.vuStats) : NULL);
 
         addParam(createParamCentered<MKnob24>(Vec(22.5, 186), module, CLIP::kLevelParam));
         addInput(createInputCentered<MPolyPort>(Vec(22.5, 222), module, CLIP::kLevelCvInput));
