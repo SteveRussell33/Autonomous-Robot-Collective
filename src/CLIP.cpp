@@ -1,14 +1,20 @@
+#include <vector>
+
+#include "arc_dsp.hpp"
 #include "plugin.hpp"
 #include "track.hpp"
 #include "widgets.hpp"
 
-// define CLIP_DEBUG
+#define CLIP_DEBUG
 
 //--------------------------------------------------------------
 // CLIP
 //--------------------------------------------------------------
 
 struct CLIP : Module {
+
+    static const int kOversampleFactor = 4;
+    std::vector<arc::dsp::Oversample> oversample;
 
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
@@ -53,11 +59,18 @@ struct CLIP : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
+
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            oversample.push_back(arc::dsp::Oversample(kOversampleFactor));
+        }
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
+
         levelAmp.onSampleRateChange(e.sampleRate);
+
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            oversample[ch].onSampleRateChange(e.sampleRate);
             levelCvAmps[ch].onSampleRateChange(e.sampleRate);
         }
     }
@@ -66,6 +79,25 @@ struct CLIP : Module {
         float v = inputs[kLevelCvInput].getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
         return levelCvAmps[ch].next(db);
+    }
+
+    float processChannel(int ch, float in, float chAmp) {
+        //return in * chAmp;
+
+        float limit = 5.0f * chAmp;
+
+        //return arc::dsp::softClip(in / limit) * limit;
+
+        //return chanClips[ch].process(in / limit) * limit;
+
+        float buffer[arc::dsp::kMaxOversample] = {};
+        oversample[ch].upsample(in, buffer);
+
+        for (int i = 0; i < kOversampleFactor; i++) {
+            buffer[i] = arc::dsp::softClip(buffer[i]/limit) * limit;
+        }
+
+        return oversample[ch].downsample(buffer);
     }
 
     void process(const ProcessArgs& args) override {
@@ -77,15 +109,19 @@ struct CLIP : Module {
 
         int channels = std::max(inputs[kInput].getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
+            float in = inputs[kInput].getPolyVoltage(ch);
 
             float chAmp = amp;
             if (inputs[kLevelCvInput].isConnected()) {
                 chAmp = chAmp * nextLevelCvAmp(ch);
             }
 
-            float in = inputs[kInput].getPolyVoltage(ch);
-
-            float out = in * chAmp;
+#ifdef CLIP_DEBUG
+            if (ch < 4) {
+                outputs[kDebug1 + ch].setVoltage(chAmp);
+            }
+#endif
+            float out = processChannel(ch, in, chAmp);
 
             outputs[kOutput].setVoltage(out, ch);
         }

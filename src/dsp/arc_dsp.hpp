@@ -35,7 +35,7 @@ struct TwelvePoleLpf {
     static const int kFilters = 6;
 
     // https://www.earlevel.com/main/2016/09/29/cascading-filters/
-    const double Q[kFilters] = {
+    static constexpr double Q[kFilters] = {
         0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
 
     Biquad filter[kFilters];
