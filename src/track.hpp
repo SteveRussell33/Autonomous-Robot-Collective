@@ -143,7 +143,6 @@ struct MonoTrack {
 
     Input* input;
     Input* levelCvInput;
-    Output* output;
 
     float nextLevelCvAmp(Input* levelCvInput, int ch) {
         float v = levelCvInput->getPolyVoltage(ch);
@@ -153,7 +152,7 @@ struct MonoTrack {
 
     void amplify(float amp, bool applyLevelCv) {
 
-        int channels = std::max(input->getChannels(), 1);
+        channels = std::max(input->getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
             float chAmp = amp;
@@ -162,31 +161,31 @@ struct MonoTrack {
             }
 
             // hard clip
-            float out = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
-
-            output->setVoltage(out, ch);
+            voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
         }
-        output->setChannels(channels);
     }
 
     // void pan() {
     // }
 
-    void summarize() {
-        sum = output->getVoltageSum();
+    void updateStats() {
+        float sum = 0.f;
+        for (int c = 0; c < channels; c++) {
+            sum += voltages[c];
+        }
         vuStats.process(sum);
     }
 
   public:
 
-    float sum = 0.0f;
+    int channels = 0;
+    float voltages[engine::PORT_MAX_CHANNELS] = {};
     VuStats vuStats;
 
-    void init(Input* input_, Input* levelCvInput_, Output* output_) {
+    void init(Input* input_, Input* levelCvInput_) {
 
         input = input_;
         levelCvInput = levelCvInput_;
-        output = output_;
     }
 
     void onSampleRateChange(float sampleRate) {
@@ -197,21 +196,20 @@ struct MonoTrack {
     }
 
     void process(float amp, bool applyLevelCv) {
+
         amplify(amp, applyLevelCv);
         // pan();
-        summarize();
+        updateStats();
     }
 
     void copyFrom(MonoTrack& trk) {
-        output->setChannels(trk.output->getChannels());
-        output->writeVoltages(trk.output->voltages);
-        summarize();
-    }
-
-    void disconnect() {
-        output->setChannels(0);
-        sum = 0.0f;
-        vuStats.process(0.0f);
+        float sum = 0.f;
+        channels = trk.channels;
+        for (int c = 0; c < channels; c++) {
+            voltages[c] = trk.voltages[c];
+            sum += voltages[c];
+        }
+        vuStats.process(sum);
     }
 };
 
@@ -230,8 +228,6 @@ struct StereoTrack {
     Param* levelParam = NULL;
     Input* levelCvInput = NULL;
     Param* muteParam = NULL;
-    Output* leftOutput = NULL;
-    Output* rightOutput = NULL;
 
   public:
 
@@ -249,20 +245,16 @@ struct StereoTrack {
         Input* rightInput_,
         Param* levelParam_,
         Input* levelCvInput_,
-        Param* muteParam_,
-        Output* leftOutput_,
-        Output* rightOutput_) {
+        Param* muteParam_) {
 
         leftInput = leftInput_;
         rightInput = rightInput_;
         levelParam = levelParam_;
         levelCvInput = levelCvInput_;
         muteParam = muteParam_;
-        leftOutput = leftOutput_;
-        rightOutput = rightOutput_;
 
-        left.init(leftInput, levelCvInput, leftOutput);
-        right.init(rightInput, levelCvInput, rightOutput);
+        left.init(leftInput, levelCvInput);
+        right.init(rightInput, levelCvInput);
     }
 
     void process() {
@@ -299,8 +291,8 @@ struct StereoTrack {
             }
             // no inputs
             else {
-                left.disconnect();
-                right.disconnect();
+                left.vuStats.process(0.0f);
+                right.vuStats.process(0.0f);
             }
         }
     }

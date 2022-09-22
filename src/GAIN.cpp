@@ -10,7 +10,7 @@
 
 struct GAIN : Module {
 
-    StereoTrack track;
+    StereoTrack stereoTrack;
 
 #ifdef GAIN_DEBUG
     float debug1;
@@ -58,22 +58,32 @@ struct GAIN : Module {
 
         //------------------------------------------------------
 
-        track.init(
+        stereoTrack.init(
             &(inputs[kLeftInput]),
             &(inputs[kRightInput]),
             &(params[kLevelParam]),
             &(inputs[kLevelCvInput]),
-            &(params[kMuteParam]),
-            &(outputs[kLeftOutput]),
-            &(outputs[kRightOutput]));
+            &(params[kMuteParam]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        track.onSampleRateChange(e.sampleRate);
+        stereoTrack.onSampleRateChange(e.sampleRate);
+    }
+
+    void processOutput(Output& output, MonoTrack& trk) {
+        if (output.isConnected()) {
+            output.setChannels(trk.channels);
+            output.writeVoltages(trk.voltages);
+        } else {
+            output.setChannels(0);
+        }
     }
 
     void process(const ProcessArgs& args) override {
-        track.process();
+        stereoTrack.process();
+
+        processOutput(outputs[kLeftOutput], stereoTrack.left);
+        processOutput(outputs[kRightOutput], stereoTrack.right);
     }
 };
 
@@ -101,8 +111,8 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
-        addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->stereoTrack.left.vuStats) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->stereoTrack.right.vuStats) : NULL);
 
         // [168, 198, 228, 258, 288, 318, 348]
         addParam(createParamCentered<MKnob24>(Vec(24, 168), module, GAIN::kLevelParam));

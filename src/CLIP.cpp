@@ -19,7 +19,7 @@ struct SoftClip {
 
     float clip(float in) {
 
-        //return arc::dsp::softClip(in);
+        // return arc::dsp::softClip(in);
 
         float buffer[arc::dsp::kMaxOversample] = {};
         oversample.upsample(in, buffer);
@@ -35,7 +35,7 @@ struct SoftClip {
 struct CLIP : Module {
 
     Amplitude levelAmp;
-    //Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+    // Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
     SoftClip softClips[engine::PORT_MAX_CHANNELS];
     VuStats vuStats;
 
@@ -86,18 +86,18 @@ struct CLIP : Module {
         levelAmp.onSampleRateChange(e.sampleRate);
 
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            //levelCvAmps[ch].onSampleRateChange(e.sampleRate);
+            // levelCvAmps[ch].onSampleRateChange(e.sampleRate);
             softClips[ch].onSampleRateChange(e.sampleRate);
         }
 
         vuStats.onSampleRateChange(e.sampleRate);
     }
 
-    //float nextLevelCvAmp( int ch) {
-    //    float v = inputs[kLevelCvInput].getPolyVoltage(ch);
-    //    float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-    //    return levelCvAmps[ch].next(db);
-    //}
+    // float nextLevelCvAmp( int ch) {
+    //     float v = inputs[kLevelCvInput].getPolyVoltage(ch);
+    //     float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+    //     return levelCvAmps[ch].next(db);
+    // }
 
     void process(const ProcessArgs& args) override {
 
@@ -119,9 +119,9 @@ struct CLIP : Module {
 
             // channel amplitude
             float chAmp = amp;
-            //if (inputs[kLevelCvInput].isConnected()) {
-            //    chAmp = chAmp * nextLevelCvAmp(ch);
-            //}
+            // if (inputs[kLevelCvInput].isConnected()) {
+            //     chAmp = chAmp * nextLevelCvAmp(ch);
+            // }
 
             // process sample
             float limit = 5.0f * chAmp;
