@@ -5,7 +5,7 @@
 #include "track.hpp"
 #include "widgets.hpp"
 
-#define CLIP_DEBUG
+// define CLIP_DEBUG
 
 //--------------------------------------------------------------
 // CLIP
@@ -81,14 +81,7 @@ struct CLIP : Module {
         return levelCvAmps[ch].next(db);
     }
 
-    float processChannel(int ch, float in, float chAmp) {
-        //return in * chAmp;
-
-        float limit = 5.0f * chAmp;
-
-        //return arc::dsp::softClip(in / limit) * limit;
-
-        //return chanClips[ch].process(in / limit) * limit;
+    float processChannel(int ch, float in, float limit) {
 
         float buffer[arc::dsp::kMaxOversample] = {};
         oversample[ch].upsample(in, buffer);
@@ -116,13 +109,7 @@ struct CLIP : Module {
                 chAmp = chAmp * nextLevelCvAmp(ch);
             }
 
-#ifdef CLIP_DEBUG
-            if (ch < 4) {
-                outputs[kDebug1 + ch].setVoltage(chAmp);
-            }
-#endif
-            float out = processChannel(ch, in, chAmp);
-
+            float out = processChannel(ch, in, 5.0f * chAmp);
             outputs[kOutput].setVoltage(out, ch);
         }
         outputs[kOutput].setChannels(channels);
