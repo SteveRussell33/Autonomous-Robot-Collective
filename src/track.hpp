@@ -305,7 +305,6 @@ struct StereoTrack {
 
         if (leftInput->isConnected()) {
             left.process(muted, amp, applyLevelCv);
-            left.updateStats();
 
             // stereo
             if (rightInput->isConnected()) {
