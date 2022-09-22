@@ -530,7 +530,7 @@
   <!-- labels -->
   <!-- [168, 198, 228, 258, 288, 318, 348] -->
   <g
-     transform="translate(5,168)"
+     transform="translate(5,166)"
      id="g147">
     <g
        aria-label="LV"
@@ -548,7 +548,7 @@
     </g>
   </g>
   <g
-     transform="translate(5,228)"
+     transform="translate(5,226)"
      id="g151">
     <g
        aria-label="M"
@@ -562,7 +562,7 @@
     </g>
   </g>
   <g
-     transform="translate(5,258)"
+     transform="translate(5,256)"
      id="g155">
     <g
        aria-label="L"
@@ -576,7 +576,7 @@
     </g>
   </g>
   <g
-     transform="translate(5,288)"
+     transform="translate(5,286)"
      id="g159">
     <g
        aria-label="R"
@@ -590,7 +590,7 @@
     </g>
   </g>
   <g
-     transform="translate(5,318)"
+     transform="translate(5,316)"
      id="g163">
     <g
        aria-label="L"
@@ -604,7 +604,7 @@
     </g>
   </g>
   <g
-     transform="translate(5,348)"
+     transform="translate(5,346)"
      id="g167">
     <g
        aria-label="R"
@@ -800,13 +800,13 @@
   </g>
   <path
      id="polyline175"
-     transform="translate(24,168)"
+     transform="translate(24,166)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 29"
      class="connect" />
   <g
      id="use177"
-     transform="translate(12,156)">
+     transform="translate(12,154)">
     <g
        transform="translate(12,12)"
        id="g305">
@@ -826,28 +826,28 @@
   </g>
   <g
      id="use181"
-     transform="translate(12,186)">
+     transform="translate(12,184)">
     <g
        transform="translate(12,12)"
        id="g313" />
   </g>
   <g
      id="use185"
-     transform="translate(15,219)">
+     transform="translate(15,217)">
     <g
        transform="translate(9,9)"
        id="g317" />
   </g>
   <g
      id="use189"
-     transform="translate(12,246)">
+     transform="translate(12,244)">
     <g
        transform="translate(12,12)"
        id="g321" />
   </g>
   <g
      id="use193"
-     transform="translate(12,276)">
+     transform="translate(12,274)">
     <g
        transform="translate(12,12)"
        id="g325" />
@@ -856,18 +856,18 @@
   <path
      id="rect197"
      style="fill:#558955"
-     d="m 12.5,303 h 23 c 1.662,0 3,1.338 3,3 v 54 c 0,1.662 -1.338,3 -3,3 h -23 c -1.662,0 -3,-1.338 -3,-3 v -54 c 0,-1.662 1.338,-3 3,-3 z"
+     d="m 12.5,301 h 23 c 1.662,0 3,1.338 3,3 v 54 c 0,1.662 -1.338,3 -3,3 h -23 c -1.662,0 -3,-1.338 -3,-3 v -54 c 0,-1.662 1.338,-3 3,-3 z"
      class="poly-output" />
   <g
      id="use199"
-     transform="translate(12,306)">
+     transform="translate(12,304)">
     <g
        transform="translate(12,12)"
        id="g239" />
   </g>
   <g
      id="use203"
-     transform="translate(12,336)">
+     transform="translate(12,334)">
     <g
        transform="translate(12,12)"
        id="g329" />

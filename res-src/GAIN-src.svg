@@ -217,22 +217,22 @@
   <!-- labels -->  
   <!-- [168, 198, 228, 258, 288, 318, 348] -->
   <g transform="translate(5 0)">
-    <g transform="translate(0 168)">
+    <g transform="translate(0 166)">
       <text x="1" y="3" class="label" text-anchor="middle">LV</text>
     </g>
-    <g transform="translate(0 228)">
+    <g transform="translate(0 226)">
       <text x="0" y="3" class="label" text-anchor="middle">M</text>
     </g>
-    <g transform="translate(0 258)">
+    <g transform="translate(0 256)">
       <text x="0" y="3" class="label" text-anchor="middle">L</text>
     </g>
-    <g transform="translate(0 288)">
+    <g transform="translate(0 286)">
       <text x="0" y="3" class="label" text-anchor="middle">R</text>
     </g>
-    <g transform="translate(0 318)">
+    <g transform="translate(0 316)">
       <text x="0" y="3" class="label" text-anchor="middle">L</text>
     </g>
-    <g transform="translate(0 348)">
+    <g transform="translate(0 346)">
       <text x="0" y="3" class="label" text-anchor="middle">R</text>
     </g>
   </g>
@@ -241,30 +241,30 @@
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(24 168)">
+  <g transform="translate(24 166)">
     <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(24 198)">
+  <g transform="translate(24 196)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(24 228)">
+  <g transform="translate(24 226)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(24 258)">
+  <g transform="translate(24 256)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(24 288)">
+  <g transform="translate(24 286)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
   <!-- mix -->  
 
-  <g transform="translate(24 318)">
+  <g transform="translate(24 316)">
     <rect x="-14.5" y="-15" width="29" height="60" rx="3" class="poly-output"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(24 348)">
+  <g transform="translate(24 346)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 

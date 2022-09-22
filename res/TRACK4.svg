@@ -787,7 +787,7 @@
   <!-- [168, 198, 228, 258, 288, 318, 348] -->
   <!-- labels -->
   <g
-     transform="translate(9,168)"
+     transform="translate(9,166)"
      id="g163">
     <g
        aria-label="LV"
@@ -805,7 +805,7 @@
     </g>
   </g>
   <g
-     transform="translate(9,228)"
+     transform="translate(9,226)"
      id="g167">
     <g
        aria-label="M"
@@ -819,7 +819,7 @@
     </g>
   </g>
   <g
-     transform="translate(9,258)"
+     transform="translate(9,256)"
      id="g171">
     <g
        aria-label="P"
@@ -833,7 +833,7 @@
     </g>
   </g>
   <g
-     transform="translate(9,318)"
+     transform="translate(9,316)"
      id="g175">
     <g
        aria-label="L"
@@ -847,7 +847,7 @@
     </g>
   </g>
   <g
-     transform="translate(9,348)"
+     transform="translate(9,346)"
      id="g179">
     <g
        aria-label="R"
@@ -1054,13 +1054,13 @@
   </g>
   <path
      id="polyline191"
-     transform="translate(30,168)"
+     transform="translate(30,166)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 29"
      class="connect" />
   <g
      id="use193"
-     transform="translate(18,156)">
+     transform="translate(18,154)">
     <g
        transform="translate(12,12)"
        id="g709">
@@ -1080,27 +1080,27 @@
   </g>
   <g
      id="use197"
-     transform="translate(18,186)">
+     transform="translate(18,184)">
     <g
        transform="translate(12,12)"
        id="g717" />
   </g>
   <g
      id="use201"
-     transform="translate(21,219)">
+     transform="translate(21,217)">
     <g
        transform="translate(9,9)"
        id="g721" />
   </g>
   <path
      id="polyline205"
-     transform="translate(30,258)"
+     transform="translate(30,256)"
      style="fill:none;stroke:#343434;stroke-width:1"
      d="M 0,0 V 29"
      class="connect" />
   <g
      id="use207"
-     transform="translate(18,246)">
+     transform="translate(18,244)">
     <g
        transform="translate(12,12)"
        id="g731">
@@ -1120,21 +1120,21 @@
   </g>
   <g
      id="use211"
-     transform="translate(18,278)">
+     transform="translate(18,274)">
     <g
        transform="translate(12,12)"
        id="g739" />
   </g>
   <g
      id="use215"
-     transform="translate(18,306)">
+     transform="translate(18,304)">
     <g
        transform="translate(12,12)"
        id="g743" />
   </g>
   <g
      id="use219"
-     transform="translate(18,336)">
+     transform="translate(18,334)">
     <g
        transform="translate(12,12)"
        id="g747" />
@@ -1340,7 +1340,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,168)"
+     transform="translate(68,166)"
      id="g235">
     <path
        id="polyline231"
@@ -1369,7 +1369,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,198)"
+     transform="translate(68,196)"
      id="g239">
     <g
        id="use237"
@@ -1380,7 +1380,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,228)"
+     transform="translate(68,226)"
      id="g243">
     <g
        id="use241"
@@ -1391,7 +1391,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,258)"
+     transform="translate(68,256)"
      id="g249">
     <path
        id="polyline245"
@@ -1420,7 +1420,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,290)"
+     transform="translate(68,286)"
      id="g253">
     <g
        id="use251"
@@ -1431,7 +1431,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,318)"
+     transform="translate(68,316)"
      id="g257">
     <g
        id="use255"
@@ -1442,7 +1442,7 @@
     </g>
   </g>
   <g
-     transform="translate(68,348)"
+     transform="translate(68,346)"
      id="g261">
     <g
        id="use259"
@@ -1653,7 +1653,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,168)"
+     transform="translate(106,166)"
      id="g277">
     <path
        id="polyline273"
@@ -1682,7 +1682,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,198)"
+     transform="translate(106,196)"
      id="g281">
     <g
        id="use279"
@@ -1693,7 +1693,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,228)"
+     transform="translate(106,226)"
      id="g285">
     <g
        id="use283"
@@ -1704,7 +1704,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,258)"
+     transform="translate(106,256)"
      id="g291">
     <path
        id="polyline287"
@@ -1733,7 +1733,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,290)"
+     transform="translate(106,286)"
      id="g295">
     <g
        id="use293"
@@ -1744,7 +1744,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,318)"
+     transform="translate(106,316)"
      id="g299">
     <g
        id="use297"
@@ -1755,7 +1755,7 @@
     </g>
   </g>
   <g
-     transform="translate(106,348)"
+     transform="translate(106,346)"
      id="g303">
     <g
        id="use301"
@@ -1966,7 +1966,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,168)"
+     transform="translate(144,166)"
      id="g319">
     <path
        id="polyline315"
@@ -1995,7 +1995,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,198)"
+     transform="translate(144,196)"
      id="g323">
     <g
        id="use321"
@@ -2006,7 +2006,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,228)"
+     transform="translate(144,226)"
      id="g327">
     <g
        id="use325"
@@ -2017,7 +2017,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,258)"
+     transform="translate(144,256)"
      id="g333">
     <path
        id="polyline329"
@@ -2046,7 +2046,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,290)"
+     transform="translate(144,286)"
      id="g337">
     <g
        id="use335"
@@ -2057,7 +2057,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,318)"
+     transform="translate(144,316)"
      id="g341">
     <g
        id="use339"
@@ -2068,7 +2068,7 @@
     </g>
   </g>
   <g
-     transform="translate(144,348)"
+     transform="translate(144,346)"
      id="g345">
     <g
        id="use343"
@@ -2287,7 +2287,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,168)"
+     transform="translate(182,166)"
      id="g361">
     <path
        id="polyline357"
@@ -2316,7 +2316,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,198)"
+     transform="translate(182,196)"
      id="g365">
     <g
        id="use363"
@@ -2327,7 +2327,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,228)"
+     transform="translate(182,226)"
      id="g369">
     <g
        id="use367"
@@ -2338,7 +2338,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,258)"
+     transform="translate(182,256)"
      id="g375">
     <path
        id="polyline371"
@@ -2367,7 +2367,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,290)"
+     transform="translate(182,286)"
      id="g379">
     <g
        id="use377"
@@ -2378,7 +2378,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,318)"
+     transform="translate(182,316)"
      id="g385">
     <path
        id="rect381"
@@ -2394,7 +2394,7 @@
     </g>
   </g>
   <g
-     transform="translate(182,348)"
+     transform="translate(182,346)"
      id="g389">
     <g
        id="use387"
