@@ -11,7 +11,7 @@
 struct CLIP : Module {
 
     Amplitude levelAmp;
-    MonoTrack monoTrack;
+    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
 #ifdef CLIP_DEBUG
     float debug1;
@@ -53,47 +53,43 @@ struct CLIP : Module {
         configOutput(kDebug3, "Debug 3");
         configOutput(kDebug4, "Debug 4");
 #endif
-
-        //------------------------------------------------------
-
-        monoTrack.init(
-            &(inputs[kInput]),
-            &(inputs[kLevelCvInput]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
         levelAmp.onSampleRateChange(e.sampleRate);
-        monoTrack.onSampleRateChange(e.sampleRate);
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelCvAmps[ch].onSampleRateChange(e.sampleRate);
+        }
     }
 
-    //void processOutput(Output& outputs[kOutput], MonoTrack& trk) {
-    //    if (outputs[kOutput].isConnected()) {
-    //        outputs[kOutput].setChannels(trk.channels);
-    //        outputs[kOutput].writeVoltages(trk.voltages);
-    //    } else {
-    //        outputs[kOutput].setChannels(0);
-    //    }
-    //}
+    float nextLevelCvAmp(int ch) {
+        float v = inputs[kLevelCvInput].getPolyVoltage(ch);
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return levelCvAmps[ch].next(db);
+    }
 
     void process(const ProcessArgs& args) override {
-
-        if (inputs[kInput].isConnected()) {
-
-            float amp = levelAmp.next(levelToDb(params[kLevelParam].getValue()));
-            bool applyLevelCv = inputs[kLevelCvInput].isConnected();
-
-            monoTrack.process(amp, applyLevelCv);
-
-            if (outputs[kOutput].isConnected()) {
-                outputs[kOutput].setChannels(monoTrack.channels);
-                outputs[kOutput].writeVoltages(monoTrack.voltages);
-            } else {
-                outputs[kOutput].setChannels(0);
-            }
-        } else {
-            monoTrack.vuStats.process(0.0f);
-            outputs[kOutput].setChannels(0);
+        if (!outputs[kOutput].isConnected()) {
+            return;
         }
+
+        float amp = levelAmp.next(levelToDb(params[kLevelParam].getValue()));
+
+        int channels = std::max(inputs[kInput].getChannels(), 1);
+        for (int ch = 0; ch < channels; ch++) {
+
+            float chAmp = amp;
+            if (inputs[kLevelCvInput].isConnected()) {
+                chAmp = chAmp * nextLevelCvAmp(ch);
+            }
+
+            float in = inputs[kInput].getPolyVoltage(ch);
+
+            float out = in * chAmp;
+
+            outputs[kOutput].setVoltage(out, ch);
+        }
+        outputs[kOutput].setChannels(channels);
     }
 };
 
@@ -121,21 +117,11 @@ struct CLIPWidget : ModuleWidget {
         addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
 #endif
 
-        addMeter(24 - 6, 44, module ? &(module->monoTrack.vuStats) : NULL);
-        addMeter(24 + 1, 44, module ? &(module->monoTrack.vuStats) : NULL);
-
-        addParam(createParamCentered<MKnob24>(Vec(22.5, 186), module, CLIP::kLevelParam));
-        addInput(createInputCentered<MPolyPort>(Vec(22.5, 222), module, CLIP::kLevelCvInput));
+        addParam(createParamCentered<MKnob24>(Vec(22.5, 74), module, CLIP::kLevelParam));
+        addInput(createInputCentered<MPolyPort>(Vec(22.5, 110), module, CLIP::kLevelCvInput));
 
         addInput(createInputCentered<MPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
         addOutput(createOutputCentered<MPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
-    }
-
-    void addMeter(float x, float y, VuStats* vuStats) {
-        VuMeter* meter = new VuMeter(vuStats);
-        meter->box.pos = Vec(x, y);
-        meter->box.size = Vec(8, 104);
-        addChild(meter);
     }
 };
 

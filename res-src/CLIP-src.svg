@@ -210,24 +210,15 @@
   <g transform="translate(0 0)"><use xlink:href="#screw"/></g>
   <g transform="translate(33 368)"><use xlink:href="#screw"/></g>
 
-  <!-- ======== lcd ======== -->  
-
-  <rect x="0" y="35" width="45" height="114" rx="2" class="lcd-bg-frame"/>
-  <rect x="0" y="36" width="45" height="112" rx="2" class="lcd-bg"/>
-
-  <g transform="translate(24 44)">
-    <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
-  </g>
-
   <!-- ======== level ======== -->  
 
-  <g transform="translate(22.5 186)">
+  <g transform="translate(22.5 74)">
     <polyline points="0 0 0 36" class="connect"/>
     <text x="0" y="-17" class="label" text-anchor="middle">LEVEL</text>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
 
-  <g transform="translate(22.5 222)">
+  <g transform="translate(22.5 110)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
 
