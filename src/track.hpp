@@ -151,18 +151,18 @@ struct MonoTrack {
         return levelCvAmps[ch].next(db);
     }
 
-    void amplify(float ampL, bool applyLevelCv) {
+    void amplify(float amp, bool applyLevelCv) {
 
         int channels = std::max(input->getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {
 
-            float ampCh = ampL;
+            float chAmp = amp;
             if (applyLevelCv) {
-                ampCh = ampCh * nextLevelCvAmp(levelCvInput, ch);
+                chAmp = chAmp * nextLevelCvAmp(levelCvInput, ch);
             }
 
             // hard clip
-            float out = clamp(input->getPolyVoltage(ch) * ampCh, -10.0f, 10.0f);
+            float out = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
 
             output->setVoltage(out, ch);
         }
@@ -196,8 +196,8 @@ struct MonoTrack {
         vuStats.onSampleRateChange(sampleRate);
     }
 
-    void process(float ampL, bool applyLevelCv) {
-        amplify(ampL, applyLevelCv);
+    void process(float amp, bool applyLevelCv) {
+        amplify(amp, applyLevelCv);
         // pan();
         summarize();
     }
@@ -270,22 +270,22 @@ struct StereoTrack {
         bool muted = muteParam->getValue() > 0.5f;
 
         // level amplitude
-        float ampL = 0.0f;
+        float amp = 0.0f;
         if (muted) {
-            ampL = levelAmp.next(kMinDb);
+            amp = levelAmp.next(kMinDb);
         } else {
-            ampL = levelAmp.next(levelToDb(levelParam->getValue()));
+            amp = levelAmp.next(levelToDb(levelParam->getValue()));
         }
 
         // level cv
         bool applyLevelCv = (!muted && levelCvInput->isConnected());
 
         if (leftInput->isConnected()) {
-            left.process(ampL, applyLevelCv);
+            left.process(amp, applyLevelCv);
 
             // stereo
             if (rightInput->isConnected()) {
-                right.process(ampL, applyLevelCv);
+                right.process(amp, applyLevelCv);
             }
             // mono: copy left to right
             else {
@@ -294,7 +294,7 @@ struct StereoTrack {
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                right.process(ampL, applyLevelCv);
+                right.process(amp, applyLevelCv);
                 left.copyFrom(right);
             }
             // no inputs

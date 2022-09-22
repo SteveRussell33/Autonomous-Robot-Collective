@@ -11,8 +11,8 @@
 
 struct CLIP : Module {
 
-    const int kOversampleFactor = 4;
-    arc::dsp::Oversample oversample{kOversampleFactor};
+    //const int kOversampleFactor = 4;
+    //arc::dsp::Oversample oversample{kOversampleFactor};
 
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
@@ -62,7 +62,7 @@ struct CLIP : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        oversample.onSampleRateChange(e.sampleRate);
+        //oversample.onSampleRateChange(e.sampleRate);
         levelAmp.onSampleRateChange(e.sampleRate);
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
             levelCvAmps[ch].onSampleRateChange(e.sampleRate);
@@ -72,30 +72,22 @@ struct CLIP : Module {
 
     float oversampleSoftClip(float in) {
 
-        float buffer[arc::dsp::kMaxOversample] = {};
-        oversample.upsample(in, buffer);
+        return arc::dsp::softClip(in);
 
-        for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = arc::dsp::softClip(buffer[i]);
-        }
+        //float buffer[arc::dsp::kMaxOversample] = {};
+        //oversample.upsample(in, buffer);
 
-        return oversample.downsample(buffer);
+        //for (int i = 0; i < kOversampleFactor; i++) {
+        //    buffer[i] = arc::dsp::softClip(buffer[i]);
+        //}
+
+        //return oversample.downsample(buffer);
     }
 
-    float nextCvAmplitude(int ch) {
-
-        // channel amplitude
-        float cvAmp = 1.0f;
-        if (inputs[kLevelCvInput].isConnected()) {
-            float cv = inputs[kLevelCvInput].getPolyVoltage(ch);
-            float cvDb = rescale(cv, 0.0f, 10.0f, kMinDb, kMaxDb);
-            cvAmp = levelCvAmps[ch].next(cvDb);
-        }
-//ifdef CLIP_DEBUG
-//            outputs[kDebug1 + ch].setVoltage(cvAmp);
-//            outputs[kDebug3 + ch].setVoltage(cvAmp * amp);
-//endif
-        return cvAmp;
+    float nextLevelCvAmp( int ch) {
+        float v = inputs[kLevelCvInput].getPolyVoltage(ch);
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return levelCvAmps[ch].next(db);
     }
 
     void process(const ProcessArgs& args) override {
@@ -116,10 +108,14 @@ struct CLIP : Module {
         for (int ch = 0; ch < channels; ch++) {
             float in = inputs[kInput].getPolyVoltage(ch);
 
-            float cvAmp = nextCvAmplitude(ch);
+            // channel amplitude
+            float chAmp = amp;
+            if (inputs[kLevelCvInput].isConnected()) {
+                chAmp = chAmp * nextLevelCvAmp(ch);
+            }
 
             // process sample
-            float limit = 5.0f * cvAmp * amp;
+            float limit = 5.0f * chAmp;
             float out = oversampleSoftClip(in / limit) * limit;
 
             sum += out;
