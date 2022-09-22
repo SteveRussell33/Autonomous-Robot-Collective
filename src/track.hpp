@@ -62,29 +62,51 @@ struct Amplitude {
 
     float curDb;
     float curAmp;
-    bogaudio::dsp::SlewLimiter slew;
+    bogaudio::dsp::SlewLimiter dbSlew;
+    bogaudio::dsp::SlewLimiter muteSlew;
+
+    bool muted = false;
 
   public:
 
     Amplitude() {
-        curDb = kMinDb;
         curAmp = 0.0f;
-        slew.setLast(curDb);
+        muteSlew.setLast(curAmp);
+        muted = true;
     }
 
     void onSampleRateChange(float sampleRate) {
-        slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
+        muteSlew.setParams(sampleRate, 5.0f, 1.0f);
     }
 
     float next(float db) {
 
-        float dbs = slew.next(db);
+        if (muted) {
+            // TODO use a lookup table
+            curDb = bogaudio::dsp::amplitudeToDecibels(curAmp);
+            dbSlew.setLast(curDb);
+            muted = false;
+        }
+
+        float dbs = dbSlew.next(db);
         if (curDb != dbs) {
             curDb = dbs;
 
             // TODO use a lookup table
             curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
         }
+        return curAmp;
+    }
+
+    float nextMute() {
+
+        if (!muted) {
+            muteSlew.setLast(curAmp);
+            muted = true;
+        }
+
+        curAmp = muteSlew.next(0.0f);
         return curAmp;
     }
 };
@@ -144,7 +166,7 @@ struct MonoTrack {
     Input* input;
     Input* levelCvInput;
 
-    float nextLevelCvAmp(Input* levelCvInput, int ch) {
+    float nextLevelCvAmp(int ch) {
         float v = levelCvInput->getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
         return levelCvAmps[ch].next(db);
@@ -157,7 +179,7 @@ struct MonoTrack {
 
             float chAmp = amp;
             if (applyLevelCv) {
-                chAmp = chAmp * nextLevelCvAmp(levelCvInput, ch);
+                chAmp = chAmp * nextLevelCvAmp(ch);
             }
 
             // hard clip
@@ -165,8 +187,17 @@ struct MonoTrack {
         }
     }
 
-    // void pan() {
-    // }
+    void mute() {
+
+        channels = std::max(input->getChannels(), 1);
+        for (int ch = 0; ch < channels; ch++) {
+
+            float chAmp = levelCvAmps[ch].nextMute();
+
+            // hard clip
+            voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
+        }
+    }
 
     void updateStats() {
         float sum = 0.f;
@@ -183,7 +214,6 @@ struct MonoTrack {
     VuStats vuStats;
 
     void init(Input* input_, Input* levelCvInput_) {
-
         input = input_;
         levelCvInput = levelCvInput_;
     }
@@ -195,10 +225,12 @@ struct MonoTrack {
         vuStats.onSampleRateChange(sampleRate);
     }
 
-    void process(float amp, bool applyLevelCv) {
-
-        amplify(amp, applyLevelCv);
-        // pan();
+    void process(bool muted, float amp, bool applyLevelCv) {
+        if (muted) {
+            mute();
+        } else {
+            amplify(amp, applyLevelCv);
+        }
         updateStats();
     }
 
@@ -259,13 +291,12 @@ struct StereoTrack {
 
     void process() {
 
+        // mute
         bool muted = muteParam->getValue() > 0.5f;
 
-        // level amplitude
+        // amplitude
         float amp = 0.0f;
-        if (muted) {
-            amp = levelAmp.next(kMinDb);
-        } else {
+        if (!muted) {
             amp = levelAmp.next(levelToDb(levelParam->getValue()));
         }
 
@@ -273,11 +304,12 @@ struct StereoTrack {
         bool applyLevelCv = (!muted && levelCvInput->isConnected());
 
         if (leftInput->isConnected()) {
-            left.process(amp, applyLevelCv);
+            left.process(muted, amp, applyLevelCv);
+            left.updateStats();
 
             // stereo
             if (rightInput->isConnected()) {
-                right.process(amp, applyLevelCv);
+                right.process(muted, amp, applyLevelCv);
             }
             // mono: copy left to right
             else {
@@ -286,7 +318,7 @@ struct StereoTrack {
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                right.process(amp, applyLevelCv);
+                right.process(muted, amp, applyLevelCv);
                 left.copyFrom(right);
             }
             // no inputs
