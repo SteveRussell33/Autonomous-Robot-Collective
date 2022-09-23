@@ -12,7 +12,8 @@ struct TRACK4 : Module {
 
     static const int kNumTracks = 4;
 
-    // StereoTrack track;
+    StereoTrack tracks[kNumTracks];
+    //StereoTrack mixTrack;
 
     enum ParamId { 
         ENUMS(kLevelParam, kNumTracks), 
@@ -92,7 +93,15 @@ struct TRACK4 : Module {
 
         //------------------------------------------------------
 
-        // track.init(
+        for (int t = 0; t < TRACK4::kNumTracks; t++) {
+            tracks[t].init(
+                &(inputs[kLeftInput + t]),
+                &(inputs[kRightInput + t]),
+                &(params[kLevelParam + t]),
+                &(inputs[kLevelCvInput + t]));
+        }
+
+        // mixTrack.init(
         //     &(inputs[kLeftInput]),
         //     &(inputs[kRightInput]),
         //     &(params[kLevelParam]),
@@ -100,10 +109,30 @@ struct TRACK4 : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        // track.onSampleRateChange(e.sampleRate);
+        for (int t = 0; t < TRACK4::kNumTracks; t++) {
+            tracks[t].onSampleRateChange(e.sampleRate);
+        }
+        //mixTrack.onSampleRateChange(e.sampleRate);
+    }
+
+    void processOutput(MonoTrack& trk, Output& output) {
+        if (output.isConnected()) {
+            output.setChannels(trk.channels);
+            output.writeVoltages(trk.voltages);
+        } else {
+            output.setChannels(0);
+        }
     }
 
     void process(const ProcessArgs& args) override {
+
+        for (int t = 0; t < TRACK4::kNumTracks; t++) {
+            bool muted = params[kMuteParam + t].getValue() > 0.5f;
+            tracks[t].process(muted);
+
+            processOutput(tracks[t].left, outputs[kLeftSend + t]);
+            processOutput(tracks[t].right, outputs[kRightSend + t]);
+        }
     }
 };
 
@@ -131,8 +160,8 @@ struct TRACK4Widget : ModuleWidget {
 
         int x = 30;
         for (int t = 0; t < TRACK4::kNumTracks; t++) {
-            //addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
-            //addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
+            addMeter(x - 6, 44, module ? &(module->tracks[t].left.vuStats) : NULL);
+            addMeter(x + 1, 44, module ? &(module->tracks[t].right.vuStats) : NULL);
 
             addParam(createParamCentered<MKnob24>(Vec(x, 166), module, TRACK4::kLevelParam + t));
             addInput(createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kLevelCvInput + t));
@@ -146,8 +175,8 @@ struct TRACK4Widget : ModuleWidget {
             x += 38;
         }
 
-        ////addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
-        ////addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
+        //addMeter(x - 6, 44, module ? &(module->track.left.vuStats) : NULL);
+        //addMeter(x + 1, 44, module ? &(module->track.right.vuStats) : NULL);
 
         addParam(createParamCentered<MKnob24>(Vec(x, 166), module, TRACK4::kMixLevelParam));
         addInput(createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kMixLevelCvInput));
@@ -170,12 +199,12 @@ struct TRACK4Widget : ModuleWidget {
         addOutput(createOutputCentered<MPolyPort>(Vec(234, y+29), module, TRACK4::kMixRightSend));
     }
 
-    //void addMeter(float x, float y, VuStats* vuStats) {
-    //    VuMeter* meter = new VuMeter(vuStats);
-    //    meter->box.pos = Vec(x, y);
-    //    meter->box.size = Vec(8, 104);
-    //    addChild(meter);
-    //}
+    void addMeter(float x, float y, VuStats* vuStats) {
+        VuMeter* meter = new VuMeter(vuStats);
+        meter->box.pos = Vec(x, y);
+        meter->box.size = Vec(8, 104);
+        addChild(meter);
+    }
 };
 
 Model* modelTRACK4 = createModel<TRACK4, TRACK4Widget>("TRACK4");

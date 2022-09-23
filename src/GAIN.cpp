@@ -62,7 +62,7 @@ struct GAIN : Module {
         track.onSampleRateChange(e.sampleRate);
     }
 
-    void processOutput(Output& output, MonoTrack& trk) {
+    void processOutput(MonoTrack& trk, Output& output) {
         if (output.isConnected()) {
             output.setChannels(trk.channels);
             output.writeVoltages(trk.voltages);
@@ -76,8 +76,8 @@ struct GAIN : Module {
         bool muted = params[kMuteParam].getValue() > 0.5f;
         track.process(muted);
 
-        processOutput(outputs[kLeftOutput], track.left);
-        processOutput(outputs[kRightOutput], track.right);
+        processOutput(track.left, outputs[kLeftOutput]);
+        processOutput(track.right, outputs[kRightOutput]);
     }
 };
 
