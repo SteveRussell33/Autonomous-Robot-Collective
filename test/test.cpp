@@ -211,47 +211,55 @@
 //}
 //
 
-//--------------------------------------------------------------
-//--------------------------------------------------------------
-//--------------------------------------------------------------
-
-#include <iomanip>
-#include <iostream>
-#include <cmath>
-
-#include "../lib/bogaudio/dsp/signal.hpp"
-#include "../src/dsp/arc_table.hpp"
-
-//--------------------------------------------------------------
-
- void dump(float v) {
-    std::cout << std::fixed;
-    std::cout << std::setprecision(7);
-    std::cout << v;
-}
-
-constexpr float factorial(int n) {
-    return (n < 2) ? 1 : (n * factorial(n-1));
-}
-
-constexpr float rescale(float x, float xMin, float xMax, float yMin, float yMax) {
-	return yMin + (x - xMin) / (xMax - xMin) * (yMax - yMin);
-}
-
-constexpr float dbtoa(int n) {
-    return std::powf(10.0f, rescale(n, 0, 10, -60, 20) * 0.05f)
-}
-
-//-60.0f + (x - 0.0f) / (xMax - 0.0f) * (yMax - -60.0f)
+////--------------------------------------------------------------
+////--------------------------------------------------------------
+////--------------------------------------------------------------
 //
-void testTable() {
-    constexpr auto lut = arc::dsp::LUT<10>(dbtoa);
-    for (int i = 0; i < 10; i++) {
-        dump(lut[i]);
-        std::cout << std::endl;
-    }
-}
+//#include <iomanip>
+//#include <iostream>
+//#include <cmath>
+//
+//#include "../lib/bogaudio/dsp/signal.hpp"
+//#include "../src/dsp/arc_table.hpp"
+//
+////--------------------------------------------------------------
+//
+//void dump(float v) {
+//    std::cout << std::fixed;
+//    std::cout << std::setprecision(7);
+//    std::cout << v;
+//}
+//
+//constexpr float rescale(float x, float xMin, float xMax, float yMin, float yMax) {
+//	return yMin + (x - xMin) / (xMax - xMin) * (yMax - yMin);
+//}
+//
+////constexpr float dbtoa(int n) {
+////    return std::powf(10.0f, rescale(n, 0, 10, -60, 20) * 0.05f);
+////}
+//
+////-60.0f + (x - 0.0f) / (xMax - 0.0f) * (yMax - -60.0f)
+////
+//void testTable() {
+//    template<std::size_t Length>
+//    inline constexpr auto factorial_lut = lut<Length>([](std::size_t n){
+//
+//        return std::powf(10.0f, rescale(n, 0, 10, -60, 20) * 0.05f);
+//        unsigned result = 1;
+//        for(unsigned i = 2; i <= n; i++){
+//            result *= i;
+//        }
+//        return result;
+//    });
+//
+//
+//    //constexpr auto lut = arc::dsp::LUT<10>(dbtoa);
+//    //for (int i = 0; i < 10; i++) {
+//    //    dump(lut[i]);
+//    //    std::cout << std::endl;
+//    //}
+//}
 
 int main() {
-    testTable();
+    //testTable();
 }
