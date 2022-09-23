@@ -14,6 +14,7 @@ using namespace rack;
 //--------------------------------------------------------------
 
 static float levelToDb(float v) {
+    // TODO use a lookup table, or compute it more efficiently somehow
     // clang-format off
     if      (v >= 0.5) return rescale(v, 0.5f, 1.0f, -12.0f,  12.0f);
     else if (v >= 0.2) return rescale(v, 0.2f, 0.5f, -36.0f, -12.0f);
@@ -241,7 +242,7 @@ class MonoTrack {
 
     void disconnect() {
         sum = 0.f;
-        vuStats.process(0.0f);
+        //vuStats.process(0.0f);
     }
 };
 
