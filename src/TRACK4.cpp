@@ -13,7 +13,10 @@ struct TRACK4 : Module {
     static const int kNumTracks = 4;
 
     StereoTrack tracks[kNumTracks];
-    //StereoTrack mixTrack;
+
+    StereoTrack mix;
+    Input mixLeftInput;
+    Input mixRightInput;
 
     enum ParamId { 
         ENUMS(kLevelParam, kNumTracks), 
@@ -101,24 +104,36 @@ struct TRACK4 : Module {
                 &(inputs[kLevelCvInput + t]));
         }
 
-        // mixTrack.init(
-        //     &(inputs[kLeftInput]),
-        //     &(inputs[kRightInput]),
-        //     &(params[kLevelParam]),
-        //     &(inputs[kLevelCvInput]));
+        mix.init(
+            &mixLeftInput,
+            &mixRightInput,
+            &(params[kMixLevelParam]),
+            &(inputs[kMixLevelCvInput]));
+
+        mixLeftInput.channels = kNumTracks;
+        mixRightInput.channels = kNumTracks;
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
         for (int t = 0; t < TRACK4::kNumTracks; t++) {
             tracks[t].onSampleRateChange(e.sampleRate);
         }
-        //mixTrack.onSampleRateChange(e.sampleRate);
+        mix.onSampleRateChange(e.sampleRate);
     }
 
-    void processOutput(MonoTrack& trk, Output& output) {
+    void processSend(MonoTrack& trk, Output& send) {
+        if (send.isConnected()) {
+            send.setChannels(trk.channels);
+            send.writeVoltages(trk.voltages);
+        } else {
+            send.setChannels(0);
+        }
+    }
+
+    void processMixOutput(float val, Output& output) {
         if (output.isConnected()) {
-            output.setChannels(trk.channels);
-            output.writeVoltages(trk.voltages);
+            output.setChannels(1);
+            output.setVoltage(val, 0);
         } else {
             output.setChannels(0);
         }
@@ -130,9 +145,21 @@ struct TRACK4 : Module {
             bool muted = params[kMuteParam + t].getValue() > 0.5f;
             tracks[t].process(muted);
 
-            processOutput(tracks[t].left, outputs[kLeftSend + t]);
-            processOutput(tracks[t].right, outputs[kRightSend + t]);
+            processSend(tracks[t].left, outputs[kLeftSend + t]);
+            processSend(tracks[t].right, outputs[kRightSend + t]);
+
+            mixLeftInput.setVoltage(tracks[t].left.sum, t);
+            mixRightInput.setVoltage(tracks[t].right.sum, t);
         }
+
+        bool muted = params[kMixMuteParam].getValue() > 0.5f;
+        mix.process(muted);
+
+        processSend(mix.left, outputs[kMixLeftSend]);
+        processSend(mix.right, outputs[kMixRightSend]);
+
+        processMixOutput(mix.left.sum, outputs[kMixLeftOutput]);
+        processMixOutput(mix.right.sum, outputs[kMixRightOutput]);
     }
 };
 
@@ -175,8 +202,8 @@ struct TRACK4Widget : ModuleWidget {
             x += 38;
         }
 
-        //addMeter(x - 6, 44, module ? &(module->track.left.vuStats) : NULL);
-        //addMeter(x + 1, 44, module ? &(module->track.right.vuStats) : NULL);
+        addMeter(x - 6, 44, module ? &(module->mix.left.vuStats) : NULL);
+        addMeter(x + 1, 44, module ? &(module->mix.right.vuStats) : NULL);
 
         addParam(createParamCentered<MKnob24>(Vec(x, 166), module, TRACK4::kMixLevelParam));
         addInput(createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kMixLevelCvInput));

@@ -77,7 +77,7 @@ class Amplitude {
 
     void onSampleRateChange(float sampleRate) {
         dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
-        muteSlew.setParams(sampleRate, 5.0f, 1.0f);
+        muteSlew.setParams(sampleRate, 25.0f, 1.0f);
     }
 
     float next(float db) {
@@ -199,8 +199,8 @@ class MonoTrack {
         }
     }
 
-    void updateStats() {
-        float sum = 0.f;
+    void summarize() {
+        sum = 0.f;
         for (int c = 0; c < channels; c++) {
             sum += voltages[c];
         }
@@ -211,6 +211,8 @@ class MonoTrack {
 
     int channels = 0;
     float voltages[engine::PORT_MAX_CHANNELS] = {};
+    float sum = 0.f;
+
     VuStats vuStats;
 
     void init(Input* input_, Input* levelCvInput_) {
@@ -231,17 +233,21 @@ class MonoTrack {
         } else {
             amplify(amp, applyLevelCv);
         }
-        updateStats();
+        summarize();
     }
 
     void copyFrom(MonoTrack& trk) {
-        float sum = 0.f;
         channels = trk.channels;
         for (int c = 0; c < channels; c++) {
             voltages[c] = trk.voltages[c];
-            sum += voltages[c];
         }
+        sum = trk.sum;
         vuStats.process(sum);
+    }
+
+    void disconnect() {
+        sum = 0.f;
+        vuStats.process(0.0f);
     }
 };
 
@@ -307,8 +313,8 @@ class StereoTrack {
             }
             // no inputs
             else {
-                left.vuStats.process(0.0f);
-                right.vuStats.process(0.0f);
+                left.disconnect();
+                right.disconnect();
             }
         }
     }
