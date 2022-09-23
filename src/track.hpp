@@ -56,7 +56,7 @@ struct LevelParamQuantity : ParamQuantity {
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
-struct Amplitude {
+class Amplitude {
 
   private:
 
@@ -115,7 +115,7 @@ struct Amplitude {
 // Pan
 //--------------------------------------------------------------
 
-struct Pan {
+class Pan {
 
   private:
 
@@ -157,7 +157,7 @@ struct Pan {
 // MonoTrack
 //--------------------------------------------------------------
 
-struct MonoTrack {
+class MonoTrack {
 
   private:
 
@@ -249,7 +249,7 @@ struct MonoTrack {
 // StereoTrack
 //--------------------------------------------------------------
 
-struct StereoTrack {
+class StereoTrack {
 
   private:
 
@@ -259,7 +259,6 @@ struct StereoTrack {
     Input* rightInput = NULL;
     Param* levelParam = NULL;
     Input* levelCvInput = NULL;
-    Param* muteParam = NULL;
 
   public:
 
@@ -276,31 +275,21 @@ struct StereoTrack {
         Input* leftInput_,
         Input* rightInput_,
         Param* levelParam_,
-        Input* levelCvInput_,
-        Param* muteParam_) {
+        Input* levelCvInput_) {
 
         leftInput = leftInput_;
         rightInput = rightInput_;
         levelParam = levelParam_;
         levelCvInput = levelCvInput_;
-        muteParam = muteParam_;
 
         left.init(leftInput, levelCvInput);
         right.init(rightInput, levelCvInput);
     }
 
-    void process() {
+    void process(bool muted) {
 
-        // mute
-        bool muted = muteParam->getValue() > 0.5f;
+        float amp = muted ? 0.0f : levelAmp.next(levelToDb(levelParam->getValue()));
 
-        // amplitude
-        float amp = 0.0f;
-        if (!muted) {
-            amp = levelAmp.next(levelToDb(levelParam->getValue()));
-        }
-
-        // level cv
         bool applyLevelCv = (!muted && levelCvInput->isConnected());
 
         if (leftInput->isConnected()) {

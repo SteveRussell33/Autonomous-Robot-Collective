@@ -19,13 +19,6 @@ struct CLIP : Module {
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
-#ifdef CLIP_DEBUG
-    float debug1;
-    float debug2;
-    float debug3;
-    float debug4;
-#endif
-
     enum ParamId { kLevelParam, kParamsLen };
 
     enum InputId { kInput, kLevelCvInput, kInputsLen };

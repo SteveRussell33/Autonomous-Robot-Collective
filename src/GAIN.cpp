@@ -12,13 +12,6 @@ struct GAIN : Module {
 
     StereoTrack stereoTrack;
 
-#ifdef GAIN_DEBUG
-    float debug1;
-    float debug2;
-    float debug3;
-    float debug4;
-#endif
-
     enum ParamId { kLevelParam, kMuteParam, kParamsLen };
 
     enum InputId { kLeftInput, kRightInput, kLevelCvInput, kInputsLen };
@@ -62,8 +55,7 @@ struct GAIN : Module {
             &(inputs[kLeftInput]),
             &(inputs[kRightInput]),
             &(params[kLevelParam]),
-            &(inputs[kLevelCvInput]),
-            &(params[kMuteParam]));
+            &(inputs[kLevelCvInput]));
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
@@ -80,7 +72,9 @@ struct GAIN : Module {
     }
 
     void process(const ProcessArgs& args) override {
-        stereoTrack.process();
+
+        bool muted = params[kMuteParam].getValue() > 0.5f;
+        stereoTrack.process(muted);
 
         processOutput(outputs[kLeftOutput], stereoTrack.left);
         processOutput(outputs[kRightOutput], stereoTrack.right);

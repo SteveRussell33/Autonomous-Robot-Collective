@@ -12,7 +12,7 @@ using namespace rack;
 //--------------------------------------------------------------
 
 // VuStats is adapted from github.com/bogaudio/BogaudioModules/src/VU.cpp
-struct VuStats {
+class VuStats {
 
   private:
 
