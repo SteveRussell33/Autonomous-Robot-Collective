@@ -217,6 +217,7 @@
 
 #include <iomanip>
 #include <iostream>
+#include <cmath>
 
 #include "../lib/bogaudio/dsp/signal.hpp"
 #include "../src/dsp/arc_table.hpp"
@@ -229,13 +230,23 @@
     std::cout << v;
 }
 
-constexpr float factorial(float n){
+constexpr float factorial(int n) {
     return (n < 2) ? 1 : (n * factorial(n-1));
 }
 
+constexpr float rescale(float x, float xMin, float xMax, float yMin, float yMax) {
+	return yMin + (x - xMin) / (xMax - xMin) * (yMax - yMin);
+}
+
+constexpr float dbtoa(int n) {
+    return std::powf(10.0f, rescale(n, 0, 10, -60, 20) * 0.05f)
+}
+
+//-60.0f + (x - 0.0f) / (xMax - 0.0f) * (yMax - -60.0f)
+//
 void testTable() {
-    constexpr auto lut = arc::dsp::LUT<5>(factorial);
-    for (int i = 0; i < 5; i++) {
+    constexpr auto lut = arc::dsp::LUT<10>(dbtoa);
+    for (int i = 0; i < 10; i++) {
         dump(lut[i]);
         std::cout << std::endl;
     }
