@@ -83,7 +83,7 @@ class Amplitude {
     float next(float db) {
 
         if (muted) {
-            // TODO use a lookup table
+            // NOTE We don't really need a lookup table for this.
             curDb = bogaudio::dsp::amplitudeToDecibels(curAmp);
             dbSlew.setLast(curDb);
             muted = false;
