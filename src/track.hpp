@@ -13,6 +13,9 @@ using namespace rack;
 // LevelParamQuantity
 //--------------------------------------------------------------
 
+static const float kMinDb = -60.0f;
+static const float kMaxDb = 12.0f;
+
 static float levelToDb(float v) {
     // TODO use a lookup table, or compute it more efficiently somehow
     // clang-format off
@@ -53,9 +56,6 @@ struct LevelParamQuantity : ParamQuantity {
 //--------------------------------------------------------------
 // Amplitude
 //--------------------------------------------------------------
-
-static const float kMinDb = -60.0f;
-static const float kMaxDb = 12.0f;
 
 class Amplitude {
 
