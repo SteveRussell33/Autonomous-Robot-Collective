@@ -242,7 +242,7 @@ class MonoTrack {
 
     void disconnect() {
         sum = 0.f;
-        //vuStats.process(0.0f);
+        vuStats.process(0.0f);
     }
 };
 

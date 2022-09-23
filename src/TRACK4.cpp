@@ -18,14 +18,15 @@ struct TRACK4 : Module {
     Input mixLeftInput;
     Input mixRightInput;
 
-    enum ParamId { 
-        ENUMS(kLevelParam, kNumTracks), 
-        ENUMS(kMuteParam, kNumTracks), 
-        ENUMS(kPanParam, kNumTracks), 
+    enum ParamId {
+        ENUMS(kLevelParam, kNumTracks),
+        ENUMS(kMuteParam, kNumTracks),
+        ENUMS(kPanParam, kNumTracks),
         kMixLevelParam,
         kMixMuteParam,
         kMixPanParam,
-        kParamsLen };
+        kParamsLen
+    };
 
     enum InputId {
         ENUMS(kLeftInput, kNumTracks),
@@ -62,7 +63,12 @@ struct TRACK4 : Module {
                 kLevelParam + t, 0.0f, 1.0f, 0.75f, string::f("Track %d Level", t + 1), " dB");
             configInput(kLevelCvInput + t, string::f("Track %d Level CV", t + 1));
             configSwitch(
-                kMuteParam + t, 0.f, 1.f, 0.f, string::f("Track %d Mute/Solo", t + 1), {"Off", "On"});
+                kMuteParam + t,
+                0.f,
+                1.f,
+                0.f,
+                string::f("Track %d Mute/Solo", t + 1),
+                {"Off", "On"});
 
             configParam(kPanParam + t, 0.0f, 1.0f, 0.5f, string::f("Track %d Pan", t + 1));
             configInput(kPanCvInput + t, string::f("Track %d Pan CV", t + 1));
@@ -105,10 +111,7 @@ struct TRACK4 : Module {
         }
 
         mix.init(
-            &mixLeftInput,
-            &mixRightInput,
-            &(params[kMixLevelParam]),
-            &(inputs[kMixLevelCvInput]));
+            &mixLeftInput, &mixRightInput, &(params[kMixLevelParam]), &(inputs[kMixLevelCvInput]));
 
         mixLeftInput.channels = kNumTracks;
         mixRightInput.channels = kNumTracks;
@@ -190,8 +193,10 @@ struct TRACK4Widget : ModuleWidget {
             addMeter(x + 1, 44, module ? &(module->tracks[t].right.vuStats) : NULL);
 
             addParam(createParamCentered<MKnob24>(Vec(x, 166), module, TRACK4::kLevelParam + t));
-            addInput(createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kLevelCvInput + t));
-            addParam(createParamCentered<MToggleButton>(Vec(x, 226), module, TRACK4::kMuteParam + t));
+            addInput(
+                createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kLevelCvInput + t));
+            addParam(
+                createParamCentered<MToggleButton>(Vec(x, 226), module, TRACK4::kMuteParam + t));
 
             addParam(createParamCentered<MKnob24>(Vec(x, 256), module, TRACK4::kPanParam + t));
             addInput(createInputCentered<MPolyPort>(Vec(x, 286), module, TRACK4::kPanCvInput + t));
@@ -218,11 +223,12 @@ struct TRACK4Widget : ModuleWidget {
         int y = 51;
         for (int t = 0; t < TRACK4::kNumTracks; t++) {
             addOutput(createOutputCentered<MPolyPort>(Vec(234, y), module, TRACK4::kLeftSend + t));
-            addOutput(createOutputCentered<MPolyPort>(Vec(234, y+29), module, TRACK4::kRightSend + t));
+            addOutput(
+                createOutputCentered<MPolyPort>(Vec(234, y + 29), module, TRACK4::kRightSend + t));
             y += 67;
         }
         addOutput(createOutputCentered<MPolyPort>(Vec(234, y), module, TRACK4::kMixLeftSend));
-        addOutput(createOutputCentered<MPolyPort>(Vec(234, y+29), module, TRACK4::kMixRightSend));
+        addOutput(createOutputCentered<MPolyPort>(Vec(234, y + 29), module, TRACK4::kMixRightSend));
     }
 
     void addMeter(float x, float y, VuStats* vuStats) {
