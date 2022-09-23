@@ -271,11 +271,7 @@ class StereoTrack {
         right.onSampleRateChange(sampleRate);
     }
 
-    void init(
-        Input* leftInput_,
-        Input* rightInput_,
-        Param* levelParam_,
-        Input* levelCvInput_) {
+    void init(Input* leftInput_, Input* rightInput_, Param* levelParam_, Input* levelCvInput_) {
 
         leftInput = leftInput_;
         rightInput = rightInput_;

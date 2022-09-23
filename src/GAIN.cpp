@@ -10,7 +10,7 @@
 
 struct GAIN : Module {
 
-    StereoTrack stereoTrack;
+    StereoTrack track;
 
     enum ParamId { kLevelParam, kMuteParam, kParamsLen };
 
@@ -33,8 +33,8 @@ struct GAIN : Module {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
         configParam<LevelParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
-        configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
         configInput(kLevelCvInput, "Level CV");
+        configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
 
         configInput(kLeftInput, "Left");
         configInput(kRightInput, "Right");
@@ -51,7 +51,7 @@ struct GAIN : Module {
 
         //------------------------------------------------------
 
-        stereoTrack.init(
+        track.init(
             &(inputs[kLeftInput]),
             &(inputs[kRightInput]),
             &(params[kLevelParam]),
@@ -59,7 +59,7 @@ struct GAIN : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        stereoTrack.onSampleRateChange(e.sampleRate);
+        track.onSampleRateChange(e.sampleRate);
     }
 
     void processOutput(Output& output, MonoTrack& trk) {
@@ -74,10 +74,10 @@ struct GAIN : Module {
     void process(const ProcessArgs& args) override {
 
         bool muted = params[kMuteParam].getValue() > 0.5f;
-        stereoTrack.process(muted);
+        track.process(muted);
 
-        processOutput(outputs[kLeftOutput], stereoTrack.left);
-        processOutput(outputs[kRightOutput], stereoTrack.right);
+        processOutput(outputs[kLeftOutput], track.left);
+        processOutput(outputs[kRightOutput], track.right);
     }
 };
 
@@ -91,10 +91,6 @@ struct GAINWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/GAIN.svg")));
 
-        // addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
@@ -105,10 +101,9 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        addMeter(24 - 6, 44, module ? &(module->stereoTrack.left.vuStats) : NULL);
-        addMeter(24 + 1, 44, module ? &(module->stereoTrack.right.vuStats) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
 
-        // [168, 198, 228, 258, 288, 318, 348]
         addParam(createParamCentered<MKnob24>(Vec(24, 166), module, GAIN::kLevelParam));
         addInput(createInputCentered<MPolyPort>(Vec(24, 196), module, GAIN::kLevelCvInput));
         addParam(createParamCentered<MToggleButton>(Vec(24, 226), module, GAIN::kMuteParam));

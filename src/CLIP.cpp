@@ -80,7 +80,7 @@ struct CLIP : Module {
         oversample[ch].upsample(in, buffer);
 
         for (int i = 0; i < kOversampleFactor; i++) {
-            buffer[i] = arc::dsp::softClip(buffer[i]/limit) * limit;
+            buffer[i] = arc::dsp::softClip(buffer[i] / limit) * limit;
         }
 
         return oversample[ch].downsample(buffer);
@@ -119,10 +119,6 @@ struct CLIPWidget : ModuleWidget {
         setModule(module);
         setPanel(createPanel(asset::plugin(pluginInstance, "res/CLIP.svg")));
 
-        // addChild(createWidget<ScrewSilver>(Vec(15, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(15, 365)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 0)));
-        // addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
         addChild(createWidget<ScrewSilver>(Vec(0, 0)));
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 

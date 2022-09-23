@@ -215,7 +215,6 @@
   <rect x="0" y="36" width="45" height="112" rx="2" class="lcd-bg"/>
 
   <!-- labels -->  
-  <!-- [168, 198, 228, 258, 288, 318, 348] -->
   <g transform="translate(5 0)">
     <g transform="translate(0 166)">
       <text x="1" y="3" class="label" text-anchor="middle">LV</text>
