@@ -61,19 +61,18 @@ class Amplitude {
 
   private:
 
-    float curDb;
-    float curAmp;
+    float amp;
+    bool muted;
+
     bogaudio::dsp::SlewLimiter dbSlew;
     bogaudio::dsp::SlewLimiter muteSlew;
 
-    bool muted = false;
+    bogaudio::dsp::Amplifier amplifier;
 
   public:
 
-    Amplitude() {
-        curAmp = 0.0f;
-        muteSlew.setLast(curAmp);
-        muted = true;
+    Amplitude() : amp(0.0f), muted(true) {
+        muteSlew.setLast(0.0f);
     }
 
     void onSampleRateChange(float sampleRate) {
@@ -84,75 +83,69 @@ class Amplitude {
     float next(float db) {
 
         if (muted) {
-            // NOTE We don't really need a lookup table for this.
-            curDb = bogaudio::dsp::amplitudeToDecibels(curAmp);
-            dbSlew.setLast(curDb);
+            // NOTE We don't need a lookup table here.
+            dbSlew.setLast(bogaudio::dsp::amplitudeToDecibels(amp));
             muted = false;
         }
 
-        float dbs = dbSlew.next(db);
-        if (curDb != dbs) {
-            curDb = dbs;
-
-            // TODO use a lookup table
-            curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
-        }
-        return curAmp;
+        amplifier.setLevel(dbSlew.next(db));
+        amp = amplifier._level;
+        return amp;
     }
 
     float nextMute() {
 
         if (!muted) {
-            muteSlew.setLast(curAmp);
+            muteSlew.setLast(amp);
             muted = true;
         }
 
-        curAmp = muteSlew.next(0.0f);
-        return curAmp;
+        amp = muteSlew.next(0.0f);
+        return amp;
     }
 };
 
-//--------------------------------------------------------------
-// Pan
-//--------------------------------------------------------------
-
-class Pan {
-
-  private:
-
-    float curPan = 0.0f;
-
-    bogaudio::dsp::SlewLimiter slew;
-
-  public:
-
-    float left = 0.7071068f;
-    float right = 0.7071068f;
-
-    Pan() {
-        slew.setLast(0.0f);
-    }
-
-    void onSampleRateChange(float sampleRate) {
-        slew.setParams(sampleRate, 5.0f, 2.0f);
-    }
-
-    void next(float pan) {
-
-        pan = clamp(pan, -1.0f, 1.0f);
-
-        float ps = slew.next(pan);
-        if (curPan != ps) {
-            curPan = ps;
-
-            float p = (curPan + 1.0f) * 0.125f;
-
-            // TODO use lookup tables
-            left = std::cosf(2.0f * M_PI * p);
-            right = std::sinf(2.0f * M_PI * p);
-        }
-    }
-};
+////--------------------------------------------------------------
+//// Pan
+////--------------------------------------------------------------
+//
+//class Pan {
+//
+//  private:
+//
+//    float curPan = 0.0f;
+//
+//    bogaudio::dsp::SlewLimiter slew;
+//
+//  public:
+//
+//    float left = 0.7071068f;
+//    float right = 0.7071068f;
+//
+//    Pan() {
+//        slew.setLast(0.0f);
+//    }
+//
+//    void onSampleRateChange(float sampleRate) {
+//        slew.setParams(sampleRate, 5.0f, 2.0f);
+//    }
+//
+//    void next(float pan) {
+//
+//        pan = clamp(pan, -1.0f, 1.0f);
+//
+//        float ps = slew.next(pan);
+//        if (curPan != ps) {
+//            curPan = ps;
+//
+//            float p = (curPan + 1.0f) * 0.125f;
+//
+//            // TODO use lookup tables
+//            left = std::cosf(2.0f * M_PI * p);
+//            right = std::sinf(2.0f * M_PI * p);
+//        }
+//    }
+//};
 
 //--------------------------------------------------------------
 // MonoTrack
