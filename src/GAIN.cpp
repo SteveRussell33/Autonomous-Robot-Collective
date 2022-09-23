@@ -64,8 +64,8 @@ struct GAIN : Module {
 
     void processOutput(MonoTrack& trk, Output& output) {
         if (output.isConnected()) {
-            output.setChannels(trk.channels);
-            output.writeVoltages(trk.voltages);
+            output.setChannels(trk.output.channels);
+            output.writeVoltages(trk.output.voltages);
         } else {
             output.setChannels(0);
         }

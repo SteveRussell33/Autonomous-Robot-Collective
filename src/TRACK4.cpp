@@ -121,10 +121,10 @@ struct TRACK4 : Module {
         mix.onSampleRateChange(e.sampleRate);
     }
 
-    void processSend(MonoTrack& trk, Output& send) {
+    void processSend(Port& port, Output& send) {
         if (send.isConnected()) {
-            send.setChannels(trk.channels);
-            send.writeVoltages(trk.voltages);
+            send.setChannels(port.channels);
+            send.writeVoltages(port.voltages);
         } else {
             send.setChannels(0);
         }
@@ -145,19 +145,18 @@ struct TRACK4 : Module {
             bool muted = params[kMuteParam + t].getValue() > 0.5f;
             tracks[t].process(muted);
 
-            processSend(tracks[t].left, outputs[kLeftSend + t]);
-            processSend(tracks[t].right, outputs[kRightSend + t]);
+            processSend(tracks[t].left.output, outputs[kLeftSend + t]);
+            processSend(tracks[t].right.output, outputs[kRightSend + t]);
 
             mixLeftInput.setVoltage(tracks[t].left.sum, t);
             mixRightInput.setVoltage(tracks[t].right.sum, t);
         }
 
+        processSend(mixLeftInput, outputs[kMixLeftSend]);
+        processSend(mixRightInput, outputs[kMixRightSend]);
+
         bool muted = params[kMixMuteParam].getValue() > 0.5f;
         mix.process(muted);
-
-        processSend(mix.left, outputs[kMixLeftSend]);
-        processSend(mix.right, outputs[kMixRightSend]);
-
         processMixOutput(mix.left.sum, outputs[kMixLeftOutput]);
         processMixOutput(mix.right.sum, outputs[kMixRightOutput]);
     }

@@ -174,8 +174,8 @@ class MonoTrack {
 
     void amplify(float amp, bool applyLevelCv) {
 
-        channels = std::max(input->getChannels(), 1);
-        for (int ch = 0; ch < channels; ch++) {
+        output.channels = std::max(input->getChannels(), 1);
+        for (int ch = 0; ch < output.channels; ch++) {
 
             float chAmp = amp;
             if (applyLevelCv) {
@@ -183,34 +183,30 @@ class MonoTrack {
             }
 
             // hard clip
-            voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
+            output.voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
         }
     }
 
     void mute() {
 
-        channels = std::max(input->getChannels(), 1);
-        for (int ch = 0; ch < channels; ch++) {
+        output.channels = std::max(input->getChannels(), 1);
+        for (int ch = 0; ch < output.channels; ch++) {
 
             float chAmp = levelCvAmps[ch].nextMute();
 
             // hard clip
-            voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
+            output.voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
         }
     }
 
     void summarize() {
-        sum = 0.f;
-        for (int c = 0; c < channels; c++) {
-            sum += voltages[c];
-        }
+        sum = output.getVoltageSum();
         vuStats.process(sum);
     }
 
   public:
 
-    int channels = 0;
-    float voltages[engine::PORT_MAX_CHANNELS] = {};
+    Output output;
     float sum = 0.f;
 
     VuStats vuStats;
@@ -237,10 +233,8 @@ class MonoTrack {
     }
 
     void copyFrom(MonoTrack& trk) {
-        channels = trk.channels;
-        for (int c = 0; c < channels; c++) {
-            voltages[c] = trk.voltages[c];
-        }
+        output.channels = trk.output.channels;
+        output.writeVoltages(trk.output.voltages);
         sum = trk.sum;
         vuStats.process(sum);
     }
