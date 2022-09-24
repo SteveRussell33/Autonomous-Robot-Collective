@@ -15,27 +15,27 @@ class VuStats {
 
   private:
 
-	//dsp::VuMeter2 rmsMeter;
-	dsp::VuMeter2 peakMeter;
+    // dsp::VuMeter2 rmsMeter;
+    dsp::VuMeter2 peakMeter;
 
     bogaudio::dsp::Timer maxPeakTimer;
 
   public:
 
-    //float rms = 0.0f;
+    // float rms = 0.0f;
     float peak = 0.0f;
     float maxPeak = 0.0f;
 
     void onSampleRateChange(float sampleRate) {
-        //rmsMeter.mode = dsp::VuMeter2::Mode::RMS;
+        // rmsMeter.mode = dsp::VuMeter2::Mode::RMS;
         peakMeter.mode = dsp::VuMeter2::Mode::PEAK;
         maxPeakTimer.setParams(sampleRate, 1.0f);
     }
 
     void process(float deltaTime, float sample) {
 
-        //rmsMeter.process(deltaTime, sample);
-        //rms = rmsMeter.v;
+        // rmsMeter.process(deltaTime, sample);
+        // rms = rmsMeter.v;
 
         peakMeter.process(deltaTime, sample);
         peak = peakMeter.v;
@@ -189,6 +189,6 @@ struct VuMeter : OpaqueWidget {
 
         drawLevel(args, 0, vuStats->peak, boldColors);
         drawMaxPeak(args, 0, vuStats->maxPeak, boldColors);
-        //drawLevel(args, 0, vuStats->rms, boldColors);
+        // drawLevel(args, 0, vuStats->rms, boldColors);
     }
 };

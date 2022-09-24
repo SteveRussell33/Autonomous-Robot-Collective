@@ -209,14 +209,7 @@ class StereoTrack {
     Param* panParam = NULL;
     Input* panCvInput = NULL;
 
-    float nextLevelCvAmp(int ch) {
-        float v = levelCvInput->getPolyVoltage(ch);
-        // rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        float db = kMinDb + v * 0.1f * kDecibelRange;
-        return levelCvAmps[ch].next(db);
-    }
-
-    void doProcess(float sampleTime, Input* inLeft, Input* inRight, bool muted) {
+    void processStereo(float sampleTime, Input* inLeft, Input* inRight, bool muted) {
 
         left.sum = 0.0f;
         right.sum = 0.0f;
@@ -228,32 +221,39 @@ class StereoTrack {
 
         if (muted) {
             for (int ch = 0; ch < maxChans; ch++) {
-                float ampCh = levelCvAmps[ch].nextMute();
-                left.process(inLeft, ch, ampCh);
-                right.process(inRight, ch, ampCh);
+                float m = levelCvAmps[ch].nextMute();
+                left.process(inLeft, ch, m);
+                right.process(inRight, ch, m);
             }
         } else {
             float amp = levelAmp.next(levelToDb(levelParam->getValue()));
 
-            float ampLeft = amp;
-            float ampRight = amp;
-            if (panParam) {
-                panner.setPan(panParam->getValue());
-                panner.next(amp, ampLeft, ampRight);
-            }
+            for (int ch = 0; ch < maxChans; ch++) {
+                float leftAmp = amp;
+                float rightAmp = amp;
 
-            if (levelCvInput->isConnected()) {
-                for (int ch = 0; ch < maxChans; ch++) {
-                    float chAmpLeft = ampLeft * nextLevelCvAmp(ch);
-                    float chAmpRight = ampRight * nextLevelCvAmp(ch);
-                    left.process(inLeft, ch, chAmpLeft);
-                    right.process(inRight, ch, chAmpRight);
+                if (levelCvInput->isConnected()) {
+                    float lv = levelCvInput->getPolyVoltage(ch);
+                    float db = kMinDb + lv * 0.1f * kDecibelRange; // avoid div in rescale()
+                    float nl = levelCvAmps[ch].next(db);
+                    leftAmp *= nl;
+                    rightAmp *= nl;
                 }
-            } else {
-                for (int ch = 0; ch < maxChans; ch++) {
-                    left.process(inLeft, ch, ampLeft);
-                    right.process(inRight, ch, ampRight);
+
+                if (panParam) {
+                    float pan = panParam->getValue();
+                    if (panCvInput->isConnected()) {
+                        float pv = panCvInput->getPolyVoltage(ch) * 0.2f; // -5/+5 => -1/+1
+                        pan = clamp(pan + pv, -1.0f, 1.0f);
+                    }
+
+                    panner.setPan(pan);
+                    leftAmp *= panner._lLevel;
+                    rightAmp *= panner._rLevel;
                 }
+
+                left.process(inLeft, ch, leftAmp);
+                right.process(inRight, ch, rightAmp);
             }
         }
 
@@ -296,16 +296,16 @@ class StereoTrack {
         if (leftInput->isConnected()) {
             // stereo
             if (rightInput->isConnected()) {
-                doProcess(sampleTime, leftInput, rightInput, muted);
+                processStereo(sampleTime, leftInput, rightInput, muted);
             }
             // mono: copy left to right
             else {
-                doProcess(sampleTime, leftInput, leftInput, muted);
+                processStereo(sampleTime, leftInput, leftInput, muted);
             }
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                doProcess(sampleTime, rightInput, rightInput, muted);
+                processStereo(sampleTime, rightInput, rightInput, muted);
             }
             // no inputs
             else {
