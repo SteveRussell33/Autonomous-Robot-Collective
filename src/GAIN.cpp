@@ -55,7 +55,9 @@ struct GAIN : Module {
             &(inputs[kLeftInput]),
             &(inputs[kRightInput]),
             &(params[kLevelParam]),
-            &(inputs[kLevelCvInput]));
+            &(inputs[kLevelCvInput]),
+            NULL,
+            NULL);
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {

@@ -48,7 +48,7 @@ class VuStats {
         rms = calcRms.next(sample) / 5.0f;
 
         // Peak
-        float pa = calcPeak.next(fabsf(sample)) / 5.0f;
+        float pa = calcPeak.next(fabsf(sample)) * 0.2f;
 
         if (pa < peak) {
             if (!peakFalling) {
@@ -68,6 +68,55 @@ class VuStats {
         }
     }
 };
+
+//// VuStats is adapted from /Rack-SDK/include/dsp/vumeter.hpp
+// class VuStats {
+//
+// private:
+//
+//	/** Inverse time constant in 1/seconds */
+//	static constexpr float kLambda = 30.f;
+//
+//     float deltaTime = 0.0f;
+//     bogaudio::dsp::Timer maxPeakTimer;
+//
+//	void processRms(float value) {
+//         value = std::pow(value, 2); // TODO lookup table
+//         rms += (value - rms) * kLambda * deltaTime;
+//     }
+//
+//	void processPeak(float value) {
+//         value = std::fabs(value);
+//         if (value >= peak) {
+//             peak = value;
+//         }
+//         else {
+//             peak += (value - peak) * kLambda * deltaTime;
+//         }
+//     }
+//
+// public:
+//
+//     float rms = 0.0f;
+//     float peak = 0.0f;
+//     float maxPeak = 0.0f;
+//
+//     void onSampleRateChange(float sampleRate) {
+//         deltaTime = 1.0f/sampleRate;
+//         maxPeakTimer.setParams(sampleRate, 1.0f);
+//     }
+//
+//	void process(float value) {
+//         processRms(value);
+//         processPeak(value);
+//
+//         // Max Peak
+//         if ((peak > maxPeak) || !maxPeakTimer.next()) {
+//             maxPeak = peak;
+//             maxPeakTimer.reset();
+//         }
+//	}
+// };
 
 //--------------------------------------------------------------
 // VuMeter

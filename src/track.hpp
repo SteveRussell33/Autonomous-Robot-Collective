@@ -28,7 +28,7 @@ static float levelToDb(float v) {
 
 struct LevelParamQuantity : ParamQuantity {
 
-private:
+  private:
 
     static constexpr float kInv24Db = 1.0f / 24.0f;
 
@@ -36,7 +36,7 @@ private:
         return yMin + (x - xMin) * kInv24Db * (yMax - yMin);
     }
 
-public:
+  public:
 
     float getDisplayValue() override {
         float v = getValue();
@@ -120,7 +120,7 @@ class Amplitude {
 //// Pan
 ////--------------------------------------------------------------
 //
-//class Pan {
+// class Pan {
 //
 //  private:
 //
@@ -198,10 +198,16 @@ class StereoTrack {
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
+    bogaudio::dsp::Panner panner;
+
     Input* leftInput = NULL;
     Input* rightInput = NULL;
+
     Param* levelParam = NULL;
     Input* levelCvInput = NULL;
+
+    Param* panParam = NULL;
+    Input* panCvInput = NULL;
 
     float nextLevelCvAmp(int ch) {
         float v = levelCvInput->getPolyVoltage(ch);
@@ -229,16 +235,24 @@ class StereoTrack {
         } else {
             float amp = levelAmp.next(levelToDb(levelParam->getValue()));
 
+            float ampLeft = amp;
+            float ampRight = amp;
+            if (panParam) {
+                panner.setPan(panParam->getValue());
+                panner.next(amp, ampLeft, ampRight);
+            }
+
             if (levelCvInput->isConnected()) {
                 for (int ch = 0; ch < maxChans; ch++) {
-                    float ampCh = amp * nextLevelCvAmp(ch);
-                    left.process(inLeft, ch, ampCh);
-                    right.process(inRight, ch, ampCh);
+                    float chAmpLeft = ampLeft * nextLevelCvAmp(ch);
+                    float chAmpRight = ampRight * nextLevelCvAmp(ch);
+                    left.process(inLeft, ch, chAmpLeft);
+                    right.process(inRight, ch, chAmpRight);
                 }
             } else {
                 for (int ch = 0; ch < maxChans; ch++) {
-                    left.process(inLeft, ch, amp);
-                    right.process(inRight, ch, amp);
+                    left.process(inLeft, ch, ampLeft);
+                    right.process(inRight, ch, ampRight);
                 }
             }
         }
@@ -261,11 +275,20 @@ class StereoTrack {
         right.onSampleRateChange(sampleRate);
     }
 
-    void init(Input* leftInput_, Input* rightInput_, Param* levelParam_, Input* levelCvInput_) {
+    void init(
+        Input* leftInput_,
+        Input* rightInput_,
+        Param* levelParam_,
+        Input* levelCvInput_,
+        Param* panParam_,
+        Input* panCvInput_) {
+
         leftInput = leftInput_;
         rightInput = rightInput_;
         levelParam = levelParam_;
         levelCvInput = levelCvInput_;
+        panParam = panParam_;
+        panCvInput = panCvInput_;
     }
 
     void process(bool muted) {

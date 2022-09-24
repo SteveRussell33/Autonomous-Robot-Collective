@@ -70,7 +70,7 @@ struct TRACK4 : Module {
                 string::f("Track %d Mute/Solo", t + 1),
                 {"Off", "On"});
 
-            configParam(kPanParam + t, 0.0f, 1.0f, 0.5f, string::f("Track %d Pan", t + 1));
+            configParam(kPanParam + t, -1.0f, 1.0f, 0.0f, string::f("Track %d Pan", t + 1));
             configInput(kPanCvInput + t, string::f("Track %d Pan CV", t + 1));
 
             configInput(kLeftInput + t, string::f("Track %d Left", t + 1));
@@ -84,7 +84,7 @@ struct TRACK4 : Module {
         configInput(kMixLevelCvInput, "Mix Level CV");
         configSwitch(kMixMuteParam, 0.f, 1.f, 0.f, "Mix Mute", {"Off", "On"});
 
-        configParam(kMixPanParam, 0.0f, 1.0f, 0.5f, "Mix Pan");
+        configParam(kMixPanParam, -1.0f, 1.0f, 0.0f, "Mix Pan");
         configInput(kMixPanCvInput, "Mix Pan CV");
 
         configOutput(kMixLeftSend, "Send Mix Left");
@@ -107,11 +107,18 @@ struct TRACK4 : Module {
                 &(inputs[kLeftInput + t]),
                 &(inputs[kRightInput + t]),
                 &(params[kLevelParam + t]),
-                &(inputs[kLevelCvInput + t]));
+                &(inputs[kLevelCvInput + t]),
+                &(params[kPanParam + t]),
+                &(inputs[kPanCvInput + t]));
         }
 
         mix.init(
-            &mixLeftInput, &mixRightInput, &(params[kMixLevelParam]), &(inputs[kMixLevelCvInput]));
+            &mixLeftInput,
+            &mixRightInput,
+            &(params[kMixLevelParam]),
+            &(inputs[kMixLevelCvInput]),
+            &(params[kMixPanParam]),
+            &(inputs[kMixPanCvInput]));
 
         mixLeftInput.channels = kNumTracks;
         mixRightInput.channels = kNumTracks;
