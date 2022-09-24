@@ -17,7 +17,7 @@ static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
 
 static float levelToDb(float v) {
-    // TODO use a lookup table, or compute it more efficiently somehow
+    // TODO compute it more efficiently
     // clang-format off
     if      (v >= 0.5) return rescale(v, 0.5f, 1.0f, -12.0f,  12.0f);
     else if (v >= 0.2) return rescale(v, 0.2f, 0.5f, -36.0f, -12.0f);
@@ -151,79 +151,30 @@ class Amplitude {
 // MonoTrack
 //--------------------------------------------------------------
 
-class MonoTrack {
-
-  private:
-
-    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
-
-    Input* input;
-    Input* levelCvInput;
-
-    float nextLevelCvAmp(int ch) {
-        float v = levelCvInput->getPolyVoltage(ch);
-        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        return levelCvAmps[ch].next(db);
-    }
-
-    void amplify(float amp, bool applyLevelCv) {
-
-        output.channels = std::max(input->getChannels(), 1);
-        for (int ch = 0; ch < output.channels; ch++) {
-
-            float chAmp = amp;
-            if (applyLevelCv) {
-                chAmp = chAmp * nextLevelCvAmp(ch);
-            }
-
-            // hard clip
-            output.voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
-        }
-    }
-
-    void mute() {
-
-        output.channels = std::max(input->getChannels(), 1);
-        for (int ch = 0; ch < output.channels; ch++) {
-
-            float chAmp = levelCvAmps[ch].nextMute();
-
-            // hard clip
-            output.voltages[ch] = clamp(input->getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
-        }
-    }
-
-    void summarize() {
-        sum = output.getVoltageSum();
-        vuStats.process(sum);
-    }
-
-  public:
+struct MonoTrack {
 
     Output output;
     float sum = 0.f;
-
     VuStats vuStats;
 
-    void init(Input* input_, Input* levelCvInput_) {
-        input = input_;
-        levelCvInput = levelCvInput_;
-    }
-
     void onSampleRateChange(float sampleRate) {
-        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            levelCvAmps[ch].onSampleRateChange(sampleRate);
-        }
         vuStats.onSampleRateChange(sampleRate);
     }
 
-    void process(bool muted, float amp, bool applyLevelCv) {
-        if (muted) {
-            mute();
-        } else {
-            amplify(amp, applyLevelCv);
+    void process(Input* input, float* amps) {
+
+        sum = 0.0f;
+        output.channels = std::max(input->getChannels(), 1);
+        for (int ch = 0; ch < output.channels; ch++) {
+
+            // hard clip
+            float out = clamp(input->getPolyVoltage(ch) * amps[ch], -10.0f, 10.0f);
+
+            output.voltages[ch] = out;
+            sum += out;
         }
-        summarize();
+
+        vuStats.process(sum);
     }
 
     void copyFrom(MonoTrack& trk) {
@@ -248,11 +199,22 @@ class StereoTrack {
   private:
 
     Amplitude levelAmp;
+    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+
+    float leftAmps[engine::PORT_MAX_CHANNELS];
+    float rightAmps[engine::PORT_MAX_CHANNELS];
 
     Input* leftInput = NULL;
     Input* rightInput = NULL;
     Param* levelParam = NULL;
     Input* levelCvInput = NULL;
+
+    float nextLevelCvAmp(int ch) {
+        float v = levelCvInput->getPolyVoltage(ch);
+        // TODO compute it more efficiently
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return levelCvAmps[ch].next(db);
+    }
 
   public:
 
@@ -261,33 +223,60 @@ class StereoTrack {
 
     void onSampleRateChange(float sampleRate) {
         levelAmp.onSampleRateChange(sampleRate);
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelCvAmps[ch].onSampleRateChange(sampleRate);
+        }
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
 
     void init(Input* leftInput_, Input* rightInput_, Param* levelParam_, Input* levelCvInput_) {
-
         leftInput = leftInput_;
         rightInput = rightInput_;
         levelParam = levelParam_;
         levelCvInput = levelCvInput_;
-
-        left.init(leftInput, levelCvInput);
-        right.init(rightInput, levelCvInput);
     }
 
     void process(bool muted) {
 
-        float amp = muted ? 0.0f : levelAmp.next(levelToDb(levelParam->getValue()));
+        //--------------------------------------------------
+        // Compute the left and right amplitude per-channel
 
-        bool applyLevelCv = (!muted && levelCvInput->isConnected());
+        int maxChans = std::max(leftInput->getChannels(), rightInput->getChannels());
+        maxChans = std::max(maxChans, 1);
+
+        if (muted) {
+            for (int ch = 0; ch < maxChans; ch++) {
+                float ampCh = levelCvAmps[ch].nextMute();
+                leftAmps[ch] = ampCh;
+                rightAmps[ch] = ampCh;
+            }
+        } else {
+            float amp = levelAmp.next(levelToDb(levelParam->getValue()));
+
+            if (levelCvInput->isConnected()) {
+                for (int ch = 0; ch < maxChans; ch++) {
+                    float ampCh = amp * nextLevelCvAmp(ch);
+                    leftAmps[ch] = ampCh;
+                    rightAmps[ch] = ampCh;
+                }
+            } else {
+                for (int ch = 0; ch < maxChans; ch++) {
+                    leftAmps[ch] = amp;
+                    rightAmps[ch] = amp;
+                }
+            }
+        }
+
+        //--------------------------------------------------
+        // Process left and right
 
         if (leftInput->isConnected()) {
-            left.process(muted, amp, applyLevelCv);
+            left.process(leftInput, leftAmps);
 
             // stereo
             if (rightInput->isConnected()) {
-                right.process(muted, amp, applyLevelCv);
+                right.process(rightInput, rightAmps);
             }
             // mono: copy left to right
             else {
@@ -296,7 +285,7 @@ class StereoTrack {
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                right.process(muted, amp, applyLevelCv);
+                right.process(rightInput, rightAmps);
                 left.copyFrom(right);
             }
             // no inputs
