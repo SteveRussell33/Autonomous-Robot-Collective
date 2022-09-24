@@ -9,12 +9,13 @@
 
 using namespace rack;
 
+static const float kMinDb = -60.0f;
+static const float kMaxDb = 12.0f;
+static const float kDecibelRange = kMaxDb - kMinDb;
+
 //--------------------------------------------------------------
 // LevelParamQuantity
 //--------------------------------------------------------------
-
-static const float kMinDb = -60.0f;
-static const float kMaxDb = 12.0f;
 
 static float levelToDb(float v) {
     // TODO compute it more efficiently
@@ -26,6 +27,16 @@ static float levelToDb(float v) {
 }
 
 struct LevelParamQuantity : ParamQuantity {
+
+private:
+
+    static constexpr float kInv24Db = 1.0f / 24.0f;
+
+    inline float rescaleToDb(float x, float xMin, float yMin, float yMax) {
+        return yMin + (x - xMin) * kInv24Db * (yMax - yMin);
+    }
+
+public:
 
     float getDisplayValue() override {
         float v = getValue();
@@ -44,9 +55,9 @@ struct LevelParamQuantity : ParamQuantity {
         v = clamp(v, -60.0f, 12.0f);
 
         // clang-format off
-        if      (v >= -12.0f) v =  rescale(v, -12.0f,  12.0f, 0.5f, 1.0f);
-        else if (v >= -36.0f) v =  rescale(v, -36.0f, -12.0f, 0.2f, 0.5f);
-        else                  v =  rescale(v, -60.0f, -36.0f, 0.0f, 0.2f);
+        if      (v >= -12.0f) v =  rescaleToDb(v, -12.0f, 0.5f, 1.0f);
+        else if (v >= -36.0f) v =  rescaleToDb(v, -36.0f, 0.2f, 0.5f);
+        else                  v =  rescaleToDb(v, -60.0f, 0.0f, 0.2f);
         // clang-format on
 
         setValue(v);
@@ -211,8 +222,8 @@ class StereoTrack {
 
     float nextLevelCvAmp(int ch) {
         float v = levelCvInput->getPolyVoltage(ch);
-        // TODO compute it more efficiently
-        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        // rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        float db = kMinDb + v * 0.1f * kDecibelRange;
         return levelCvAmps[ch].next(db);
     }
 
