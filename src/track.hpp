@@ -105,48 +105,6 @@ class Amplitude {
     }
 };
 
-////--------------------------------------------------------------
-//// Pan
-////--------------------------------------------------------------
-//
-// class Pan {
-//
-//  private:
-//
-//    float curPan = 0.0f;
-//
-//    bogaudio::dsp::SlewLimiter slew;
-//
-//  public:
-//
-//    float left = 0.7071068f;
-//    float right = 0.7071068f;
-//
-//    Pan() {
-//        slew.setLast(0.0f);
-//    }
-//
-//    void onSampleRateChange(float sampleRate) {
-//        slew.setParams(sampleRate, 5.0f, 2.0f);
-//    }
-//
-//    void next(float pan) {
-//
-//        pan = clamp(pan, -1.0f, 1.0f);
-//
-//        float ps = slew.next(pan);
-//        if (curPan != ps) {
-//            curPan = ps;
-//
-//            float p = (curPan + 1.0f) * 0.125f;
-//
-//            // TODO use lookup tables
-//            left = std::cosf(2.0f * M_PI * p);
-//            right = std::sinf(2.0f * M_PI * p);
-//        }
-//    }
-//};
-
 //--------------------------------------------------------------
 // MonoTrack
 //--------------------------------------------------------------
@@ -189,6 +147,9 @@ class StereoTrack {
 
     bogaudio::dsp::Panner panner;
 
+    bogaudio::dsp::SlewLimiter panSlew;
+    bogaudio::dsp::SlewLimiter panCvSlew[engine::PORT_MAX_CHANNELS];
+
     Input* leftInput = NULL;
     Input* rightInput = NULL;
 
@@ -223,16 +184,16 @@ class StereoTrack {
 
                 if (levelCvInput->isConnected()) {
                     float lv = levelCvInput->getPolyVoltage(ch);
-                    float db = kMinDb + lv * 0.1f * kDecibelRange; // avoid div in rescale()
+                    float db = kMinDb + lv * 0.1f * kDecibelRange;
                     float nl = levelCvAmps[ch].next(db);
                     leftAmp *= nl;
                     rightAmp *= nl;
                 }
 
                 if (panParam) {
-                    float pan = panParam->getValue();
+                    float pan = panSlew.next(panParam->getValue());
                     if (panCvInput->isConnected()) {
-                        float pv = panCvInput->getPolyVoltage(ch) * 0.2f; // -5/+5 => -1/+1
+                        float pv = panCvSlew[ch].next(panCvInput->getPolyVoltage(ch) * 0.2f);
                         pan = clamp(pan + pv, -1.0f, 1.0f);
                     }
 
@@ -256,10 +217,15 @@ class StereoTrack {
     MonoTrack right;
 
     void onSampleRateChange(float sampleRate) {
+
         levelAmp.onSampleRateChange(sampleRate);
+        panSlew.setParams(sampleRate, 5.0f, 2.0f);
+
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
             levelCvAmps[ch].onSampleRateChange(sampleRate);
+            panCvSlew[ch].setParams(sampleRate, 5.0f, 2.0f);
         }
+
         left.onSampleRateChange(sampleRate);
         right.onSampleRateChange(sampleRate);
     }
