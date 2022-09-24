@@ -12,7 +12,7 @@
    height="18"
    viewBox="0 0 18 18"
    id="svg8"
-   sodipodi:docname="toggle-orange.svg"
+   sodipodi:docname="button-gray.svg"
    inkscape:version="1.0.2 (e86c8708, 2021-01-15)">
   <metadata
      id="metadata14">
@@ -53,6 +53,6 @@
      d="M 17.5,9 A 8.5,8.5 0 0 1 9,17.5 8.5,8.5 0 0 1 0.5,9 8.5,8.5 0 0 1 9,0.5 8.5,8.5 0 0 1 17.5,9 Z" />
   <path
      id="circle4"
-     style="fill:#d5a155"
+     style="fill:#bababa"
      d="M 16.5,9 A 7.5,7.5 0 0 1 9,16.5 7.5,7.5 0 0 1 1.5,9 7.5,7.5 0 0 1 9,1.5 7.5,7.5 0 0 1 16.5,9 Z" />
 </svg>

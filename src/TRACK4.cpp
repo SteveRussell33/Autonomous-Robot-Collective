@@ -207,10 +207,12 @@ struct TRACK4Widget : ModuleWidget {
                 createParamCentered<ArcMuteButton>(Vec(x, 226), module, TRACK4::kMuteParam + t));
 
             addParam(createParamCentered<ArcKnob24>(Vec(x, 256), module, TRACK4::kPanParam + t));
-            addInput(createInputCentered<ArcPolyPort>(Vec(x, 286), module, TRACK4::kPanCvInput + t));
+            addInput(
+                createInputCentered<ArcPolyPort>(Vec(x, 286), module, TRACK4::kPanCvInput + t));
 
             addInput(createInputCentered<ArcPolyPort>(Vec(x, 316), module, TRACK4::kLeftInput + t));
-            addInput(createInputCentered<ArcPolyPort>(Vec(x, 346), module, TRACK4::kRightInput + t));
+            addInput(
+                createInputCentered<ArcPolyPort>(Vec(x, 346), module, TRACK4::kRightInput + t));
             x += 38;
         }
 
@@ -230,13 +232,15 @@ struct TRACK4Widget : ModuleWidget {
         // sends
         int y = 51;
         for (int t = 0; t < TRACK4::kNumTracks; t++) {
-            addOutput(createOutputCentered<ArcPolyPort>(Vec(234, y), module, TRACK4::kLeftSend + t));
             addOutput(
-                createOutputCentered<ArcPolyPort>(Vec(234, y + 29), module, TRACK4::kRightSend + t));
+                createOutputCentered<ArcPolyPort>(Vec(234, y), module, TRACK4::kLeftSend + t));
+            addOutput(createOutputCentered<ArcPolyPort>(
+                Vec(234, y + 29), module, TRACK4::kRightSend + t));
             y += 67;
         }
         addOutput(createOutputCentered<ArcPolyPort>(Vec(234, y), module, TRACK4::kMixLeftSend));
-        addOutput(createOutputCentered<ArcPolyPort>(Vec(234, y + 29), module, TRACK4::kMixRightSend));
+        addOutput(
+            createOutputCentered<ArcPolyPort>(Vec(234, y + 29), module, TRACK4::kMixRightSend));
     }
 
     void addMeter(float x, float y, VuStats* vuStats) {

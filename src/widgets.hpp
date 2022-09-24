@@ -52,11 +52,84 @@ struct ArcHSwitch : SvgSwitch {
 
 struct ArcMuteButton : SvgSwitch {
     ArcMuteButton() {
-        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-gray.svg")));
-        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/toggle-orange.svg")));
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/button-gray.svg")));
+        addFrame(APP->window->loadSvg(asset::plugin(pluginInstance, "res/button-orange.svg")));
         box.size = Vec(18, 18);
         shadow->blurRadius = 1.0;
         shadow->box.pos = Vec(0.0, 1.5);
     }
 };
 
+// Adapted from /github.com/bogaudio/BogaudioModules/src/mixer.cpp
+//struct ArcSoloMuteButton : ParamWidget {
+//    std::vector<std::shared_ptr<Svg>> _frames;
+//    SvgWidget* _svgWidget; // deleted elsewhere.
+//    CircularShadow* shadow = NULL;
+//
+//    ArcSoloMuteButton() {
+//        shadow = new CircularShadow();
+//        addChild(shadow);
+//
+//        _svgWidget = new SvgWidget();
+//        addChild(_svgWidget);
+//
+//        auto svg = APP->window->loadSvg(asset::plugin(pluginInstance, "res/button-gray.svg"));
+//        _frames.push_back(svg);
+//        _frames.push_back(
+//            APP->window->loadSvg(asset::plugin(pluginInstance, "res/button-orange.svg")));
+//        _frames.push_back(
+//            APP->window->loadSvg(asset::plugin(pluginInstance, "res/button-green.svg")));
+//        _frames.push_back(
+//            APP->window->loadSvg(asset::plugin(pluginInstance, "res/button-green.svg")));
+//
+//        _svgWidget->setSvg(svg);
+//        box.size = _svgWidget->box.size;
+//        shadow->box.size = _svgWidget->box.size;
+//        shadow->blurRadius = 1.0;
+//        shadow->box.pos = Vec(0.0, 1.0);
+//    }
+//
+//    void reset() {
+//        if (getParamQuantity()) {
+//            getParamQuantity()->setValue(0.0f);
+//        }
+//    }
+//
+//    void randomize() {
+//        if (getParamQuantity()) {
+//            getParamQuantity()->setValue(random::uniform() > 0.5f ? 1.0f : 0.0f);
+//        }
+//    }
+//
+//    void onButton(const event::Button& e) {
+//        if (!getParamQuantity() || !(e.action == GLFW_PRESS && (e.mods & RACK_MOD_MASK) == 0)) {
+//            ParamWidget::onButton(e);
+//            return;
+//        }
+//
+//        float value = getParamQuantity()->getValue();
+//        if (value >= 2.0f) {
+//            getParamQuantity()->setValue(value - 2.0f);
+//        } else if (e.button == GLFW_MOUSE_BUTTON_RIGHT) {
+//            getParamQuantity()->setValue(value + 2.0f);
+//        } else {
+//            getParamQuantity()->setValue(value > 0.5f ? 0.0f : 1.0f);
+//        }
+//
+//        if (e.button == GLFW_MOUSE_BUTTON_RIGHT) {
+//            e.consume(this);
+//        } else {
+//            ParamWidget::onButton(e);
+//        }
+//    }
+//
+//    void onChange(const event::Change& e) {
+//        assert(_frames.size() == 4);
+//        if (getParamQuantity()) {
+//            float value = getParamQuantity()->getValue();
+//            assert(value >= 0.0f && value <= 3.0f);
+//            _svgWidget->setSvg(_frames[(int)value]);
+//        }
+//        ParamWidget::onChange(e);
+//    }
+//};
