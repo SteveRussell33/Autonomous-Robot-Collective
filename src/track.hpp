@@ -172,27 +172,13 @@ struct MonoTrack {
         vuStats.onSampleRateChange(sampleRate);
     }
 
-    void process(Input* input, float* amps) {
+    void process(Input* input, int ch, float amp) {
 
-        sum = 0.0f;
-        output.channels = std::max(input->getChannels(), 1);
-        for (int ch = 0; ch < output.channels; ch++) {
+        // hard clip
+        float out = clamp(input->getPolyVoltage(ch) * amp, -10.0f, 10.0f);
 
-            // hard clip
-            float out = clamp(input->getPolyVoltage(ch) * amps[ch], -10.0f, 10.0f);
-
-            output.voltages[ch] = out;
-            sum += out;
-        }
-
-        vuStats.process(sum);
-    }
-
-    void copyFrom(MonoTrack& trk) {
-        output.channels = trk.output.channels;
-        output.writeVoltages(trk.output.voltages);
-        sum = trk.sum;
-        vuStats.copyFrom(trk.vuStats);
+        output.voltages[ch] = out;
+        sum += out;
     }
 
     void disconnect() {
@@ -212,9 +198,6 @@ class StereoTrack {
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
-    float leftAmps[engine::PORT_MAX_CHANNELS];
-    float rightAmps[engine::PORT_MAX_CHANNELS];
-
     Input* leftInput = NULL;
     Input* rightInput = NULL;
     Param* levelParam = NULL;
@@ -225,6 +208,43 @@ class StereoTrack {
         // rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
         float db = kMinDb + v * 0.1f * kDecibelRange;
         return levelCvAmps[ch].next(db);
+    }
+
+    void doProcess(Input* inLeft, Input* inRight, bool muted) {
+
+        left.sum = 0.0f;
+        right.sum = 0.0f;
+
+        left.output.channels = std::max(inLeft->getChannels(), 1);
+        right.output.channels = std::max(inRight->getChannels(), 1);
+
+        int maxChans = std::max(left.output.channels, right.output.channels);
+
+        if (muted) {
+            for (int ch = 0; ch < maxChans; ch++) {
+                float ampCh = levelCvAmps[ch].nextMute();
+                left.process(inLeft, ch, ampCh);
+                right.process(inRight, ch, ampCh);
+            }
+        } else {
+            float amp = levelAmp.next(levelToDb(levelParam->getValue()));
+
+            if (levelCvInput->isConnected()) {
+                for (int ch = 0; ch < maxChans; ch++) {
+                    float ampCh = amp * nextLevelCvAmp(ch);
+                    left.process(inLeft, ch, ampCh);
+                    right.process(inRight, ch, ampCh);
+                }
+            } else {
+                for (int ch = 0; ch < maxChans; ch++) {
+                    left.process(inLeft, ch, amp);
+                    right.process(inRight, ch, amp);
+                }
+            }
+        }
+
+        left.vuStats.process(left.sum);
+        right.vuStats.process(right.sum);
     }
 
   public:
@@ -250,54 +270,19 @@ class StereoTrack {
 
     void process(bool muted) {
 
-        //--------------------------------------------------
-        // Compute the left and right amplitude per-channel
-
-        int maxChans = std::max(leftInput->getChannels(), rightInput->getChannels());
-        maxChans = std::max(maxChans, 1);
-
-        if (muted) {
-            for (int ch = 0; ch < maxChans; ch++) {
-                float ampCh = levelCvAmps[ch].nextMute();
-                leftAmps[ch] = ampCh;
-                rightAmps[ch] = ampCh;
-            }
-        } else {
-            float amp = levelAmp.next(levelToDb(levelParam->getValue()));
-
-            if (levelCvInput->isConnected()) {
-                for (int ch = 0; ch < maxChans; ch++) {
-                    float ampCh = amp * nextLevelCvAmp(ch);
-                    leftAmps[ch] = ampCh;
-                    rightAmps[ch] = ampCh;
-                }
-            } else {
-                for (int ch = 0; ch < maxChans; ch++) {
-                    leftAmps[ch] = amp;
-                    rightAmps[ch] = amp;
-                }
-            }
-        }
-
-        //--------------------------------------------------
-        // Process left and right
-
         if (leftInput->isConnected()) {
-            left.process(leftInput, leftAmps);
-
             // stereo
             if (rightInput->isConnected()) {
-                right.process(rightInput, rightAmps);
+                doProcess(leftInput, rightInput, muted);
             }
             // mono: copy left to right
             else {
-                right.copyFrom(left);
+                doProcess(leftInput, leftInput, muted);
             }
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                right.process(rightInput, rightAmps);
-                left.copyFrom(right);
+                doProcess(rightInput, rightInput, muted);
             }
             // no inputs
             else {
