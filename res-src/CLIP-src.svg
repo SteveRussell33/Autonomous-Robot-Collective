@@ -214,7 +214,7 @@
 
   <g transform="translate(22.5 74)">
     <polyline points="0 0 0 36" class="connect"/>
-    <text x="0" y="-17" class="label" text-anchor="middle">LEVEL</text>
+    <text x="0" y="-18" class="big-label" text-anchor="middle">LEVEL</text>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
 

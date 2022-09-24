@@ -526,27 +526,27 @@
   <g
      aria-label="LEVEL"
      id="text143"
-     style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
-     class="label">
+     style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+     class="big-label">
     <path
-       d="m 11.96875,57 h 3.636719 V 56.183594 H 12.832031 V 51.304687 H 11.96875 Z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       d="M 9.3359375,56 H 13.881836 V 54.979492 H 10.415039 V 48.880859 H 9.3359375 Z"
+       style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
        id="path264" />
     <path
-       d="m 16.421875,57 h 3.636719 v -0.816406 h -2.773438 v -1.671875 h 2.367188 v -0.765625 h -2.367188 v -1.625 h 2.773438 v -0.816407 h -3.636719 z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       d="m 14.902344,56 h 4.545898 v -1.020508 h -3.466797 v -2.089844 h 2.958985 v -0.957031 h -2.958985 v -2.03125 h 3.466797 v -1.020508 h -4.545898 z"
+       style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
        id="path266" />
     <path
-       d="m 22.160156,57 h 0.671875 l 1.882813,-5.695313 h -0.914063 l -1.296875,4.335938 h -0.01563 L 21.195312,51.304687 H 20.28125 Z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       d="m 22.075195,56 h 0.839844 l 2.353516,-7.119141 h -1.142578 l -1.621094,5.419922 h -0.01953 l -1.616211,-5.419922 h -1.142579 z"
+       style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
        id="path268" />
     <path
-       d="m 25.328125,57 h 3.636719 v -0.816406 h -2.773438 v -1.671875 h 2.367188 v -0.765625 h -2.367188 v -1.625 h 2.773438 v -0.816407 h -3.636719 z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       d="m 26.035156,56 h 4.545899 v -1.020508 h -3.466797 v -2.089844 h 2.958984 v -0.957031 h -2.958984 v -2.03125 h 3.466797 v -1.020508 h -4.545899 z"
+       style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
        id="path270" />
     <path
-       d="m 29.78125,57 h 3.636719 V 56.183594 H 30.644531 V 51.304687 H 29.78125 Z"
-       style="font-size:8px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
+       d="m 31.601562,56 h 4.545899 v -1.020508 h -3.466797 v -6.098633 h -1.079102 z"
+       style="font-size:10px;font-family:'DIN Alternate';text-anchor:middle;fill:#343434"
        id="path272" />
   </g>
   <g
