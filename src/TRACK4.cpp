@@ -13,6 +13,7 @@ struct TRACK4 : Module {
     static const int kNumTracks = 4;
 
     StereoTrack tracks[kNumTracks];
+    bool muted[kNumTracks];
 
     StereoTrack mix;
     Input mixLeftInput;
@@ -188,10 +189,10 @@ struct TRACK4Widget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 30, 365)));
 
 #ifdef TRACK4_DEBUG
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 12), module, TRACK4::kDebug1));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 36), module, TRACK4::kDebug2));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 60), module, TRACK4::kDebug3));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, TRACK4::kDebug4));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 12), module, TRACK4::kDebug1));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 36), module, TRACK4::kDebug2));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 60), module, TRACK4::kDebug3));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 84), module, TRACK4::kDebug4));
 #endif
 
         int x = 30;
@@ -199,43 +200,43 @@ struct TRACK4Widget : ModuleWidget {
             addMeter(x - 6, 44, module ? &(module->tracks[t].left.vuStats) : NULL);
             addMeter(x + 1, 44, module ? &(module->tracks[t].right.vuStats) : NULL);
 
-            addParam(createParamCentered<MKnob24>(Vec(x, 166), module, TRACK4::kLevelParam + t));
+            addParam(createParamCentered<ArcKnob24>(Vec(x, 166), module, TRACK4::kLevelParam + t));
             addInput(
-                createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kLevelCvInput + t));
+                createInputCentered<ArcPolyPort>(Vec(x, 196), module, TRACK4::kLevelCvInput + t));
             addParam(
-                createParamCentered<MToggleButton>(Vec(x, 226), module, TRACK4::kMuteParam + t));
+                createParamCentered<ArcMuteButton>(Vec(x, 226), module, TRACK4::kMuteParam + t));
 
-            addParam(createParamCentered<MKnob24>(Vec(x, 256), module, TRACK4::kPanParam + t));
-            addInput(createInputCentered<MPolyPort>(Vec(x, 286), module, TRACK4::kPanCvInput + t));
+            addParam(createParamCentered<ArcKnob24>(Vec(x, 256), module, TRACK4::kPanParam + t));
+            addInput(createInputCentered<ArcPolyPort>(Vec(x, 286), module, TRACK4::kPanCvInput + t));
 
-            addInput(createInputCentered<MPolyPort>(Vec(x, 316), module, TRACK4::kLeftInput + t));
-            addInput(createInputCentered<MPolyPort>(Vec(x, 346), module, TRACK4::kRightInput + t));
+            addInput(createInputCentered<ArcPolyPort>(Vec(x, 316), module, TRACK4::kLeftInput + t));
+            addInput(createInputCentered<ArcPolyPort>(Vec(x, 346), module, TRACK4::kRightInput + t));
             x += 38;
         }
 
         addMeter(x - 6, 44, module ? &(module->mix.left.vuStats) : NULL);
         addMeter(x + 1, 44, module ? &(module->mix.right.vuStats) : NULL);
 
-        addParam(createParamCentered<MKnob24>(Vec(x, 166), module, TRACK4::kMixLevelParam));
-        addInput(createInputCentered<MPolyPort>(Vec(x, 196), module, TRACK4::kMixLevelCvInput));
-        addParam(createParamCentered<MToggleButton>(Vec(x, 226), module, TRACK4::kMixMuteParam));
+        addParam(createParamCentered<ArcKnob24>(Vec(x, 166), module, TRACK4::kMixLevelParam));
+        addInput(createInputCentered<ArcPolyPort>(Vec(x, 196), module, TRACK4::kMixLevelCvInput));
+        addParam(createParamCentered<ArcMuteButton>(Vec(x, 226), module, TRACK4::kMixMuteParam));
 
-        addParam(createParamCentered<MKnob24>(Vec(x, 256), module, TRACK4::kMixPanParam));
-        addInput(createInputCentered<MPolyPort>(Vec(x, 286), module, TRACK4::kMixPanCvInput));
+        addParam(createParamCentered<ArcKnob24>(Vec(x, 256), module, TRACK4::kMixPanParam));
+        addInput(createInputCentered<ArcPolyPort>(Vec(x, 286), module, TRACK4::kMixPanCvInput));
 
-        addOutput(createOutputCentered<MPolyPort>(Vec(x, 316), module, TRACK4::kMixLeftOutput));
-        addOutput(createOutputCentered<MPolyPort>(Vec(x, 346), module, TRACK4::kMixRightOutput));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(x, 316), module, TRACK4::kMixLeftOutput));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(x, 346), module, TRACK4::kMixRightOutput));
 
         // sends
         int y = 51;
         for (int t = 0; t < TRACK4::kNumTracks; t++) {
-            addOutput(createOutputCentered<MPolyPort>(Vec(234, y), module, TRACK4::kLeftSend + t));
+            addOutput(createOutputCentered<ArcPolyPort>(Vec(234, y), module, TRACK4::kLeftSend + t));
             addOutput(
-                createOutputCentered<MPolyPort>(Vec(234, y + 29), module, TRACK4::kRightSend + t));
+                createOutputCentered<ArcPolyPort>(Vec(234, y + 29), module, TRACK4::kRightSend + t));
             y += 67;
         }
-        addOutput(createOutputCentered<MPolyPort>(Vec(234, y), module, TRACK4::kMixLeftSend));
-        addOutput(createOutputCentered<MPolyPort>(Vec(234, y + 29), module, TRACK4::kMixRightSend));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(234, y), module, TRACK4::kMixLeftSend));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(234, y + 29), module, TRACK4::kMixRightSend));
     }
 
     void addMeter(float x, float y, VuStats* vuStats) {

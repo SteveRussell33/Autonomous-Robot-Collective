@@ -123,17 +123,17 @@ struct CLIPWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 #ifdef CLIP_DEBUG
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 12), module, CLIP::kDebug1));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 36), module, CLIP::kDebug2));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 60), module, CLIP::kDebug3));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 12), module, CLIP::kDebug1));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 36), module, CLIP::kDebug2));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 60), module, CLIP::kDebug3));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 84), module, CLIP::kDebug4));
 #endif
 
-        addParam(createParamCentered<MKnob24>(Vec(22.5, 74), module, CLIP::kLevelParam));
-        addInput(createInputCentered<MPolyPort>(Vec(22.5, 110), module, CLIP::kLevelCvInput));
+        addParam(createParamCentered<ArcKnob24>(Vec(22.5, 74), module, CLIP::kLevelParam));
+        addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 110), module, CLIP::kLevelCvInput));
 
-        addInput(createInputCentered<MPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
-        addOutput(createOutputCentered<MPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
+        addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 293), module, CLIP::kInput));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(22.5, 334), module, CLIP::kOutput));
     }
 };
 

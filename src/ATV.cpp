@@ -100,19 +100,19 @@ struct ATVWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 #ifdef ATV_DEBUG
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 12), module, ATV::kDebug1));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 36), module, ATV::kDebug2));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 60), module, ATV::kDebug3));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, ATV::kDebug4));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 12), module, ATV::kDebug1));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 36), module, ATV::kDebug2));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 60), module, ATV::kDebug3));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 84), module, ATV::kDebug4));
 #endif
 
-        addInput(createInputCentered<MPolyPort>(Vec(15, 74), module, ATV::kInputA));
-        addParam(createParamCentered<MKnob18>(Vec(15, 116), module, ATV::kCvParamA));
-        addOutput(createOutputCentered<MPolyPort>(Vec(15, 158), module, ATV::kOutputA));
+        addInput(createInputCentered<ArcPolyPort>(Vec(15, 74), module, ATV::kInputA));
+        addParam(createParamCentered<ArcKnob18>(Vec(15, 116), module, ATV::kCvParamA));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(15, 158), module, ATV::kOutputA));
 
-        addInput(createInputCentered<MPolyPort>(Vec(15, 224), module, ATV::kInputB));
-        addParam(createParamCentered<MKnob18>(Vec(15, 266), module, ATV::kCvParamB));
-        addOutput(createOutputCentered<MPolyPort>(Vec(15, 308), module, ATV::kOutputB));
+        addInput(createInputCentered<ArcPolyPort>(Vec(15, 224), module, ATV::kInputB));
+        addParam(createParamCentered<ArcKnob18>(Vec(15, 266), module, ATV::kCvParamB));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(15, 308), module, ATV::kOutputB));
     }
 };
 

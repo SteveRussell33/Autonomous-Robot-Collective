@@ -97,24 +97,24 @@ struct GAINWidget : ModuleWidget {
         addChild(createWidget<ScrewSilver>(Vec(box.size.x - 15, 365)));
 
 #ifdef GAIN_DEBUG
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 12), module, GAIN::kDebug1));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 36), module, GAIN::kDebug2));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 60), module, GAIN::kDebug3));
-        addOutput(createOutputCentered<MPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 12), module, GAIN::kDebug1));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 36), module, GAIN::kDebug2));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 60), module, GAIN::kDebug3));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
         addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
         addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
 
-        addParam(createParamCentered<MKnob24>(Vec(24, 166), module, GAIN::kLevelParam));
-        addInput(createInputCentered<MPolyPort>(Vec(24, 196), module, GAIN::kLevelCvInput));
-        addParam(createParamCentered<MToggleButton>(Vec(24, 226), module, GAIN::kMuteParam));
+        addParam(createParamCentered<ArcKnob24>(Vec(24, 166), module, GAIN::kLevelParam));
+        addInput(createInputCentered<ArcPolyPort>(Vec(24, 196), module, GAIN::kLevelCvInput));
+        addParam(createParamCentered<ArcMuteButton>(Vec(24, 226), module, GAIN::kMuteParam));
 
-        addInput(createInputCentered<MPolyPort>(Vec(24, 256), module, GAIN::kLeftInput));
-        addInput(createInputCentered<MPolyPort>(Vec(24, 286), module, GAIN::kRightInput));
+        addInput(createInputCentered<ArcPolyPort>(Vec(24, 256), module, GAIN::kLeftInput));
+        addInput(createInputCentered<ArcPolyPort>(Vec(24, 286), module, GAIN::kRightInput));
 
-        addOutput(createOutputCentered<MPolyPort>(Vec(24, 316), module, GAIN::kLeftOutput));
-        addOutput(createOutputCentered<MPolyPort>(Vec(24, 346), module, GAIN::kRightOutput));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(24, 316), module, GAIN::kLeftOutput));
+        addOutput(createOutputCentered<ArcPolyPort>(Vec(24, 346), module, GAIN::kRightOutput));
     }
 
     void addMeter(float x, float y, VuStats* vuStats) {
