@@ -76,7 +76,7 @@ struct GAIN : Module {
     void process(const ProcessArgs& args) override {
 
         bool muted = params[kMuteParam].getValue() > 0.5f;
-        track.process(muted);
+        track.process(args.sampleTime, muted);
 
         processOutput(track.left, outputs[kLeftOutput]);
         processOutput(track.right, outputs[kRightOutput]);

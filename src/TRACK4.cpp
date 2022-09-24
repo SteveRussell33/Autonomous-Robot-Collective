@@ -153,7 +153,7 @@ struct TRACK4 : Module {
 
         for (int t = 0; t < TRACK4::kNumTracks; t++) {
             bool muted = params[kMuteParam + t].getValue() > 0.5f;
-            tracks[t].process(muted);
+            tracks[t].process(args.sampleTime, muted);
 
             processSend(tracks[t].left.output, outputs[kLeftSend + t]);
             processSend(tracks[t].right.output, outputs[kRightSend + t]);
@@ -166,7 +166,7 @@ struct TRACK4 : Module {
         processSend(mixRightInput, outputs[kMixRightSend]);
 
         bool muted = params[kMixMuteParam].getValue() > 0.5f;
-        mix.process(muted);
+        mix.process(args.sampleTime, muted);
         processMixOutput(mix.left.sum, outputs[kMixLeftOutput]);
         processMixOutput(mix.right.sum, outputs[kMixRightOutput]);
     }

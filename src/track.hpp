@@ -181,9 +181,9 @@ struct MonoTrack {
         sum += out;
     }
 
-    void disconnect() {
+    void disconnect(float sampleTime) {
         sum = 0.f;
-        vuStats.process(0.0f);
+        vuStats.process(sampleTime, 0.0f);
     }
 };
 
@@ -216,7 +216,7 @@ class StereoTrack {
         return levelCvAmps[ch].next(db);
     }
 
-    void doProcess(Input* inLeft, Input* inRight, bool muted) {
+    void doProcess(float sampleTime, Input* inLeft, Input* inRight, bool muted) {
 
         left.sum = 0.0f;
         right.sum = 0.0f;
@@ -257,8 +257,8 @@ class StereoTrack {
             }
         }
 
-        left.vuStats.process(left.sum);
-        right.vuStats.process(right.sum);
+        left.vuStats.process(sampleTime, left.sum);
+        right.vuStats.process(sampleTime, right.sum);
     }
 
   public:
@@ -291,26 +291,26 @@ class StereoTrack {
         panCvInput = panCvInput_;
     }
 
-    void process(bool muted) {
+    void process(float sampleTime, bool muted) {
 
         if (leftInput->isConnected()) {
             // stereo
             if (rightInput->isConnected()) {
-                doProcess(leftInput, rightInput, muted);
+                doProcess(sampleTime, leftInput, rightInput, muted);
             }
             // mono: copy left to right
             else {
-                doProcess(leftInput, leftInput, muted);
+                doProcess(sampleTime, leftInput, leftInput, muted);
             }
         } else {
             // mono: copy right to left
             if (rightInput->isConnected()) {
-                doProcess(rightInput, rightInput, muted);
+                doProcess(sampleTime, rightInput, rightInput, muted);
             }
             // no inputs
             else {
-                left.disconnect();
-                right.disconnect();
+                left.disconnect(sampleTime);
+                right.disconnect(sampleTime);
             }
         }
     }
