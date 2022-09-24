@@ -207,8 +207,8 @@ class StereoTrack {
             }
         }
 
-        left.vuStats.process(sampleTime, left.sum);
-        right.vuStats.process(sampleTime, right.sum);
+        left.vuStats.process(sampleTime, left.sum * 0.2f);
+        right.vuStats.process(sampleTime, right.sum * 0.2f);
     }
 
   public:
