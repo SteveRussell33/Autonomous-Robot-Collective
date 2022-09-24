@@ -230,7 +230,7 @@ class MonoTrack {
         output.channels = trk.output.channels;
         output.writeVoltages(trk.output.voltages);
         sum = trk.sum;
-        vuStats.process(sum);
+        vuStats.copyFrom(trk.vuStats);
     }
 
     void disconnect() {

@@ -67,6 +67,12 @@ class VuStats {
             maxPeakTimer.reset();
         }
     }
+
+    void copyFrom(VuStats& stats) {
+        rms = stats.rms;
+        peak = stats.peak;
+        maxPeak = stats.maxPeak;
+    }
 };
 
 //--------------------------------------------------------------
