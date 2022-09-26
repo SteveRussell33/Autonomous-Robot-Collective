@@ -85,53 +85,57 @@ struct GAIN : Module {
 
     void process(const ProcessArgs& args) override {
 
-        if (outputs[kOutput].isConnected()) {
+        // Check if anything is connected
+        if (!inputs[kInput].isConnected() && !outputs[kOutput].isConnected()) {
+            vuStats.process(args.sampleTime, 0.0f);
+            return;
+        }
 
-            float sum = 0.0f;
-            int channels = std::max(inputs[kInput].getChannels(), 1);
+        float sum = 0.0f;
+        int channels = std::max(inputs[kInput].getChannels(), 1);
 
-            if (params[kMuteParam].getValue() > 0.5f) {
+        // Muted
+        if (params[kMuteParam].getValue() > 0.5f) {
 
-                for (int ch = 0; ch < channels; ch++) {
-                    float m = levelCvAmps[ch].nextMute();
+            for (int ch = 0; ch < channels; ch++) {
+                float m = levelCvAmps[ch].nextMute();
 
-                    float out = clamp(inputs[kInput].getPolyVoltage(ch) * m, -10.0f, 10.0f);
+                float out = clamp(inputs[kInput].getPolyVoltage(ch) * m, -10.0f, 10.0f);
+                if (outputs[kOutput].isConnected()) {
                     outputs[kOutput].voltages[ch] = out;
-                    sum += out;
                 }
-            } else {
-
-                float db = levelToDb(params[kLevelParam].getValue());
-                db += rescale(params[kBoostParam].getValue(), 0.0f, 4.0f, -24.0f, 24.0f);
-                float amp = levelAmp.next(db);
-
-                for (int ch = 0; ch < channels; ch++) {
-                    float chAmp = amp;
-
-                    if (inputs[kLevelCvInput].isConnected()) {
-                        float lv = inputs[kLevelCvInput].getPolyVoltage(ch);
-                        float chDb = kMinDb + lv * 0.1f * kDecibelRange;
-                        float nl = levelCvAmps[ch].next(chDb);
-                        chAmp *= nl;
-                    }
-
-                    float out = clamp(inputs[kInput].getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
-                    outputs[kOutput].voltages[ch] = out;
-                    sum += out;
-                }
+                sum += out;
             }
-            outputs[kOutput].channels = channels;
-
-            vuStats.process(args.sampleTime, sum * 0.2f);
         } 
-        // if the output is not connected, just meter the input
+        // process normally
         else {
-            if (inputs[kInput].isConnected()) {
-                vuStats.process(args.sampleTime, inputs[kInput].getVoltageSum() * 0.2f);
-            } else {
-                vuStats.process(args.sampleTime, 0.0f);
+            float db = levelToDb(params[kLevelParam].getValue());
+            db += rescale(params[kBoostParam].getValue(), 0.0f, 4.0f, -24.0f, 24.0f);
+            float amp = levelAmp.next(db);
+
+            for (int ch = 0; ch < channels; ch++) {
+                float chAmp = amp;
+
+                if (inputs[kLevelCvInput].isConnected()) {
+                    float lv = inputs[kLevelCvInput].getPolyVoltage(ch);
+                    float chDb = kMinDb + lv * 0.1f * kDecibelRange;
+                    float nl = levelCvAmps[ch].next(chDb);
+                    chAmp *= nl;
+                }
+
+                float out = clamp(inputs[kInput].getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
+                if (outputs[kOutput].isConnected()) {
+                    outputs[kOutput].voltages[ch] = out;
+                }
+                sum += out;
             }
         }
+
+        if (outputs[kOutput].isConnected()) {
+            outputs[kOutput].channels = channels;
+        }
+
+        vuStats.process(args.sampleTime, sum * 0.2f);
     }
 };
 
