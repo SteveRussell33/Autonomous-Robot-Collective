@@ -214,57 +214,50 @@
   <rect x="0" y="35" width="45" height="114" rx="2" class="lcd-bg-frame"/>
   <rect x="0" y="36" width="45" height="112" rx="2" class="lcd-bg"/>
 
-  <!-- labels -->  
-  <g transform="translate(5 0)">
-    <g transform="translate(0 166)">
-      <text x="1" y="3" class="label" text-anchor="middle">LV</text>
-    </g>
-    <g transform="translate(0 226)">
-      <text x="0" y="3" class="label" text-anchor="middle">M</text>
-    </g>
-    <g transform="translate(0 256)">
-      <text x="0" y="3" class="label" text-anchor="middle">L</text>
-    </g>
-    <g transform="translate(0 286)">
-      <text x="0" y="3" class="label" text-anchor="middle">R</text>
-    </g>
-    <g transform="translate(0 316)">
-      <text x="0" y="3" class="label" text-anchor="middle">L</text>
-    </g>
-    <g transform="translate(0 346)">
-      <text x="0" y="3" class="label" text-anchor="middle">R</text>
-    </g>
-  </g>
-
-  <g transform="translate(24 44)">
+  <g transform="translate(22.5 44)">
     <use xlink:href="#meter-strip" transform="translate(-20 -4)"/>
   </g>
 
-  <g transform="translate(24 166)">
+  <!-- labels -->  
+  <g transform="translate(5 0)">
+    <g transform="translate(0 166)">
+      <text x="0" y="3" class="label" text-anchor="middle">LV</text>
+    </g>
+    <g transform="translate(0 226)">
+      <text x="1" y="3" class="label" text-anchor="middle">M</text>
+    </g>
+    <g transform="translate(0 256)">
+      <text x="1" y="3" class="label" text-anchor="middle">B</text>
+    </g>
+  </g>
+
+  <!-- controls -->  
+  <g transform="translate(22.5 166)">
     <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(24 196)">
+  <g transform="translate(22.5 196)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(24 226)">
+  <g transform="translate(22.5 226)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
-  <g transform="translate(24 256)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
-  </g>
-  <g transform="translate(24 286)">
-    <use xlink:href="#port" transform="translate(-12 -12)"/>
+
+  <g transform="translate(22.5 256)">
+      <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
 
-  <!-- mix -->  
+  <!-- ======== in/out ======== -->  
 
-  <g transform="translate(24 316)">
-    <rect x="-14.5" y="-15" width="29" height="60" rx="3" class="poly-output"/>
+  <g transform="translate(22.5 293)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
+    <text x="0" y="22" class="label" text-anchor="middle">IN</text>
   </g>
-  <g transform="translate(24 346)">
+
+  <g transform="translate(22.5 334)">
+    <rect x="-15" y="-15" width="30" height="41" rx="3" class="poly-output"/>
     <use xlink:href="#port" transform="translate(-12 -12)"/>
+    <text x="0" y="22" class="output-label" text-anchor="middle">OUT</text>
   </g>
 
 </svg>
