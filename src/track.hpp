@@ -119,7 +119,7 @@ struct MonoTrack {
         vuStats.onSampleRateChange(sampleRate);
     }
 
-    void process(Input* input, int ch, float amp) {
+    void processChannel(Input* input, int ch, float amp) {
 
         // hard clip
         float out = clamp(input->getPolyVoltage(ch) * amp, -10.0f, 10.0f);
@@ -146,7 +146,6 @@ class StereoTrack {
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
     bogaudio::dsp::Panner panner;
-
     bogaudio::dsp::SlewLimiter panSlew;
     bogaudio::dsp::SlewLimiter panCvSlew[engine::PORT_MAX_CHANNELS];
 
@@ -172,8 +171,8 @@ class StereoTrack {
         if (muted) {
             for (int ch = 0; ch < maxChans; ch++) {
                 float m = levelCvAmps[ch].nextMute();
-                left.process(inLeft, ch, m);
-                right.process(inRight, ch, m);
+                left.processChannel(inLeft, ch, m);
+                right.processChannel(inRight, ch, m);
             }
         } else {
             float amp = levelAmp.next(levelToDb(levelParam->getValue()));
@@ -182,6 +181,7 @@ class StereoTrack {
                 float leftAmp = amp;
                 float rightAmp = amp;
 
+                // level cv
                 if (levelCvInput->isConnected()) {
                     float lv = levelCvInput->getPolyVoltage(ch);
                     float db = kMinDb + lv * 0.1f * kDecibelRange;
@@ -190,20 +190,20 @@ class StereoTrack {
                     rightAmp *= nl;
                 }
 
-                if (panParam) {
-                    float pan = panSlew.next(panParam->getValue());
-                    if (panCvInput->isConnected()) {
-                        float pv = panCvSlew[ch].next(panCvInput->getPolyVoltage(ch) * 0.2f);
-                        pan = clamp(pan + pv, -1.0f, 1.0f);
-                    }
-
-                    panner.setPan(pan);
-                    leftAmp *= panner._lLevel;
-                    rightAmp *= panner._rLevel;
+                // panning
+                float pan = panSlew.next(panParam->getValue());
+                if (panCvInput->isConnected()) {
+                    float pv = panCvSlew[ch].next(panCvInput->getPolyVoltage(ch) * 0.2f);
+                    pan = clamp(pan + pv, -1.0f, 1.0f);
                 }
 
-                left.process(inLeft, ch, leftAmp);
-                right.process(inRight, ch, rightAmp);
+                panner.setPan(pan);
+                leftAmp *= panner._lLevel;
+                rightAmp *= panner._rLevel;
+
+                // process left/right
+                left.processChannel(inLeft, ch, leftAmp);
+                right.processChannel(inRight, ch, rightAmp);
             }
         }
 

@@ -10,7 +10,10 @@
 
 struct GAIN : Module {
 
-    //StereoTrack track;
+    Amplitude levelAmp;
+    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+
+    VuStats vuStats;
 
     enum ParamId { kLevelParam, kMuteParam, kParamsLen };
 
@@ -36,8 +39,9 @@ struct GAIN : Module {
         configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
 
         configInput(kInput, "Audio");
-
         configOutput(kOutput, "Audio");
+
+        configBypass(kInput, kOutput);
 
 #ifdef GAIN_DEBUG
         configOutput(kDebug1, "Debug 1");
@@ -48,24 +52,62 @@ struct GAIN : Module {
     }
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        //track.onSampleRateChange(e.sampleRate);
-    }
 
-    //void processOutput(MonoTrack& trk, Output& output) {
-    //    if (output.isConnected()) {
-    //        output.setChannels(trk.output.channels);
-    //        output.writeVoltages(trk.output.voltages);
-    //    } else {
-    //        output.setChannels(0);
-    //    }
-    //}
+        levelAmp.onSampleRateChange(e.sampleRate);
+        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelCvAmps[ch].onSampleRateChange(e.sampleRate);
+        }
+
+        vuStats.onSampleRateChange(e.sampleRate);
+    }
 
     void process(const ProcessArgs& args) override {
 
-        //bool muted = params[kMuteParam].getValue() > 0.5f;
-        //track.process(args.sampleTime, muted);
+        if (outputs[kOutput].isConnected()) {
 
-        //processOutput(track.left, outputs[kOutput]);
+            float sum = 0.0f;
+            int channels = std::max(inputs[kInput].getChannels(), 1);
+
+            if (params[kMuteParam].getValue() > 0.5f) {
+
+                for (int ch = 0; ch < channels; ch++) {
+                    float m = levelCvAmps[ch].nextMute();
+
+                    float out = clamp(inputs[kInput].getPolyVoltage(ch) * m, -10.0f, 10.0f);
+                    outputs[kOutput].voltages[ch] = out;
+                    sum += out;
+                }
+            } else {
+
+                float amp = levelAmp.next(levelToDb(params[kLevelParam].getValue()));
+
+                for (int ch = 0; ch < channels; ch++) {
+                    float chAmp = amp;
+
+                    if (inputs[kLevelCvInput].isConnected()) {
+                        float lv = inputs[kLevelCvInput].getPolyVoltage(ch);
+                        float db = kMinDb + lv * 0.1f * kDecibelRange;
+                        float nl = levelCvAmps[ch].next(db);
+                        chAmp *= nl;
+                    }
+
+                    float out = clamp(inputs[kInput].getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);
+                    outputs[kOutput].voltages[ch] = out;
+                    sum += out;
+                }
+            }
+            outputs[kOutput].channels = channels;
+
+            vuStats.process(args.sampleTime, sum * 0.2f);
+        } 
+        // if the output is not connected, just meter the input
+        else {
+            if (inputs[kInput].isConnected()) {
+                vuStats.process(args.sampleTime, inputs[kInput].getVoltageSum() * 0.2f);
+            } else {
+                vuStats.process(args.sampleTime, 0.0f);
+            }
+        }
     }
 };
 
@@ -89,8 +131,8 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<ArcPolyPort>(Vec(12, 84), module, GAIN::kDebug4));
 #endif
 
-        //addMeter(24 - 6, 44, module ? &(module->track.left.vuStats) : NULL);
-        //addMeter(24 + 1, 44, module ? &(module->track.right.vuStats) : NULL);
+        addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
+        addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
 
         addParam(createParamCentered<ArcKnob24>(Vec(22.5, 166), module, GAIN::kLevelParam));
         addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 196), module, GAIN::kLevelCvInput));
@@ -100,12 +142,12 @@ struct GAINWidget : ModuleWidget {
         addOutput(createOutputCentered<ArcPolyPort>(Vec(22.5, 334), module, GAIN::kOutput));
     }
 
-    //void addMeter(float x, float y, VuStats* vuStats) {
-    //    VuMeter* meter = new VuMeter(vuStats);
-    //    meter->box.pos = Vec(x, y);
-    //    meter->box.size = Vec(8, 104);
-    //    addChild(meter);
-    //}
+    void addMeter(float x, float y, VuStats* vuStats) {
+        VuMeter* meter = new VuMeter(vuStats);
+        meter->box.pos = Vec(x, y);
+        meter->box.size = Vec(8, 104);
+        addChild(meter);
+    }
 };
 
 Model* modelGAIN = createModel<GAIN, GAINWidget>("GAIN");
