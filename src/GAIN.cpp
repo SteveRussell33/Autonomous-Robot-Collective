@@ -8,6 +8,25 @@
 // GAIN
 //--------------------------------------------------------------
 
+struct BoostParamQuantity : ParamQuantity {
+
+    float getDisplayValue() override {
+        float v = getValue();
+        if (!module) {
+            return v;
+        }
+        return rescale(v, 0.0f, 4.0f, -24.0f, 24.0f);
+    }
+
+    void setDisplayValue(float v) override {
+        if (!module) {
+            return;
+        }
+        v = clamp(v, -24.0f, 24.0f);
+        setValue(rescale(v, -24.0f, 24.0f, 0.0f, 4.0f));
+    }
+};
+
 struct GAIN : Module {
 
     Amplitude levelAmp;
@@ -15,7 +34,7 @@ struct GAIN : Module {
 
     VuStats vuStats;
 
-    enum ParamId { kLevelParam, kMuteParam, kParamsLen };
+    enum ParamId { kLevelParam, kMuteParam, kBoostParam, kParamsLen };
 
     enum InputId { kInput, kLevelCvInput, kInputsLen };
 
@@ -37,6 +56,9 @@ struct GAIN : Module {
         configParam<LevelParamQuantity>(kLevelParam, 0.0f, 1.0f, 0.75f, "Level", " dB");
         configInput(kLevelCvInput, "Level CV");
         configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
+
+		configParam<BoostParamQuantity>(kBoostParam, 0.0f, 4.0f, 2.0f, "Boost/Cut", " dB");
+		getParamQuantity(kBoostParam)->snapEnabled = true;
 
         configInput(kInput, "Audio");
         configOutput(kOutput, "Audio");
@@ -79,15 +101,17 @@ struct GAIN : Module {
                 }
             } else {
 
-                float amp = levelAmp.next(levelToDb(params[kLevelParam].getValue()));
+                float db = levelToDb(params[kLevelParam].getValue());
+                db += rescale(params[kBoostParam].getValue(), 0.0f, 4.0f, -24.0f, 24.0f);
+                float amp = levelAmp.next(db);
 
                 for (int ch = 0; ch < channels; ch++) {
                     float chAmp = amp;
 
                     if (inputs[kLevelCvInput].isConnected()) {
                         float lv = inputs[kLevelCvInput].getPolyVoltage(ch);
-                        float db = kMinDb + lv * 0.1f * kDecibelRange;
-                        float nl = levelCvAmps[ch].next(db);
+                        float chDb = kMinDb + lv * 0.1f * kDecibelRange;
+                        float nl = levelCvAmps[ch].next(chDb);
                         chAmp *= nl;
                     }
 
@@ -137,6 +161,12 @@ struct GAINWidget : ModuleWidget {
         addParam(createParamCentered<ArcKnob24>(Vec(22.5, 176), module, GAIN::kLevelParam));
         addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 206), module, GAIN::kLevelCvInput));
         addParam(createParamCentered<ArcMuteButton>(Vec(22.5, 236), module, GAIN::kMuteParam));
+
+        auto w = createParamCentered<ArcKnob18>(Vec(22.5, 262), module, GAIN::kBoostParam);
+        auto k = dynamic_cast<SvgKnob*>(w);
+        k->minAngle = -M_PI / 2.0f;
+        k->maxAngle = M_PI / 2.0f;
+        addParam(w);
 
         addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 293), module, GAIN::kInput));
         addOutput(createOutputCentered<ArcPolyPort>(Vec(22.5, 334), module, GAIN::kOutput));
