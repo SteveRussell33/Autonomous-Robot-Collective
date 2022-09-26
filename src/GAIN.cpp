@@ -134,9 +134,9 @@ struct GAINWidget : ModuleWidget {
         addMeter(24 - 6, 44, module ? &(module->vuStats) : NULL);
         addMeter(24 + 1, 44, module ? &(module->vuStats) : NULL);
 
-        addParam(createParamCentered<ArcKnob24>(Vec(22.5, 166), module, GAIN::kLevelParam));
-        addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 196), module, GAIN::kLevelCvInput));
-        addParam(createParamCentered<ArcMuteButton>(Vec(22.5, 226), module, GAIN::kMuteParam));
+        addParam(createParamCentered<ArcKnob24>(Vec(22.5, 176), module, GAIN::kLevelParam));
+        addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 206), module, GAIN::kLevelCvInput));
+        addParam(createParamCentered<ArcMuteButton>(Vec(22.5, 236), module, GAIN::kMuteParam));
 
         addInput(createInputCentered<ArcPolyPort>(Vec(22.5, 293), module, GAIN::kInput));
         addOutput(createOutputCentered<ArcPolyPort>(Vec(22.5, 334), module, GAIN::kOutput));

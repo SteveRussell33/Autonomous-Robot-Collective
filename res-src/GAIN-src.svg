@@ -219,7 +219,7 @@
   </g>
 
   <!-- labels -->  
-  <g transform="translate(5 0)">
+  <!--g transform="translate(5 0)">
     <g transform="translate(0 166)">
       <text x="0" y="3" class="label" text-anchor="middle">LV</text>
     </g>
@@ -229,21 +229,22 @@
     <g transform="translate(0 256)">
       <text x="1" y="3" class="label" text-anchor="middle">B</text>
     </g>
-  </g>
+  </g-->
 
   <!-- controls -->  
-  <g transform="translate(22.5 166)">
+  <g transform="translate(22.5 176)">
+    <text x="0" y="-16" class="label" text-anchor="middle">LEVEL</text>
     <polyline points="0 0 0 29" class="connect"/>
     <use xlink:href="#knob24" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(22.5 196)">
+  <g transform="translate(22.5 206)">
     <use xlink:href="#port" transform="translate(-12 -12)"/>
   </g>
-  <g transform="translate(22.5 226)">
+  <g transform="translate(22.5 236)">
     <use xlink:href="#toggleButton" transform="translate(-9 -9)"/>
   </g>
 
-  <g transform="translate(22.5 256)">
+  <g transform="translate(22.5 262)">
       <use xlink:href="#knob18" transform="translate(-9 -9)"/>
   </g>
 
