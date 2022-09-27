@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include "rack.hpp"
+#include <math.h>
 
 using namespace rack;
 
@@ -159,8 +160,8 @@ public:
 
         // TODO use lookup tables
         float lr = (pan + 1.0f) * 0.125f;
-        left = std::cosf(2.0f * M_PI * lr);
-        right = std::sinf(2.0f * M_PI * lr);
+        left = cosf(2.0f * M_PI * lr);
+        right = sinf(2.0f * M_PI * lr);
     }
 };
 
