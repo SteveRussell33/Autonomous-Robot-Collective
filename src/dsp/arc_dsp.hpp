@@ -3,9 +3,20 @@
 #include <cmath>
 
 #include "earlevel/Biquad.h"
+#include "rack.hpp"
+
+using namespace rack;
 
 namespace arc {
 namespace dsp {
+
+inline float frequencyToCV(float frequency) {
+    return log2f(frequency / rack::dsp::FREQ_C4);
+}
+
+inline float cvToFrequency(float cv) {
+    return powf(2.0, cv) * rack::dsp::FREQ_C4;
+}
 
 //--------------------------------------------------------------
 // soft clip

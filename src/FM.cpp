@@ -1,8 +1,6 @@
+#include "arc_dsp.hpp"
 #include "plugin.hpp"
 #include "widgets.hpp"
-
-#include "bogaudio/dsp/pitch.hpp"
-#include "bogaudio/dsp/signal.hpp"
 
 // define FM_DEBUG
 
@@ -106,9 +104,9 @@ struct FM : Module {
             offset = offset * 40.0f; // -200Hz to 200 Hz
 
             // frequency
-            float carrierFreq = bogaudio::dsp::cvToFrequency(inCarrierPitch);
+            float carrierFreq = arc::dsp::cvToFrequency(inCarrierPitch);
             float modulatorFreq = clamp(carrierFreq * ratio + offset, 20.0f, 20000.0f);
-            float outModulatorPitch = bogaudio::dsp::frequencyToCV(modulatorFreq);
+            float outModulatorPitch = arc::dsp::frequencyToCV(modulatorFreq);
 
             outputs[kModulatorPitchOutput].setVoltage(outModulatorPitch, ch);
         }
