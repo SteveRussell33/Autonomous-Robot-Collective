@@ -38,8 +38,6 @@ struct FM : Module {
         kOutputsLen
     };
 
-    bogaudio::dsp::SlewLimiter paramSlew[kParamsLen];
-
     FM() {
         config(kParamsLen, kInputsLen, kOutputsLen, 0);
 
@@ -77,30 +75,16 @@ struct FM : Module {
             return round(ratio);
     }
 
-    inline float slewParam(int id) {
-        float v = params[id].getValue();
-        return paramSlew[id].next(v);
-    }
-
-    void onSampleRateChange(const SampleRateChangeEvent& e) override {
-        // clang-format off
-        paramSlew[kRatioParam]         .setParams(e.sampleRate, 5.0f, 10.0f);
-        paramSlew[kRatioCvAmountParam] .setParams(e.sampleRate, 5.0f,  2.0f);
-        paramSlew[kOffsetParam]        .setParams(e.sampleRate, 5.0f, 10.0f);
-        paramSlew[kOffsetCvAmountParam].setParams(e.sampleRate, 5.0f,  2.0f);
-        // clang-format on
-    }
-
     void process(const ProcessArgs& args) override {
 
         if (!outputs[kModulatorPitchOutput].isConnected()) {
             return;
         }
 
-        float pRatio = slewParam(kRatioParam);
-        float pRatioCvAmount = slewParam(kRatioCvAmountParam);
-        float pOffset = slewParam(kOffsetParam);
-        float pOffsetCvAmount = slewParam(kOffsetCvAmountParam);
+        float pRatio = params[kRatioParam].getValue();
+        float pRatioCvAmount = params[kRatioCvAmountParam].getValue();
+        float pOffset = params[kOffsetParam].getValue();
+        float pOffsetCvAmount = params[kOffsetCvAmountParam].getValue();
 
         bool pRatioQuant = params[kRatioQuantParam].getValue() < 0.5f;
 
