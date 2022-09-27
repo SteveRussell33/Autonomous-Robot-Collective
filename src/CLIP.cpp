@@ -13,9 +13,8 @@
 
 struct CLIP : Module {
 
-    static constexpr float kRampTime = 0.010f;
-    arc::dsp::LinearRamp levelRamp;
-    arc::dsp::LinearRamp levelCvRamps[engine::PORT_MAX_CHANNELS];
+    arc::dsp::Amplifier levelAmp;
+    arc::dsp::Amplifier levelCvAmps[engine::PORT_MAX_CHANNELS];
 
     static const int kOversampleFactor = 4;
     std::vector<arc::dsp::Oversample> oversample;
@@ -61,14 +60,9 @@ struct CLIP : Module {
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
 
-        levelRamp.onSampleRateChange(e.sampleRate);
-        levelRamp.setTime(kRampTime);
+        levelAmp.onSampleRateChange(e.sampleRate);
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            levelCvRamps[ch].onSampleRateChange(e.sampleRate);
-            levelCvRamps[ch].setTime(kRampTime);
-        }
-
-        for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
+            levelCvAmps[ch].onSampleRateChange(e.sampleRate);
             oversample[ch].onSampleRateChange(e.sampleRate);
         }
     }
@@ -76,7 +70,7 @@ struct CLIP : Module {
     float nextLevelCvAmp(int ch) {
         float v = inputs[kLevelCvInput].getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        return arc::dsp::decibelsToAmplitude(levelCvRamps[ch].next(db));
+        return levelCvAmps[ch].next(db);
     }
 
     float processChannel(int ch, float in, float limit) {
@@ -97,7 +91,7 @@ struct CLIP : Module {
         }
 
         float db = levelToDb(params[kLevelParam].getValue());
-        float amp = arc::dsp::decibelsToAmplitude(levelRamp.next(db));
+        float amp = levelAmp.next(db);
 
         int channels = std::max(inputs[kInput].getChannels(), 1);
         for (int ch = 0; ch < channels; ch++) {

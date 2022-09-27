@@ -98,6 +98,36 @@ class LinearRamp {
 };
 
 //--------------------------------------------------------------
+// Amplifier
+//--------------------------------------------------------------
+
+class Amplifier {
+
+    static constexpr float kRampTime = 0.010f;
+    arc::dsp::LinearRamp ramp;
+
+    float db = -60.0f;
+    float amp = 0.0f;
+
+public:
+
+    void onSampleRateChange(float sampleRate) {
+        ramp.onSampleRateChange(sampleRate);
+        ramp.setTime(kRampTime);
+    }
+
+    float next(float v) {
+        if (db == v) {
+            return amp;
+        }
+
+        db = v;
+        amp = decibelsToAmplitude(db);
+        return amp;
+    }
+};
+
+//--------------------------------------------------------------
 // Panner
 //--------------------------------------------------------------
 
@@ -116,27 +146,6 @@ public:
         // TODO use lookup tables
         left = std::cosf(2.0f * M_PI * pan);
         right = std::sinf(2.0f * M_PI * pan);
-    }
-};
-
-//--------------------------------------------------------------
-// Amplifier
-//--------------------------------------------------------------
-
-class Amplifier {
-
-    static constexpr float kRampTime = 0.010f;
-    arc::dsp::LinearRamp ramp;
-
-public:
-
-    void onSampleRateChange(float sampleRate) {
-        ramp.onSampleRateChange(sampleRate);
-        ramp.setTime(kRampTime);
-    }
-
-    float next(float db) {
-        return arc::dsp::decibelsToAmplitude(ramp.next(db));
     }
 };
 
