@@ -90,7 +90,7 @@ class StereoTrack {
 
     arc::dsp::Amplifier levelAmp;
     arc::dsp::Amplifier levelCvAmps[engine::PORT_MAX_CHANNELS];
-    arc::dsp::Panner panner;
+    arc::dsp::Panner panners[engine::PORT_MAX_CHANNELS];
 
     Input* leftInput = NULL;
     Input* rightInput = NULL;
@@ -107,6 +107,14 @@ class StereoTrack {
         return levelCvAmps[ch].next(db);
     }
 
+    void nextPanner(int ch, float pan) {
+        if (panCvInput->isConnected()) {
+            pan += panCvInput->getPolyVoltage(ch) * 0.2f;
+        }
+        pan = clamp(pan, -1.0f, 1.0f);
+        panners[ch].next(pan);
+    }
+
     void processStereo(float sampleTime, Input* inLeft, Input* inRight, bool muted) {
 
         left.sum = 0.0f;
@@ -119,6 +127,7 @@ class StereoTrack {
 
         if (muted) {
             float amp = levelAmp.next(kMinDb);
+            float pan = panParam->getValue();
 
             for (int ch = 0; ch < maxChans; ch++) {
                 float leftAmp = amp;
@@ -131,16 +140,10 @@ class StereoTrack {
                     rightAmp *= nla;
                 }
 
-                //// panning
-                //float pan = panParam->getValue();
-                //if (panCvInput->isConnected()) {
-                //    pan += panCvInput->getPolyVoltage(ch) * 0.2f;
-                //}
-                //pan = clamp(pan, -1.0f, 1.0f);
-
-                //panner.next(pan);
-                //leftAmp *= panner.left;
-                //rightAmp *= panner.right;
+                // panning
+                nextPanner(ch, pan);
+                leftAmp *= panners[ch].left;
+                rightAmp *= panners[ch].right;
 
                 // process left/right
                 left.processChannel(inLeft, ch, leftAmp);
@@ -148,6 +151,7 @@ class StereoTrack {
             }
         } else {
             float amp = levelAmp.next(levelToDb(levelParam->getValue()));
+            float pan = panParam->getValue();
 
             for (int ch = 0; ch < maxChans; ch++) {
                 float leftAmp = amp;
@@ -160,16 +164,10 @@ class StereoTrack {
                     rightAmp *= nla;
                 }
 
-                //// panning
-                //float pan = panParam->getValue();
-                //if (panCvInput->isConnected()) {
-                //    pan += panCvInput->getPolyVoltage(ch) * 0.2f;
-                //}
-                //pan = clamp(pan, -1.0f, 1.0f);
-
-                //panner.next(pan);
-                //leftAmp *= panner.left;
-                //rightAmp *= panner.right;
+                // panning
+                nextPanner(ch, pan);
+                leftAmp *= panners[ch].left;
+                rightAmp *= panners[ch].right;
 
                 // process left/right
                 left.processChannel(inLeft, ch, leftAmp);
@@ -191,6 +189,7 @@ class StereoTrack {
         levelAmp.onSampleRateChange(sampleRate);
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
             levelCvAmps[ch].onSampleRateChange(sampleRate);
+            panners[ch].onSampleRateChange(sampleRate);
         }
 
         left.onSampleRateChange(sampleRate);

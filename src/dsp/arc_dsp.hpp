@@ -134,19 +134,34 @@ public:
 
 class Panner {
 
+    static constexpr float kRampTime = 0.005f;
+    arc::dsp::LinearRamp ramp;
+
+    float pan = 0.0f;
+
 public:
 
     float left = 0.7071068f;
     float right = 0.7071068f;
 
-    // Must be wthin [-1.0, 1.0]
-    void next(float pan) {
+    void onSampleRateChange(float sampleRate) {
+        ramp.onSampleRateChange(sampleRate);
+        ramp.setTime(kRampTime);
+    }
 
-        pan = (pan + 1.0f) * 0.125f;
+    // Must be wthin [-1.0, 1.0]
+    void next(float v) {
+        v = ramp.next(v);
+        if (pan == v) {
+            return;
+        }
+
+        pan = v;
 
         // TODO use lookup tables
-        left = std::cosf(2.0f * M_PI * pan);
-        right = std::sinf(2.0f * M_PI * pan);
+        float lr = (pan + 1.0f) * 0.125f;
+        left = std::cosf(2.0f * M_PI * lr);
+        right = std::sinf(2.0f * M_PI * lr);
     }
 };
 
