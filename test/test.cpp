@@ -136,45 +136,45 @@
 ////--------------------------------------------------------------
 //// Pan
 ////--------------------------------------------------------------
-
-struct Pan {
-
-  private:
-
-    float curPan = 0.0f;
-
-    bogaudio::dsp::SlewLimiter slew;
-
-  public:
-
-    float left = 0.7071068f;
-    float right = 0.7071068f;
-
-    Pan() {
-        slew.setLast(0.0f);
-    }
-
-    void onSampleRateChange(float sampleRate) {
-        slew.setParams(sampleRate, 5.0f, 2.0f);
-    }
-
-    void next(float pan) {
-
-        pan = clamp(pan, -1.0f, 1.0f);
-
-        float ps = slew.next(pan);
-        if (curPan != ps) {
-            curPan = ps;
-
-            float p = (curPan + 1.0f) * 0.125f;
-
-            // TODO use lookup tables
-            left = std::cosf(2.0f * M_PI * p);
-            right = std::sinf(2.0f * M_PI * p);
-        }
-    }
-};
-
+//
+//struct Pan {
+//
+//  private:
+//
+//    float curPan = 0.0f;
+//
+//    bogaudio::dsp::SlewLimiter slew;
+//
+//  public:
+//
+//    float left = 0.7071068f;
+//    float right = 0.7071068f;
+//
+//    Pan() {
+//        slew.setLast(0.0f);
+//    }
+//
+//    void onSampleRateChange(float sampleRate) {
+//        slew.setParams(sampleRate, 5.0f, 2.0f);
+//    }
+//
+//    void next(float pan) {
+//
+//        pan = clamp(pan, -1.0f, 1.0f);
+//
+//        float ps = slew.next(pan);
+//        if (curPan != ps) {
+//            curPan = ps;
+//
+//            float p = (curPan + 1.0f) * 0.125f;
+//
+//            // TODO use lookup tables
+//            left = std::cosf(2.0f * M_PI * p);
+//            right = std::sinf(2.0f * M_PI * p);
+//        }
+//    }
+//};
+//
 // void testPan() {
 //
 //    Pan pan;
@@ -211,55 +211,36 @@ struct Pan {
 //}
 //
 
-////--------------------------------------------------------------
-////--------------------------------------------------------------
-////--------------------------------------------------------------
-//
-//#include <iomanip>
-//#include <iostream>
-//#include <cmath>
-//
-//#include "../lib/bogaudio/dsp/signal.hpp"
-//#include "../src/dsp/arc_table.hpp"
-//
-////--------------------------------------------------------------
-//
-// void dump(float v) {
-//    std::cout << std::fixed;
-//    std::cout << std::setprecision(7);
-//    std::cout << v;
-//}
-//
-// constexpr float rescale(float x, float xMin, float xMax, float yMin, float yMax) {
-//	return yMin + (x - xMin) / (xMax - xMin) * (yMax - yMin);
-//}
-//
-////constexpr float dbtoa(int n) {
-////    return std::powf(10.0f, rescale(n, 0, 10, -60, 20) * 0.05f);
-////}
-//
-////-60.0f + (x - 0.0f) / (xMax - 0.0f) * (yMax - -60.0f)
-////
-// void testTable() {
-//     template<std::size_t Length>
-//     inline constexpr auto factorial_lut = lut<Length>([](std::size_t n){
-//
-//         return std::powf(10.0f, rescale(n, 0, 10, -60, 20) * 0.05f);
-//         unsigned result = 1;
-//         for(unsigned i = 2; i <= n; i++){
-//             result *= i;
-//         }
-//         return result;
-//     });
-//
-//
-//     //constexpr auto lut = arc::dsp::LUT<10>(dbtoa);
-//     //for (int i = 0; i < 10; i++) {
-//     //    dump(lut[i]);
-//     //    std::cout << std::endl;
-//     //}
-// }
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+#include <iomanip>
+#include <iostream>
+#include <cmath>
+
+ void dump(float v) {
+    std::cout << std::fixed;
+    std::cout << std::setprecision(3);
+    std::cout << v;
+}
+
+void testParam() {
+
+    float base = -10;
+    float mult = 40;
+
+    for (float v = 0.0f; v < 2.001f; v += 0.1f) {
+        float p = std::logf(v) / std::logf(-base);
+        p *= mult;
+
+        dump(v);
+        std::cout << ",";
+        dump(p);
+        std::cout << std::endl;
+    }
+}
 
 int main() {
-    // testTable();
+    testParam();
 }
