@@ -4,8 +4,6 @@
 //#include <sstream>
 //#include <vector>
 //
-//#include "../lib/bogaudio/dsp/signal.hpp"
-//
 // inline float clamp(float x, float a = 0.f, float b = 1.f) {
 //	return std::fmax(std::fmin(x, b), a);
 //}
@@ -219,28 +217,85 @@
 #include <iostream>
 #include <cmath>
 
- void dump(float v) {
+//#include "../src/dsp/arc_dsp.hpp"
+
+class LinearRamp {
+
+    float sampleRate = 1.0f;
+    float time = 1.0f; // in seconds
+
+    float value = 0.0f;
+
+    float target = 0.0f;
+    float increment = 0.0f;
+    bool rising = false;
+
+public:
+
+    LinearRamp(float time_) : time(time_) {
+    }
+
+    void onSampleRateChange(float sampleRate_) {
+        sampleRate = sampleRate_;
+    }
+
+    void setTarget(float target_) {
+        target = target_;
+        increment = (target - value) / (sampleRate * time);
+        rising = (target > value);
+    }
+
+    float next() {
+        if (target == value) {
+            return value;
+        }
+
+        value += increment;
+
+        if (rising) {
+            if (value > target) {
+                value = target;
+            }
+        } else {
+            if (value < target) {
+                value = target;
+            }
+        }
+
+        return value;
+    }
+};
+
+void dump(float v) {
     std::cout << std::fixed;
-    std::cout << std::setprecision(3);
+    std::cout << std::setprecision(7);
     std::cout << v;
 }
 
-void testParam() {
+void testLinearRamp() {
 
-    float base = -10;
-    float mult = 40;
+    LinearRamp ramp{0.1f};
+    ramp.onSampleRateChange(100.0f);
 
-    for (float v = 0.0f; v < 2.001f; v += 0.1f) {
-        float p = std::logf(v) / std::logf(-base);
-        p *= mult;
+    ramp.setTarget(2.0f);
+    for (int t = 0; t < 20; t++) {
+        std::cout << t << ": ";
+        float value = ramp.next();
+        dump(value);
+        std::cout << std::endl;
+    }
 
-        dump(v);
-        std::cout << ",";
-        dump(p);
+    std::cout << "-------------------" << std::endl;
+
+    ramp.setTarget(1.234567f);
+    for (int t = 0; t < 20; t++) {
+        std::cout << t << ": ";
+        float value = ramp.next();
+        dump(value);
         std::cout << std::endl;
     }
 }
 
 int main() {
-    testParam();
+    testLinearRamp();
 }

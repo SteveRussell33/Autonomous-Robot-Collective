@@ -30,7 +30,11 @@ T decibelsToAmplitude(T db) {
 	return std::pow(10, db / 20);
 }
 
-struct Panner {
+//--------------------------------------------------------------
+// Pan
+//--------------------------------------------------------------
+
+struct Pan {
 
     float left = 0.7071068f;
     float right = 0.7071068f;
@@ -43,6 +47,57 @@ struct Panner {
         // TODO use lookup tables
         left = std::cosf(2.0f * M_PI * pan);
         right = std::sinf(2.0f * M_PI * pan);
+    }
+};
+
+//--------------------------------------------------------------
+// LinearRamp
+//--------------------------------------------------------------
+
+class LinearRamp {
+
+    float sampleRate = 1.0f;
+    float time = 1.0f; // in seconds
+
+    float value = 0.0f;
+
+    float target = 0.0f;
+    float increment = 0.0f;
+    bool rising = false;
+
+public:
+
+    LinearRamp(float time_) : time(time_) {
+    }
+
+    void onSampleRateChange(float sampleRate_) {
+        sampleRate = sampleRate_;
+    }
+
+    void setTarget(float target_) {
+        target = target_;
+        increment = (target - value) / (sampleRate * time);
+        rising = (target > value);
+    }
+
+    float next() {
+        if (target == value) {
+            return value;
+        }
+
+        value += increment;
+
+        if (rising) {
+            if (value > target) {
+                value = target;
+            }
+        } else {
+            if (value < target) {
+                value = target;
+            }
+        }
+
+        return value;
     }
 };
 

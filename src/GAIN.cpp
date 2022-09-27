@@ -83,6 +83,12 @@ struct GAIN : Module {
         vuStats.onSampleRateChange(e.sampleRate);
     }
 
+    float nextLevelCvAmp(int ch) {
+        float v = inputs[kLevelCvInput].getPolyVoltage(ch);
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return arc::dsp::decibelsToAmplitude(db);
+    }
+
     void process(const ProcessArgs& args) override {
 
         // Check if anything is connected
@@ -117,10 +123,7 @@ struct GAIN : Module {
                 float chAmp = amp;
 
                 if (inputs[kLevelCvInput].isConnected()) {
-                    float lv = inputs[kLevelCvInput].getPolyVoltage(ch);
-                    float chDb = kMinDb + lv * 0.1f * kDecibelRange;
-                    float nl = levelCvAmps[ch].next(chDb);
-                    chAmp *= nl;
+                    chAmp = chAmp * nextLevelCvAmp(ch);
                 }
 
                 float out = clamp(inputs[kInput].getPolyVoltage(ch) * chAmp, -10.0f, 10.0f);

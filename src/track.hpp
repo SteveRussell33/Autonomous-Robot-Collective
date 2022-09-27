@@ -10,7 +10,6 @@ using namespace rack;
 
 static const float kMinDb = -60.0f;
 static const float kMaxDb = 12.0f;
-static const float kDecibelRange = kMaxDb - kMinDb;
 
 //--------------------------------------------------------------
 // LevelParamQuantity
@@ -144,7 +143,7 @@ class StereoTrack {
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
-    arc::dsp::Panner panner;
+    arc::dsp::Pan panner;
 
     Input* leftInput = NULL;
     Input* rightInput = NULL;
@@ -154,6 +153,12 @@ class StereoTrack {
 
     Param* panParam = NULL;
     Input* panCvInput = NULL;
+
+    float nextLevelCvAmp(int ch) {
+        float v = levelCvInput->getPolyVoltage(ch);
+        float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
+        return arc::dsp::decibelsToAmplitude(db);
+    }
 
     void processStereo(float sampleTime, Input* inLeft, Input* inRight, bool muted) {
 
@@ -180,11 +185,9 @@ class StereoTrack {
 
                 // level cv
                 if (levelCvInput->isConnected()) {
-                    float lv = levelCvInput->getPolyVoltage(ch);
-                    float db = kMinDb + lv * 0.1f * kDecibelRange;
-                    float nl = levelCvAmps[ch].next(db);
-                    leftAmp *= nl;
-                    rightAmp *= nl;
+                    float nla = nextLevelCvAmp(ch);
+                    leftAmp *= nla;
+                    rightAmp *= nla;
                 }
 
                 // panning
