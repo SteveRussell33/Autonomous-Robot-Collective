@@ -2,7 +2,6 @@
 
 #include <cmath>
 
-#include "earlevel/Biquad.h"
 #include "rack.hpp"
 
 using namespace rack;
@@ -196,16 +195,17 @@ struct TwelvePoleLpf {
     static constexpr double Q[kFilters] = {
         0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
 
-    Biquad filter[kFilters];
+    rack::dsp::TBiquadFilter<double> filter[kFilters];
 
   public:
 
     void setCutoff(float cutoff, float sampleRate) {
 
-        double Fc = cutoff / sampleRate;
+        double fc = cutoff / sampleRate;
 
+        auto filterType = rack::dsp::TBiquadFilter<double>::Type::LOWPASS;
         for (int i = 0; i < kFilters; i++) {
-            filter[i].setBiquad(bq_type_lowpass, Fc, Q[i], 0);
+            filter[i].setParameters(filterType, fc, Q[i], 0);
         }
     }
 
