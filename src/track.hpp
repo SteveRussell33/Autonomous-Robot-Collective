@@ -142,7 +142,6 @@ class StereoTrack {
 
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
-
     arc::dsp::Pan panner;
 
     Input* leftInput = NULL;
@@ -193,9 +192,9 @@ class StereoTrack {
                 // panning
                 float pan = panParam->getValue();
                 if (panCvInput->isConnected()) {
-                    float pv = panCvInput->getPolyVoltage(ch) * 0.2f;
-                    pan = clamp(pan + pv, -1.0f, 1.0f);
+                    pan += panCvInput->getPolyVoltage(ch) * 0.2f;
                 }
+                pan = clamp(pan, -1.0f, 1.0f);
 
                 panner.next(pan);
                 leftAmp *= panner.left;
@@ -219,7 +218,6 @@ class StereoTrack {
     void onSampleRateChange(float sampleRate) {
 
         levelAmp.onSampleRateChange(sampleRate);
-
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
             levelCvAmps[ch].onSampleRateChange(sampleRate);
         }

@@ -32,26 +32,6 @@ template <typename T> T decibelsToAmplitude(T db) {
 }
 
 //--------------------------------------------------------------
-// Pan
-//--------------------------------------------------------------
-
-struct Pan {
-
-    float left = 0.7071068f;
-    float right = 0.7071068f;
-
-    void next(float pan) {
-
-        pan = clamp(pan, -1.0f, 1.0f);
-        pan = (pan + 1.0f) * 0.125f;
-
-        // TODO use lookup tables
-        left = std::cosf(2.0f * M_PI * pan);
-        right = std::sinf(2.0f * M_PI * pan);
-    }
-};
-
-//--------------------------------------------------------------
 // LinearRamp
 //--------------------------------------------------------------
 
@@ -81,10 +61,6 @@ class LinearRamp {
         assert(time_ > 0.0f);
         time = time_;
         recalc();
-    }
-
-    void setValue(float value_) {
-        value = value_;
     }
 
     float next(float target_) {
@@ -118,6 +94,28 @@ class LinearRamp {
         }
 
         return value;
+    }
+};
+
+//--------------------------------------------------------------
+// Pan
+//--------------------------------------------------------------
+
+class Pan {
+
+public:
+
+    float left = 0.7071068f;
+    float right = 0.7071068f;
+
+    // Must be wthin [-1.0, 1.0]
+    void next(float pan) {
+
+        pan = (pan + 1.0f) * 0.125f;
+
+        // TODO use lookup tables
+        left = std::cosf(2.0f * M_PI * pan);
+        right = std::sinf(2.0f * M_PI * pan);
     }
 };
 
