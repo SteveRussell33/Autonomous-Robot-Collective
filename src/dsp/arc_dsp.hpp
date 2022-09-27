@@ -10,12 +10,24 @@ using namespace rack;
 namespace arc {
 namespace dsp {
 
+// TODO lookup tables
+
 inline float frequencyToCV(float frequency) {
     return log2f(frequency / rack::dsp::FREQ_C4);
 }
 
 inline float cvToFrequency(float cv) {
     return powf(2.0, cv) * rack::dsp::FREQ_C4;
+}
+
+template <typename T>
+T amplitudeToDecibels(T amp) {
+	return simd::log10(amp) * 20;
+}
+
+template <typename T>
+T decibelsToAmplitude(T db) {
+	return std::pow(10, db / 20);
 }
 
 //--------------------------------------------------------------

@@ -1,9 +1,7 @@
 #pragma once
 
+#include "arc_dsp.hpp"
 #include "rack.hpp"
-
-#include "bogaudio/dsp/filters/utility.hpp"
-#include "bogaudio/dsp/signal.hpp"
 
 using namespace rack;
 
@@ -15,32 +13,27 @@ class VuStats {
 
   private:
 
-    // dsp::VuMeter2 rmsMeter;
     dsp::VuMeter2 peakMeter;
-
-    bogaudio::dsp::Timer maxPeakTimer;
+	dsp::ClockDivider maxPeakTimer;
 
   public:
 
-    // float rms = 0.0f;
     float peak = 0.0f;
     float maxPeak = 0.0f;
 
     void onSampleRateChange(float sampleRate) {
-        // rmsMeter.mode = dsp::VuMeter2::Mode::RMS;
-        peakMeter.mode = dsp::VuMeter2::Mode::PEAK;
-        maxPeakTimer.setParams(sampleRate, 1.0f);
+        // once per second
+		maxPeakTimer.setDivision(sampleRate);
     }
 
     void process(float deltaTime, float sample) {
 
-        // rmsMeter.process(deltaTime, sample);
-        // rms = rmsMeter.v;
-
         peakMeter.process(deltaTime, sample);
         peak = peakMeter.v;
 
-        if ((peak > maxPeak) || !maxPeakTimer.next()) {
+        if (maxPeakTimer.process()) {
+            maxPeak = peak;
+        } else if (peak > maxPeak) {
             maxPeak = peak;
             maxPeakTimer.reset();
         }
@@ -66,10 +59,10 @@ struct VuMeter : OpaqueWidget {
     VuStats* vuStats = NULL;
 
     // clang-format off
-    VuColors fadedColors = {
-        nvgRGBA(0xFF, 0x87, 0x24, 0xA0),
-        nvgRGBA(0xFF, 0xCA, 0x33, 0xA0),
-        nvgRGBA(0x3E, 0xD5, 0x64, 0xA0)};
+    //VuColors fadedColors = {
+    //    nvgRGBA(0xFF, 0x87, 0x24, 0xA0),
+    //    nvgRGBA(0xFF, 0xCA, 0x33, 0xA0),
+    //    nvgRGBA(0x3E, 0xD5, 0x64, 0xA0)};
 
     VuColors boldColors = {
         nvgRGB(0xFF, 0x87, 0x24), 
@@ -124,7 +117,7 @@ struct VuMeter : OpaqueWidget {
 
     void drawLevel(const DrawArgs& args, float x, float level, VuColors colors) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(level), -48.0f, 0.0f);
+        float db = clamp(arc::dsp::amplitudeToDecibels(level), -48.0f, 0.0f);
         if (db < -45.0f) {
             return;
         }
@@ -169,7 +162,7 @@ struct VuMeter : OpaqueWidget {
 
     void drawMaxPeak(const DrawArgs& args, float x, float maxPeak, VuColors colors) {
 
-        float db = clamp(bogaudio::dsp::amplitudeToDecibels(maxPeak), -48.0f, 0.0f);
+        float db = clamp(arc::dsp::amplitudeToDecibels(maxPeak), -48.0f, 0.0f);
         if (db < -45.0f) {
             return;
         }
@@ -189,6 +182,5 @@ struct VuMeter : OpaqueWidget {
 
         drawLevel(args, 0, vuStats->peak, boldColors);
         drawMaxPeak(args, 0, vuStats->maxPeak, boldColors);
-        // drawLevel(args, 0, vuStats->rms, boldColors);
     }
 };
