@@ -14,7 +14,7 @@ class VuStats {
   private:
 
     dsp::VuMeter2 peakMeter;
-	dsp::ClockDivider maxPeakTimer;
+    dsp::ClockDivider maxPeakTimer;
 
   public:
 
@@ -23,7 +23,7 @@ class VuStats {
 
     void onSampleRateChange(float sampleRate) {
         // once per second
-		maxPeakTimer.setDivision(sampleRate);
+        maxPeakTimer.setDivision(sampleRate);
     }
 
     void process(float deltaTime, float sample) {

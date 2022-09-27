@@ -1,262 +1,71 @@
-//#include <cmath>
-//#include <iomanip>
-//#include <iostream>
-//#include <sstream>
-//#include <vector>
-//
-// inline float clamp(float x, float a = 0.f, float b = 1.f) {
-//	return std::fmax(std::fmin(x, b), a);
-//}
-//
-// void dump(float v) {
-//    std::cout << std::fixed;
-//    std::cout << std::setprecision(7);
-//    std::cout << v;
-//}
-//
-// const float sampleRate = 48000.0f;
-//
-////--------------------------------------------------------------
-//// Amplitude
-////--------------------------------------------------------------
-//
-// static const float kMinDb = -60.0f;
-// static const float kMaxDb = 12.0f;
-//
-// struct Amplitude {
-//
-//  private:
-//
-//    float curDb;
-//    float curAmp;
-//    bogaudio::dsp::SlewLimiter slew;
-//
-//  public:
-//
-//    Amplitude() {
-//        curDb = kMinDb;
-//        curAmp = 0.0f;
-//        slew.setLast(curDb);
-//    }
-//
-//    void onSampleRateChange(float sampleRate) {
-//        slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
-//    }
-//
-//    float next(float db) {
-//
-//        float dbs = slew.next(db);
-//        if (curDb != dbs) {
-//            curDb = dbs;
-//
-//            // TODO use a lookup table
-//            curAmp = bogaudio::dsp::decibelsToAmplitude(curDb);
-//
-//            if (curAmp < 0.0011220 /* -59 dB */) {
-//                curAmp = 0.0f;
-//            }
-//        }
-//        return curAmp;
-//    }
-//};
-//
-// void testAmplitude() {
-//
-//    Amplitude faderAmp;
-//
-//    faderAmp.onSampleRateChange(sampleRate);
-//
-//    for (int i = 0; i < 500; i++) {
-//        float ampF = faderAmp.next(kMaxDb);
-//        std::cout << i << ": ";
-//        dump(ampF);
-//        std::cout << std::endl;
-//    }
-//
-//    for (int i = 0; i < 500; i++) {
-//        float ampF = faderAmp.next(kMinDb);
-//        std::cout << i << ": ";
-//        dump(ampF);
-//        std::cout << std::endl;
-//    }
-//}
-//
-////--------------------------------------------------------------
-////--------------------------------------------------------------
-////--------------------------------------------------------------
-//
-// void testSlew() {
-//
-//    bogaudio::dsp::SlewLimiter slew;
-//    slew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
-//
-//    slew.setLast(0);
-//    for (int i = 0; i < 100 * 10; i++) {
-//        dump(slew.next(kMinDb));
-//        std::cout << std::endl;
-//    }
-//}
-//
-////void csv() {
-////
-////    std::cout << "T,A,B" << std::endl;
-////
-////    for (int i = 0; i < 10; i++) {
-////        for (int j = 0; j < 100; j++) {
-////
-////            float t = i + j/100.0f;
-////
-////            float a = foo();
-////            a = a * amplitude;
-////
-////            float b = bar();
-////            b = b * amplitude;
-////
-////            dump(t);
-////            std::cout << ",";
-////            dump(a);
-////            std::cout << ",";
-////            dump(b);
-////            std::cout << std::endl;
-////        }
-////    }
-////}
-//
-////// don't forget to clamp at -1, 1
-////void pan(float pan) {
-////
-////    float p = (pan + 1.0f) * 0.125f;
-////    float left = std::cosf(2.0f * M_PI * p);
-////    float right = std::sinf(2.0f * M_PI * p);
-////
-////}
-//
-////--------------------------------------------------------------
-//// Pan
-////--------------------------------------------------------------
-//
-//struct Pan {
-//
-//  private:
-//
-//    float curPan = 0.0f;
-//
-//    bogaudio::dsp::SlewLimiter slew;
-//
-//  public:
-//
-//    float left = 0.7071068f;
-//    float right = 0.7071068f;
-//
-//    Pan() {
-//        slew.setLast(0.0f);
-//    }
-//
-//    void onSampleRateChange(float sampleRate) {
-//        slew.setParams(sampleRate, 5.0f, 2.0f);
-//    }
-//
-//    void next(float pan) {
-//
-//        pan = clamp(pan, -1.0f, 1.0f);
-//
-//        float ps = slew.next(pan);
-//        if (curPan != ps) {
-//            curPan = ps;
-//
-//            float p = (curPan + 1.0f) * 0.125f;
-//
-//            // TODO use lookup tables
-//            left = std::cosf(2.0f * M_PI * p);
-//            right = std::sinf(2.0f * M_PI * p);
-//        }
-//    }
-//};
-//
-// void testPan() {
-//
-//    Pan pan;
-//    pan.onSampleRateChange(sampleRate);
-//
-//    for (int i = 0; i < 100 * 10; i++) {
-//        pan.next(1.0f);
-//
-//        std::cout << i << ": ";
-//        dump(pan.left);
-//        std::cout << ", ";
-//        dump(pan.right);
-//        std::cout << std::endl;
-//    }
-//}
-//
-// void testDb() {
-//
-//    for (int db = -60; db <= -50; db++) {
-//        float amp = bogaudio::dsp::decibelsToAmplitude(db);
-//        if (amp < 0.0011220 /* -59 dB */) {
-//            amp = 0.0f;
-//        }
-//
-//        dump(db);
-//        std::cout << ",";
-//        dump(amp);
-//        std::cout << std::endl;
-//    }
-//}
-//
-// int main() {
-//    testAmplitude();
-//}
-//
 
-//--------------------------------------------------------------
-//--------------------------------------------------------------
-//--------------------------------------------------------------
-
+#include <cmath>
 #include <iomanip>
 #include <iostream>
-#include <cmath>
 
-//#include "../src/dsp/arc_dsp.hpp"
+void dump(float v) {
+    std::cout << std::fixed;
+    std::cout << std::setprecision(7);
+    std::cout << v;
+}
+
+//--------------------------------------------------------------
+// LinearRamp
+//--------------------------------------------------------------
 
 class LinearRamp {
 
     float sampleRate = 1.0f;
     float time = 1.0f; // in seconds
-
-    float value = 0.0f;
+    float divisor = 1.0f;
 
     float target = 0.0f;
     float increment = 0.0f;
-    bool rising = false;
+    float value = 0.0f;
 
-public:
-
-    LinearRamp(float time_) : time(time_) {
+    void recalc() {
+        divisor = 1.0f / (sampleRate * time);
     }
+
+  public:
 
     void onSampleRateChange(float sampleRate_) {
+        assert(sampleRate_ > 0.0f);
         sampleRate = sampleRate_;
+        recalc();
     }
 
-    void setTarget(float target_) {
-        target = target_;
-        increment = (target - value) / (sampleRate * time);
-        rising = (target > value);
+    void setTime(float time_) {
+        assert(time_ > 0.0f);
+        time = time_;
+        recalc();
     }
 
-    float next() {
-        if (target == value) {
+    float next(float target_) {
+
+        // done already
+        if (target_ == value) {
             return value;
         }
 
+        // new target
+        if (target != target_) {
+            target = target_;
+            increment = (target - value) * divisor;
+        }
+
+        // increment the value
+        bool rising = (target > value);
         value += increment;
 
+        // rising
         if (rising) {
             if (value > target) {
                 value = target;
             }
-        } else {
+        }
+        // falling
+        else {
             if (value < target) {
                 value = target;
             }
@@ -266,31 +75,24 @@ public:
     }
 };
 
-void dump(float v) {
-    std::cout << std::fixed;
-    std::cout << std::setprecision(7);
-    std::cout << v;
-}
-
 void testLinearRamp() {
 
-    LinearRamp ramp{0.1f};
-    ramp.onSampleRateChange(100.0f);
+    LinearRamp ramp;
+    ramp.setTime(0.005f);
+    ramp.onSampleRateChange(48000.0f);
 
-    ramp.setTarget(2.0f);
-    for (int t = 0; t < 20; t++) {
+    for (int t = 0; t < 300; t++) {
         std::cout << t << ": ";
-        float value = ramp.next();
+        float value = ramp.next(2.0f);
         dump(value);
         std::cout << std::endl;
     }
 
     std::cout << "-------------------" << std::endl;
 
-    ramp.setTarget(1.234567f);
-    for (int t = 0; t < 20; t++) {
+    for (int t = 0; t < 300; t++) {
         std::cout << t << ": ";
-        float value = ramp.next();
+        float value = ramp.next(1.234567f);
         dump(value);
         std::cout << std::endl;
     }

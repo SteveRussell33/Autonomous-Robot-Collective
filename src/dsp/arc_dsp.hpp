@@ -20,14 +20,15 @@ inline float cvToFrequency(float cv) {
     return powf(2.0, cv) * rack::dsp::FREQ_C4;
 }
 
-template <typename T>
-T amplitudeToDecibels(T amp) {
-	return simd::log10(amp) * 20;
+template <typename T> T amplitudeToDecibels(T amp) {
+    return simd::log10(amp) * 20;
 }
 
-template <typename T>
-T decibelsToAmplitude(T db) {
-	return std::pow(10, db / 20);
+template <typename T> T decibelsToAmplitude(T db) {
+    if (db <= -60.0f) {
+        return 0.0f;
+    }
+    return std::pow(10, db / 20);
 }
 
 //--------------------------------------------------------------
@@ -58,40 +59,59 @@ class LinearRamp {
 
     float sampleRate = 1.0f;
     float time = 1.0f; // in seconds
-
-    float value = 0.0f;
+    float divisor = 1.0f;
 
     float target = 0.0f;
     float increment = 0.0f;
-    bool rising = false;
+    float value = 0.0f;
 
-public:
-
-    LinearRamp(float time_) : time(time_) {
+    void recalc() {
+        divisor = 1.0f / (sampleRate * time);
     }
+
+  public:
 
     void onSampleRateChange(float sampleRate_) {
+        assert(sampleRate_ > 0.0f);
         sampleRate = sampleRate_;
+        recalc();
     }
 
-    void setTarget(float target_) {
-        target = target_;
-        increment = (target - value) / (sampleRate * time);
-        rising = (target > value);
+    void setTime(float time_) {
+        assert(time_ > 0.0f);
+        time = time_;
+        recalc();
     }
 
-    float next() {
-        if (target == value) {
+    void setValue(float value_) {
+        value = value_;
+    }
+
+    float next(float target_) {
+
+        // done already
+        if (target_ == value) {
             return value;
         }
 
+        // new target
+        if (target != target_) {
+            target = target_;
+            increment = (target - value) * divisor;
+        }
+
+        // increment the value
+        bool rising = (target > value);
         value += increment;
 
+        // rising
         if (rising) {
             if (value > target) {
                 value = target;
             }
-        } else {
+        }
+        // falling
+        else {
             if (value < target) {
                 value = target;
             }

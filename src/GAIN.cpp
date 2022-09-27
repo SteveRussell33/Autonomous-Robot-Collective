@@ -29,8 +29,8 @@ struct BoostParamQuantity : ParamQuantity {
 
 struct GAIN : Module {
 
-    Amplitude levelAmp;
-    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+    arc::dsp::LinearRamp levelRamp;
+    arc::dsp::LinearRamp levelCvRamps[engine::PORT_MAX_CHANNELS];
 
     VuStats vuStats;
 
@@ -75,9 +75,12 @@ struct GAIN : Module {
 
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
 
-        levelAmp.onSampleRateChange(e.sampleRate);
+        levelRamp.onSampleRateChange(e.sampleRate);
+        levelRamp.setTime(0.005f);
+
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
-            levelCvAmps[ch].onSampleRateChange(e.sampleRate);
+            levelCvRamps[ch].onSampleRateChange(e.sampleRate);
+            levelCvRamps[ch].setTime(0.010f);
         }
 
         vuStats.onSampleRateChange(e.sampleRate);
@@ -86,7 +89,7 @@ struct GAIN : Module {
     float nextLevelCvAmp(int ch) {
         float v = inputs[kLevelCvInput].getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        return arc::dsp::decibelsToAmplitude(db);
+        return arc::dsp::decibelsToAmplitude(levelCvRamps[ch].next(db));
     }
 
     void process(const ProcessArgs& args) override {
@@ -103,10 +106,11 @@ struct GAIN : Module {
         // Muted
         if (params[kMuteParam].getValue() > 0.5f) {
 
-            for (int ch = 0; ch < channels; ch++) {
-                float m = levelCvAmps[ch].nextMute();
+            float amp = arc::dsp::decibelsToAmplitude(levelRamp.next(kMinDb));
 
-                float out = clamp(inputs[kInput].getPolyVoltage(ch) * m, -10.0f, 10.0f);
+            for (int ch = 0; ch < channels; ch++) {
+
+                float out = clamp(inputs[kInput].getPolyVoltage(ch) * amp, -10.0f, 10.0f);
                 if (outputs[kOutput].isConnected()) {
                     outputs[kOutput].voltages[ch] = out;
                 }
@@ -115,9 +119,10 @@ struct GAIN : Module {
         }
         // process normally
         else {
+
             float db = levelToDb(params[kLevelParam].getValue());
             db += rescale(params[kBoostParam].getValue(), 0.0f, 4.0f, -24.0f, 24.0f);
-            float amp = levelAmp.next(db);
+            float amp = arc::dsp::decibelsToAmplitude(levelRamp.next(db));
 
             for (int ch = 0; ch < channels; ch++) {
                 float chAmp = amp;
