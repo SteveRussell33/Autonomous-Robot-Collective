@@ -29,6 +29,7 @@ struct BoostParamQuantity : ParamQuantity {
 
 struct GAIN : Module {
 
+    static constexpr float kRampTime = 0.010f;
     arc::dsp::LinearRamp levelRamp;
     arc::dsp::LinearRamp levelCvRamps[engine::PORT_MAX_CHANNELS];
 
@@ -76,11 +77,10 @@ struct GAIN : Module {
     void onSampleRateChange(const SampleRateChangeEvent& e) override {
 
         levelRamp.onSampleRateChange(e.sampleRate);
-        levelRamp.setTime(0.005f);
-
+        levelRamp.setTime(kRampTime);
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
             levelCvRamps[ch].onSampleRateChange(e.sampleRate);
-            levelCvRamps[ch].setTime(0.010f);
+            levelCvRamps[ch].setTime(kRampTime);
         }
 
         vuStats.onSampleRateChange(e.sampleRate);
