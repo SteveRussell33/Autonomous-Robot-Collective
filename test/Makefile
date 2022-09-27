@@ -1,7 +1,7 @@
 .DEFAULT_GOAL := compile
 
 compile:
-	clang++ -Wall -std=c++11 -I../lib -c test.cpp
+	clang++ -Wall -std=c++11 -c test.cpp
 	clang++ -Wall -std=c++11 *.o -o run-test
 
 clean:

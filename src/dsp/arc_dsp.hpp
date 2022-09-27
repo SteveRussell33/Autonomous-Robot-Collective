@@ -195,6 +195,8 @@ struct TwelvePoleLpf {
     static constexpr double Q[kFilters] = {
         0.50431448, 0.54119610, 0.63023621, 0.82133982, 1.3065630, 3.8306488};
 
+    static const auto kFilterType = rack::dsp::TBiquadFilter<double>::Type::LOWPASS;
+
     rack::dsp::TBiquadFilter<double> filter[kFilters];
 
   public:
@@ -203,9 +205,8 @@ struct TwelvePoleLpf {
 
         double fc = cutoff / sampleRate;
 
-        auto filterType = rack::dsp::TBiquadFilter<double>::Type::LOWPASS;
         for (int i = 0; i < kFilters; i++) {
-            filter[i].setParameters(filterType, fc, Q[i], 0);
+            filter[i].setParameters(kFilterType, fc, Q[i], 0);
         }
     }
 
