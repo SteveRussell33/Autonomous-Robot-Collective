@@ -52,58 +52,6 @@ struct LevelParamQuantity : ParamQuantity {
 };
 
 //--------------------------------------------------------------
-// Amplitude
-//--------------------------------------------------------------
-
-class Amplitude {
-
-  private:
-
-    float amp;
-    bool muted;
-
-    bogaudio::dsp::SlewLimiter dbSlew;
-    bogaudio::dsp::SlewLimiter muteSlew;
-
-    bogaudio::dsp::Amplifier amplifier;
-
-  public:
-
-    Amplitude() : amp(0.0f), muted(true) {
-        muteSlew.setLast(0.0f);
-    }
-
-    void onSampleRateChange(float sampleRate) {
-        dbSlew.setParams(sampleRate, 5.0f, kMaxDb - kMinDb);
-        muteSlew.setParams(sampleRate, 25.0f, 1.0f);
-    }
-
-    float next(float db) {
-
-        if (muted) {
-            // NOTE We don't need a lookup table here.
-            dbSlew.setLast(bogaudio::dsp::amplitudeToDecibels(amp));
-            muted = false;
-        }
-
-        amplifier.setLevel(dbSlew.next(db));
-        amp = amplifier._level;
-        return amp;
-    }
-
-    float nextMute() {
-
-        if (!muted) {
-            muteSlew.setLast(amp);
-            muted = true;
-        }
-
-        amp = muteSlew.next(0.0f);
-        return amp;
-    }
-};
-
-//--------------------------------------------------------------
 // MonoTrack
 //--------------------------------------------------------------
 
@@ -140,8 +88,8 @@ class StereoTrack {
 
   private:
 
-    Amplitude levelAmp;
-    Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
+    arc::dsp::Amplifier levelAmp;
+    arc::dsp::Amplifier levelCvAmps[engine::PORT_MAX_CHANNELS];
     arc::dsp::Panner panner;
 
     Input* leftInput = NULL;
@@ -156,7 +104,7 @@ class StereoTrack {
     float nextLevelCvAmp(int ch) {
         float v = levelCvInput->getPolyVoltage(ch);
         float db = rescale(v, 0.0f, 10.0f, kMinDb, kMaxDb);
-        return arc::dsp::decibelsToAmplitude(db);
+        return levelCvAmps[ch].next(db);
     }
 
     void processStereo(float sampleTime, Input* inLeft, Input* inRight, bool muted) {
@@ -170,10 +118,33 @@ class StereoTrack {
         int maxChans = std::max(left.output.channels, right.output.channels);
 
         if (muted) {
+            float amp = levelAmp.next(kMinDb);
+
             for (int ch = 0; ch < maxChans; ch++) {
-                float m = levelCvAmps[ch].nextMute();
-                left.processChannel(inLeft, ch, m);
-                right.processChannel(inRight, ch, m);
+                float leftAmp = amp;
+                float rightAmp = amp;
+
+                // level cv
+                if (levelCvInput->isConnected()) {
+                    float nla = levelCvAmps[ch].next(kMinDb);
+                    leftAmp *= nla;
+                    rightAmp *= nla;
+                }
+
+                //// panning
+                //float pan = panParam->getValue();
+                //if (panCvInput->isConnected()) {
+                //    pan += panCvInput->getPolyVoltage(ch) * 0.2f;
+                //}
+                //pan = clamp(pan, -1.0f, 1.0f);
+
+                //panner.next(pan);
+                //leftAmp *= panner.left;
+                //rightAmp *= panner.right;
+
+                // process left/right
+                left.processChannel(inLeft, ch, leftAmp);
+                right.processChannel(inRight, ch, rightAmp);
             }
         } else {
             float amp = levelAmp.next(levelToDb(levelParam->getValue()));
@@ -189,16 +160,16 @@ class StereoTrack {
                     rightAmp *= nla;
                 }
 
-                // panning
-                float pan = panParam->getValue();
-                if (panCvInput->isConnected()) {
-                    pan += panCvInput->getPolyVoltage(ch) * 0.2f;
-                }
-                pan = clamp(pan, -1.0f, 1.0f);
+                //// panning
+                //float pan = panParam->getValue();
+                //if (panCvInput->isConnected()) {
+                //    pan += panCvInput->getPolyVoltage(ch) * 0.2f;
+                //}
+                //pan = clamp(pan, -1.0f, 1.0f);
 
-                panner.next(pan);
-                leftAmp *= panner.left;
-                rightAmp *= panner.right;
+                //panner.next(pan);
+                //leftAmp *= panner.left;
+                //rightAmp *= panner.right;
 
                 // process left/right
                 left.processChannel(inLeft, ch, leftAmp);

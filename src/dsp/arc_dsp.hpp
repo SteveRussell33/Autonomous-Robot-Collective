@@ -57,7 +57,7 @@ class LinearRamp {
         recalc();
     }
 
-    void setTime(float time_) {
+    void setTime(float time_ /* in seconds */) {
         assert(time_ > 0.0f);
         time = time_;
         recalc();
