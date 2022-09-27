@@ -57,8 +57,8 @@ struct GAIN : Module {
         configInput(kLevelCvInput, "Level CV");
         configSwitch(kMuteParam, 0.f, 1.f, 0.f, "Mute", {"Off", "On"});
 
-		configParam<BoostParamQuantity>(kBoostParam, 0.0f, 4.0f, 2.0f, "Boost/Cut", " dB");
-		getParamQuantity(kBoostParam)->snapEnabled = true;
+        configParam<BoostParamQuantity>(kBoostParam, 0.0f, 4.0f, 2.0f, "Boost/Cut", " dB");
+        getParamQuantity(kBoostParam)->snapEnabled = true;
 
         configInput(kInput, "Audio");
         configOutput(kOutput, "Audio");
@@ -106,7 +106,7 @@ struct GAIN : Module {
                 }
                 sum += out;
             }
-        } 
+        }
         // process normally
         else {
             float db = levelToDb(params[kLevelParam].getValue());

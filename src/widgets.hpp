@@ -61,7 +61,7 @@ struct ArcMuteButton : SvgSwitch {
 };
 
 // Adapted from /github.com/bogaudio/BogaudioModules/src/mixer.cpp
-//struct ArcSoloMuteButton : ParamWidget {
+// struct ArcSoloMuteButton : ParamWidget {
 //    std::vector<std::shared_ptr<Svg>> _frames;
 //    SvgWidget* _svgWidget; // deleted elsewhere.
 //    CircularShadow* shadow = NULL;
