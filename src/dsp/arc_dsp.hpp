@@ -30,6 +30,22 @@ T decibelsToAmplitude(T db) {
 	return std::pow(10, db / 20);
 }
 
+struct Panner {
+
+    float left = 0.7071068f;
+    float right = 0.7071068f;
+
+    void next(float pan) {
+
+        pan = clamp(pan, -1.0f, 1.0f);
+        pan = (pan + 1.0f) * 0.125f;
+
+        // TODO use lookup tables
+        left = std::cosf(2.0f * M_PI * pan);
+        right = std::sinf(2.0f * M_PI * pan);
+    }
+};
+
 //--------------------------------------------------------------
 // soft clip
 //--------------------------------------------------------------

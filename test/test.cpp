@@ -136,45 +136,45 @@
 ////--------------------------------------------------------------
 //// Pan
 ////--------------------------------------------------------------
-//
-// struct Pan {
-//
-//  private:
-//
-//    float curPan = 0.0f;
-//
-//    bogaudio::dsp::SlewLimiter slew;
-//
-//  public:
-//
-//    float left = 0.7071068f;
-//    float right = 0.7071068f;
-//
-//    Pan() {
-//        slew.setLast(0.0f);
-//    }
-//
-//    void onSampleRateChange(float sampleRate) {
-//        slew.setParams(sampleRate, 5.0f, 2.0f);
-//    }
-//
-//    void next(float pan) {
-//
-//        pan = clamp(pan, -1.0f, 1.0f);
-//
-//        float ps = slew.next(pan);
-//        if (curPan != ps) {
-//            curPan = ps;
-//
-//            float p = (curPan + 1.0f) * 0.125f;
-//
-//            // TODO use lookup tables
-//            left = std::cosf(2.0f * M_PI * p);
-//            right = std::sinf(2.0f * M_PI * p);
-//        }
-//    }
-//};
-//
+
+struct Pan {
+
+  private:
+
+    float curPan = 0.0f;
+
+    bogaudio::dsp::SlewLimiter slew;
+
+  public:
+
+    float left = 0.7071068f;
+    float right = 0.7071068f;
+
+    Pan() {
+        slew.setLast(0.0f);
+    }
+
+    void onSampleRateChange(float sampleRate) {
+        slew.setParams(sampleRate, 5.0f, 2.0f);
+    }
+
+    void next(float pan) {
+
+        pan = clamp(pan, -1.0f, 1.0f);
+
+        float ps = slew.next(pan);
+        if (curPan != ps) {
+            curPan = ps;
+
+            float p = (curPan + 1.0f) * 0.125f;
+
+            // TODO use lookup tables
+            left = std::cosf(2.0f * M_PI * p);
+            right = std::sinf(2.0f * M_PI * p);
+        }
+    }
+};
+
 // void testPan() {
 //
 //    Pan pan;

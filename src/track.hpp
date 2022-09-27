@@ -2,7 +2,6 @@
 
 #include "rack.hpp"
 
-#include "bogaudio/dsp/filters/utility.hpp"
 #include "bogaudio/dsp/signal.hpp"
 
 #include "vu.hpp"
@@ -145,9 +144,7 @@ class StereoTrack {
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
 
-    bogaudio::dsp::Panner panner;
-    bogaudio::dsp::SlewLimiter panSlew;
-    bogaudio::dsp::SlewLimiter panCvSlew[engine::PORT_MAX_CHANNELS];
+    arc::dsp::Panner panner;
 
     Input* leftInput = NULL;
     Input* rightInput = NULL;
@@ -191,15 +188,15 @@ class StereoTrack {
                 }
 
                 // panning
-                float pan = panSlew.next(panParam->getValue());
+                float pan = panParam->getValue();
                 if (panCvInput->isConnected()) {
-                    float pv = panCvSlew[ch].next(panCvInput->getPolyVoltage(ch) * 0.2f);
+                    float pv = panCvInput->getPolyVoltage(ch) * 0.2f;
                     pan = clamp(pan + pv, -1.0f, 1.0f);
                 }
 
-                panner.setPan(pan);
-                leftAmp *= panner._lLevel;
-                rightAmp *= panner._rLevel;
+                panner.next(pan);
+                leftAmp *= panner.left;
+                rightAmp *= panner.right;
 
                 // process left/right
                 left.processChannel(inLeft, ch, leftAmp);
@@ -219,11 +216,9 @@ class StereoTrack {
     void onSampleRateChange(float sampleRate) {
 
         levelAmp.onSampleRateChange(sampleRate);
-        panSlew.setParams(sampleRate, 5.0f, 2.0f);
 
         for (int ch = 0; ch < engine::PORT_MAX_CHANNELS; ch++) {
             levelCvAmps[ch].onSampleRateChange(sampleRate);
-            panCvSlew[ch].setParams(sampleRate, 5.0f, 2.0f);
         }
 
         left.onSampleRateChange(sampleRate);
