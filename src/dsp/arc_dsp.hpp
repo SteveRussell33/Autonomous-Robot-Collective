@@ -103,7 +103,7 @@ class LinearRamp {
 
 class Amplifier {
 
-    static constexpr float kRampTime = 0.010f;
+    static constexpr float kRampTime = 0.005f;
     arc::dsp::LinearRamp ramp;
 
     float db = -60.0f;
@@ -117,6 +117,7 @@ public:
     }
 
     float next(float v) {
+        v = ramp.next(v);
         if (db == v) {
             return amp;
         }
