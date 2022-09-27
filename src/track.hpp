@@ -142,7 +142,7 @@ class StereoTrack {
 
     Amplitude levelAmp;
     Amplitude levelCvAmps[engine::PORT_MAX_CHANNELS];
-    arc::dsp::Pan panner;
+    arc::dsp::Panner panner;
 
     Input* leftInput = NULL;
     Input* rightInput = NULL;
